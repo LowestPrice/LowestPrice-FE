@@ -1,27 +1,45 @@
-# React + TypeScript + Vite
+## 코드 컨벤션
+1. any 사용 지양
+2. 변수명, 함수명은 Camel case, styled components는 pascal case 사용
+3. 문장 끝엔 ;(세미콜론) 사용
+4. 싱글 따옴표 사용
+5. 함수명은 동사 + 명사 형태 
+6. 폴더명은 소문자 형태
+7. 파일명은 .을 통해 구분
+   예시) comments.service.ts
+8. 연산자 사이 space 사용
+   예시) const sum = 1 + 1;
+9. 주석 규칙
+   |색상|설명|
+   |------|---|
+   |초록|기능 주석|
+   |빨강|! : 문제가 되는 부분 명시|
+   |파랑| ? : 의문점이 생기는 부분 명시|
+   |주황|Todo : 각자 자유롭게 사용|
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 커밋 컨벤션 
+예시) Feat: 로그인 함수 추가
+*이름: 띄어쓰기 설명 순으로 작성 
 
-Currently, two official plugins are available:
+|이름|설명|
+|------|---|
+|Feat|새로운 기능을 추가할 경우|
+|Fix|버그를 고친 경우|
+|Design|CSS 등 사용자 UI 디자인 변경|
+|!BREAKING CHANGE|커다란 API 변경의 경우|
+|!HOTFIX|급하게 치명적인 버그를 고쳐야하는 경우|
+|Style|코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경우|
+|Refactor|프로덕션 코드 리팩토링|
+|Comment|필요한 주석 추가 및 변경|
+|Docs|문서를 수정한 경우|
+|Test|테스트 추가, 테스트 리팩토링(프로덕션 코드 변경 X)|
+|Chore|빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우(프로덕션 코드 변경 X)|	
+|Rename|파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우|	
+|Remove|파일을 삭제하는 작업만 수행한 경우|	
+|Setting|프로젝트 초기 세팅|	
+|Readme|리드미 편집|	
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+	
+	
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
