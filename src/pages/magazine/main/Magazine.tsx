@@ -1,6 +1,7 @@
+import { MagazineProps } from '../../../type/type';
 import { Container, Header, Title, Line, Subtitle, Box, Img, BoxPadding, BoxTitle, Flex, Content } from './styles';
 
-const Magazine: React.FC = () => {
+const Magazine: React.FC<MagazineProps> = ({ data }) => {
   return (
     <Container>
       <Header>매거진</Header>
@@ -10,11 +11,11 @@ const Magazine: React.FC = () => {
       <Box>
         <Img>img</Img>
         <BoxPadding>
-          <BoxTitle>Title</BoxTitle>
-          <Content>Content</Content>
+          <BoxTitle>{data.title}</BoxTitle>
+          <Content>{data.content}</Content>
           <Flex>
-            <div>에디터 OOO</div>
-            <button>좋아요</button>
+            <div>{data.editor}</div>
+            <button>{data.likes}</button>
           </Flex>
         </BoxPadding>
       </Box>
