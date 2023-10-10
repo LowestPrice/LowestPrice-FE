@@ -30,8 +30,8 @@ export default function App() {
         <Route path='/magazine' element={<Magazine />}></Route>
         <Route path='/magazineDetail' element={<MagazineDetail />}></Route>
         <Route path='/search' element={<Search />}></Route>
-        <Route path='/' element={<Search />}></Route>
-        <Route path='/' element={<Search />}></Route>
+        {/* <Route path='/' element={<Search />}></Route>
+        <Route path='/' element={<Search />}></Route> */}
       </Routes>
       {location.pathname !== '/magazineDetail' && <Footer />}
     </div>
