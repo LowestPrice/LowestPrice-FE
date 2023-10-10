@@ -5,6 +5,9 @@ export const FlexBox = styled.div`
   flex-direction: row;
   justify-content: space-around;
   border-top: 1px solid grey;
+  position: fixed;
+  width: 375px;
+  bottom: 0px;
 `;
 
 export const ButtonStyle = styled.button`
