@@ -1,8 +1,8 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Main from './pages/main/Main';
-import Magazine from './pages/magazine/magazineMain/magazine.main';
-import MagazineDetail from './pages/magazine/magazineDetail/magazine.detail';
-import MagazineWriting from './pages/magazine/magazineWriting/magazine.writing';
+import Magazine from './pages/magazine/magazineMain/MagazineMain';
+import MagazineDetail from './pages/magazine/magazineDetail/MagazineDetail';
+import MagazineWriting from './pages/magazine/magazineWriting/MagazineWriting';
 import Mypage from './pages/mypage/main/MyPage';
 import LikeMagazine from './pages/likeMagazine/LikeMagazine';
 import EditMypage from './pages/mypage/edit/EditMypage';
@@ -12,7 +12,7 @@ import Notification from './pages/notification/Notification';
 import Detail from './pages/detail/detailPage';
 import Footer from './components/footer/footer';
 import Search from './pages/search/search';
-import { exampleData } from './pages/magazine/magazineMain/example';
+import { exampleData } from './pages/magazine/magazineMain/Example';
 import './App.css';
 
 export default function App() {
