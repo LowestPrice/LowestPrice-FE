@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {
+export interface UserInfo {
   userName: string;
   image: string;
 };
 
-export default function EditMypage({ userName, image }: Props) {
+export default function EditMypage({ userName, image }: UserInfo) {
   // 상태 관리 ---------------------------------------
   const [name, setName] = useState<string>(userName);
   const [imageSrc, setImageSrc]: any = useState(image);

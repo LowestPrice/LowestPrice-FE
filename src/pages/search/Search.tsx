@@ -18,7 +18,6 @@ function Search({}: Props) {
           <div className='filterOption'> 낮은가격순</div>
           <div className='filterOption'> 높은가격순</div>
         </Options>
-        <div className=''>품절 상품 제외</div>
       </Filterbar>
       <SearchProductList>
         <SearchProduct />
