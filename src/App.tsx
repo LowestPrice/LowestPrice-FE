@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-import Main from './pages/main/main';
+import Main from './pages/main/Main';
 import Magazine from './pages/magazine/magazineMain/magazine.main';
 import MagazineDetail from './pages/magazine/magazineDetail/magazine.detail';
 import MagazineWriting from './pages/magazine/magazineWriting/magazine.writing';
