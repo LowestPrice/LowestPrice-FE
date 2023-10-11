@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import SearchProduct from './SearchProduct';
 
 type Props = {};
 
@@ -12,10 +13,27 @@ function Search({}: Props) {
         </form>
       </Header>
       <Filterbar>
-        <div className='filterOption'> 할인순</div>
-        <div className='filterOption'> 낮은가격순</div>
-        <div className='filterOption'> 높은가격순</div>
+        <Options>
+          <div className='filterOption'> 할인순</div>
+          <div className='filterOption'> 낮은가격순</div>
+          <div className='filterOption'> 높은가격순</div>
+        </Options>
+        <div className=''>품절 상품 제외</div>
       </Filterbar>
+      <SearchProductList>
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+        <SearchProduct />
+      </SearchProductList>
     </div>
   );
 }
@@ -47,13 +65,45 @@ const SearchInput = styled.input`
 const Filterbar = styled.div`
   width: 375px;
   height: 31px;
-  top: 104px;
   border-bottom: 1px solid rgba(243, 243, 243, 1);
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(181, 181, 181, 1);
+  cursor: pointer;
+`;
+
+const Options = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 7px;
+  height: 12px;
+  padding-top: 10px;
   .filterOption {
     font-size: 12px;
     color: rgba(181, 181, 181, 1);
+    cursor: pointer;
   }
+`;
+
+const SearchProductList = styled.div`
+  width: 346px;
+  max-height: 710px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: rgba(181, 181, 181, 1);
+
+    border-radius: 10px;
+  }
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
