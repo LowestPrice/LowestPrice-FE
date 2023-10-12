@@ -1,10 +1,24 @@
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SlideProduct from './SlideProduct';
 import CategoryProduct from './CategoryProduct';
+import axios from 'axios';
 
 type Props = {};
 
 export default function Main({}: Props) {
+  useEffect(() => {
+    getMagazine();
+  }, []);
+  const getMagazine = async () => {
+    try {
+      const response = await axios.get('http://13.209.68.221:3000/magazines');
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div style={{ minHeight: '100vh', position: 'relative', width: '100%' }}>
       <Header>

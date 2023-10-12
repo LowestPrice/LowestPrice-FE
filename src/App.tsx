@@ -9,7 +9,7 @@ import YetLogin from './pages/login/YetLogin';
 import Login from './pages/login/Login';
 import Notification from './pages/notification/Notification';
 import MagazineDetail from './pages/magazine/detail/detail';
-import Detail from './pages/detail/detailPage';
+import Detail from './pages/detail/Detail';
 import Footer from './components/footer/footer';
 import Search from './pages/search/Search';
 
