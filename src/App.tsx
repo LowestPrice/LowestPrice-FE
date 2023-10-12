@@ -9,7 +9,9 @@ import EditMypage from './pages/mypage/edit/EditMypage';
 import YetLogin from './pages/login/YetLogin';
 import Login from './pages/login/Login';
 import Notification from './pages/notification/Notification';
-import Detail from './pages/detail/detailPage';
+
+import MagazineDetail from './pages/magazine/detail/detail';
+import Detail from './pages/detail/Detail';
 import Footer from './components/footer/footer';
 import Search from './pages/search/search';
 import { exampleData } from './pages/magazine/magazineMain/Example';
