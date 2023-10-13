@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchProduct from './SearchProduct';
+import Footer from '../../components/footer/Footer';
 
 type Props = {};
 
@@ -33,6 +34,7 @@ function Search({}: Props) {
         <SearchProduct />
         <SearchProduct />
       </SearchProductList>
+      <Footer />
     </div>
   );
 }

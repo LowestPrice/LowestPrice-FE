@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import SlideProduct from './SlideProduct';
 import CategoryProduct from './CategoryProduct';
+import Footer from '../../components/footer/Footer';
 
 type Props = {};
 
@@ -48,6 +49,7 @@ export default function Main({}: Props) {
             <CategoryProduct></CategoryProduct>
           </CategoryProductList>
         </CategoryWrap>
+        <Footer />
       </Wrap>
     </div>
   );
