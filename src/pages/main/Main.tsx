@@ -2,23 +2,14 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SlideProduct from './SlideProduct';
 import CategoryProduct from './CategoryProduct';
-import axios from 'axios';
+import { getProduct } from '../../api/product';
+import { useQuery } from 'react-query';
 
 type Props = {};
 
 export default function Main({}: Props) {
-  useEffect(() => {
-    getMagazine();
-  }, []);
-  const getMagazine = async () => {
-    try {
-      const response = await axios.get('http://13.209.68.221:3000/magazines');
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  const { isError, isLoading, data } = useQuery('product', () => getProduct(2));
+  console.log(data);
   return (
     <div style={{ minHeight: '100vh', position: 'relative', width: '100%' }}>
       <Header>
