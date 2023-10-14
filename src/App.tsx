@@ -12,6 +12,8 @@ import MagazineDetail from './pages/magazine/detail/detail';
 import Detail from './pages/detail/Detail';
 import Footer from './components/footer/footer';
 import Search from './pages/search/Search';
+import Prac from './pages/Slide';
+import Topten from './pages/main/Topten';
 
 export default function App() {
   const location = useLocation();
@@ -30,8 +32,8 @@ export default function App() {
         <Route path='/magazine' element={<Magazine />}></Route>
         <Route path='/magazineDetail' element={<MagazineDetail />}></Route>
         <Route path='/search' element={<Search />}></Route>
-        {/* <Route path='/' element={<Search />}></Route>
-        <Route path='/' element={<Search />}></Route> */}
+        <Route path='/prac' element={<Prac />}></Route>
+        <Route path='/topten' element={<Topten />}></Route>
       </Routes>
       {location.pathname !== '/magazineDetail' && <Footer />}
     </div>

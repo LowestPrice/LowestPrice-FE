@@ -5,27 +5,25 @@ type Props = {};
 
 function SlideProduct({}: Props) {
   return (
-    <div>
-      <Wrap>
-        <div className='rank'>1</div>
-        <Content>
-          <div>
-            <span className='discount'>00%</span>
-            <span className='price'>000,000원</span>
-            <span className='existingPrice'>000,000원</span>
-          </div>
-          <div className='title'>Apple 정품 2022 아애패드 프로 11 4세대 M2칩</div>
-        </Content>
-      </Wrap>
-    </div>
+    <Wrap>
+      <div className='rank'>1</div>
+      <Content>
+        <div>
+          <span className='discount'>00%</span>
+          <span className='price'>000,000원</span>
+          <span className='existingPrice'>000,000원</span>
+        </div>
+        <div className='title'>Apple 정품 2022 아애패드 프로 11 4세대 M2칩</div>
+      </Content>
+    </Wrap>
   );
 }
 
 export default SlideProduct;
 
 const Wrap = styled.div`
-  width: 271px;
-  height: 318px;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(
     180.08deg,
     rgba(255, 255, 255, 0) 34.86%,
