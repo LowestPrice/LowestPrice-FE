@@ -28,7 +28,7 @@ export default function App() {
         <Route path='/yetlogin' element={<YetLogin />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/notice' element={<Notification />}></Route>
-        <Route path='/detail' element={<Detail />}></Route>
+        <Route path='/detail/:id' element={<Detail />}></Route>
         <Route path='/magazine' element={<Magazine />}></Route>
         <Route path='/magazineDetail' element={<MagazineDetail />}></Route>
         <Route path='/search' element={<Search />}></Route>

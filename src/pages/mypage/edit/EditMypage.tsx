@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 export interface UserInfo {
-  userName: string;
-  image: string;
-};
+  userName?: string;
+  image?: string;
+}
 
 export default function EditMypage({ userName, image }: UserInfo) {
   // 상태 관리 ---------------------------------------

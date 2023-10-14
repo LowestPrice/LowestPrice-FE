@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Topten from '../main/Topten';
 
 type Props = {};
 
