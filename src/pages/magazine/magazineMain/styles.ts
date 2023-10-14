@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 335px;
@@ -31,6 +31,14 @@ export const Subtitle = styled.div`
   color: grey;
   margin-top: 1%;
   font-weight: 600;
+`;
+
+export const Writing = styled.div`
+  font-size: 18px;
+  font-weight: 600;
+  text-align: right;
+  color: #b5b5b5;
+  cursor: pointer;
 `;
 
 export const Box = styled.div`
