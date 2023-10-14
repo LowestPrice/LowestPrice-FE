@@ -8,6 +8,7 @@ export const FlexBox = styled.div`
   position: fixed;
   width: 375px;
   bottom: 0px;
+  background-color: white;
 `;
 
 export const ButtonStyle = styled.button`
