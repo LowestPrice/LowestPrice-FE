@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { loginWithKakao } from '../../api/product';
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';  
+import Footer from '../../components/footer/Footer';
+
+
 
 export default function Login() {
   const handleKakaoLogin = () => {
@@ -20,6 +23,7 @@ export default function Login() {
           <LoginButton onClick={handleKakaoLogin}>카카오 로그인</LoginButton>
         </Content>
       </Wrap>
+      <Footer />
     </div>
   );
 }
