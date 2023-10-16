@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import SlideProduct from './SlideProduct';
 import CategoryProduct from './CategoryProduct';
 import { getProduct } from '../../api/product';
 import { useQuery } from 'react-query';
 import Footer from '../../components/footer/Footer';
-
+import Topten from './Topten';
 
 type Props = {};
 
@@ -19,16 +18,14 @@ export default function Main({}: Props) {
         <h3>내일은 최저가</h3>
       </Header>
       <Wrap>
-        <SearchInput />
+        <SearchInputWrap>
+          <SearchInput placeholder='검색'></SearchInput>
+        </SearchInputWrap>
         <Title>
           <div className='title'>오늘의 특가</div>
           <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
         </Title>
-        <SlideWrap>
-          <SlideProduct />
-          <SlideProduct />
-          <SlideProduct />
-        </SlideWrap>
+        <Topten></Topten>
         <CategoryWrap>
           <CategoryTitle>
             <div>Apple 제품</div>
@@ -58,6 +55,7 @@ export default function Main({}: Props) {
         </CategoryWrap>
         <Footer />
       </Wrap>
+      {/* <Footer /> */}
     </div>
   );
 }
@@ -76,18 +74,30 @@ const Header = styled.div`
 
 const Wrap = styled.div`
   width: 375px;
-  height: 489.32px;
+  height: 550.32px;
   background: linear-gradient(180deg, #cdcdcd 0%, rgba(213, 213, 213, 0.915044) 13.02%, rgba(171, 171, 171, 0.36) 58.85%, rgba(171, 171, 171, 0) 79.17%);
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const SearchInput = styled.input`
-  width: 335px;
-  height: 52px;
+const SearchInputWrap = styled.div`
+  width: 300px;
+  height: 60px;
   border-radius: 60px;
   margin-top: 20px;
+  border: none;
+  outline: none;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SearchInput = styled.input`
+  width: 250px;
+  height: 20px;
   border: none;
   outline: none;
 `;
@@ -109,19 +119,9 @@ const Title = styled.div`
   margin-top: 20px;
 `;
 
-const SlideWrap = styled.div`
-  min-width: 807px;
-  height: 318px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 20px;
-`;
-
 const CategoryWrap = styled.div`
   width: 374px;
-  min-height: 900px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,7 +135,6 @@ const CategoryTitle = styled.div`
   border-bottom: 1px solid rgba(243, 243, 243, 1);
   font-size: 20px;
   font-weight: 700;
-  margin-top: 20px;
   gap: 22px;
 `;
 
@@ -152,7 +151,7 @@ const CategoryTabWrap = styled.div`
   gap: 10px;
   border-bottom: 1px solid rgba(243, 243, 243, 1);
   position: absolute;
-  top: 120px;
+  top: 94px;
   left: 18px;
   &::-webkit-scrollbar {
     height: 5px;
@@ -185,7 +184,7 @@ const Filterbar = styled.div`
   font-size: 12px;
   color: rgba(181, 181, 181, 1);
   position: absolute;
-  top: 192px;
+  top: 174px;
 `;
 
 const Options = styled.div`
@@ -210,6 +209,5 @@ const CategoryProductList = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   position: absolute;
-
-  top: 230px;
+  top: 210px;
 `;
