@@ -12,8 +12,9 @@ import YetLogin from './pages/login/YetLogin';
 import Login from './pages/login/Login';
 import Notification from './pages/notification/Notification';
 import Search from './pages/search/Search';
+import Detail from './pages/detail/Detail';
+import Footer from './components/footer/footer';
 import './App.css';
-
 const queryClient = new QueryClient();
 
 export default function App() {
