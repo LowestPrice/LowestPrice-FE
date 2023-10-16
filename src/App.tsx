@@ -15,10 +15,11 @@ import Detail from './pages/detail/Detail';
 import Search from './pages/search/Search';
 import Prac from './pages/Slide';
 import Topten from './pages/main/Topten';
+import KaKaoLogin from './pages/login/KaKaoLogin';
+import { ToastContainer } from 'react-toastify';
+import Error from './components/Error';
 import './App.css';
         
-const queryClient = new QueryClient();
-
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
           <Route path='/search' element={<Search />}></Route
           <Route path='/prac' element={<Prac />}></Route>
           <Route path='/topten' element={<Topten />}></Route>
+          <Route path='/error' element={<Error />}></Route>
         </Routes>
       </div>
     </QueryClientProvider>
