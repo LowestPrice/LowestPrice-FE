@@ -1,11 +1,16 @@
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SlideProduct from './SlideProduct';
 import CategoryProduct from './CategoryProduct';
+import { getProduct } from '../../api/product';
+import { useQuery } from 'react-query';
 import Footer from '../../components/footer/Footer';
 
 type Props = {};
 
 export default function Main({}: Props) {
+  const { isError, isLoading, data } = useQuery('product', () => getProduct(2));
+  // console.log(data);
   return (
     <div style={{ minHeight: '100vh', position: 'relative', width: '100%' }}>
       <Header>

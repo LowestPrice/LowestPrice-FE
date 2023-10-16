@@ -1,27 +1,13 @@
 import React, { useState } from 'react';
 import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv } from './styles';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../../components/footer/Footer';
-import { useQuery, useQueryClient, useMutation } from 'react-query';
-import { getMagazineDetail, postMagazine } from '../../../api/magazine';
+import { useQueryClient, useMutation } from 'react-query';
+import { postMagazine } from '../../../api/magazine';
 
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
-  const params = useParams();
-  const magazineId = params.id;
   const queryClient = useQueryClient();
-
-  // 데이터 불러오기
-  const { isLoading, isError, data } = useQuery(['posts', magazineId], () => getMagazineDetail(magazineId), {
-    enabled: !!magazineId,
-  });
-
-  if (isLoading) {
-    return <h1>로딩 중입니다.</h1>;
-  }
-  if (isError) {
-    return <h1>에러가 발생했습니다.</h1>;
-  }
 
   // 데이터 추가하기
   const [title, setTitle] = useState<any>('');
@@ -37,21 +23,21 @@ const MagazineWriting: React.FC = () => {
     },
   });
 
-  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setTitle(e.target.value);
   };
 
-  const onContentChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onContentChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setContent(e.target.value);
   };
 
-  const onImageChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onImageChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setImage(e.target.value);
   };
 
-  const onSubmitButtonHandler = (newTitle: any, newContent: any, newImage: any) => {
+  const onSubmitButtonHandler = (title: any, content: any, image: any) => {
     addPosts.mutate(
-      { title: newTitle, content: newContent, image: newImage },
+      { title, content, image },
       {
         onSuccess: () => {
           alert('추가 완료');
@@ -63,8 +49,6 @@ const MagazineWriting: React.FC = () => {
       }
     );
   };
-
-  // 데이터 삭제하기
 
   return (
     <>
@@ -79,9 +63,9 @@ const MagazineWriting: React.FC = () => {
           <PhotoDiv>
             <PhotoAdd></PhotoAdd>
           </PhotoDiv>
-          <Title type='text' placeholder='제목' onChange={onTitleChangeHandler} value={title} />
-          <Content type='text' placeholder='내용을 입력하세요' onChange={onContentChangeHandler} value={content} />
-          <input type='text' onChange={onImageChangeHandler} value={image} />
+          <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
+          <Content placeholder='내용을 입력하세요' onChange={onContentChangeHandler} value={content} />
+          <textarea placeholder='이미지' onChange={onImageChangeHandler} value={image} />
         </DirectionCol>
       </ContentBox>
       <Footer />

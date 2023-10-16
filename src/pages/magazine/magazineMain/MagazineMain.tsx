@@ -36,13 +36,13 @@ const Magazine: React.FC<MagazineProps> = () => {
         <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
         {magazines?.map((data, index) => (
           <Box key={index} onClick={() => navigate(`/magazine/${data.magazineId}`)}>
-            <Img>{data.mainImage}</Img>
+            <Img src={data.mainImage} />
             <BoxPadding>
               <BoxTitle>{data.title}</BoxTitle>
               <Content>{data.content.length > 20 ? `${data.content.substring(0, 20)}...` : data.content}</Content>
               <Flex>
                 <div>{data.editor}</div>
-                <button>{data.likes}</button>
+                <button>{data.LikeMagazine}</button>
               </Flex>
             </BoxPadding>
           </Box>
