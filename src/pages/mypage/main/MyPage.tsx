@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../../components/footer/Footer';
 
 type Props = {};
 
@@ -26,6 +27,7 @@ function Mypage({}: Props) {
         <Article onClick={() => navigate('/likemagazine')}>좋아요한 매거진 보기</Article>
         <Article>내일은 최저가 사용법</Article>
       </Wrap>
+      <Footer />
     </div>
   );
 }

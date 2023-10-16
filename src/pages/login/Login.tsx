@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import Footer from '../../components/footer/Footer';
 import Topten from '../main/Topten';
+
 
 type Props = {};
 
@@ -17,6 +19,7 @@ export default function Login({}: Props) {
           <LoginButton>카카오 로그인</LoginButton>
         </Content>
       </Wrap>
+      <Footer />
     </div>
   );
 }

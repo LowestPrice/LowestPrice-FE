@@ -1,10 +1,13 @@
 export type MagazineProps = {
-  data: MagazineData;
+  data: magazine[];
 };
 
-type MagazineData = {
+export interface magazine {
+  magazineId: number;
   title: string;
   content: string;
+  mainImage: undefined;
+  createAt: undefined;
   editor: string;
-  likes: boolean;
-};
+  likes: undefined;
+}

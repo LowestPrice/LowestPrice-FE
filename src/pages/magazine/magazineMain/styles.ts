@@ -48,7 +48,7 @@ export const Box = styled.div`
   border-radius: 1%;
 `;
 
-export const Img = styled.div`
+export const Img = styled.img`
   height: 60%;
   background-color: lightgrey;
 `;
