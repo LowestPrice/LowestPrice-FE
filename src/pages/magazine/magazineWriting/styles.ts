@@ -27,7 +27,7 @@ export const ContentBox = styled.div`
   margin: 0px auto 0px auto;
 `;
 
-export const Title = styled.input`
+export const Title = styled.textarea`
   font-size: 26px;
   font-weight: 500;
   color: #b1b1b1;
@@ -41,7 +41,7 @@ export const Title = styled.input`
   }
 `;
 
-export const Content = styled.input`
+export const Content = styled.textarea`
   font-size: 18px;
   font-weight: 500;
   color: #b1b1b1;

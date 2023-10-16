@@ -4,12 +4,15 @@ import SlideProduct from './SlideProduct';
 import CategoryProduct from './CategoryProduct';
 import { getProduct } from '../../api/product';
 import { useQuery } from 'react-query';
+import Footer from '../../components/footer/Footer';
+
 
 type Props = {};
 
 export default function Main({}: Props) {
   const { isError, isLoading, data } = useQuery('product', () => getProduct(2));
-  console.log(data);
+  // console.log(data);
+
   return (
     <div style={{ minHeight: '100vh', position: 'relative', width: '100%' }}>
       <Header>
@@ -53,6 +56,7 @@ export default function Main({}: Props) {
             <CategoryProduct></CategoryProduct>
           </CategoryProductList>
         </CategoryWrap>
+        <Footer />
       </Wrap>
     </div>
   );
