@@ -10,7 +10,8 @@ type Props = {};
 
 export default function Main({}: Props) {
   const { isError, isLoading, data } = useQuery('product', () => getProduct(2));
-  console.log(data);
+  // console.log(data);
+
   return (
     <div style={{ minHeight: '100vh', position: 'relative', width: '100%' }}>
       <Header>
@@ -52,6 +53,7 @@ export default function Main({}: Props) {
             <CategoryProduct></CategoryProduct>
           </CategoryProductList>
         </CategoryWrap>
+        <Footer />
       </Wrap>
       {/* <Footer /> */}
     </div>
