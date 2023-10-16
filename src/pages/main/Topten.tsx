@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import SlideProduct from './ToptenProduct';
 import { useQuery } from 'react-query';
 import { getTopten } from '../../api/product';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
 
 function Topten() {
   //슬라이드
@@ -29,13 +31,13 @@ function Topten() {
   console.log(index);
 
   // 할인율 상위 10위 API ----------------------------------------------------------
-  const { isError, isLoading, data } = useQuery('topProduct', getTopten);
 
+  const { isError, isLoading, data } = useQuery('topProduct', getTopten);
   if (isError) {
-    return <div>예상치 못한 에러를 만났습니다. 다시 시도해주세요.</div>;
+    return <Error />;
   }
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <Loading />;
   }
 
   // 오른쪽 넘기기---------------------------------------------------
@@ -70,10 +72,10 @@ function Topten() {
 
   // preview 위한 순서 index ------------------------------------------
 
-  const morePrevIndex = index === 1 ? 9 : index === 0 ? 9 : index - 2;
+  const morePrevIndex = index === 1 ? 9 : index === 0 ? 8 : index - 2;
   const PrevIndex = index === 0 ? 9 : index - 1;
   const NextIndex = index === 9 ? 0 : index + 1;
-  const moreNextIndex = index === 9 ? 1 : index === 9 ? 0 : index + 2;
+  const moreNextIndex = index === 9 ? 1 : index === 8 ? 0 : index + 2;
 
   // 화면 ----------------------------------------------------------------
 

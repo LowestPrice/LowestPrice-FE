@@ -5,6 +5,8 @@ import { getProduct } from '../../api/product';
 import { useQuery } from 'react-query';
 import Footer from '../../components/footer/Footer';
 import Topten from './Topten';
+import Error from '../../components/Error';
+import Loading from '../../components/Loading';
 
 type Props = {};
 
