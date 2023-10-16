@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -14,10 +13,8 @@ type Props = {
 
 function ToptenProduct(props: Props) {
   const navigate = useNavigate();
-  // const currentPrice = parseFloat()
-  // const originalPrice = props.originalPrice.toLocaleString('ko-KR');
-
-  // console.log(currentPrice);
+  const currentPrice = props.currentPrice.toLocaleString();
+  const originalPrice = props.originalPrice.toLocaleString();
 
   return (
     <Wrap
@@ -25,13 +22,13 @@ function ToptenProduct(props: Props) {
         navigate(`/detail/${props.productId}`);
       }}
     >
-      <ProductImageWrap></ProductImageWrap>
+      <ProductImageWrap />
       <div className='rank'>{props.index + 1}</div>
       <Content>
         <div>
           <span className='discountRate'>{props.discountRate}%</span>
-          <span className='price'>{props.currentPrice}원</span>
-          <span className='originalPrice'>{props.originalPrice}원</span>
+          <span className='price'>{currentPrice}원</span>
+          <span className='originalPrice'>{originalPrice}원</span>
         </div>
         <div className='title'>{props.productName}</div>
       </Content>

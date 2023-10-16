@@ -1,20 +1,23 @@
 import styled from 'styled-components';
-import Topten from '../main/Topten';
+import { loginWithKakao } from '../../api/product';
+import { toast } from 'react-toastify';
 
-type Props = {};
-
-export default function Login({}: Props) {
+export default function Login() {
+  const handleKakaoLogin = () => {
+    toast.success('이미 로그인 한 유저입니다.');
+    loginWithKakao();
+  };
   return (
     <div>
       <Header>
-        <h3>로그인 / 회원가입</h3>
+        <h3>로그인</h3>
       </Header>
       <Wrap>
         <Content>
           <h2>내일은 최저가</h2>
           <span>Apple 제품을 최저가로 만나보세요.</span>
           <span>Apple 제품을 최저가로 만나보세요.</span>
-          <LoginButton>카카오 로그인</LoginButton>
+          <LoginButton onClick={handleKakaoLogin}>카카오 로그인</LoginButton>
         </Content>
       </Wrap>
     </div>

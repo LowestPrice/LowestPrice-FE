@@ -4,12 +4,12 @@ import CategoryProduct from './CategoryProduct';
 import { getProduct } from '../../api/product';
 import { useQuery } from 'react-query';
 import Topten from './Topten';
+import Error from '../../components/Error';
+import Loading from '../../components/Loading';
 
 type Props = {};
 
 export default function Main({}: Props) {
-  const { isError, isLoading, data } = useQuery('product', () => getProduct(2));
-  console.log(data);
   return (
     <div style={{ minHeight: '100vh', position: 'relative', width: '100%' }}>
       <Header>
