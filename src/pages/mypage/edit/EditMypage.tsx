@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../../../components/footer/Footer';
 
 export interface UserInfo {
-  userName: string;
-  image: string;
+  userName?: string;
+  image?: string;
 }
 
 export default function EditMypage({ userName, image }: UserInfo) {
@@ -41,7 +40,6 @@ export default function EditMypage({ userName, image }: UserInfo) {
           <EditName defaultValue={name}></EditName>
         </Profile>
       </Wrap>
-      <Footer />
     </div>
   );
 }
