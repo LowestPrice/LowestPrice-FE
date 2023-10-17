@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 export interface UserInfo {
-  userName?: string;
+  userName?: string | undefined;
   image?: string;
 }
 
 export default function EditMypage({ userName, image }: UserInfo) {
   // 상태 관리 ---------------------------------------
-  const [name, setName] = useState<string>(userName);
+  const [name, setName] = useState<string | undefined>(userName);
   const [imageSrc, setImageSrc]: any = useState(image);
 
   // 네비게이트 ----------------------------------------

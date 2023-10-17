@@ -9,14 +9,12 @@ import Login from './pages/login/Login';
 import Notification from './pages/notification/Notification';
 import MagazineDetail from './pages/magazine/detail/detail';
 import Detail from './pages/detail/Detail';
-import Footer from './components/footer/footer';
+import Footer from './components/footer/Footer';
 import Search from './pages/search/Search';
 import Prac from './pages/Slide';
-import Topten from './pages/main/Topten';
-import KaKaoLogin from './pages/login/KaKaoLogin';
-import { ToastContainer } from 'react-toastify';
-import './App.css';
+import Topten from './pages/main/topten/Topten';
 import Error from './components/Error';
+import './App.css';
 
 export default function App() {
   const location = useLocation();
@@ -39,7 +37,6 @@ export default function App() {
         <Route path='/topten' element={<Topten />}></Route>
         <Route path='/error' element={<Error />}></Route>
       </Routes>
-      {location.pathname !== '/magazineDetail' && <Footer />}
     </div>
   );
 }

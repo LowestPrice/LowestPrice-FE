@@ -1,6 +1,6 @@
 import { FlexBox, ButtonStyle } from './style';
 
-const footer = () => {
+const Footer = () => {
   return (
     <FlexBox>
       <ButtonStyle>홈</ButtonStyle>
@@ -15,4 +15,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;

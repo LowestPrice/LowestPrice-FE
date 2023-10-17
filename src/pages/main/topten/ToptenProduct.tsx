@@ -13,6 +13,7 @@ type Props = {
 
 function ToptenProduct(props: Props) {
   const navigate = useNavigate();
+
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
 
