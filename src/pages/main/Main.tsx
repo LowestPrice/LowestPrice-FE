@@ -8,6 +8,13 @@ import { useState } from 'react';
 import CategoryTab from './category/CategoryTab';
 import CategoryOnProductList from './category/category_on/CategoryOnProductList';
 
+import { getProduct } from '../../api/product';
+import { useQuery } from 'react-query';
+import Footer from '../../components/footer/Footer';
+import Topten from './Topten';
+import Error from '../../components/Error';
+import Loading from '../../components/Loading';
+
 type Props = {};
 
 export default function Main({}: Props) {
@@ -76,6 +83,8 @@ export default function Main({}: Props) {
         </Wrap>
       </div>
       <Footer />
+
+ 
     </div>
   );
 }

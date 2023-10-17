@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import MagazineItem from './MagazineItem';
+import Footer from '../../components/footer/Footer';
 
 type Props = {};
 
@@ -14,6 +15,7 @@ function LikeMagazine({}: Props) {
         <MagazineItem></MagazineItem>
         <MagazineItem></MagazineItem>
       </LikeMagazineList>
+      <Footer />
     </div>
   );
 }

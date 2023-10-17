@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 335px;
@@ -33,6 +33,14 @@ export const Subtitle = styled.div`
   font-weight: 600;
 `;
 
+export const Writing = styled.div`
+  font-size: 18px;
+  font-weight: 600;
+  text-align: right;
+  color: #b5b5b5;
+  cursor: pointer;
+`;
+
 export const Box = styled.div`
   height: 315px;
   margin-top: 3%;
@@ -40,8 +48,10 @@ export const Box = styled.div`
   border-radius: 1%;
 `;
 
-export const Img = styled.div`
+export const Img = styled.img`
+  width: 100%;
   height: 60%;
+  object-fit: cover;
   background-color: lightgrey;
 `;
 

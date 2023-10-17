@@ -5,9 +5,10 @@ export const FlexBox = styled.div`
   flex-direction: row;
   justify-content: space-around;
   border-top: 1px solid grey;
-  position: fixed;
-  width: 375px;
-  bottom: 0px;
+  position: sticky;
+  width: 100%;
+  bottom: 0;
+  margin-top: 20px;
   background-color: white;
 `;
 

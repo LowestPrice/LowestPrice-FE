@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -7,8 +7,11 @@ export const Container = styled.div`
 
 export const TopBox = styled.div`
   height: 304px;
-  background-color: lightgrey;
+
   position: relative;
+  width: 100%;
+
+  object-fit: cover;
 `;
 
 export const InfoBox = styled.div`
@@ -22,6 +25,7 @@ export const InfoBox = styled.div`
 export const Title = styled.div`
   font-size: 26px;
   font-weight: 500;
+  color: #ffffff;
   margin-left: 20px;
 `;
 
@@ -61,9 +65,25 @@ export const ContentEditor = styled.div`
 `;
 
 export const MagazineTitle = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 22px 0px 22px 0px;
   font-size: 12px;
   font-weight: 300;
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 22px 0px 22px 0px;
+`;
+
+export const Button = styled.div`
+  width: 24px;
+  height: 24px;
+  background-color: #d9d9d9;
+`;
+
+export const Img = styled.img`
+  width: 100%;
+  height: 234px;
+  object-fit: cover;
 `;
