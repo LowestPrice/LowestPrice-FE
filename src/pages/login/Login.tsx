@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { loginWithKakao } from '../../api/product';
-import { toast } from 'react-toastify';  
+import { toast } from 'react-toastify';
 import Footer from '../../components/footer/Footer';
-
-
 
 export default function Login() {
   const handleKakaoLogin = () => {
