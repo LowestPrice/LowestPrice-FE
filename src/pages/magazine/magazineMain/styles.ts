@@ -1,29 +1,42 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 335px;
-  height: 100vh;
-  margin: 0 auto 0 auto;
+  width: 375px;
+  min-height: 100vh;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const InnerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Header = styled.div`
   height: 68px;
   font-size: 22px;
   font-weight: 600;
-  padding: auto;
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-left: 10px;
 `;
 
 export const Title = styled.div`
   font-size: 20px;
   font-weight: 700;
-  margin-top: 3%;
+  text-align: left;
+  width: 100%;
+  padding-left: 15px;
 `;
 
 export const Line = styled.div`
   border-top: 1px solid grey;
-  margin: 0 !important;
 `;
 
 export const Subtitle = styled.div`
@@ -31,6 +44,9 @@ export const Subtitle = styled.div`
   color: grey;
   margin-top: 1%;
   font-weight: 600;
+  text-align: left;
+  width: 100%;
+  padding-left: 15px;
 `;
 
 export const Writing = styled.div`
@@ -39,9 +55,12 @@ export const Writing = styled.div`
   text-align: right;
   color: #b5b5b5;
   cursor: pointer;
+  width: 100%;
+  padding-right: 15px;
 `;
 
 export const Box = styled.div`
+  width: 335px;
   height: 315px;
   margin-top: 3%;
   border: 1px solid black;
@@ -76,4 +95,9 @@ export const Flex = styled.div`
   justify-content: space-between;
   font-size: 14px;
   font-weight: 400;
+`;
+
+export const LikeFlex = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;

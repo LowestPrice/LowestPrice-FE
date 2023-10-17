@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const FlexBox = styled.div`
+  width: 375px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   border-top: 1px solid grey;
-  position: sticky;
-  width: 100%;
+  position: fixed;
   bottom: 0;
   margin-top: 20px;
   background-color: white;
