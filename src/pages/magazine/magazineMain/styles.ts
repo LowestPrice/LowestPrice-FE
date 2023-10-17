@@ -49,7 +49,9 @@ export const Box = styled.div`
 `;
 
 export const Img = styled.img`
+  width: 100%;
   height: 60%;
+  object-fit: cover;
   background-color: lightgrey;
 `;
 

@@ -12,7 +12,7 @@ const MagazineWriting: React.FC = () => {
   // 데이터 추가하기
   const [title, setTitle] = useState<any>('');
   const [content, setContent] = useState<any>('');
-  const [image, setImage] = useState<any>('');
+  const [image, setImage] = useState<any>(null);
 
   const addPosts = useMutation(postMagazine, {
     onSuccess: () => {
@@ -31,11 +31,13 @@ const MagazineWriting: React.FC = () => {
     setContent(e.target.value);
   };
 
-  const onImageChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    setImage(e.target.value);
+  const onImageChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const imageFile = e.target.files?.[0];
+    setImage(imageFile);
   };
 
   const onSubmitButtonHandler = (title: any, content: any, image: any) => {
+    console.log(title, content, image, '롸이팅 페이지');
     addPosts.mutate(
       { title, content, image },
       {
@@ -65,7 +67,7 @@ const MagazineWriting: React.FC = () => {
           </PhotoDiv>
           <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
           <Content placeholder='내용을 입력하세요' onChange={onContentChangeHandler} value={content} />
-          <textarea placeholder='이미지' onChange={onImageChangeHandler} value={image} />
+          <input placeholder='이미지' onChange={onImageChangeHandler} type='file' accept='image/*' />
         </DirectionCol>
       </ContentBox>
       <Footer />
