@@ -76,3 +76,16 @@ export const deleteMagazine = async (props: any) => {
     console.error('매거진 삭제 에러', error);
   }
 };
+
+// 매거진 좋아요 등록/취소
+export const postMagazineLike = async (props: any) => {
+  const id = props.id;
+
+  try {
+    const response = await axios.post(`http://3.39.251.68:3000/magazines/${id}/user/1/like`);
+    // 유저 아이디 임의로 1 적용
+    return response;
+  } catch (error) {
+    console.error('매거진 좋아요 등록/취소 에러', error);
+  }
+};

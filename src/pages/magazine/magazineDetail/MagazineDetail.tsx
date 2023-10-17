@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, TopBox, InfoBox, Title, Editor, TextArea, ContentButton, ContentTitle, ContentEditor, MagazineTitle, Flex, Button } from './styles';
+import { Container, TopBox, InfoBox, Title, Editor, TextArea, ContentButton, ContentTitle, ContentEditor, MagazineTitle, Flex, Button, Img } from './styles';
 import { MagazineProps } from '../../../type/type';
 import { deleteMagazine, getMagazineDetail } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -71,7 +71,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
         </InfoBox>
         <Flex>
           <Button onClick={() => navigate('/magazine')} key={magazineData.magazineId}></Button>
-          <MagazineTitle>매거진 제목 또는 카테고리</MagazineTitle>
+          <MagazineTitle>{magazineData.title}</MagazineTitle>
           <Button onClick={() => navigate(`/magazineEditing/${magazineData.magazineId}`, { state: { props: magazineData } })}></Button>
           <Button
             onClick={() => {
@@ -81,10 +81,10 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           ></Button>
           {/* 삭제하기 */}
         </Flex>
-        <img src={magazineData.mainImage} alt='매거진 이미지' />
+        <Img src={magazineData.mainImage} alt='매거진 이미지' />
       </TopBox>
       <TextArea>{magazineData.content}</TextArea>
-
+      <div>다른 매거진 보기</div>
       {/* {nextMagazineData && ( */}
       <ContentButton>
         <ContentTitle>{magazineData.title}</ContentTitle>
