@@ -7,8 +7,11 @@ export const Container = styled.div`
 
 export const TopBox = styled.div`
   height: 304px;
-  background-color: #b5b5b5;
+
   position: relative;
+  width: 100%;
+
+  object-fit: cover;
 `;
 
 export const InfoBox = styled.div`
@@ -77,4 +80,10 @@ export const Button = styled.div`
   width: 24px;
   height: 24px;
   background-color: #d9d9d9;
+`;
+
+export const Img = styled.img`
+  width: 100%;
+  height: 234px;
+  object-fit: cover;
 `;

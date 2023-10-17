@@ -19,8 +19,6 @@ import KaKaoLogin from './pages/login/KaKaoLogin';
 import { ToastContainer } from 'react-toastify';
 import Error from './components/Error';
 import './App.css';
-        
-const queryClient = new QueryClient();
 
 export default function App() {
   return (
@@ -39,7 +37,7 @@ export default function App() {
           <Route path='/magazine/:id' element={<MagazineDetail />}></Route>
           <Route path='/magazineWriting' element={<MagazineWriting />}></Route>
           <Route path='/magazineEditing/:id' element={<MagazineEditing />}></Route>
-          <Route path='/search' element={<Search />}></Route
+          <Route path='/search' element={<Search />}></Route>
           <Route path='/prac' element={<Prac />}></Route>
           <Route path='/topten' element={<Topten />}></Route>
           <Route path='/error' element={<Error />}></Route>
