@@ -1,31 +1,78 @@
 import styled from 'styled-components';
+
+import { getProduct } from '../../api/product';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
 import SimilarProduct from './SimilarProduct';
 
+import { BsCaretDownFill } from 'react-icons/bs';
+import { BsChevronDown } from 'react-icons/bs';
+import Footer from '../../components/footer/Footer';
+import OptionModal from '../../components/modal/option/OptionModal';
+
 function Detail() {
+  const params = useParams();
+
+  const { status, data } = useQuery('product', () => getProduct(params.id));
+  if (status === 'loading') {
+    return <Loading />;
+  }
+  if (status === 'error') {
+    return <Error />;
+  }
+
+  console.log(data);
+
+  const currentPrice = data.currentPrice.toLocaleString();
+  const originalPrice = data.originalPrice.toLocaleString();
+
   return (
-    <div>
-      <Header>
-        <h3>카테고리명</h3>
-      </Header>
-      <ProductImage></ProductImage>
-      <Content>
-        <div className='title'>Apple 정품 2022 아이패드 프로 11 4세대 M2칩</div>
-        <div className='existingPrice'>000,000원</div>
-        <div className='price'>
-          0,000,000원 <span>00%</span>
+    <>
+      <div style={{ paddingBottom: '85px' }}>
+        <Header>
+          <h3>카테고리명</h3>
+        </Header>
+        <div style={{ padding: '10px' }}>
+          <ProductImage src={data.productImage}></ProductImage>
         </div>
-      </Content>
-      <SimilarProuctWrap>
-        <div className='title'>해당 상품과 비슷한 상품</div>
-        <SimilarProductList>
-          <SimilarProduct />
-          <SimilarProduct />
-          <SimilarProduct />
-          <SimilarProduct />
-          <SimilarProduct />
-        </SimilarProductList>
-      </SimilarProuctWrap>
-    </div>
+        <Content>
+          <div className='title'>{data.productName}</div>
+          <div className='originalPrice'>{originalPrice}원</div>
+          <PriceNDiscountWrap>
+            <div>{currentPrice}원</div>
+            <DiscountWrap>
+              <div style={{ marginTop: '5px' }}>
+                <BsCaretDownFill size='16' />
+              </div>
+              <div>{data.discountRate}%</div>
+            </DiscountWrap>
+          </PriceNDiscountWrap>
+        </Content>
+        <OptionWrap>
+          <Option>
+            제품 옵션 선택
+            <div>
+              <BsChevronDown color='#B1B1B1' size='20' />
+            </div>
+          </Option>
+          <OptionModal {...data}></OptionModal>
+        </OptionWrap>
+        <SimilarProuctWrap>
+          <div className='title'>해당 상품과 비슷한 상품</div>
+          <SimilarProductList>
+            <SimilarProduct />
+            <SimilarProduct />
+            <SimilarProduct />
+            <SimilarProduct />
+            <SimilarProduct />
+          </SimilarProductList>
+        </SimilarProuctWrap>
+      </div>
+      <Footer />
+    </>
   );
 }
 
@@ -41,15 +88,15 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const ProductImage = styled.div`
-  width: 375px;
-  height: 350px;
+const ProductImage = styled.img`
+  width: 100%;
+  height: 100%;
   background-color: rgba(217, 217, 217, 1);
 `;
 
 const Content = styled.div`
   width: 375px;
-  height: 140px;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,23 +104,42 @@ const Content = styled.div`
   margin-top: 10px;
   .title {
     width: 335px;
-    height: 50px;
     font-size: 19px;
     font-weight: 600;
   }
-  .existingPrice {
+  .originalPrice {
     width: 335px;
     font-size: 16px;
     font-weight: 500;
     color: rgba(217, 217, 217, 1);
+    text-decoration: line-through;
   }
-  .price {
-    width: 335px;
-    font-size: 22px;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 1);
-    margin-top: -10px;
-  }
+`;
+
+const PriceNDiscountWrap = styled.div`
+  width: 335px;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
+  margin-top: -10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const DiscountWrap = styled.div`
+  width: 48px;
+  height: 22px;
+  background-color: #9ecbff;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #0c77f6;
+  margin-left: 20px;
 `;
 
 const SimilarProuctWrap = styled.div`
@@ -103,5 +169,33 @@ const SimilarProductList = styled.div`
     height: 5px;
     background: rgba(181, 181, 181, 1);
     border-radius: 10px;
+  }
+`;
+
+const OptionWrap = styled.div`
+  width: 375px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Option = styled.div`
+  width: 335px;
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid #b5b5b5;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 18px;
+  position: relative;
+  cursor: pointer;
+  div {
+    position: absolute;
+    right: 20px;
+    margin-top: 5px;
   }
 `;

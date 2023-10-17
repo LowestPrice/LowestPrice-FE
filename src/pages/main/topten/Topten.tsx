@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import SlideProduct from './ToptenProduct';
+import ToptenProduct from './ToptenProduct';
 import { useQuery } from 'react-query';
-import { getTopten } from '../../api/product';
-import Loading from '../../components/Loading';
-import Error from '../../components/Error';
+import { getTopten } from '../../../api/product';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
 
 function Topten() {
   //슬라이드
@@ -28,16 +28,15 @@ function Topten() {
       clearTimeout(autoPage);
     };
   }, [index]);
-  console.log(index);
 
   // 할인율 상위 10위 API ----------------------------------------------------------
 
   const { isError, isLoading, data } = useQuery('topProduct', getTopten);
-  if (isError) {
-    return <Error />;
-  }
   if (isLoading) {
     return <Loading />;
+  }
+  if (isError) {
+    return <Error />;
   }
 
   // 오른쪽 넘기기---------------------------------------------------
@@ -93,27 +92,27 @@ function Topten() {
       >
         <Container>
           <PrivewProductWrap>
-            <SlideProduct {...data[morePrevIndex]} index={morePrevIndex} />
+            <ToptenProduct {...data[morePrevIndex]} index={morePrevIndex} />
           </PrivewProductWrap>
         </Container>
         <Container>
           <PrivewProductWrap>
-            <SlideProduct {...data[PrevIndex]} index={PrevIndex} />
+            <ToptenProduct {...data[PrevIndex]} index={PrevIndex} />
           </PrivewProductWrap>
         </Container>
         <IndexWrapper>
           <ProductWrap>
-            <SlideProduct {...data[index]} index={index} />
+            <ToptenProduct {...data[index]} index={index} />
           </ProductWrap>
         </IndexWrapper>
         <Container>
           <PrivewProductWrap>
-            <SlideProduct {...data[NextIndex]} index={NextIndex} />
+            <ToptenProduct {...data[NextIndex]} index={NextIndex} />
           </PrivewProductWrap>
         </Container>
         <Container>
           <PrivewProductWrap>
-            <SlideProduct {...data[moreNextIndex]} index={moreNextIndex} />
+            <ToptenProduct {...data[moreNextIndex]} index={moreNextIndex} />
           </PrivewProductWrap>
         </Container>
       </Row>
