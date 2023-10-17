@@ -16,8 +16,6 @@ import Search from './pages/search/Search';
 import Prac from './pages/Slide';
 import Topten from './pages/main/Topten';
 import './App.css';
-        
-const queryClient = new QueryClient();
 
 const queryClient = new QueryClient();
 
@@ -38,7 +36,7 @@ export default function App() {
           <Route path='/magazine/:id' element={<MagazineDetail />}></Route>
           <Route path='/magazineWriting' element={<MagazineWriting />}></Route>
           <Route path='/magazineEditing/:id' element={<MagazineEditing />}></Route>
-          <Route path='/search' element={<Search />}></Route
+          <Route path='/search' element={<Search />}></Route>
           <Route path='/prac' element={<Prac />}></Route>
           <Route path='/topten' element={<Topten />}></Route>
         </Routes>

@@ -6,7 +6,7 @@ export const FlexBox = styled.div`
   justify-content: space-around;
   border-top: 1px solid grey;
   position: sticky;
-  width: 375px;
+  width: 100%;
   bottom: 0;
   margin-top: 20px;
   background-color: white;

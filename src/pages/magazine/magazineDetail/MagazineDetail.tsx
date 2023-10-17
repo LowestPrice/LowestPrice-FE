@@ -10,7 +10,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const navigate = useNavigate();
 
   // 데이터 불러오기
-  const { isLoading, isError, data } = useQuery('magazineDetailData', () => getMagazineDetail(id));
+  const { isLoading, isError, data } = useQuery('posts', () => getMagazineDetail(id));
   const magazineData = data?.data.data;
 
   // 데이터 삭제하기
@@ -28,9 +28,36 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
     alert('삭제되었습니다.');
   };
 
+  // 게시글 이동
+  // const nextMagazine = (id: any) => {
+  //   const currentId = parseInt(id, 10);
+  //   const nextId = currentId + 1;
+  //   const secondId = currentId + 2;
+  //   const thirdId = currentId + 3;
+
+  //   const { data: nextMagazineData } = useQuery(['posts', nextId], () => getMagazineDetail(nextId), {
+  //     enabled: !isNaN(nextId),
+  //   });
+
+  //   const { data: secondMagazineData } = useQuery(['posts', secondId], () => getMagazineDetail(secondId), {
+  //     enabled: !isNaN(secondId),
+  //   });
+
+  //   const { data: thirdMagazineData } = useQuery(['posts', thirdId], () => getMagazineDetail(thirdId), {
+  //     enabled: !isNaN(thirdId),
+  //   });
+
+  //   return { nextMagazineData, secondMagazineData, thirdMagazineData };
+  // };
+
+  // 호출
+  // const { nextMagazineData: any, secondMagazineData, thirdMagazineData } = nextMagazine(id);
+  // console.log(nextMagazineData.data.data.titile, 'next title');
+
   if (isLoading) {
     return <h1>로딩중입니다</h1>;
   }
+
   if (isError) {
     return <h1>에러가 발생했습니다.</h1>;
   }
@@ -56,22 +83,28 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
         </Flex>
         <img src={magazineData.mainImage} alt='매거진 이미지' />
       </TopBox>
-
       <TextArea>{magazineData.content}</TextArea>
 
-      {/* 다음 매거진 페이지 -> 버튼 + Link나 navigate 사용*/}
+      {/* {nextMagazineData && ( */}
       <ContentButton>
-        <ContentTitle>매거진 타이틀</ContentTitle>
-        <ContentEditor>by 000</ContentEditor>
+        <ContentTitle>{magazineData.title}</ContentTitle>
+        <ContentEditor>by 관리자</ContentEditor>
       </ContentButton>
+      {/*  )} */}
+
+      {/* {secondMagazineData && ( */}
       <ContentButton>
-        <ContentTitle>매거진 타이틀</ContentTitle>
-        <ContentEditor>by 000</ContentEditor>
+        <ContentTitle>{magazineData.title}</ContentTitle>
+        <ContentEditor>by 관리자</ContentEditor>
       </ContentButton>
+      {/* )} */}
+
+      {/* {thirdMagazineData && ( */}
       <ContentButton>
-        <ContentTitle>매거진 타이틀</ContentTitle>
-        <ContentEditor>by 000</ContentEditor>
+        <ContentTitle>{magazineData.title}</ContentTitle>
+        <ContentEditor>by 관리자</ContentEditor>
       </ContentButton>
+      {/* )} */}
     </Container>
   );
 };
