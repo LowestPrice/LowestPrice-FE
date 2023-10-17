@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FlexBox, ButtonStyle } from './style';
 
 const Footer = () => {
+
   const navigate = useNavigate();
   return (
     <FlexBox>
