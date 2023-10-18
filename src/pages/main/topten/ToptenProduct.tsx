@@ -1,15 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Product } from '../../../type';
+import Alarmbell from '../../../assets/icon/Alarmbell';
 
-type Props = {
-  productName: string;
-  currentPrice: number;
-  discountRate: number;
-  productImage: string;
-  originalPrice: string;
+interface Props extends Product {
   index: number;
-  productId: number;
-};
+}
 
 function ToptenProduct(props: Props) {
   const navigate = useNavigate();
@@ -24,6 +20,9 @@ function ToptenProduct(props: Props) {
       }}
     >
       <ProductImageWrap />
+      <BellImage>
+        <Alarmbell />
+      </BellImage>
       <div className='rank'>{props.index + 1}</div>
       <Content>
         <div>
@@ -43,7 +42,7 @@ function ToptenProduct(props: Props) {
           position: 'absolute',
           top: '0px',
         }}
-      ></img>
+      />
     </Wrap>
   );
 }
@@ -53,21 +52,12 @@ export default ToptenProduct;
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    180.08deg,
-    rgba(255, 255, 255, 0) 34.86%,
-    rgba(148, 148, 148, 0.04) 53.24%,
-    rgba(139, 139, 139, 0.17) 65.15%,
-    rgba(120, 120, 120, 0.33) 71.61%,
-    rgba(107, 107, 107, 0.62) 80.8%,
-    #4d4d4d 100.2%
-  );
   background-color: rgba(243, 243, 243, 1);
   border-radius: 15px;
   position: relative;
   .rank {
     font-size: 53.19px;
-    color: black;
+    color: tomato;
     line-height: 58, 51px;
     position: absolute;
     left: 16px;
@@ -79,7 +69,7 @@ const Wrap = styled.div`
 const ProductImageWrap = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(243, 243, 243, 1);
+  background-color: #f3f3f3;
   background: linear-gradient(
     180.08deg,
     rgba(255, 255, 255, 0) 34.86%,
@@ -90,6 +80,15 @@ const ProductImageWrap = styled.div`
     #4d4d4d 100.2%
   );
   border-radius: 15px;
+`;
+
+const BellImage = styled.div`
+  width: 39.19px;
+  height: 39.19px;
+  z-index: 10;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 `;
 
 const Content = styled.div`

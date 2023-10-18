@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { getProduct } from '../../api/product';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
@@ -10,14 +11,24 @@ import SimilarProduct from './SimilarProduct';
 
 import { BsCaretDownFill } from 'react-icons/bs';
 import { BsChevronDown } from 'react-icons/bs';
-import Footer from '../../components/footer/Footer';
-import OptionModal from '../../components/modal/option/OptionModal';
+import OptionModal from './option/OptionModal';
+import AlarmFooter from '../../components/footer/AlarmFooter';
+import { useEffect, useState } from 'react';
 
 import { ChartArea } from './style';
 import { PriceChart } from './PriceChart';
 
 function Detail() {
+  const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
+  const navigate = useNavigate();
+
   const params = useParams();
+  console.log(params.id);
+
+  useEffect(() => {
+    console.log(params.id);
+    navigate(`/detail/${params.id}`);
+  }, [params.id]);
 
   const { status, data } = useQuery('product', () => getProduct(params.id));
   if (status === 'loading') {
@@ -27,18 +38,28 @@ function Detail() {
     return <Error />;
   }
 
+  const handleOptionModalButton = () => {
+    setIsOpenOption(!isOpenOption);
+  };
+
+  const handleOptionButton = (productId: number) => {
+    console.log('click', productId);
+    navigate(`/detail/${productId}`);
+  };
+
+
   const currentPrice = data.currentPrice.toLocaleString();
   const originalPrice = data.originalPrice.toLocaleString();
 
   return (
     <>
-      <div style={{ paddingBottom: '85px' }}>
+      <div style={{ paddingBottom: '40px' }}>
         <Header>
-          <h3>카테고리명</h3>
+          <h3>{data.Category[0].categoryName}</h3>
         </Header>
-        <div style={{ padding: '10px' }}>
+        <ProductImageWrap>
           <ProductImage src={data.productImage}></ProductImage>
-        </div>
+        </ProductImageWrap>
         <Content>
           <div className='title'>{data.productName}</div>
           <div className='originalPrice'>{originalPrice}원</div>
@@ -53,13 +74,13 @@ function Detail() {
           </PriceNDiscountWrap>
         </Content>
         <OptionWrap>
-          <Option>
+          <Option onClick={handleOptionModalButton}>
             제품 옵션 선택
             <div>
               <BsChevronDown color='#B1B1B1' size='20' />
             </div>
           </Option>
-          <OptionModal {...data}></OptionModal>
+          <OptionModal handleOptionButton={handleOptionButton} productId={data.productId} isOpenOption={isOpenOption} realId={data.realId}></OptionModal>
         </OptionWrap>
 
         <ChartArea>
@@ -78,7 +99,7 @@ function Detail() {
           </SimilarProductList>
         </SimilarProuctWrap>
       </div>
-      <Footer />
+      <AlarmFooter />
     </>
   );
 }
@@ -86,15 +107,21 @@ function Detail() {
 export default Detail;
 
 const Header = styled.div`
-  height: 68px;
+  height: 58px;
   border-bottom: 1px solid rgba(217, 217, 217, 1);
   padding: 10px;
   display: flex;
+  gap: 8px;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  padding-left: 15px;
 `;
 
+const ProductImageWrap = styled.div`
+  padding: 10px 50px 10px 50px;
+  position: relative;
+`;
 const ProductImage = styled.img`
   width: 100%;
   height: 100%;
@@ -186,6 +213,7 @@ const OptionWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const Option = styled.div`

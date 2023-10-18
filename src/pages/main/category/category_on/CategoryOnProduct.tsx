@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Product } from '../../../../type';
 import { BsCaretDownFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import Alarmbell from '../../../../assets/icon/Alarmbell';
 
 interface Props extends Product {}
 
@@ -19,7 +20,10 @@ function CategoryProduct(props: Props) {
         }}
       >
         <CProductImage>
-          <img src={props.productImage}></img>
+          <img src={props.productImage} className='productImage'></img>
+          <BellImage>
+            <Alarmbell />
+          </BellImage>
         </CProductImage>
         <CProductContent>
           <div className='title'>{props.productName}</div>
@@ -46,6 +50,7 @@ const Wrap = styled.div`
   /* border: 1px solid gray; */
   margin-bottom: 10px;
   cursor: pointer;
+  position: relative;
 `;
 
 const CProductImage = styled.div`
@@ -53,10 +58,19 @@ const CProductImage = styled.div`
   height: 152.6px;
   border-radius: 20px;
   background-color: rgba(243, 243, 243, 1);
-  img {
+  .productImage {
     width: 100%;
     height: 100%;
   }
+`;
+
+const BellImage = styled.div`
+  width: 36.49px;
+  height: 36.49px;
+  z-index: 10;
+  position: absolute;
+  right: 10px;
+  bottom: 100px;
 `;
 
 const CProductContent = styled.div`
