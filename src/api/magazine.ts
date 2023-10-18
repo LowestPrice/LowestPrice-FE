@@ -55,7 +55,7 @@ export const putMagazine = async (props: any) => {
   const newMainImage = props.newMainImage;
 
   try {
-    const response = await axios.patch(`http://3.39.251.68:3000/magazines/${id}`, {
+    const response = await axios.put(`http://3.39.251.68:3000/magazines/${id}`, {
       title: newTitle,
       content: newContent,
       mainImage: newMainImage,

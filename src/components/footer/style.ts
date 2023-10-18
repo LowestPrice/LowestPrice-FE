@@ -19,4 +19,14 @@ export const ButtonStyle = styled.button`
   font-size: 11px;
   margin: 6px 0px 20px 0px;
   border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: '#00ABF9';
+  /* '#6F6F6F */
+`;
+
+export const Text = styled.div`
+  font-size: 11px;
+  width: 48px;
 `;

@@ -12,23 +12,23 @@ const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ToastContainer
-          position='top-center'
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme='light'
-        />
-        <App />
-      </BrowserRouter>
-    </QueryClientProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <ToastContainer
+        position='top-center'
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
+      <App />
+    </BrowserRouter>
+  </QueryClientProvider>
+  // </React.StrictMode>
 );

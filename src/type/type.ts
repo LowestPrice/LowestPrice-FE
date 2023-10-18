@@ -11,3 +11,9 @@ export interface magazine {
   editor: string;
   likes: undefined;
 }
+
+export interface PriceData {
+  maxPrice: number;
+  minPrice: number;
+  priceHistoryForWeek: any;
+}
