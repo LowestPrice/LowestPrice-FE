@@ -33,7 +33,7 @@ interface ParamsProps {
 export const PriceChart: React.FC<ParamsProps> = ({ id }) => {
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
   const [chartOptions, setChartOptions] = useState<any>(null);
-  console.log(data, 'data');
+  // console.log(data, 'data');
 
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
