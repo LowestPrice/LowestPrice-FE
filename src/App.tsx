@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import { QueryClientProvider, useQueryClient } from 'react-query';
 import Main from './pages/main/Main';
 import Magazine from './pages/magazine/magazineMain/MagazineMain';
 import MagazineDetail from './pages/magazine/magazineDetail/MagazineDetail';
@@ -12,11 +11,11 @@ import YetLogin from './pages/login/YetLogin';
 import Login from './pages/login/Login';
 import Notification from './pages/notification/Notification';
 import Detail from './pages/detail/Detail';
-import Search from './pages/search/Search';
+import Search from './pages/search/search';
 import Prac from './pages/Slide';
 import Topten from './pages/main/topten/Topten';
-import KaKaoLogin from './pages/login/KaKaoLogin';
-import { ToastContainer } from 'react-toastify';
+// import KaKaoLogin from './pages/login/KaKaoLogin';
+// import { ToastContainer } from 'react-toastify';
 import Error from './components/Error';
 import './App.css';
 

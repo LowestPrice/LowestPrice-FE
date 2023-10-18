@@ -41,10 +41,10 @@ const Magazine: React.FC<MagazineProps> = () => {
   };
 
   if (isLoading) {
-    <h1>로딩중입니다</h1>;
+    return <h1>로딩중입니다</h1>;
   }
   if (isError) {
-    <h1>에러가 발생했습니다.</h1>;
+    return <h1>에러가 발생했습니다.</h1>;
   }
 
   return (
