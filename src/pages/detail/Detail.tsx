@@ -15,6 +15,9 @@ import OptionModal from './option/OptionModal';
 import AlarmFooter from '../../components/footer/AlarmFooter';
 import { useEffect, useState } from 'react';
 
+import { ChartArea } from './style';
+import { PriceChart } from './PriceChart';
+
 function Detail() {
   const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -43,6 +46,7 @@ function Detail() {
     console.log('click', productId);
     navigate(`/detail/${productId}`);
   };
+
 
   const currentPrice = data.currentPrice.toLocaleString();
   const originalPrice = data.originalPrice.toLocaleString();
@@ -78,6 +82,12 @@ function Detail() {
           </Option>
           <OptionModal handleOptionButton={handleOptionButton} productId={data.productId} isOpenOption={isOpenOption} realId={data.realId}></OptionModal>
         </OptionWrap>
+
+        <ChartArea>
+          <div>가격 그래프</div>
+          <PriceChart id={params.id as string} />
+        </ChartArea>
+
         <SimilarProuctWrap>
           <div className='title'>해당 상품과 비슷한 상품</div>
           <SimilarProductList>

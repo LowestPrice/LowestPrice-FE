@@ -66,3 +66,24 @@ export const loginWithKakao = () => {
   )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
   window.location.href = kakaoOauthURL;
 };
+
+//차트
+
+export type PriceData = {
+  maxPrice: number;
+  minPrice: number;
+  priceHistoryForWeek: {
+    [date: string]: number;
+  };
+};
+
+export const getPriceHistory = async (id: any): Promise<PriceData | undefined> => {
+  console.log(id, 'api는 id값이 나올까?');
+  try {
+    const response = await axios.get(`http://3.39.251.68:3000/price-history/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('가격 히스토리 에러', error);
+    return undefined;
+  }
+};
