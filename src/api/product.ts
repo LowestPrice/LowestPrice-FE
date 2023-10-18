@@ -13,7 +13,7 @@ export const getProduct = async (productId: string | undefined) => {
   try {
     console.log(productId);
     const response = await axios.get(`http://3.39.251.68:3000/product/${productId}`);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     console.log(err);
   }
@@ -30,9 +30,28 @@ export const getTopten = async () => {
 
 export const getCategory = async (categoryName: string | undefined) => {
   try {
-    console.log(categoryName);
     const response = await axios.get(`http://3.39.251.68:3000/product/category/${categoryName}`);
     return response.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getCategoryFilter = async (categoryName: string | undefined, filterName: string | undefined) => {
+  try {
+    console.log(categoryName, filterName);
+    const response = await axios.get(`http://3.39.251.68:3000/product/category/${categoryName}/${filterName}`);
+    return response.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getOptions = async (realId: string | undefined) => {
+  try {
+    console.log(realId);
+    const response = await axios.get(`http://3.39.251.68:3000/option/${realId}`);
+    return response.data;
   } catch (err) {
     console.log(err);
   }

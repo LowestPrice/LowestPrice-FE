@@ -7,22 +7,28 @@ import Footer from '../../components/footer/Footer';
 import { useState } from 'react';
 import CategoryTab from './category/CategoryTab';
 import CategoryOnProductList from './category/category_on/CategoryOnProductList';
+import Logo from '../../assets/icon/Logo';
+import { Filter } from '../../type';
 
-import { getProduct } from '../../api/product';
-import { useQuery } from 'react-query';
-import Footer from '../../components/footer/Footer';
-import Topten from './Topten';
-import Error from '../../components/Error';
-import Loading from '../../components/Loading';
-
-type Props = {};
-
-export default function Main({}: Props) {
+export default function Main() {
+  // 상태 관리 ------------------------------------------------------------------------------------------------
   const [isOnCategory, setIsOnCategory] = useState<boolean>(false);
   const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([false, false, false, false, false]);
   const [categoryId, setCategoryId] = useState<number>(0);
+  const [filterName, setFilterName] = useState<string>('');
+  const [isFilter, setIsFilter] = useState<boolean>(false);
+
+  // 카테고리 리스트 ------------------------------------------------------------------------------------
 
   const categoryList: string[] = ['아이패드', '맥북', '맥', '에어팟', '아이폰', '애플워치'];
+
+  // 필터 리스트 -------------------------------------------
+
+  const filterList: Filter[] = [
+    { content: '할인순', value: 'discountRate_desc' },
+    { content: '낮은가격순', value: 'price_asc' },
+    { content: '높은가격순', value: 'price_desc' },
+  ];
 
   // 카테고리 버튼 색 변경 ------------------------------------
 
@@ -35,12 +41,19 @@ export default function Main({}: Props) {
     setCategoryId(idx + 1);
   };
 
-  // 카테고리 변경 ---------------------------------------------------------
+  // 카테고리 필터 변경 ---------------------------------------------------------
+
+  const handleFilterButton = (e: any) => {
+    setFilterName(e.id);
+    setIsFilter(true);
+    console.log(filterName);
+  };
 
   return (
     <div>
       <div style={{ height: '100%', position: 'relative', width: '100%' }}>
         <Header>
+          <Logo />
           <h3>내일은 최저가</h3>
         </Header>
         <Wrap>
@@ -73,18 +86,30 @@ export default function Main({}: Props) {
             </CategoryTabWrap>
             <Filterbar>
               <Options>
-                <div className='filterOption'> 할인순</div>
-                <div className='filterOption'> 낮은가격순</div>
-                <div className='filterOption'> 높은가격순</div>
+                {filterList.map((item, index) => {
+                  return (
+                    <FilterOption
+                      key={index}
+                      id={item.value}
+                      onClick={(e) => {
+                        handleFilterButton(e.target);
+                      }}
+                    >
+                      {item.content}
+                    </FilterOption>
+                  );
+                })}
               </Options>
             </Filterbar>
-            {isOnCategory ? <CategoryOnProductList categoryId={categoryId} /> : <CategoryOffProductList categoryId={categoryId} />}
+            {isOnCategory ? (
+              <CategoryOnProductList categoryId={categoryId} filterName={filterName} isFilter={isFilter} />
+            ) : (
+              <CategoryOffProductList categoryId={categoryId} />
+            )}
           </CategoryWrap>
         </Wrap>
       </div>
       <Footer />
-
- 
     </div>
   );
 }
@@ -93,12 +118,12 @@ const Header = styled.div`
   width: 375px;
   height: 62px;
   top: 34px;
-  padding: 12px, 51px, 12px, 12px;
   border-bottom: 1px solid rgba(243, 243, 243, 1);
   gap: 8px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
 `;
 
 const Wrap = styled.div`
@@ -169,7 +194,7 @@ const CategoryTitle = styled.div`
 
 const CategoryTabWrap = styled.div`
   display: flex;
-  width: 375px;
+  width: 357px;
   height: 70px;
   flex-direction: row;
   white-space: nowrap;
@@ -213,9 +238,10 @@ const Options = styled.div`
   gap: 7px;
   height: 12px;
   padding-top: 10px;
-  .filterOption {
-    font-size: 12px;
-    color: rgba(181, 181, 181, 1);
-    cursor: pointer;
-  }
+`;
+
+const FilterOption = styled.div`
+  font-size: 12px;
+  color: rgba(181, 181, 181, 1);
+  cursor: pointer;
 `;

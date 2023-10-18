@@ -1,5 +1,5 @@
 export type MagazineProps = {
-  data: magazine[];
+  data?: magazine[];
 };
 
 export interface magazine {
