@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-
 import Topten from './topten/Topten';
-
 import CategoryOffProductList from './category/category_off/CategoryOffProductList';
 import Footer from '../../components/footer/Footer';
 import { useState } from 'react';
@@ -10,7 +8,12 @@ import CategoryOnProductList from './category/category_on/CategoryOnProductList'
 import Logo from '../../assets/icon/Logo';
 import { Filter } from '../../type';
 
-export default function Main() {
+
+
+
+
+
+export default function Main({}: Props) {
   // 상태 관리 ------------------------------------------------------------------------------------------------
   const [isOnCategory, setIsOnCategory] = useState<boolean>(false);
   const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([false, false, false, false, false]);
