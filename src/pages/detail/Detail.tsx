@@ -13,6 +13,9 @@ import { BsChevronDown } from 'react-icons/bs';
 import Footer from '../../components/footer/Footer';
 import OptionModal from '../../components/modal/option/OptionModal';
 
+import { ChartArea } from './style';
+import { PriceChart } from './PriceChart';
+
 function Detail() {
   const params = useParams();
 
@@ -23,8 +26,6 @@ function Detail() {
   if (status === 'error') {
     return <Error />;
   }
-
-  console.log(data);
 
   const currentPrice = data.currentPrice.toLocaleString();
   const originalPrice = data.originalPrice.toLocaleString();
@@ -60,6 +61,12 @@ function Detail() {
           </Option>
           <OptionModal {...data}></OptionModal>
         </OptionWrap>
+
+        <ChartArea>
+          <div>가격 그래프</div>
+          <PriceChart id={params.id as string} />
+        </ChartArea>
+
         <SimilarProuctWrap>
           <div className='title'>해당 상품과 비슷한 상품</div>
           <SimilarProductList>

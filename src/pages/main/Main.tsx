@@ -1,17 +1,13 @@
 import styled from 'styled-components';
-
 import Topten from './topten/Topten';
-
 import CategoryOffProductList from './category/category_off/CategoryOffProductList';
 import Footer from '../../components/footer/Footer';
 import { useState } from 'react';
 import CategoryTab from './category/CategoryTab';
 import CategoryOnProductList from './category/category_on/CategoryOnProductList';
-
 import { getProduct } from '../../api/product';
 import { useQuery } from 'react-query';
-import Footer from '../../components/footer/Footer';
-import Topten from './Topten';
+
 // import Error from '../../components/Error';
 // import Loading from '../../components/Loading';
 
