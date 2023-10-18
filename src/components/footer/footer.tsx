@@ -1,8 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { FlexBox } from './style';
-
-import styled from 'styled-components';
-
 import { FlexBox, ButtonStyle, Text } from './style';
 import { MyPageIcon, BellIcon, FooterMagazineIcon, HomeIcon } from '../../assets/icon/icon';
 

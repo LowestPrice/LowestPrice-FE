@@ -19,7 +19,7 @@ export const ButtonStyle = styled.button`
   width: 52px;
   height: 52px;
   font-size: 11px;
-  margin: 6px 0px 20px 0px;
+  margin: 6px 0px 6px 0px;
   border: none;
   display: flex;
   flex-direction: column;
