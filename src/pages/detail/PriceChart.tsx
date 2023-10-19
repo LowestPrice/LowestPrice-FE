@@ -35,9 +35,6 @@ export const PriceChart: React.FC<ParamsProps> = ({ id }) => {
   //   console.log(data?.minPrice, 'maxprice');
   //   console.log(data?.priceHistoryForWeek, 'pricehistoryforweek');
 
-  const [chartOptions, setChartOptions] = useState<any>(null);
-  // console.log(data, 'data');
-
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
     datasets: [

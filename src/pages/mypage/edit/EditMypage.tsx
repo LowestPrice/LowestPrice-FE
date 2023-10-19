@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 // import { useNavigate } from 'react-router-dom';
-import Footer from '../../../components/footer/Footer';
+import PageFooter from '../../../components/footer/PageFooter';
 
 export interface UserInfo {
   userName?: string | undefined;
@@ -50,7 +50,7 @@ export default function EditMypage({ userName, image }: UserInfo) {
           <EditName defaultValue={name}></EditName>
         </Profile>
       </Wrap>
-      <Footer />
+      <PageFooter />
     </div>
   );
 }
