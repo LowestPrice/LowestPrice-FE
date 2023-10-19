@@ -1,12 +1,29 @@
 import { useNavigate } from 'react-router-dom';
 import { MagazineProps } from '../../../type/type';
-import { Container, Header, Title, Line, Subtitle, Box, Img, BoxPadding, BoxTitle, Flex, Content, Writing, LikeFlex, InnerContainer } from './styles';
+import {
+  Container,
+  Header,
+  Title,
+  Line,
+  Subtitle,
+  Box,
+  Img,
+  BoxPadding,
+  BoxTitle,
+  Flex,
+  Content,
+  Writing,
+  LikeFlex,
+  InnerContainer,
+  LogoTitle,
+} from './styles';
 import PageFooter from '../../../components/footer/PageFooter';
 import { useState, useEffect } from 'react';
 import { getMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { postMagazineLike } from '../../../api/magazine';
 import Heart from '../Heart';
+import { BlueLogo } from '../../../assets/icon/icon';
 
 const Magazine: React.FC<MagazineProps> = () => {
   const [magazines, setMagazines] = useState<any[]>([]);
@@ -49,7 +66,10 @@ const Magazine: React.FC<MagazineProps> = () => {
 
   return (
     <>
-      <Header>매거진</Header>
+      <Header>
+        <BlueLogo />
+        <LogoTitle>매거진</LogoTitle>
+      </Header>
       <Container>
         <InnerContainer>
           <Line></Line>
@@ -61,7 +81,7 @@ const Magazine: React.FC<MagazineProps> = () => {
               <Img src={data.mainImage} />
               <BoxPadding>
                 <BoxTitle>{data.title}</BoxTitle>
-                <Content>{data.content.length > 20 ? `${data.content.substring(0, 20)}...` : data.content}</Content>
+                <Content>{data.content.length > 53 ? `${data.content.substring(0, 53)}...` : data.content}</Content>
                 <Flex>
                   <div>{data.editor}</div>
                   <LikeFlex>

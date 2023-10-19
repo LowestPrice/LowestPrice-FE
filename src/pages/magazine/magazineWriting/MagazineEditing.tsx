@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
@@ -14,6 +14,7 @@ const MagazineEditing: React.FC = () => {
   const [newTitle, setNewTitle] = useState(magazineData.title);
   const [newContent, setNewContent] = useState(magazineData.content);
   const [newMainImage, setNewImage] = useState(magazineData.mainImage);
+  const [previewImage, setPreviewImage] = useState<string>(magazineData.mainImage);
   const queryClient = useQueryClient();
 
   const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
@@ -26,9 +27,18 @@ const MagazineEditing: React.FC = () => {
     setNewContent(newContent);
   };
 
-  const onImageChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    const newMainImage = e.target.value;
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+
+  const onImageChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const newMainImage = e.target.files?.[0];
     setNewImage(newMainImage);
+    if (newMainImage) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(newMainImage);
+    }
   };
 
   // 데이터 변경하기
@@ -41,7 +51,7 @@ const MagazineEditing: React.FC = () => {
     },
   });
 
-  const onSubmitButtonHandler = (id: any, newTitle: string, newContent: string, newMainImage: string) => {
+  const onSubmitButtonHandler = (id: any, newTitle: string, newContent: string, newMainImage: File) => {
     changePost.mutate(
       {
         id,
@@ -60,6 +70,31 @@ const MagazineEditing: React.FC = () => {
       }
     );
   };
+  // console.log(newTitle, '새로운 타이틀');
+  // console.log(newContent, '새로운 내용');
+  // console.log(newMainImage, '새로운 이미지');
+
+  const adjustHeight = () => {
+    const targetTextarea = contentRef.current;
+    if (targetTextarea) {
+      targetTextarea.style.height = 'auto';
+      if (targetTextarea.scrollHeight > targetTextarea.clientHeight) {
+        targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
+      } else {
+        targetTextarea.style.height = window.innerHeight + 'px';
+      }
+    }
+  };
+
+  // 내용이 변경될 때마다 높이 조정
+  useEffect(() => {
+    adjustHeight();
+  }, [newContent]);
+
+  // 컴포넌트가 마운트 될 때 높이 조정
+  useEffect(() => {
+    adjustHeight();
+  }, []);
 
   return (
     <>
@@ -75,8 +110,16 @@ const MagazineEditing: React.FC = () => {
             <PhotoAdd></PhotoAdd>
           </PhotoDiv>
           <Title value={newTitle} defaultValue={magazineData.title} onChange={onTitleChangeHandler} />
-          <Content value={newContent} defaultValue={magazineData.content} onChange={onContentChangeHandler} />
-          <textarea value={newMainImage} defaultValue={magazineData.image} onChange={onImageChangeHandler} />
+          <img src={previewImage} alt='매거진 이미지' />
+          <input type='file' accept='image/*' onChange={onImageChangeHandler} />
+          <textarea style={{ display: 'none' }} />
+          <Content
+            value={newContent}
+            defaultValue={magazineData.content}
+            onChange={onContentChangeHandler}
+            ref={contentRef}
+            style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box' }}
+          />
         </DirectionCol>
       </ContentBox>
     </>
