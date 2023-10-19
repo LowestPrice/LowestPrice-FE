@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../../components/footer/Footer';
 
-type Props = {};
+// type Props = {};
 
-function Mypage({}: Props) {
+function Mypage() {
   // 상태 관리 ---------------------------------------
   const [imageSrc, _]: any = useState(null);
 
   // 네비게이트 ----------------------------------------
   const navigate = useNavigate();
+
+  const handleSetImageSrc = () => {
+    setImageSrc('');
+  };
+
+  useEffect(() => {
+    handleSetImageSrc();
+  }, []);
 
   return (
     <div>
