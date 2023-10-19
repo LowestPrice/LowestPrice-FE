@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../../components/footer/Footer';
@@ -7,7 +7,7 @@ type Props = {};
 
 function Mypage({}: Props) {
   // 상태 관리 ---------------------------------------
-  const [imageSrc, setImageSrc]: any = useState(null);
+  const [imageSrc, _]: any = useState(null);
 
   // 네비게이트 ----------------------------------------
   const navigate = useNavigate();

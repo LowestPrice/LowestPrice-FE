@@ -80,9 +80,10 @@ export const deleteMagazine = async (props: any) => {
 // 매거진 좋아요 등록/취소
 export const postMagazineLike = async (props: any) => {
   const id = props.id;
+  const userId = props.userId;
 
   try {
-    const response = await axios.post(`http://3.39.251.68:3000/magazines/${id}/user/1/like`);
+    const response = await axios.post(`http://3.39.251.68:3000/magazines/${id}/user/${userId}/like`);
     // 유저 아이디 임의로 1 적용
     return response;
   } catch (error) {

@@ -37,7 +37,7 @@ const Magazine: React.FC<MagazineProps> = () => {
 
   const handleLikeClick = (event: React.MouseEvent, magazineId: string) => {
     event.stopPropagation();
-    magazineLike.mutate({ id: magazineId }); // mutate 메서드에 id를 전달
+    magazineLike.mutate({ id: magazineId });
   };
 
   if (isLoading) {
@@ -65,7 +65,7 @@ const Magazine: React.FC<MagazineProps> = () => {
                 <Flex>
                   <div>{data.editor}</div>
                   <LikeFlex>
-                    <Heart like={like} onClick={() => handleLikeClick(data.magazineId, event)} />
+                    <Heart like={like} onClick={(event) => handleLikeClick(event, data.magazineId)} />
                     <div>{data.LikeMagazine}</div>
                   </LikeFlex>
                 </Flex>
