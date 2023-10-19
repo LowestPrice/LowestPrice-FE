@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { MagazineProps } from '../../../type/type';
 import { Container, Header, Title, Line, Subtitle, Box, Img, BoxPadding, BoxTitle, Flex, Content, Writing, LikeFlex, InnerContainer } from './styles';
-import Footer from '../../../components/footer/Footer';
+import PageFooter from '../../../components/footer/PageFooter';
 import { useState, useEffect } from 'react';
 import { getMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -72,7 +72,7 @@ const Magazine: React.FC<MagazineProps> = () => {
               </BoxPadding>
             </Box>
           ))}
-          <Footer />
+          <PageFooter />
         </InnerContainer>
       </Container>
     </>

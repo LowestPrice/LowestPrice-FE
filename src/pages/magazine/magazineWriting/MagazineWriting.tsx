@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv } from './styles';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../../../components/footer/Footer';
 import { useQueryClient, useMutation } from 'react-query';
 import { postMagazine } from '../../../api/magazine';
+import PageFooter from '../../../components/footer/PageFooter';
 
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ const MagazineWriting: React.FC = () => {
           <input placeholder='이미지' onChange={onImageChangeHandler} type='file' accept='image/*' />
         </DirectionCol>
       </ContentBox>
-      <Footer />
+      <PageFooter />
     </>
   );
 };
