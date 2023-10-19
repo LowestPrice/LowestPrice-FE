@@ -7,7 +7,7 @@ import Footer from '../../../components/footer/Footer';
 
 function Mypage() {
   // 상태 관리 ---------------------------------------
-  const [imageSrc, setImageSrc]: any = useState(null);
+  const [imageSrc, _]: any = useState(null);
 
   // 네비게이트 ----------------------------------------
   const navigate = useNavigate();
