@@ -37,9 +37,12 @@ export const Editor = styled.div`
 
 export const TextArea = styled.div`
   width: 335px;
-  height: 344px;
   margin: 20px;
   background-color: #f3f3f3;
+  resize: none;
+  overflow-y: auto;
+  min-height: 344px;
+  line-height: 1.5;
 `;
 
 export const ContentButton = styled.button`
@@ -86,4 +89,12 @@ export const Img = styled.img`
   width: 100%;
   height: 234px;
   object-fit: cover;
+`;
+
+export const AnotherMagazine = styled.div`
+  font-size: 20px;
+  font-weight: 600;
+  height: 125px;
+  display: flex;
+  align-items: center;
 `;

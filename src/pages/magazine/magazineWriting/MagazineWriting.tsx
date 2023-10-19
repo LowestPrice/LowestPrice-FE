@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
@@ -8,6 +8,7 @@ import PageFooter from '../../../components/footer/PageFooter';
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const contentRef = useRef<HTMLTextAreaElement>(null);
 
   // 데이터 추가하기
   const [title, setTitle] = useState<any>('');
@@ -37,7 +38,6 @@ const MagazineWriting: React.FC = () => {
   };
 
   const onSubmitButtonHandler = (title: any, content: any, image: any) => {
-    console.log(title, content, image, '롸이팅 페이지');
     addPosts.mutate(
       { title, content, image },
       {
@@ -51,6 +51,28 @@ const MagazineWriting: React.FC = () => {
       }
     );
   };
+
+  // textarea 높이 조정
+  const adjustHeight = () => {
+    const targetTextarea = contentRef.current;
+    if (targetTextarea) {
+      targetTextarea.style.height = 'auto';
+      if (targetTextarea.scrollHeight > targetTextarea.clientHeight) {
+        targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
+      } else {
+        targetTextarea.style.height = window.innerHeight + 'px';
+      }
+    }
+  };
+
+  useEffect(() => {
+    adjustHeight();
+  }, [content]);
+
+  // 컴포넌트가 마운트 될 때 길이 조정
+  useEffect(() => {
+    adjustHeight();
+  }, []);
 
   return (
     <>
@@ -66,8 +88,15 @@ const MagazineWriting: React.FC = () => {
             <PhotoAdd></PhotoAdd>
           </PhotoDiv>
           <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
-          <Content placeholder='내용을 입력하세요' onChange={onContentChangeHandler} value={content} />
           <input placeholder='이미지' onChange={onImageChangeHandler} type='file' accept='image/*' />
+          <Content
+            placeholder='내용을 입력하세요'
+            onChange={onContentChangeHandler}
+            value={content}
+            ref={contentRef}
+            rows={100}
+            style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box' }}
+          />
         </DirectionCol>
       </ContentBox>
       <PageFooter />

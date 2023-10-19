@@ -30,10 +30,10 @@ export const PriceChart: React.FC<ParamsProps> = ({ id }) => {
   console.log(id, 'id값이 나올까?');
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
 
-  //   console.log(data, '데이터 결과');
+  console.log(data, '데이터 결과');
   //   console.log(data?.maxPrice, 'maxprice');
   //   console.log(data?.minPrice, 'maxprice');
-  //   console.log(data?.priceHistoryForWeek, 'pricehistoryforweek');
+  console.log(data?.priceHistoryForWeek, 'pricehistoryforweek');
 
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
