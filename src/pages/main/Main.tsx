@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Topten from './topten/Topten';
 import CategoryOffProductList from './category/category_off/CategoryOffProductList';
-import Footer from '../../components/footer/Footer';
+import PageFooter from '../../components/footer/PageFooter';
 import { useState } from 'react';
 import CategoryTab from './category/CategoryTab';
 import CategoryOnProductList from './category/category_on/CategoryOnProductList';
@@ -103,7 +103,7 @@ export default function Main() {
           </CategoryWrap>
         </Wrap>
       </div>
-      <Footer />
+      <PageFooter />
     </div>
   );
 }

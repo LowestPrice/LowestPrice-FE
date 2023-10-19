@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Footer from '../../components/footer/Footer';
+import PageFooter from '../../components/footer/PageFooter';
 
 type Props = {};
 
@@ -25,7 +25,7 @@ function YetLogin({}: Props) {
           </LoginButton>
         </Content>
       </Wrap>
-      <Footer />
+      <PageFooter />
     </div>
   );
 }

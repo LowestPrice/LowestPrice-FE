@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FlexBox, ButtonStyle, Text } from './style';
 import { MyPageIcon, BellIcon, FooterMagazineIcon, HomeIcon } from '../../assets/icon/icon';
 
-const Footer = () => {
+const PageFooter = () => {
   const navigate = useNavigate();
   return (
     <FlexBox>
@@ -26,4 +26,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default PageFooter;

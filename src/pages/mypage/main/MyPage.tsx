@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../../../components/footer/Footer';
+import PageFooter from '../../../components/footer/PageFooter';
 
 // type Props = {};
 
 function Mypage() {
   // 상태 관리 ---------------------------------------
-  const [imageSrc, _]: any = useState(null);
+  const [imageSrc, setImageSrc]: any = useState(null);
 
   // 네비게이트 ----------------------------------------
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ function Mypage() {
         <Article onClick={() => navigate('/likemagazine')}>좋아요한 매거진 보기</Article>
         <Article>내일은 최저가 사용법</Article>
       </Wrap>
-      <Footer />
+      <PageFooter />
     </div>
   );
 }

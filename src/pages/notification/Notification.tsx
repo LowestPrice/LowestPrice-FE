@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import NProductList from './NProductList/NProductList';
 import NPriceAlarmList from './NPriceAlarmList/NPriceAlarmList';
-import Footer from '../../components/footer/Footer';
+import PageFooter from '../../components/footer/PageFooter';
 
 type Props = {};
 
@@ -41,7 +41,7 @@ export default function Notification({}: Props) {
         </PriceAlarmList>
       </Navigate>
       {tab ? <NProductList /> : <NPriceAlarmList />}
-      <Footer />
+      <PageFooter />
     </div>
   );
 }
