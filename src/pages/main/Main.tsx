@@ -8,12 +8,7 @@ import CategoryOnProductList from './category/category_on/CategoryOnProductList'
 import Logo from '../../assets/icon/Logo';
 import { Filter } from '../../type';
 
-
-
-
-
-
-export default function Main({}: Props) {
+export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
   const [isOnCategory, setIsOnCategory] = useState<boolean>(false);
   const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([false, false, false, false, false]);
@@ -104,11 +99,7 @@ export default function Main({}: Props) {
                 })}
               </Options>
             </Filterbar>
-            {isOnCategory ? (
-              <CategoryOnProductList categoryId={categoryId} filterName={filterName} isFilter={isFilter} />
-            ) : (
-              <CategoryOffProductList categoryId={categoryId} />
-            )}
+            {isOnCategory ? <CategoryOnProductList categoryId={categoryId} filterName={filterName} isFilter={isFilter} /> : <CategoryOffProductList />}
           </CategoryWrap>
         </Wrap>
       </div>

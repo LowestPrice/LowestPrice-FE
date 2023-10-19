@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import NProductList from './NProductList/NProductList';
 import NPriceAlarmList from './NPriceAlarmList/NPriceAlarmList';
