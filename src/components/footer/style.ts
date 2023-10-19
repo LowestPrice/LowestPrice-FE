@@ -9,9 +9,9 @@ export const FlexBox = styled.div`
   border-top: 1px solid grey;
   position: fixed;
   bottom: 0;
-  margin-top: 20px;
   background-color: white;
   z-index: 1000;
+  margin-top: 5px;
 `;
 
 export const ButtonStyle = styled.button`
