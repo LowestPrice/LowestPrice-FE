@@ -65,7 +65,7 @@ const Magazine: React.FC<MagazineProps> = () => {
                 <Flex>
                   <div>{data.editor}</div>
                   <LikeFlex>
-                    <Heart like={like} onClick={() => handleLikeClick(data.magazineId, event)} />
+                    <Heart like={like} onClick={() => handleLikeClick(event, data.magazineId)} />
                     <div>{data.LikeMagazine}</div>
                   </LikeFlex>
                 </Flex>

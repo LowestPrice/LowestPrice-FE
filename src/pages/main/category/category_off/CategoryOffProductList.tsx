@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 import CategoryOffProduct from './CategoryOffProduct';
-import { getCategory, getProducts } from '../../../../api/product';
+import {  getProducts } from '../../../../api/product';
 import { useQueries } from 'react-query';
 import Loading from '../../../../components/Loading';
-import { useEffect } from 'react';
 import Error from '../../../../components/Error';
-interface Props {
-  categoryId: number;
-}
+// interface Props {
+//   categoryId: number;
+// }
 
-function CategoryOffProductList(props: Props) {
+function CategoryOffProductList() {
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
   const result = useQueries([
     {

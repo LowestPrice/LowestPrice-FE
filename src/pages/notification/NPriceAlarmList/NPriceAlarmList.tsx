@@ -1,4 +1,3 @@
-import React from 'react';
 import NPricetItem from './NPricetItem';
 
 type Props = {};

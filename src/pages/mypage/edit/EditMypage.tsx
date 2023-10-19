@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Footer from '../../../components/footer/Footer';
 
 export interface UserInfo {
@@ -14,7 +14,7 @@ export default function EditMypage({ userName, image }: UserInfo) {
   const [imageSrc, setImageSrc]: any = useState(image);
 
   // 네비게이트 ----------------------------------------
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // 프로필 이미지 수정
   const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +28,15 @@ export default function EditMypage({ userName, image }: UserInfo) {
       };
     }
   };
+
+  const handleSetName = () => {
+    setName('');
+  };
+
+  useEffect(() => {
+    handleSetName();
+  }, []);
+
   return (
     <div>
       <Header>
