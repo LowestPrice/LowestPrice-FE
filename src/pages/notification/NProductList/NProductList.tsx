@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import NProductItem from './NProductItem';
 
 type Props = {};

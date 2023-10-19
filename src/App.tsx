@@ -11,7 +11,7 @@ import YetLogin from './pages/login/YetLogin';
 import Login from './pages/login/Login';
 import Notification from './pages/notification/Notification';
 import Detail from './pages/detail/Detail';
-import Search from './pages/search/search';
+import Search from './pages/search/Search';
 import Prac from './pages/Slide';
 import Topten from './pages/main/topten/Topten';
 import Error from './components/Error';
