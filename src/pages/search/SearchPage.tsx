@@ -31,6 +31,7 @@ function Search() {
   ]);
 
   // 리패치 -------------------------------------
+  
   useEffect(() => {
     result[1].refetch();
   }, [filterButton]);
