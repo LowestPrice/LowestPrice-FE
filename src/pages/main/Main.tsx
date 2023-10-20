@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import Topten from './topten/Topten';
 import CategoryOffProductList from './category/category_off/CategoryOffProductList';
 import PageFooter from '../../components/footer/PageFooter';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CategoryTab from './category/CategoryTab';
 import CategoryOnProductList from './category/category_on/CategoryOnProductList';
 import Logo from '../../assets/icon/Logo';
 import { Filter } from '../../type';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
@@ -23,6 +24,11 @@ export default function Main() {
 
   const categoryList: string[] = ['아이패드', '맥북', '맥', '에어팟', '아이폰', '애플워치'];
 
+  useEffect(() => {
+    // console.log(res.Headers)
+    console.log(Cookies.get('Authorization'));
+  });
+
   // 필터 리스트 -------------------------------------------
 
   const filterList: Filter[] = [
@@ -31,7 +37,8 @@ export default function Main() {
     { content: '높은가격순', value: 'price_desc' },
   ];
 
-  // 네비게이트 -----------------------
+  // 네비게이트 ------------------------
+
   const navigate = useNavigate();
 
   // 카테고리 버튼 색 변경 ------------------------------------
