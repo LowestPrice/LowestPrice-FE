@@ -10,13 +10,7 @@ interface Props {
 function CategoryTab(props: Props) {
   return (
     <div>
-      <Wrap
-        onClick={() => props.handleCategoryButton(props.index)}
-        style={{
-          backgroundColor: `${props.isCategorySelected[props.index] ? '#0FB4FF' : 'white'}`,
-          color: `${props.isCategorySelected[props.index] ? 'white' : 'black'}`,
-        }}
-      >
+      <Wrap type='button' onClick={() => props.handleCategoryButton(props.index)} $isCategorySelected={props.isCategorySelected[props.index]}>
         {props.content}
       </Wrap>
     </div>
@@ -25,12 +19,13 @@ function CategoryTab(props: Props) {
 
 export default CategoryTab;
 
-const Wrap = styled.button`
+const Wrap = styled.button<{ $isCategorySelected: boolean }>`
   width: 96px;
   height: 38px;
   border-radius: 32px;
   border: 1px solid rgba(217, 217, 217, 1);
-  background-color: white;
+  background-color: ${(props) => (props.$isCategorySelected ? '#0FB4FF' : 'white')};
+  color: ${(props) => (props.$isCategorySelected ? 'white' : 'black')};
   font-size: 16px;
   font-weight: 500;
   flex-shrink: 0;

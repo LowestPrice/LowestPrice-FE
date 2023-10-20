@@ -57,14 +57,28 @@ export const getOptions = async (realId: string | undefined) => {
   }
 };
 
-// 카카오 로그인
+// 검색 상품
 
-export const loginWithKakao = () => {
-  const SERVER_URL = 'http://3.39.251.68:3000/' || 'http://localhost:5173';
-  const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
-    `${SERVER_URL}/api/kakao/callback`
-  )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
-  window.location.href = kakaoOauthURL;
+export const getSearch = async (searchWord: string | undefined) => {
+  try {
+    console.log(searchWord);
+    const response = await axios.get(`http://3.39.251.68:3000/search?search=${searchWord}`);
+    return response.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 검색한 상품 필터 -----------------------------------------------------------------------------
+
+export const getFilteredSearch = async (filterName: string | undefined, searchWord: string | undefined) => {
+  try {
+    console.log(filterName, searchWord);
+    const response = await axios.get(`http://3.39.251.68:3000/search/${filterName}?search=${searchWord}`);
+    return response.data.data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 //차트
@@ -78,7 +92,7 @@ export type PriceData = {
 };
 
 export const getPriceHistory = async (id: any): Promise<PriceData | undefined> => {
-  console.log(id, 'api는 id값이 나올까?');
+  // console.log(id, 'api는 id값이 나올까?');
   try {
     const response = await axios.get(`http://3.39.251.68:3000/price-history/${id}`);
     return response.data;

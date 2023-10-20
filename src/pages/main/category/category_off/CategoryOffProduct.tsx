@@ -21,7 +21,7 @@ function CategoryOffProduct(props: Props) {
       >
         <CProductImage>
           <img src={props.productImage} className='productImage'></img>
-          <BellImage>
+          <BellImage onClick={(e) => e.preventDefault()}>
             <Alarmbell />
           </BellImage>
         </CProductImage>

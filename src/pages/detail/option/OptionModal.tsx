@@ -33,7 +33,6 @@ function OptionModal(props: Props) {
 
   const withoutOptionList = [...data].filter((it) => it.productId !== props.productId);
 
-  console.log(props.isOpenOption);
   //? 화면 -------------------------------------------------------
 
   return (
@@ -53,10 +52,12 @@ const Wrap = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   top: 84px;
   right: 39px;
-  width: 335px;
   border: 1px solid #b5b5b5;
   z-index: 10;
   width: 300px;
-  display: ${($isOpen) => ($isOpen ? 'none' : 'none')};
-  /* height: ${($isOpen) => ($isOpen ? '50px' : '400px')}; */
+  overflow: hidden;
+  opacity: ${(props) => (props.$isOpen ? '1' : '0')};
+  height: ${(props) => (props.$isOpen ? 'auto' : '0px')};
+  transition: all 400ms ease-in-out 0s;
+  border-radius: 10px;
 `;

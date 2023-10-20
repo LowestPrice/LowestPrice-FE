@@ -1,13 +1,21 @@
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
-type Props = {};
+interface Props {
+ 
+  productUrl: string;
+}
 
-function AlarmFooter({}: Props) {
+function AlarmFooter(props: Props) {
   return (
     <div>
       <Wrap>
         <Content>
-          <Alarm>
+          <Alarm
+            onClick={() => {
+              toast.success('알람을 받아보실 수 있습니다.');
+            }}
+          >
             <div>
               <svg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path
@@ -20,7 +28,13 @@ function AlarmFooter({}: Props) {
               </svg>
             </div>
           </Alarm>
-          <CoupangButton>최저가로 사러 가기</CoupangButton>
+          <CoupangButton
+            onClick={() => {
+              window.open(props.productUrl);
+            }}
+          >
+            최저가로 사러 가기
+          </CoupangButton>
         </Content>
       </Wrap>
     </div>

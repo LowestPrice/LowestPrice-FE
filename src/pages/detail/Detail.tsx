@@ -13,24 +13,27 @@ import { BsCaretDownFill } from 'react-icons/bs';
 import { BsChevronDown } from 'react-icons/bs';
 import OptionModal from './option/OptionModal';
 import AlarmFooter from '../../components/footer/AlarmFooter';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { ChartArea } from './style';
 import { PriceChart } from './PriceChart';
 
 function Detail() {
+  // 상태 관리 ------------------------------------------------------
   const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
+
+  // 네비게이트(페이지 이동) ----------------------
+
   const navigate = useNavigate();
 
+  // 파람스를 통해 productId 받아오기 -------------------------
+
   const params = useParams();
-  console.log(params.id);
 
-  useEffect(() => {
-    console.log(params.id);
-    navigate(`/detail/${params.id}`);
-  }, [params.id]);
+  // 해당 상품 데이터 불러오기 ----------------------------------------------
 
-  const { status, data } = useQuery('product', () => getProduct(params.id));
+  const { status, data } = useQuery(['product', params.id], () => getProduct(params.id), { enabled: !!params.id });
+
   if (status === 'loading') {
     return <Loading />;
   }
@@ -38,22 +41,38 @@ function Detail() {
     return <Error />;
   }
 
+  // 옵션(셀렉트)모달 켜고 닫기 ------------------------------------------------------------
+
   const handleOptionModalButton = () => {
     setIsOpenOption(!isOpenOption);
   };
 
-  const handleOptionButton = (productId: number) => {
-    console.log('click', productId);
-    navigate(`/detail/${productId}`);
+  // 옵션(셀렉트)모달 켜고 닫기 ------------------------------------------------------------
+
+  const OffOptionModal = () => {
+    setIsOpenOption(false);
   };
 
+  // 옵션 버튼 선택시 페이지 이동 --------------------------------------------------------------
+
+  const handleOptionButton = (productId: number) => {
+    console.log('click', productId);
+
+    navigate(`/detail/${productId}`);
+    // history.push(`/detail/${productId}`);
+  };
 
   const currentPrice = data.currentPrice.toLocaleString();
   const originalPrice = data.originalPrice.toLocaleString();
 
   return (
     <>
-      <div style={{ paddingBottom: '40px' }}>
+      <div
+        style={{ paddingBottom: '40px' }}
+        onClick={() => {
+          OffOptionModal();
+        }}
+      >
         <Header>
           <h3>{data.Category[0].categoryName}</h3>
         </Header>
@@ -74,7 +93,12 @@ function Detail() {
           </PriceNDiscountWrap>
         </Content>
         <OptionWrap>
-          <Option onClick={handleOptionModalButton}>
+          <Option
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOptionModalButton();
+            }}
+          >
             제품 옵션 선택
             <div>
               <BsChevronDown color='#B1B1B1' size='20' />
@@ -99,7 +123,7 @@ function Detail() {
           </SimilarProductList>
         </SimilarProuctWrap>
       </div>
-      <AlarmFooter />
+      <AlarmFooter productUrl={data.productUrl} />
     </>
   );
 }
