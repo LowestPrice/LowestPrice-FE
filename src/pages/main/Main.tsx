@@ -18,7 +18,7 @@ export default function Main() {
   const [categoryId, setCategoryId] = useState<number>(0);
   const [filterName, setFilterName] = useState<string>('');
   const [isFilter, setIsFilter] = useState<boolean>(false);
-  const [filterOptionBtn, setFilterOptionBtn] = useState<boolean>(false);
+  // const [filterOptionBtn, setFilterOptionBtn] = useState<boolean>(false);
 
   // 카테고리 리스트 ------------------------------------------------------------------------------------
 
