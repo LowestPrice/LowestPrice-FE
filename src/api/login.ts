@@ -1,5 +1,4 @@
 // 카카오 로그인
-
 export const loginWithKakao = () => {
   const SERVER_URL = 'https://lowest-price.store' || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
