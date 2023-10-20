@@ -7,14 +7,17 @@ import CategoryTab from './category/CategoryTab';
 import CategoryOnProductList from './category/category_on/CategoryOnProductList';
 import Logo from '../../assets/icon/Logo';
 import { Filter } from '../../type';
+import { useNavigate } from 'react-router-dom';
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
+  const [searchWord, setSearchWord] = useState<string>('');
   const [isOnCategory, setIsOnCategory] = useState<boolean>(false);
   const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([false, false, false, false, false]);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [filterName, setFilterName] = useState<string>('');
   const [isFilter, setIsFilter] = useState<boolean>(false);
+  const [filterOptionBtn, setFilterOptionBtn] = useState<boolean>(false);
 
   // 카테고리 리스트 ------------------------------------------------------------------------------------
 
@@ -27,6 +30,9 @@ export default function Main() {
     { content: '낮은가격순', value: 'price_asc' },
     { content: '높은가격순', value: 'price_desc' },
   ];
+
+  // 네비게이트 -----------------------
+  const navigate = useNavigate();
 
   // 카테고리 버튼 색 변경 ------------------------------------
 
@@ -43,67 +49,93 @@ export default function Main() {
 
   const handleFilterButton = (e: any) => {
     setFilterName(e.id);
-    setIsFilter(true);
-    console.log(filterName);
+    setIsFilter(!isFilter);
+  };
+
+  // 검색어 입력 --------------------------------------------------
+
+  const onChangeSearchWord = (e: any) => {
+    setSearchWord(e.target.value);
   };
 
   return (
     <div>
-      <div style={{ height: '100%', position: 'relative', width: '100%' }}>
-        <Header>
-          <Logo />
-          <h3>내일은 최저가</h3>
-        </Header>
-        <Wrap>
-          <SearchInputWrap>
-            <SearchInput placeholder='검색'></SearchInput>
-          </SearchInputWrap>
-          <Title>
-            <div className='title'>오늘의 특가</div>
-            <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
-          </Title>
-          <Topten />
-          <CategoryWrap>
-            <CategoryTitle>
-              <div>Apple 제품</div>
-              <div>가장 저렴할 때 구매하세요.</div>
-            </CategoryTitle>
-            <CategoryTabWrap>
-              {categoryList.map((item, index: number) => {
-                return (
-                  <CategoryTab
-                    key={index}
-                    children={index}
-                    isCategorySelected={isCategorySelect}
-                    handleCategoryButton={handleCategoryButton}
-                    index={index}
-                    content={item}
-                  />
-                );
-              })}
-            </CategoryTabWrap>
-            <Filterbar>
-              <Options>
-                {filterList.map((item, index) => {
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          navigate(`/search/${searchWord}`);
+        }}
+      >
+        <div style={{ height: '100%', position: 'relative', width: '100%' }}>
+          <Header>
+            <Logo />
+            <h3>내일은 최저가</h3>
+          </Header>
+          <Wrap>
+            <SearchInputWrap>
+              <SearchInput
+                type='text'
+                placeholder='검색'
+                value={searchWord}
+                onChange={(e) => {
+                  onChangeSearchWord(e);
+                }}
+              ></SearchInput>
+              <button style={{ display: 'none' }} />
+            </SearchInputWrap>
+            <Title>
+              <div className='title'>오늘의 특가</div>
+              <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
+            </Title>
+            <Topten />
+            <CategoryWrap>
+              <CategoryTitle>
+                <div>Apple 제품</div>
+                <div>가장 저렴할 때 구매하세요.</div>
+              </CategoryTitle>
+              <CategoryTabWrap>
+                {categoryList.map((item, index: number) => {
                   return (
-                    <FilterOption
+                    <CategoryTab
                       key={index}
-                      id={item.value}
-                      onClick={(e) => {
-                        handleFilterButton(e.target);
-                      }}
-                    >
-                      {item.content}
-                    </FilterOption>
+                      children={index}
+                      isCategorySelected={isCategorySelect}
+                      handleCategoryButton={handleCategoryButton}
+                      index={index}
+                      content={item}
+                    />
                   );
                 })}
-              </Options>
-            </Filterbar>
-            {isOnCategory ? <CategoryOnProductList categoryId={categoryId} filterName={filterName} isFilter={isFilter} /> : <CategoryOffProductList />}
-          </CategoryWrap>
-        </Wrap>
-      </div>
-      <PageFooter />
+              </CategoryTabWrap>
+              <Filterbar>
+                <Options>
+                  {filterList.map((item, index) => {
+                    return (
+                      <FilterOption
+                        key={index}
+                        id={item.value}
+                        onClick={(e) => {
+                          handleFilterButton(e.target);
+                        }}
+                      >
+                        {item.content}
+                      </FilterOption>
+                    );
+                  })}
+                </Options>
+              </Filterbar>
+              {isOnCategory ? <CategoryOnProductList categoryId={categoryId} filterName={filterName} isFilter={isFilter} /> : <CategoryOffProductList />}
+            </CategoryWrap>
+          </Wrap>
+        </div>
+        <div
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <PageFooter />
+        </div>
+      </form>
     </div>
   );
 }

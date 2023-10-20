@@ -26,7 +26,7 @@ export default OptionModalItem;
 const Wrap = styled.div`
   width: 100%;
   height: 40px;
-  /* padding-left: 10px; */
+  padding-left: 13px;
   background-color: white;
   color: black;
   border-bottom: 1px solid gray;
