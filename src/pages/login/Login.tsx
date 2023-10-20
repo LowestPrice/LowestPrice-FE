@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { loginWithKakao } from '../../api/product';
+import { loginWithKakao } from '../../api/login';
 import { toast } from 'react-toastify';
 import PageFooter from '../../components/footer/PageFooter';
 
