@@ -25,7 +25,7 @@ export default function Main() {
   const categoryList: string[] = ['아이패드', '맥북', '맥', '에어팟', '아이폰', '애플워치'];
 
   useEffect(() => {
-    // console.log(res.Headers)
+    Cookies.set('name', 'value');
     console.log(Cookies.get());
   });
 
