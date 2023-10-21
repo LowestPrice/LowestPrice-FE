@@ -32,17 +32,7 @@ function ToptenProduct(props: Props) {
         </div>
         <div className='title'>{props.productName}</div>
       </Content>
-      <img
-        src={props.productImage}
-        style={{
-          width: '100%',
-          height: '100%',
-          borderRadius: '15px',
-          zIndex: '-1',
-          position: 'absolute',
-          top: '0px',
-        }}
-      />
+      <ProductImage src={props.productImage} />
     </Wrap>
   );
 }
@@ -125,4 +115,13 @@ const Content = styled.div`
     font-size: 13.99px;
     font-weight: 500;
   }
+`;
+
+const ProductImage = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  z-index: -1;
+  position: absolute;
+  top: 0px;
 `;
