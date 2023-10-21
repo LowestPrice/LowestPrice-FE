@@ -3,7 +3,7 @@ import axios from 'axios';
 // 매거진 데이터 조회
 export const getMagazine = async () => {
   try {
-    const response = await axios.get('http://3.39.251.68:3000/magazines');
+    const response = await axios.get('https://lowest-price.store/magazines');
 
     return response.data.data;
   } catch (error) {
@@ -14,7 +14,7 @@ export const getMagazine = async () => {
 // 매거진 상세 조회
 export const getMagazineDetail = async (id: any) => {
   try {
-    const response = await axios.get(`http://3.39.251.68:3000/magazines/${id}`);
+    const response = await axios.get(`https://lowest-price.store/magazines/${id}`);
     return response;
   } catch (error) {
     console.error('매거진 상세 데이터 조회 에러', error);
@@ -33,7 +33,7 @@ export const postMagazine = async ({ title, content, image }: { title: any; cont
       console.log(pair[0] + ', ' + pair[1]);
     }
 
-    const response = await axios.post('http://3.39.251.68:3000/magazines', formData, {
+    const response = await axios.post('https://lowest-price.store/magazines', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -55,7 +55,7 @@ export const putMagazine = async (props: any) => {
   const newMainImage = props.newMainImage;
 
   try {
-    const response = await axios.put(`http://3.39.251.68:3000/magazines/${id}`, {
+    const response = await axios.put(`https://lowest-price.store/magazines/${id}`, {
       title: newTitle,
       content: newContent,
       mainImage: newMainImage,
@@ -70,7 +70,7 @@ export const putMagazine = async (props: any) => {
 export const deleteMagazine = async (props: any) => {
   const id = props.id;
   try {
-    const response = await axios.delete(`http://3.39.251.68:3000/magazines/${id}`);
+    const response = await axios.delete(`https://lowest-price.store/magazines/${id}`);
     return response;
   } catch (error) {
     console.error('매거진 삭제 에러', error);
@@ -83,7 +83,7 @@ export const postMagazineLike = async (props: any) => {
   const userId = props.userId;
 
   try {
-    const response = await axios.post(`http://3.39.251.68:3000/magazines/${id}/user/${userId}/like`);
+    const response = await axios.post(`https://lowest-price.store/magazines/${id}/user/${userId}/like`);
     // 유저 아이디 임의로 1 적용
     return response;
   } catch (error) {

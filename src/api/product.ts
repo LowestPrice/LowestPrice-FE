@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getProducts = async () => {
   try {
-    const response = await axios.get('http://3.39.251.68:3000/product');
+    const response = await axios.get('https://lowest-price.store/product');
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -12,7 +12,7 @@ export const getProducts = async () => {
 export const getProduct = async (productId: string | undefined) => {
   try {
     console.log(productId);
-    const response = await axios.get(`http://3.39.251.68:3000/product/${productId}`);
+    const response = await axios.get(`https://lowest-price.store/product/${productId}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -21,7 +21,7 @@ export const getProduct = async (productId: string | undefined) => {
 
 export const getTopten = async () => {
   try {
-    const response = await axios.get(`http://3.39.251.68:3000/product/top`);
+    const response = await axios.get(`https://lowest-price.store/product/top`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -30,7 +30,7 @@ export const getTopten = async () => {
 
 export const getCategory = async (categoryName: string | undefined) => {
   try {
-    const response = await axios.get(`http://3.39.251.68:3000/product/category/${categoryName}`);
+    const response = await axios.get(`https://lowest-price.store/product/category/${categoryName}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -40,7 +40,7 @@ export const getCategory = async (categoryName: string | undefined) => {
 export const getCategoryFilter = async (categoryName: string | undefined, filterName: string | undefined) => {
   try {
     console.log(categoryName, filterName);
-    const response = await axios.get(`http://3.39.251.68:3000/product/category/${categoryName}/${filterName}`);
+    const response = await axios.get(`https://lowest-price.store/product/category/${categoryName}/${filterName}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -50,7 +50,7 @@ export const getCategoryFilter = async (categoryName: string | undefined, filter
 export const getOptions = async (realId: string | undefined) => {
   try {
     console.log(realId);
-    const response = await axios.get(`http://3.39.251.68:3000/option/${realId}`);
+    const response = await axios.get(`https://lowest-price.store/option/${realId}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -62,7 +62,7 @@ export const getOptions = async (realId: string | undefined) => {
 export const getSearch = async (searchWord: string | undefined) => {
   try {
     console.log(searchWord);
-    const response = await axios.get(`http://3.39.251.68:3000/search?search=${searchWord}`);
+    const response = await axios.get(`https://lowest-price.store/search?search=${searchWord}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -74,7 +74,7 @@ export const getSearch = async (searchWord: string | undefined) => {
 export const getFilteredSearch = async (filterName: string | undefined, searchWord: string | undefined) => {
   try {
     console.log(filterName, searchWord);
-    const response = await axios.get(`http://3.39.251.68:3000/search/${filterName}?search=${searchWord}`);
+    const response = await axios.get(`https://lowest-price.store/search/${filterName}?search=${searchWord}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -94,7 +94,7 @@ export type PriceData = {
 export const getPriceHistory = async (id: any): Promise<PriceData | undefined> => {
   // console.log(id, 'api는 id값이 나올까?');
   try {
-    const response = await axios.get(`http://3.39.251.68:3000/price-history/${id}`);
+    const response = await axios.get(`https://lowest-price.store/price-history/${id}`);
     return response.data;
   } catch (error) {
     console.error('가격 히스토리 에러', error);
