@@ -15,7 +15,6 @@ export const getMagazine = async () => {
 export const getMagazineDetail = async (id: any) => {
   try {
     const response = await axios.get(`https://lowest-price.store/magazines/${id}`);
-    console.log(response, '매거진 상세조회responsse');
     return response;
   } catch (error: unknown) {
     console.error('매거진 상세 데이터 조회 에러', error);
@@ -56,7 +55,7 @@ export const putMagazine = async (props: any) => {
   const formData = new FormData();
   formData.set('title', newTitle);
   formData.set('content', newContent);
-  formData.set('mainImage', newMainImage);
+  formData.set('file', newMainImage);
 
   console.log(formData, 'formdata');
   console.log(newMainImage, '수정하기 이미지');
@@ -64,7 +63,7 @@ export const putMagazine = async (props: any) => {
   console.log(newTitle, '수정하기 타이틀');
 
   for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`, '매거진 수정 키 밸류');
+    console.log(key, value, '매거진 수정하기 키값 밸류값');
   }
 
   try {
@@ -73,7 +72,6 @@ export const putMagazine = async (props: any) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(response, 'response');
     return response;
   } catch (error) {
     console.error('매거진 수정 에러', error);

@@ -8,7 +8,7 @@ function NPricetItem({}: Props) {
       <NPriceItem>
         <div className='time'>오늘 오전 07 : 30</div>
         <NPriceContent style={{ display: 'flex', flexDirection: 'row' }}>
-          <NPriceImage></NPriceImage>
+          <NPriceimg></NPriceimg>
           <NPriceInfo>
             <div className='title'>Apple 정품 2022 아이패드 프로 11 4세대</div>
             <div className='option'>옵션1 스페이스 그레이</div>
@@ -49,7 +49,7 @@ const NPriceContent = styled.div`
   height: 68px;
 `;
 
-const NPriceImage = styled.image`
+const NPriceimg = styled.img`
   width: 68px;
   height: 68px;
   border-radius: 7px;

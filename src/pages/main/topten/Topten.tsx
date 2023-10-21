@@ -80,7 +80,7 @@ function Topten() {
 
   return (
     <Wrapper>
-      <LeftButton onClick={decreaseClick}>
+      <LeftButton type='button' onClick={decreaseClick}>
         <i className='fas fa-chevron-left'></i>
       </LeftButton>
       <Row
@@ -117,7 +117,7 @@ function Topten() {
         </Container>
       </Row>
 
-      <RightButton onClick={increaseClick}>
+      <RightButton type='button' onClick={increaseClick}>
         <i className='fas fa-chevron-right'></i>
       </RightButton>
     </Wrapper>
