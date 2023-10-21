@@ -31,3 +31,8 @@ export interface Filter {
   content: string;
   value: string;
 }
+
+export interface Params {
+  readonly id?: number;
+  readonly searchWord?: string;
+}

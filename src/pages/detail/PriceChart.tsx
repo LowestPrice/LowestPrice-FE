@@ -27,7 +27,7 @@ interface ParamsProps {
 }
 
 export const PriceChart: React.FC<ParamsProps> = ({ id }) => {
-  console.log(id, 'id값이 나올까?');
+  // console.log(id, 'id값이 나올까?');
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
 
   console.log(data, '데이터 결과');

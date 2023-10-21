@@ -11,11 +11,12 @@ import YetLogin from './pages/login/YetLogin';
 import Login from './pages/login/Login';
 import Notification from './pages/notification/Notification';
 import Detail from './pages/detail/Detail';
-import Search from './pages/search/Search';
+import Search from './pages/search/SearchPage';
 import Prac from './pages/Slide';
 import Topten from './pages/main/topten/Topten';
 import Error from './components/Error';
 import './App.css';
+import KakaoLogin from './pages/login/kakaologin/KakaoLogin';
 
 export default function App() {
   return (
@@ -33,10 +34,11 @@ export default function App() {
         <Route path='/magazine/:id' element={<MagazineDetail />}></Route>
         <Route path='/magazineWriting' element={<MagazineWriting />}></Route>
         <Route path='/magazineEditing/:id' element={<MagazineEditing />}></Route>
-        <Route path='/search' element={<Search />}></Route>
+        <Route path='/search/:searchWord' element={<Search />}></Route>
         <Route path='/prac' element={<Prac />}></Route>
         <Route path='/topten' element={<Topten />}></Route>
         <Route path='/error' element={<Error />}></Route>
+        <Route path='/kakaologin' element={<KakaoLogin />}></Route>
       </Routes>
     </div>
   );
