@@ -33,7 +33,7 @@ function Mypage() {
           <EditProfileImage onClick={() => navigate('/editmypage')}>프로필 수정</EditProfileImage>
         </Profile>
         <Article onClick={() => navigate('/likemagazine')}>좋아요한 매거진 보기</Article>
-        <Article>내일은 최저가 사용법</Article>
+        <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>
       </Wrap>
       <PageFooter />
     </div>

@@ -16,6 +16,7 @@ import Prac from './pages/Slide';
 import Topten from './pages/main/topten/Topten';
 import Error from './components/Error';
 import './App.css';
+import KakaoLogin from './pages/login/kakaologin/KakaoLogin';
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
         <Route path='/prac' element={<Prac />}></Route>
         <Route path='/topten' element={<Topten />}></Route>
         <Route path='/error' element={<Error />}></Route>
+        <Route path='/kakaologin' element={<KakaoLogin />}></Route>
       </Routes>
     </div>
   );
