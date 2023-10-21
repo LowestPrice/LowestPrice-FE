@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Topten from './topten/Topten';
 import CategoryOffProductList from './category/category_off/CategoryOffProductList';
 import PageFooter from '../../components/footer/PageFooter';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import CategoryTab from './category/CategoryTab';
 import CategoryOnProductList from './category/category_on/CategoryOnProductList';
 import Logo from '../../assets/icon/Logo';
@@ -24,10 +24,7 @@ export default function Main() {
 
   const categoryList: string[] = ['아이패드', '맥북', '맥', '에어팟', '아이폰', '애플워치'];
 
-  useEffect(() => {
-    Cookies.set('name', 'value');
-    console.log(Cookies.get());
-  });
+  console.log(Cookies.get('Authorization'));
 
   // 필터 리스트 -------------------------------------------
 

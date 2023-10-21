@@ -1,11 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PageFooter from '../../components/footer/PageFooter';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 type Props = {};
 
 function YetLogin({}: Props) {
   const navigate = useNavigate();
+  const params = useParams();
+  console.log(params);
+
+ 
 
   return (
     <div>
