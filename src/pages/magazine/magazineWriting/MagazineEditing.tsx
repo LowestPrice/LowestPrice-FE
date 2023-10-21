@@ -17,7 +17,7 @@ const MagazineEditing: React.FC = () => {
   const [previewImage, setPreviewImage] = useState<string>(magazineData.mainImage);
   const queryClient = useQueryClient();
 
-  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newTitle = e.target.value;
     setNewTitle(newTitle);
   };
@@ -99,10 +99,8 @@ const MagazineEditing: React.FC = () => {
   return (
     <>
       <FlexBox>
-        <Button onClick={() => navigate('/magazine')} back-color={'#b1b1b1'} width={'24px'}></Button>
-        <Button onClick={() => onSubmitButtonHandler(id, newTitle, newContent, newMainImage)} back-color={'transparent'} width={'80px'}>
-          수정
-        </Button>
+        <Button onClick={() => navigate('/magazine')}></Button>
+        <Button onClick={() => onSubmitButtonHandler(id, newTitle, newContent, newMainImage)}>수정</Button>
       </FlexBox>
       <ContentBox>
         <DirectionCol>
