@@ -26,7 +26,7 @@ export default function Main() {
 
   useEffect(() => {
     Cookies.set('name', 'value');
-    console.log(Cookies.get());
+    console.log(Cookies.get('Authorization'));
   });
 
   // 필터 리스트 -------------------------------------------
