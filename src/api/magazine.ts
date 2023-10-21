@@ -16,8 +16,9 @@ export const getMagazineDetail = async (id: any) => {
   try {
     const response = await axios.get(`https://lowest-price.store/magazines/${id}`);
     return response;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('매거진 상세 데이터 조회 에러', error);
+    alert(error.response.data.errorMessage);
   }
 };
 
@@ -52,18 +53,17 @@ export const postMagazine = async ({ title, content, image }: { title: any; cont
 export const putMagazine = async (props: any) => {
   const { id, newTitle, newContent, newMainImage } = props;
   const formData = new FormData();
-  formData.append('title', newTitle);
-  formData.append('content', newContent);
-  if (newMainImage) {
-    formData.append('mainImage', newMainImage);
-  }
+  formData.set('title', newTitle);
+  formData.set('content', newContent);
+  formData.set('mainImage', newMainImage);
+
   console.log(formData, 'formdata');
   console.log(newMainImage, '수정하기 이미지');
   console.log(newContent, '수정하기 콘텐츠');
   console.log(newTitle, '수정하기 타이틀');
 
   for (let [key, value] of formData.entries()) {
-    console.log(key, value, '키값 밸류값');
+    console.log(`${key}: ${value}`, '매거진 수정 키 밸류');
   }
 
   try {
@@ -77,6 +77,7 @@ export const putMagazine = async (props: any) => {
     return response;
   } catch (error) {
     console.error('매거진 수정 에러', error);
+    throw error;
   }
 };
 
@@ -113,3 +114,8 @@ export const getNextMagazine = async (id: any) => {
     console.error('다른 매거진 리스트 조회 에러', error);
   }
 };
+
+// 좋아요 한 매거진 조회
+// export const getLikedMagazineLists = async (props: any) => {
+
+// }

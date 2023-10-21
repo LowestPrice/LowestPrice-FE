@@ -33,7 +33,7 @@ const Magazine: React.FC<MagazineProps> = () => {
 
   // 매거진 데이터 불러오기
   const { isLoading, isError, data } = useQuery('magazineData', getMagazine);
-  console.log(data);
+  console.log(data, '매거진 메인 데이터');
 
   useEffect(() => {
     if (data) {
