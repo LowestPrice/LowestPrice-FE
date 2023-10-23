@@ -149,6 +149,11 @@ export default function Main() {
             e.preventDefault();
           }}
         >
+          <BusinessInfo>
+            <h5>사업자 정보</h5>
+            <div>업체명: 아담 인터네셔널</div>
+            <div>사업자 등록번호: 394-27-00969</div>
+          </BusinessInfo>
           <PageFooter />
         </div>
       </form>
@@ -217,7 +222,6 @@ const Title = styled.div`
 
 const CategoryWrap = styled.div`
   width: 374px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -280,4 +284,16 @@ const Options = styled.div`
   gap: 7px;
   height: 12px;
   padding-top: 10px;
+`;
+
+const BusinessInfo = styled.div`
+  position: absolute;
+  bottom: -1030px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 375px;
+  font-size: 12px;
+  font-weight: 600;
 `;
