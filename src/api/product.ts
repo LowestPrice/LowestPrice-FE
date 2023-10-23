@@ -49,7 +49,6 @@ export const getCategoryFilter = async (categoryName: string | undefined, filter
 
 export const getOptions = async (realId: string | undefined) => {
   try {
-    console.log(realId);
     const response = await axios.get(`https://lowest-price.store/option/${realId}`);
     return response.data;
   } catch (err) {

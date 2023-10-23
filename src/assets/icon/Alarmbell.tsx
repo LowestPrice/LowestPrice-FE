@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 type Props = {};
 
@@ -6,12 +8,17 @@ function Alarmbell({}: Props) {
   const [onAlarm, setOnAlarm] = useState<boolean>(false);
 
   const handleAlarmButton = () => {
+    if (onAlarm) {
+      toast.error('더 이상 알림을 보내지 않습니다.');
+    } else {
+      toast.success('알림을 받아보실 수 있습니다.');
+    }
     setOnAlarm(!onAlarm);
   };
   return (
-    <div onClick={handleAlarmButton} style={{ zIndex: '100' }}>
+    <Wrap onClick={handleAlarmButton}>
       {!onAlarm ? (
-        <svg width='100%' height='100%' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <svg width='85%' height='85%' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
           <circle cx='19.7371' cy='19.7726' r='19.5943' fill='#00ABF9' />
           <path
             d='M16.9871 28.117C17.7169 28.7 18.6807 29.0545 19.7372 29.0545C20.7937 29.0545 21.7575 28.7 22.4873 28.117M12.0105 25.1169C11.5757 25.1169 11.2241 24.7933 11.4871 24.4137C12.0974 23.5331 12.7952 21.8821 12.7952 20.3268L12.8204 18.0731C12.8204 13.8859 15.9172 10.4915 19.7372 10.4915C23.6135 10.4915 26.7559 13.9359 26.7559 18.1848L26.7307 20.3268C26.7307 21.8928 27.4019 23.5328 27.9874 24.4137C28.2403 24.7942 27.8943 25.1169 27.4649 25.1169H12.0105Z'
@@ -22,7 +29,7 @@ function Alarmbell({}: Props) {
           />
         </svg>
       ) : (
-        <svg xmlns='http://www.w3.org/2000/svg' width='54' height='54' viewBox='0 0 54 54' fill='none'>
+        <svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 54 54' fill='none'>
           <g filter='url(#filter0_d_75_5740)'>
             <circle cx='27' cy='23' r='23' fill='#00ABF9' />
             <path
@@ -31,7 +38,7 @@ function Alarmbell({}: Props) {
             />
           </g>
           <defs>
-            <filter id='filter0_d_75_5740' x='0' y='0' width='54' height='54' filterUnits='userSpaceOnUse' colorInterpolationFilters='sRGB'>
+            <filter id='filter0_d_75_5740' x='0' y='0' width='100%' height='100%' filterUnits='userSpaceOnUse' colorInterpolationFilters='sRGB'>
               <feFlood floodOpacity='0' result='BackgroundImageFix' />
               <feColorMatrix in='SourceAlpha' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0' result='hardAlpha' />
               <feOffset dy='4' />
@@ -44,8 +51,18 @@ function Alarmbell({}: Props) {
           </defs>
         </svg>
       )}
-    </div>
+    </Wrap>
   );
 }
 
 export default Alarmbell;
+
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  width: 36.49px;
+  height: 36.49px;
+`;

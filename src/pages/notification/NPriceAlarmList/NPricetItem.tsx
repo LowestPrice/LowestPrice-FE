@@ -49,7 +49,7 @@ const NPriceContent = styled.div`
   height: 68px;
 `;
 
-const NPriceimg = styled.img`
+const NPriceimg = styled.div`
   width: 68px;
   height: 68px;
   border-radius: 7px;
