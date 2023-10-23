@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import ToptenProduct from './ToptenProduct';
 import { useQuery } from 'react-query';
@@ -124,7 +124,7 @@ function Topten() {
   );
 }
 
-export default Topten;
+export default React.memo(Topten);
 
 const Wrapper = styled.div`
   display: flex;

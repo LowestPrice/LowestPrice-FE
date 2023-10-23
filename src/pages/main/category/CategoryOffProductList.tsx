@@ -1,14 +1,18 @@
 import styled from 'styled-components';
-import CategoryOffProduct from './CategoryOffProduct';
-import {  getProducts } from '../../../../api/product';
+import CategoryOnProduct from './CategoryProduct';
+import { getProducts } from '../../../api/product';
 import { useQueries } from 'react-query';
-import Loading from '../../../../components/Loading';
-import Error from '../../../../components/Error';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
+import React, { useEffect } from 'react';
 // interface Props {
 //   categoryId: number;
 // }
 
 function CategoryOffProductList() {
+  useEffect(() => {
+    console.log('CategoryOffProductList 렌더링');
+  }, []);
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
   const result = useQueries([
     {
@@ -39,13 +43,13 @@ function CategoryOffProductList() {
   return (
     <Wrap>
       {eightProducts.map((productItem, index) => (
-        <CategoryOffProduct key={index} {...productItem} />
+        <CategoryOnProduct key={index} {...productItem} />
       ))}
     </Wrap>
   );
 }
 
-export default CategoryOffProductList;
+export default React.memo(CategoryOffProductList);
 
 const Wrap = styled.div`
   width: 346px;

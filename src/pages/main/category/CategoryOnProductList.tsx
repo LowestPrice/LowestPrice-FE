@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { useQueries } from 'react-query';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import { getCategory } from '../../../../api/product';
-import { getCategoryFilter } from '../../../../api/product';
+import { getCategory } from '../../../api/product';
+import { getCategoryFilter } from '../../../api/product';
 
-import CategoryOnProduct from './CategoryOnProduct';
-import Loading from '../../../../components/Loading';
-import Error from '../../../../components/Error';
+import CategoryOnProduct from './CategoryProduct';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
 interface Props {
   categoryId: number;
   filterName: string;
@@ -15,6 +15,9 @@ interface Props {
 }
 
 function CategoryOnProductList(props: Props) {
+  useEffect(() => {
+    console.log('CategoryOnProductList 렌더링');
+  }, []);
   // 카테고리 이름 -----------------------------------------------------------------------
   const categoryNameList = ['iPad', 'iPad', 'MacBook', 'Mac', 'AirPods', 'iPhone', 'AppleWatch'];
 
@@ -31,7 +34,6 @@ function CategoryOnProductList(props: Props) {
   useEffect(() => {
     result[0].refetch();
     result[1].refetch();
-    console.log(result);
   }, [props.categoryId, props.filterName]);
 
   // 데이터 로딩 중 관리 -------------------------
@@ -53,8 +55,6 @@ function CategoryOnProductList(props: Props) {
   const categoryProducts = [...result[0].data].slice(0, 8);
   const filterProducts = [...result[1].data].slice(0, 8);
 
-  console.log(filterProducts);
-
   // console.log(list.slice(0, 10));
 
   return (
@@ -66,7 +66,7 @@ function CategoryOnProductList(props: Props) {
   );
 }
 
-export default CategoryOnProductList;
+export default React.memo(CategoryOnProductList);
 
 const Wrap = styled.div`
   width: 370px;
