@@ -9,6 +9,7 @@ import Loading from './components/Loading';
 // 로그인
 const Login = React.lazy(() => import('./pages/login/Login'));
 const YetLogin = React.lazy(() => import('./pages/login/YetLogin'));
+const KakaoLogin = React.lazy(() => import('./pages/login/kakaologin/KakaoLogin'));
 
 // 상품 검색, 상세, 알림
 const SearchPage = React.lazy(() => import('./pages/search/SearchPage'));
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
         element: <YetLogin />,
       },
       {
+        path: 'kakaologin',
+        element: <KakaoLogin />,
+      },
+      {
         path: 'notification',
         element: <Notification />,
       },
@@ -62,7 +67,7 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: 'mypage/edit',
+        path: 'editmypage',
         element: <EditMypage />,
       },
       {

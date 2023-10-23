@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NProductList from './NProductList/NProductList';
 import NPriceAlarmList from './NPriceAlarmList/NPriceAlarmList';
 import PageFooter from '../../components/footer/PageFooter';
+import { getAlarmProducts } from '../../api/alarm';
 
 type Props = {};
 
@@ -16,6 +17,10 @@ export default function Notification({}: Props) {
   const switchPriceTab = (): void => {
     setTab(false);
   };
+
+  useEffect(() => {
+    getAlarmProducts();
+  }, []);
 
   return (
     <div>

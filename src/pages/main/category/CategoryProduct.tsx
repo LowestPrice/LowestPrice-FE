@@ -3,6 +3,8 @@ import { Product } from '../../../type';
 import { useNavigate } from 'react-router-dom';
 import Alarmbell from '../../../assets/icon/Alarmbell';
 import React from 'react';
+import { useMutation } from 'react-query';
+import { toggleAlarm } from '../../../api/alarm';
 
 interface Props extends Product {}
 
@@ -11,6 +13,15 @@ function CategoryProduct(props: Props) {
 
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
+
+  const alarmMutation = useMutation(toggleAlarm, {
+    onSuccess: () => {
+      console.log('alarm 완료');
+    },
+    onError: () => {
+      console.log('alarm 실패');
+    },
+  });
 
   return (
     <div>
@@ -21,7 +32,14 @@ function CategoryProduct(props: Props) {
       >
         <CProductImage>
           <img src={props.productImage} className='productImage'></img>
-          <BellImage>
+          <BellImage
+            style={{ zIndex: '999' }}
+            onClick={(e) => {
+              console.log('알람클릭');
+              e.stopPropagation();
+              alarmMutation.mutate(props.productId);
+            }}
+          >
             <Alarmbell />
           </BellImage>
         </CProductImage>

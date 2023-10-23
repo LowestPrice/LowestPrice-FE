@@ -38,7 +38,7 @@ const NProductContent = styled.div`
   margin: auto;
 `;
 
-const NProductImage = styled.image`
+const NProductImage = styled.img`
   width: 64px;
   height: 64px;
   border-radius: 7px;
