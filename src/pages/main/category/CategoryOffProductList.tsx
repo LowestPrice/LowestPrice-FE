@@ -60,5 +60,5 @@ const Wrap = styled.div`
   justify-content: space-between;
   position: absolute;
   top: 210px;
-  padding-bottom: 78px;
+  padding-bottom: 165px;
 `;
