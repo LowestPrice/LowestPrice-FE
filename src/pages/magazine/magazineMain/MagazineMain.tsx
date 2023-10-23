@@ -27,17 +27,19 @@ import { BlueLogo } from '../../../assets/icon/icon';
 
 const Magazine: React.FC<MagazineProps> = () => {
   const [magazines, setMagazines] = useState<any[]>([]);
-  const [like, setLike] = useState(false);
   const navigate = useNavigate();
   const queryclient = useQueryClient();
 
   // 매거진 데이터 불러오기
   const { isLoading, isError, data } = useQuery('magazineData', getMagazine);
+  const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   console.log(data, '매거진 메인 데이터');
 
   useEffect(() => {
     if (data) {
-      setMagazines(data);
+      setLike(data.isLiked);
+      setLikeCount(data.LikeMagazine);
     }
   }, [data]);
 
@@ -45,7 +47,10 @@ const Magazine: React.FC<MagazineProps> = () => {
   const magazineLike = useMutation(postMagazineLike, {
     onSuccess: () => {
       queryclient.invalidateQueries('posts');
-      setLike(!like);
+      setLike((prevLike: any) => {
+        setLikeCount((prevCount: any) => (prevLike ? prevCount - 1 : prevCount + 1));
+        return !prevLike;
+      });
     },
     onError: (error) => {
       console.error('좋아요 error 발생', error);
@@ -86,7 +91,7 @@ const Magazine: React.FC<MagazineProps> = () => {
                   <div>{data.editor}</div>
                   <LikeFlex>
                     <Heart like={like} onClick={(event) => handleLikeClick(event, data.magazineId)} />
-                    <div>{data.LikeMagazine}</div>
+                    <div>{likeCount}</div>
                   </LikeFlex>
                 </Flex>
               </BoxPadding>

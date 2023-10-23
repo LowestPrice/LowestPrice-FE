@@ -29,19 +29,19 @@ const PageFooter = () => {
 
   return (
     <FlexBox>
-      <ButtonStyle active={location.pathname === '/'} onClick={() => handleNavigation('/')}>
+      <ButtonStyle $active={location.pathname === '/'} onClick={() => handleNavigation('/')}>
         {activeIcon === '/' ? <ColorHomeIcon /> : <HomeIcon />}
         <Text>홈</Text>
       </ButtonStyle>
-      <ButtonStyle active={location.pathname === '/magazine'} onClick={() => handleNavigation('/magazine')}>
+      <ButtonStyle $active={location.pathname === '/magazine'} onClick={() => handleNavigation('/magazine')}>
         {activeIcon === '/magazine' ? <ColorFooterMagazineIcon /> : <FooterMagazineIcon />}
         <Text>매거진</Text>
       </ButtonStyle>
-      <ButtonStyle active={location.pathname === '/notice'} onClick={() => handleNavigation('/notice')}>
+      <ButtonStyle $active={location.pathname === '/notice'} onClick={() => handleNavigation('/notice')}>
         {activeIcon === '/notice' ? <ColorBellIcon /> : <BellIcon />}
         <Text>내 알림</Text>
       </ButtonStyle>
-      <ButtonStyle active={location.pathname === '/mypage'} onClick={() => handleNavigation('/mypage')}>
+      <ButtonStyle $active={location.pathname === '/mypage'} onClick={() => handleNavigation('/mypage')}>
         {activeIcon === '/mypage' ? <ColorMyPageIcon /> : <MyPageIcon />}
         <Text>마이페이지</Text>
       </ButtonStyle>
