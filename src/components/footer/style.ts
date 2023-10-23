@@ -1,4 +1,9 @@
+import { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
+
+interface ButtonStyleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  active?: boolean;
+}
 
 export const FlexBox = styled.div`
   width: 375px;
@@ -9,12 +14,12 @@ export const FlexBox = styled.div`
   border-top: 1px solid grey;
   position: fixed;
   bottom: 0;
-  margin-top: 20px;
   background-color: white;
   z-index: 1000;
+  margin-top: 5px;
 `;
 
-export const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button<ButtonStyleProps>`
   background-color: transparent;
   width: 52px;
   height: 52px;
@@ -24,8 +29,7 @@ export const ButtonStyle = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: '#00ABF9';
-  /* '#6F6F6F */
+  color: ${(props) => (props.active ? '#00ABF9' : '#6F6F6F')};
 `;
 
 export const Text = styled.div`

@@ -4,10 +4,11 @@ export const Container = styled.div`
   width: 375px;
   min-height: 100vh;
   margin: 0 auto;
-  margin-bottom: 100px;
+  padding-bottom: 82px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #f3f3f3;
 `;
 
 export const InnerContainer = styled.div`
@@ -18,13 +19,17 @@ export const InnerContainer = styled.div`
 `;
 
 export const Header = styled.div`
-  height: 68px;
-  font-size: 22px;
-  font-weight: 600;
   display: flex;
   justify-content: flex-start;
-  margin-top: 20px;
-  margin-left: 10px;
+  align-items: center;
+  padding: 26px 274px 18px 20px;
+`;
+
+export const LogoTitle = styled.div`
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 110%;
+  margin-left: 6px;
 `;
 
 export const Title = styled.div`
@@ -32,7 +37,9 @@ export const Title = styled.div`
   font-weight: 700;
   text-align: left;
   width: 100%;
-  padding-left: 15px;
+  padding-top: 10px;
+  padding-left: 40px;
+  line-height: 100%;
 `;
 
 export const Line = styled.div`
@@ -46,32 +53,37 @@ export const Subtitle = styled.div`
   font-weight: 600;
   text-align: left;
   width: 100%;
-  padding-left: 15px;
+  margin-left: 40px;
 `;
 
 export const Writing = styled.div`
+  width: 323px;
   font-size: 18px;
   font-weight: 600;
-  text-align: right;
   color: #b5b5b5;
   cursor: pointer;
   width: 100%;
-  padding-right: 15px;
+  margin-right: 56px;
+  margin-bottom: -16px;
+  text-align: right;
+  line-height: 110%;
+  text-decoration-line: underline;
 `;
 
 export const Box = styled.div`
   width: 335px;
   height: 315px;
-  margin-top: 3%;
-  border: 1px solid black;
-  border-radius: 1%;
+  margin-top: 26px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: white;
 `;
 
 export const Img = styled.img`
   width: 100%;
   height: 60%;
   object-fit: cover;
-  background-color: lightgrey;
+  /* display: block */
 `;
 
 export const BoxPadding = styled.div`
@@ -100,4 +112,5 @@ export const Flex = styled.div`
 export const LikeFlex = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-right: 15px;
 `;

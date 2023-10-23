@@ -1,7 +1,23 @@
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, TopBox, InfoBox, Title, Editor, TextArea, ContentButton, ContentTitle, ContentEditor, MagazineTitle, Flex, Button, Img } from './styles';
+import {
+  Container,
+  TopBox,
+  InfoBox,
+  Title,
+  Editor,
+  TextArea,
+  ContentButton,
+  ContentTitle,
+  ContentEditor,
+  MagazineTitle,
+  Flex,
+  Button,
+  Img,
+  AnotherMagazine,
+} from './styles';
 import { MagazineProps } from '../../../type/type';
-import { deleteMagazine, getMagazineDetail } from '../../../api/magazine';
+import { deleteMagazine, getMagazineDetail, getNextMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
@@ -10,8 +26,15 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const navigate = useNavigate();
 
   // 데이터 불러오기
-  const { isLoading, isError, data } = useQuery('posts', () => getMagazineDetail(id));
-  const magazineData = data?.data.data;
+  const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
+  const magazineData = dataDetail?.data.data;
+
+  // 토큰이 없는 비로그인 유저 로그인 화면으로 이동
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate('/login');
+  //   }
+  // }, [token]);
 
   // 데이터 삭제하기
   const deletePosts = useMutation(deleteMagazine, {
@@ -28,37 +51,16 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
     alert('삭제되었습니다.');
   };
 
-  // 게시글 이동
-  // const nextMagazine = (id: any) => {
-  //   const currentId = parseInt(id, 10);
-  //   const nextId = currentId + 1;
-  //   const secondId = currentId + 2;
-  //   const thirdId = currentId + 3;
+  // 다른 매거진
+  const { isLoading: isLoadingAnother, isError: isErrorAnoter, data: dataAnother } = useQuery('anotherPosts', () => getNextMagazine(id));
+  const anotherMagazine = dataAnother?.data.data;
+  console.log(anotherMagazine, 'anothermagazine');
 
-  //   const { data: nextMagazineData } = useQuery(['posts', nextId], () => getMagazineDetail(nextId), {
-  //     enabled: !isNaN(nextId),
-  //   });
-
-  //   const { data: secondMagazineData } = useQuery(['posts', secondId], () => getMagazineDetail(secondId), {
-  //     enabled: !isNaN(secondId),
-  //   });
-
-  //   const { data: thirdMagazineData } = useQuery(['posts', thirdId], () => getMagazineDetail(thirdId), {
-  //     enabled: !isNaN(thirdId),
-  //   });
-
-  //   return { nextMagazineData, secondMagazineData, thirdMagazineData };
-  // };
-
-  // 호출
-  // const { nextMagazineData: any, secondMagazineData, thirdMagazineData } = nextMagazine(id);
-  // console.log(nextMagazineData.data.data.titile, 'next title');
-
-  if (isLoading) {
+  if (isLoadingDetail || isLoadingAnother) {
     return <h1>로딩중입니다</h1>;
   }
 
-  if (isError) {
+  if (isErrorDetail || isErrorAnoter) {
     return <h1>에러가 발생했습니다.</h1>;
   }
 
@@ -79,32 +81,18 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
               navigate('/magazine');
             }}
           ></Button>
-          {/* 삭제하기 */}
         </Flex>
         <Img src={magazineData.mainImage} alt='매거진 이미지' />
       </TopBox>
       <TextArea>{magazineData.content}</TextArea>
-      <div>다른 매거진 보기</div>
-      {/* {nextMagazineData && ( */}
-      <ContentButton>
-        <ContentTitle>{magazineData.title}</ContentTitle>
-        <ContentEditor>by 관리자</ContentEditor>
-      </ContentButton>
-      {/*  )} */}
-
-      {/* {secondMagazineData && ( */}
-      <ContentButton>
-        <ContentTitle>{magazineData.title}</ContentTitle>
-        <ContentEditor>by 관리자</ContentEditor>
-      </ContentButton>
-      {/* )} */}
-
-      {/* {thirdMagazineData && ( */}
-      <ContentButton>
-        <ContentTitle>{magazineData.title}</ContentTitle>
-        <ContentEditor>by 관리자</ContentEditor>
-      </ContentButton>
-      {/* )} */}
+      <AnotherMagazine>다른 매거진 보기</AnotherMagazine>
+      {anotherMagazine &&
+        anotherMagazine.slice(0, 4).map((magazine: any, index: any) => (
+          <ContentButton key={index} style={{ backgroundImage: `url(${magazine.mainImage})` }} onClick={() => navigate(`/magazine/${magazine.magazineId}`)}>
+            <ContentTitle>{magazine.title}</ContentTitle>
+            <ContentEditor>by 관리자</ContentEditor>
+          </ContentButton>
+        ))}
     </Container>
   );
 };

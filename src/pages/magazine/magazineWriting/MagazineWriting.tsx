@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { postMagazine } from '../../../api/magazine';
 import PageFooter from '../../../components/footer/PageFooter';
+import { BackIcon, AddImageIcon } from '../../../assets/icon/icon';
 
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
 
   // 데이터 추가하기
   const [title, setTitle] = useState<any>('');
@@ -23,7 +26,7 @@ const MagazineWriting: React.FC = () => {
     },
   });
 
-  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
   };
 
@@ -37,7 +40,6 @@ const MagazineWriting: React.FC = () => {
   };
 
   const onSubmitButtonHandler = (title: any, content: any, image: any) => {
-    console.log(title, content, image, '롸이팅 페이지');
     addPosts.mutate(
       { title, content, image },
       {
@@ -52,22 +54,69 @@ const MagazineWriting: React.FC = () => {
     );
   };
 
+  // textarea 높이 조정
+  const adjustHeight = () => {
+    const targetTextarea = contentRef.current;
+    if (targetTextarea) {
+      targetTextarea.style.height = 'auto';
+      if (targetTextarea.scrollHeight > targetTextarea.clientHeight) {
+        targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
+      } else {
+        targetTextarea.style.height = window.innerHeight + 'px';
+      }
+    }
+  };
+
+  const adjustTitleHeight = () => {
+    const targetTextarea = titleRef.current;
+    if (targetTextarea) {
+      targetTextarea.style.height = 'auto';
+      targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
+    }
+  };
+
+  useEffect(() => {
+    adjustTitleHeight();
+  }, [title]);
+
+  useEffect(() => {
+    adjustHeight();
+  }, [content]);
+
+  // 컴포넌트가 마운트 될 때 길이 조정
+  useEffect(() => {
+    adjustHeight();
+    adjustTitleHeight();
+  }, []);
+
   return (
     <>
       <FlexBox>
-        <Button onClick={() => navigate('/magazine')} back-color={'#b1b1b1'} width={'24px'}></Button>
-        <Button onClick={() => onSubmitButtonHandler(title, content, image)} back-color={'transparent'} width={'80px'}>
-          등록
+        <Button onClick={() => navigate('/magazine')}>
+          <BackIcon />
         </Button>
+        <Button onClick={() => onSubmitButtonHandler(title, content, image)}>등록</Button>
       </FlexBox>
       <ContentBox>
         <DirectionCol>
           <PhotoDiv>
-            <PhotoAdd></PhotoAdd>
+            <PhotoAdd>
+              <label>
+                <input style={{ display: 'none' }} onChange={onImageChangeHandler} type='file' accept='image/*' />
+                <AddImageIcon />
+              </label>
+            </PhotoAdd>
           </PhotoDiv>
-          <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
-          <Content placeholder='내용을 입력하세요' onChange={onContentChangeHandler} value={content} />
-          <input placeholder='이미지' onChange={onImageChangeHandler} type='file' accept='image/*' />
+          <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} ref={titleRef} />
+          <input placeholder='이미지' onChange={onImageChangeHandler} type='file' accept='image/*' style ={{display: "none"}}/>
+          <Content
+            placeholder='내용을 입력하세요'
+            onChange={onContentChangeHandler}
+            value={content}
+            ref={contentRef}
+            rows={100}
+            style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box' }}
+          />
         </DirectionCol>
       </ContentBox>
       <PageFooter />
