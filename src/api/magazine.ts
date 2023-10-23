@@ -16,7 +16,7 @@ export const getMagazineDetail = async (id: any) => {
   try {
     const response = await axios.get(`https://lowest-price.store/magazines/${id}`);
     return response;
-  } catch (error: unknown) {
+  } catch (error: any) {
     console.error('매거진 상세 데이터 조회 에러', error);
     alert(error.response.data.errorMessage);
   }
