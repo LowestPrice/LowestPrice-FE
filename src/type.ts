@@ -36,3 +36,7 @@ export interface Params {
   readonly id?: number;
   readonly searchWord?: string;
 }
+
+export interface AccessToken {
+  headers: string;
+}
