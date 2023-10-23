@@ -1,17 +1,17 @@
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RouterProvider } from 'react-router';
+import router from './Router.tsx';
 
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
-  <BrowserRouter>
+  <>
     <QueryClientProvider client={queryClient}>
       <ToastContainer
         position='top-center'
@@ -25,7 +25,7 @@ root.render(
         pauseOnHover
         theme='light'
       />
-      <App />
+      <RouterProvider router={router} />
     </QueryClientProvider>
-  </BrowserRouter>
+  </>
 );

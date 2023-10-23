@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import Topten from './topten/Topten';
-import CategoryOffProductList from './category/category_off/CategoryOffProductList';
+import CategoryOffProductList from './category/CategoryOffProductList';
 import PageFooter from '../../components/footer/PageFooter';
-import {  useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import CategoryTab from './category/CategoryTab';
-import CategoryOnProductList from './category/category_on/CategoryOnProductList';
+import CategoryOnProductList from './category/CategoryOnProductList';
 import Logo from '../../assets/icon/Logo';
 import { Filter } from '../../type';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import FilterOption from './category/FilterOption';
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
@@ -18,42 +18,53 @@ export default function Main() {
   const [categoryId, setCategoryId] = useState<number>(0);
   const [filterName, setFilterName] = useState<string>('');
   const [isFilter, setIsFilter] = useState<boolean>(false);
-  // const [filterOptionBtn, setFilterOptionBtn] = useState<boolean>(false);
+  const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
 
   // 카테고리 리스트 ------------------------------------------------------------------------------------
 
-  const categoryList: string[] = ['아이패드', '맥북', '맥', '에어팟', '아이폰', '애플워치'];
-
-  console.log(Cookies.get('Authorization'));
+  const categoryList: string[] = useMemo(() => {
+    return ['아이패드', '맥북', '맥', '에어팟', '아이폰', '애플워치'];
+  }, []);
 
   // 필터 리스트 -------------------------------------------
 
-  const filterList: Filter[] = [
-    { content: '할인순', value: 'discountRate_desc' },
-    { content: '낮은가격순', value: 'price_asc' },
-    { content: '높은가격순', value: 'price_desc' },
-  ];
+  const filterList: Filter[] = useMemo(() => {
+    return [
+      { content: '할인순', value: 'discountRate_desc' },
+      { content: '낮은가격순', value: 'price_asc' },
+      { content: '높은가격순', value: 'price_desc' },
+    ];
+  }, []);
 
   // 네비게이트 ------------------------
 
   const navigate = useNavigate();
 
-  // 카테고리 버튼 색 변경 ------------------------------------
+  // 카테고리 버튼 클릭 ------------------------------------
 
-  const handleCategoryButton = (idx: any) => {
-    const newArr = Array(6).fill(false);
-    newArr[idx] = true;
+  const handleCategoryButton = useCallback(
+    (idx: any) => {
+      setIsOnCategory(true);
+      setCategoryId(idx + 1);
+      setIsCategorySelect(() => {
+        const newArr = Array(6).fill(false);
+        newArr[idx] = true;
+        return newArr;
+      });
+    },
+    [isCategorySelect, isOnCategory, categoryId]
+  );
+
+  // 카테고리 필터 버튼 클릭 ---------------------------------------------------------
+
+  const handleFilterButton = (idx: number, value: string) => {
+    const newArr = Array(3).fill(false);
+    console.log(idx, value);
+    newArr[idx] = !newArr[idx];
     console.log(newArr);
-    setIsOnCategory(true);
-    setIsCategorySelect(newArr);
-    setCategoryId(idx + 1);
-  };
-
-  // 카테고리 필터 변경 ---------------------------------------------------------
-
-  const handleFilterButton = (e: any) => {
-    setFilterName(e.id);
-    setIsFilter(!isFilter);
+    setIsFilter(true);
+    setFilterButton(newArr);
+    setFilterName(value);
   };
 
   // 검색어 입력 --------------------------------------------------
@@ -116,14 +127,15 @@ export default function Main() {
                   {filterList.map((item, index) => {
                     return (
                       <FilterOption
+                        children={index}
                         key={index}
-                        id={item.value}
-                        onClick={(e) => {
-                          handleFilterButton(e.target);
-                        }}
-                      >
-                        {item.content}
-                      </FilterOption>
+                        handleFilterButton={handleFilterButton}
+                        filterButton={filterButton}
+                        content={item.content}
+                        value={item.value}
+                        isFilter={isFilter}
+                        index={index}
+                      ></FilterOption>
                     );
                   })}
                 </Options>
@@ -268,10 +280,4 @@ const Options = styled.div`
   gap: 7px;
   height: 12px;
   padding-top: 10px;
-`;
-
-const FilterOption = styled.div`
-  font-size: 12px;
-  color: rgba(181, 181, 181, 1);
-  cursor: pointer;
 `;

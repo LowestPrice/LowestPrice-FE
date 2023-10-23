@@ -1,8 +1,7 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PageFooter from '../../components/footer/PageFooter';
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
+
 
 type Props = {};
 

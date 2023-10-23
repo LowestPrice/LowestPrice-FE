@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Product } from '../../../type';
 import Alarmbell from '../../../assets/icon/Alarmbell';
+import getParametersForUnsplash from '../../../optimization/imgcdn';
 
 interface Props extends Product {
   index: number;
@@ -13,6 +14,7 @@ function ToptenProduct(props: Props) {
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
 
+ 
   return (
     <Wrap
       onClick={() => {
@@ -32,7 +34,7 @@ function ToptenProduct(props: Props) {
         </div>
         <div className='title'>{props.productName}</div>
       </Content>
-      <ProductImage src={props.productImage} />
+      <ProductImage src={props.productImage + getParametersForUnsplash(257.997, 257.997, 80, 'jpg')} />
     </Wrap>
   );
 }
