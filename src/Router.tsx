@@ -6,16 +6,20 @@ import Main from './pages/main/Main';
 import Error from './components/Error';
 import Loading from './components/Loading';
 
+// 로그인
 const Login = React.lazy(() => import('./pages/login/Login'));
 const YetLogin = React.lazy(() => import('./pages/login/YetLogin'));
 
+// 상품 검색, 상세, 알림
 const SearchPage = React.lazy(() => import('./pages/search/SearchPage'));
 const Detail = React.lazy(() => import('./pages/detail/Detail'));
 const Notification = React.lazy(() => import('./pages/notification/Notification'));
 
+// 마이페이지
 const MyPage = React.lazy(() => import('./pages/mypage/main/MyPage'));
 const EditMypage = React.lazy(() => import('./pages/mypage/edit/EditMypage'));
 
+// 매거진
 const MagazineMain = React.lazy(() => import('./pages/magazine/magazineMain/MagazineMain'));
 const MagazineWriting = React.lazy(() => import('./pages/magazine/magazineWriting/MagazineWriting'));
 const MagazineEditing = React.lazy(() => import('./pages/magazine/magazineWriting/MagazineEditing'));
