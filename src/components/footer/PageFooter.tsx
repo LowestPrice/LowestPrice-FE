@@ -1,13 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { FlexBox, ButtonStyle, Text } from './style';
 import { MyPageIcon, BellIcon, FooterMagazineIcon, HomeIcon } from '../../assets/icon/icon';
-import { useEffect } from 'react';
 
 const PageFooter = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log('footer 렌더');
-  }, []);
+
   return (
     <FlexBox>
       <ButtonStyle onClick={() => navigate('/')}>

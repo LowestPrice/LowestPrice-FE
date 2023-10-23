@@ -8,7 +8,7 @@ function KakaoLogin() {
   const currentUrl = window.location.href;
   const url = new URL(currentUrl);
   const queryString = url.searchParams; // URLSearchParams {size: 1}
-  const accessToken = 'Bearer ' + queryString.get('authorization');
+  const accessToken = 'Bearer ' + queryString.get('Authorization');
 
   useEffect(() => {
     Cookies.set('Authorization', accessToken);
