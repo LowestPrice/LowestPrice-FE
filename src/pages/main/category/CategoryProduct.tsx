@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { Product } from '../../../../type';
-import { BsCaretDownFill } from 'react-icons/bs';
+import { Product } from '../../../type';
 import { useNavigate } from 'react-router-dom';
-import Alarmbell from '../../../../assets/icon/Alarmbell';
+import Alarmbell from '../../../assets/icon/Alarmbell';
+import React from 'react';
 
 interface Props extends Product {}
 
-function CategoryOffProduct(props: Props) {
+function CategoryProduct(props: Props) {
   const navigate = useNavigate();
 
   const currentPrice = props.currentPrice.toLocaleString();
@@ -21,8 +21,14 @@ function CategoryOffProduct(props: Props) {
       >
         <CProductImage>
           <img src={props.productImage} className='productImage'></img>
-          <BellImage onClick={(e) => e.preventDefault()}>
-            <Alarmbell />
+          <BellImage
+            style={{ zIndex: '999' }}
+            onClick={(e) => {
+              console.log('알람클릭');
+              e.stopPropagation();
+            }}
+          >
+            <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
           </BellImage>
         </CProductImage>
         <CProductContent>
@@ -32,7 +38,12 @@ function CategoryOffProduct(props: Props) {
             <div className='currentPrice'>{currentPrice}원</div>
             <DiscountRateWrap>
               <div>
-                <BsCaretDownFill size='15' color='#137FFF' />
+                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'>
+                  <path
+                    d='M4.256 6.67159C4.65334 7.11401 5.34666 7.11401 5.744 6.67159L9.56398 2.41818C10.1421 1.77442 9.68526 0.75 8.81998 0.75H1.18001C0.31474 0.75 -0.142143 1.77442 0.436019 2.41818L4.256 6.67159Z'
+                    fill='#137FFF'
+                  />
+                </svg>
               </div>
               <div>{props.discountRate}%</div>
             </DiscountRateWrap>
@@ -43,11 +54,11 @@ function CategoryOffProduct(props: Props) {
   );
 }
 
-export default CategoryOffProduct;
+export default React.memo(CategoryProduct);
+
 const Wrap = styled.div`
   width: 166px;
   height: 243px;
-  /* border: 1px solid gray; */
   margin-bottom: 10px;
   cursor: pointer;
   position: relative;

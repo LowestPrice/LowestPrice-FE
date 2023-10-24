@@ -17,6 +17,7 @@ import { useState } from 'react';
 
 import { ChartArea } from './style';
 import { PriceDataWrap, PriceChart } from './PriceHistory';
+import Alarmbell from '../../assets/icon/Alarmbell';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
@@ -68,6 +69,8 @@ function Detail() {
   const currentPrice = data.currentPrice.toLocaleString();
   const originalPrice = data.originalPrice.toLocaleString();
 
+  console.log(data.isAlertOn);
+
   return (
     <>
       <div
@@ -81,6 +84,9 @@ function Detail() {
         </Header>
         <ProductImageWrap>
           <ProductImage src={data.productImage}></ProductImage>
+          <AlarmbellWrap>
+            <Alarmbell productId={data.productId} isAlertOn={data.isAlertOn} />
+          </AlarmbellWrap>
         </ProductImageWrap>
         <Content>
           <div className='title'>{data.productName}</div>
@@ -261,4 +267,10 @@ const Option = styled.div`
     right: 20px;
     margin-top: 5px;
   }
+`;
+
+const AlarmbellWrap = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
 `;

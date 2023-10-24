@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useQueries } from 'react-query';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { getCategory } from '../../../../api/product';
 import { getCategoryFilter } from '../../../../api/product';
 
-import CategoryOnProduct from './CategoryOnProduct';
+import CategoryOnProduct from '../CategoryProduct';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 interface Props {
@@ -19,6 +19,7 @@ function CategoryOnProductList(props: Props) {
   const categoryNameList = ['iPad', 'iPad', 'MacBook', 'Mac', 'AirPods', 'iPhone', 'AppleWatch'];
 
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
+  
   const result = useQueries([
     { queryKey: ['categoryProduct'], queryFn: () => getCategory(categoryNameList[props.categoryId]) },
     {
@@ -28,13 +29,14 @@ function CategoryOnProductList(props: Props) {
   ]);
 
   // 데이터가 변경될 때마다 실행 -------------------
+
   useEffect(() => {
     result[0].refetch();
     result[1].refetch();
-    console.log(result);
   }, [props.categoryId, props.filterName]);
 
   // 데이터 로딩 중 관리 -------------------------
+  
   if (result[0].status === 'loading') {
     return <Loading />;
   }
@@ -53,8 +55,6 @@ function CategoryOnProductList(props: Props) {
   const categoryProducts = [...result[0].data].slice(0, 8);
   const filterProducts = [...result[1].data].slice(0, 8);
 
-  console.log(filterProducts);
-
   // console.log(list.slice(0, 10));
 
   return (
@@ -66,16 +66,16 @@ function CategoryOnProductList(props: Props) {
   );
 }
 
-export default CategoryOnProductList;
+export default React.memo(CategoryOnProductList);
 
 const Wrap = styled.div`
-  width: 370px;
-  padding: 10px 40px 10px 40px;
+  width: 346px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   position: absolute;
   top: 210px;
-  padding-bottom: 78px;
+  padding-bottom: 165px;
 `;

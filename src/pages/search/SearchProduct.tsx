@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Product } from '../../type';
-import { BsCaretDownFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import Alarmbell from '../../assets/icon/Alarmbell';
 
 interface Props extends Product {
   key: number;
@@ -20,6 +20,13 @@ function SearchProduct(props: Props) {
       }}
     >
       <SProductImage src={props.productImage} />
+      <AlarmWrap
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
+      </AlarmWrap>
       <SProductContent>
         <div className='productName'>{props.productName}</div>
         <div className='originalPrice'>{originalPrice}</div>
@@ -27,7 +34,12 @@ function SearchProduct(props: Props) {
           <div className='currentPrice'>{currentPrice}원</div>
           <SProductDisount>
             <div>
-              <BsCaretDownFill size='15' color='#137FFF' />
+              <svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'>
+                <path
+                  d='M4.256 6.67159C4.65334 7.11401 5.34666 7.11401 5.744 6.67159L9.56398 2.41818C10.1421 1.77442 9.68526 0.75 8.81998 0.75H1.18001C0.31474 0.75 -0.142143 1.77442 0.436019 2.41818L4.256 6.67159Z'
+                  fill='#137FFF'
+                />
+              </svg>
             </div>
             <div>{props.discountRate}%</div>
           </SProductDisount>
@@ -45,6 +57,7 @@ const Wrap = styled.div`
   /* border: 1px solid gray; */
   margin-bottom: 15px;
   cursor: pointer;
+  position: relative;
 `;
 
 const SProductImage = styled.img`
@@ -109,4 +122,10 @@ const SProductDiscountWrap = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`;
+
+const AlarmWrap = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 3px;
 `;

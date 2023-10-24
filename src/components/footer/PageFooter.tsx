@@ -1,31 +1,9 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FlexBox, ButtonStyle, Text } from './style';
-import {
-  MyPageIcon,
-  BellIcon,
-  FooterMagazineIcon,
-  HomeIcon,
-  ColorMyPageIcon,
-  ColorBellIcon,
-  ColorFooterMagazineIcon,
-  ColorHomeIcon,
-} from '../../assets/icon/icon';
-import { useLocation } from 'react-router-dom';
+import { MyPageIcon, BellIcon, FooterMagazineIcon, HomeIcon } from '../../assets/icon/icon';
 
 const PageFooter = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [activeIcon, setActiveIcon] = useState('');
-
-  useEffect(() => {
-    setActiveIcon(location.pathname);
-  }, [location.pathname]);
-
-  const handleNavigation = (path: any) => {
-    navigate(path);
-    setActiveIcon(path);
-  };
 
   return (
     <FlexBox>
