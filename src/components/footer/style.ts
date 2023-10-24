@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 interface ButtonStyleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  active?: boolean;
+  $active?: boolean;
 }
 
 export const FlexBox = styled.div`
@@ -29,7 +29,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${(props) => (props.active ? '#00ABF9' : '#6F6F6F')};
+  color: ${(props) => (props.$active ? '#00ABF9' : '#6F6F6F')};
 `;
 
 export const Text = styled.div`

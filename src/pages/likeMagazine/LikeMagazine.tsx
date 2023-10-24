@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import MagazineItem from './MagazineItem';
 import PageFooter from '../../components/footer/PageFooter';
 
-type Props = {};
-
-function LikeMagazine({}: Props) {
+const LikeMagazine = () => {
   return (
     <div>
       <Header>
@@ -12,13 +10,11 @@ function LikeMagazine({}: Props) {
       </Header>
       <LikeMagazineList>
         <MagazineItem></MagazineItem>
-        <MagazineItem></MagazineItem>
-        <MagazineItem></MagazineItem>
       </LikeMagazineList>
       <PageFooter />
     </div>
   );
-}
+};
 
 export default LikeMagazine;
 
