@@ -10,9 +10,11 @@ export interface Image {
 
 export interface Product {
   ProductCategory: Category[];
-  cardDiscount: null | undefined;
+  cardDiscount: number;
   coupangItemId: string;
   coupangVendorId: string;
+  createdAt: string;
+  deletedAt: null;
   currentPrice: number;
   discountRate: number;
   isOutOfStock: boolean;
@@ -20,6 +22,7 @@ export interface Product {
   productId: number;
   productImage: string;
   productName: string;
+  isAlertOn: boolean;
 }
 
 export interface Category {

@@ -1,6 +1,11 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
+// 상품 전체 조회
 
 export const getProducts = async () => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get('https://lowest-price.store/product');
     return response.data.data;
@@ -9,7 +14,11 @@ export const getProducts = async () => {
   }
 };
 
+// 상품 상세 조회
+
 export const getProduct = async (productId: string | undefined) => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(productId);
     const response = await axios.get(`https://lowest-price.store/product/${productId}`);
@@ -19,7 +28,11 @@ export const getProduct = async (productId: string | undefined) => {
   }
 };
 
+// 할인율 상위권 10위
+
 export const getTopten = async () => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`https://lowest-price.store/product/top`);
     return response.data.data;
@@ -28,7 +41,11 @@ export const getTopten = async () => {
   }
 };
 
+// 카테고리별 상품
+
 export const getCategory = async (categoryName: string | undefined) => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`https://lowest-price.store/product/category/${categoryName}`);
     return response.data.data;
@@ -37,7 +54,11 @@ export const getCategory = async (categoryName: string | undefined) => {
   }
 };
 
+// 카테고리 안에 필터
+
 export const getCategoryFilter = async (categoryName: string | undefined, filterName: string | undefined) => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(categoryName, filterName);
     const response = await axios.get(`https://lowest-price.store/product/category/${categoryName}/${filterName}`);
@@ -47,7 +68,11 @@ export const getCategoryFilter = async (categoryName: string | undefined, filter
   }
 };
 
+// 상품 옵션
+
 export const getOptions = async (realId: string | undefined) => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`https://lowest-price.store/option/${realId}`);
     return response.data;
@@ -59,6 +84,8 @@ export const getOptions = async (realId: string | undefined) => {
 // 검색 상품
 
 export const getSearch = async (searchWord: string | undefined) => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(searchWord);
     const response = await axios.get(`https://lowest-price.store/search?search=${searchWord}`);
@@ -71,6 +98,8 @@ export const getSearch = async (searchWord: string | undefined) => {
 // 검색한 상품 필터 -----------------------------------------------------------------------------
 
 export const getFilteredSearch = async (filterName: string | undefined, searchWord: string | undefined) => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(filterName, searchWord);
     const response = await axios.get(`https://lowest-price.store/search/${filterName}?search=${searchWord}`);

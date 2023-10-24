@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import CategoryOnProduct from './CategoryProduct';
-import { getProducts } from '../../../api/product';
-import { useQueries } from 'react-query';
-import Loading from '../../../components/Loading';
-import Error from '../../../components/Error';
+import CategoryOnProduct from '../CategoryProduct';
+import { getProducts } from '../../../../api/product';
+import { useQuery } from 'react-query';
+import Loading from '../../../../components/Loading';
+import Error from '../../../../components/Error';
 import React, { useEffect } from 'react';
 // interface Props {
 //   categoryId: number;
@@ -14,31 +14,24 @@ function CategoryOffProductList() {
     console.log('CategoryOffProductList 렌더링');
   }, []);
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
-  const result = useQueries([
-    {
-      queryKey: ['products'],
-      queryFn: getProducts,
-    },
-  ]);
+  const { status, data } = useQuery('products', getProducts);
 
   // 데이터 로딩 중 관리 -------------------------
-  if (result[0].status === 'loading') {
+  if (status === 'loading') {
     return <Loading />;
   }
-  if (result[0].status === 'error') {
+  if (status === 'error') {
     return <Error />;
   }
-
-  // 가져온 데이터 가공 ---------------------------------
-
-  const products = result[0].data;
 
   // 처음 렌더링 할 랜덤 8가지 상품 ----------------------------
 
   const eightProducts = [];
   for (let i = 0; i < 8; i++) {
-    eightProducts.push(products[Math.floor(Math.random() * 953)]);
+    eightProducts.push(data[Math.floor(Math.random() * 953)]);
   }
+
+  console.log(eightProducts);
 
   return (
     <Wrap>
