@@ -7,20 +7,20 @@ const PageFooter = () => {
 
   return (
     <FlexBox>
-      <ButtonStyle onClick={() => navigate('/')}>
-        <HomeIcon></HomeIcon>
+      <ButtonStyle $active={location.pathname === '/'} onClick={() => handleNavigation('/')}>
+        {activeIcon === '/' ? <ColorHomeIcon /> : <HomeIcon />}
         <Text>홈</Text>
       </ButtonStyle>
-      <ButtonStyle onClick={() => navigate('/magazine')}>
-        <FooterMagazineIcon></FooterMagazineIcon>
+      <ButtonStyle $active={location.pathname === '/magazine'} onClick={() => handleNavigation('/magazine')}>
+        {activeIcon === '/magazine' ? <ColorFooterMagazineIcon /> : <FooterMagazineIcon />}
         <Text>매거진</Text>
       </ButtonStyle>
-      <ButtonStyle onClick={() => navigate('/notification')}>
-        <BellIcon></BellIcon>
+      <ButtonStyle $active={location.pathname === '/notice'} onClick={() => handleNavigation('/notice')}>
+        {activeIcon === '/notice' ? <ColorBellIcon /> : <BellIcon />}
         <Text>내 알림</Text>
       </ButtonStyle>
-      <ButtonStyle onClick={() => navigate('/mypage')}>
-        <MyPageIcon></MyPageIcon>
+      <ButtonStyle $active={location.pathname === '/mypage'} onClick={() => handleNavigation('/mypage')}>
+        {activeIcon === '/mypage' ? <ColorMyPageIcon /> : <MyPageIcon />}
         <Text>마이페이지</Text>
       </ButtonStyle>
     </FlexBox>
