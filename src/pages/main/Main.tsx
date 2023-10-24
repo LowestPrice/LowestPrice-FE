@@ -1,23 +1,25 @@
-import styled from 'styled-components';
-import Topten from './topten/Topten';
-import CategoryOffProductList from './category/CategoryOffProductList';
-import PageFooter from '../../components/footer/PageFooter';
 import { useState, useCallback, useMemo } from 'react';
-import CategoryTab from './category/CategoryTab';
-import CategoryOnProductList from './category/CategoryOnProductList';
-import Logo from '../../assets/icon/Logo';
-import { Filter } from '../../type';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+import Topten from './topten/Topten';
+import PageFooter from '../../components/footer/PageFooter';
+import CategoryTab from './category/CategoryTab';
+import Logo from '../../assets/icon/Logo';
 import FilterOption from './category/FilterOption';
+import CategoryList from './category/list/CategoryProductList';
+
+import { Filter } from '../../type';
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
+
   const [searchWord, setSearchWord] = useState<string>('');
   const [isOnCategory, setIsOnCategory] = useState<boolean>(false);
   const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([false, false, false, false, false]);
   const [categoryId, setCategoryId] = useState<number>(0);
-  const [filterName, setFilterName] = useState<string>('');
   const [isFilter, setIsFilter] = useState<boolean>(false);
+  const [filterName, setFilterName] = useState<string>('');
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
 
   // 카테고리 리스트 ------------------------------------------------------------------------------------
@@ -57,15 +59,18 @@ export default function Main() {
 
   // 카테고리 필터 버튼 클릭 ---------------------------------------------------------
 
-  const handleFilterButton = (idx: number, value: string) => {
-    const newArr = Array(3).fill(false);
-    console.log(idx, value);
-    newArr[idx] = !newArr[idx];
-    console.log(newArr);
-    setIsFilter(true);
-    setFilterButton(newArr);
-    setFilterName(value);
-  };
+  const handleFilterButton = useCallback(
+    (idx: number, value: string) => {
+      setIsFilter(true);
+      setFilterName(value);
+      setFilterButton(() => {
+        const newArr = Array(3).fill(false);
+        newArr[idx] = !newArr[idx];
+        return newArr;
+      });
+    },
+    [isFilter, filterButton, filterName]
+  );
 
   // 검색어 입력 --------------------------------------------------
 
@@ -82,10 +87,12 @@ export default function Main() {
         }}
       >
         <div style={{ height: '100%', position: 'relative', width: '100%' }}>
+          {/* 헤더 ---------------------------------------------- */}
           <Header>
             <Logo />
             <h3>내일은 최저가</h3>
           </Header>
+
           <Wrap>
             <SearchInputWrap>
               <SearchInput
@@ -140,7 +147,7 @@ export default function Main() {
                   })}
                 </Options>
               </Filterbar>
-              {isOnCategory ? <CategoryOnProductList categoryId={categoryId} filterName={filterName} isFilter={isFilter} /> : <CategoryOffProductList />}
+              <CategoryList isOnCategory={isOnCategory} categoryId={categoryId} filterName={filterName} isFilter={isFilter} />
             </CategoryWrap>
           </Wrap>
         </div>
@@ -229,7 +236,7 @@ const CategoryWrap = styled.div`
 `;
 
 const CategoryTitle = styled.div`
-  width: 315px;
+  width: 350px;
   height: 70px;
   padding: 10px;
   border-bottom: 1px solid rgba(243, 243, 243, 1);
@@ -240,7 +247,7 @@ const CategoryTitle = styled.div`
 
 const CategoryTabWrap = styled.div`
   display: flex;
-  width: 357px;
+  width: 370px;
   height: 70px;
   flex-direction: row;
   white-space: nowrap;
@@ -252,7 +259,7 @@ const CategoryTabWrap = styled.div`
   border-bottom: 1px solid rgba(243, 243, 243, 1);
   position: absolute;
   top: 94px;
-  left: 18px;
+  left: -1px;
   &::-webkit-scrollbar {
     height: 5px;
   }

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Product } from '../../type';
 import { useNavigate } from 'react-router-dom';
+import Alarmbell from '../../assets/icon/Alarmbell';
 
 interface Props extends Product {
   key: number;
@@ -19,6 +20,13 @@ function SearchProduct(props: Props) {
       }}
     >
       <SProductImage src={props.productImage} />
+      <AlarmWrap
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
+      </AlarmWrap>
       <SProductContent>
         <div className='productName'>{props.productName}</div>
         <div className='originalPrice'>{originalPrice}</div>
@@ -49,6 +57,7 @@ const Wrap = styled.div`
   /* border: 1px solid gray; */
   margin-bottom: 15px;
   cursor: pointer;
+  position: relative;
 `;
 
 const SProductImage = styled.img`
@@ -113,4 +122,10 @@ const SProductDiscountWrap = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`;
+
+const AlarmWrap = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 3px;
 `;

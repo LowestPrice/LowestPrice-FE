@@ -3,8 +3,6 @@ import { Product } from '../../../type';
 import { useNavigate } from 'react-router-dom';
 import Alarmbell from '../../../assets/icon/Alarmbell';
 import React from 'react';
-import { useMutation } from 'react-query';
-import { toggleAlarm } from '../../../api/alarm';
 
 interface Props extends Product {}
 
@@ -13,15 +11,6 @@ function CategoryProduct(props: Props) {
 
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
-
-  const alarmMutation = useMutation(toggleAlarm, {
-    onSuccess: () => {
-      console.log('alarm 완료');
-    },
-    onError: () => {
-      console.log('alarm 실패');
-    },
-  });
 
   return (
     <div>
@@ -37,10 +26,9 @@ function CategoryProduct(props: Props) {
             onClick={(e) => {
               console.log('알람클릭');
               e.stopPropagation();
-              alarmMutation.mutate(props.productId);
             }}
           >
-            <Alarmbell />
+            <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
           </BellImage>
         </CProductImage>
         <CProductContent>
@@ -71,7 +59,6 @@ export default React.memo(CategoryProduct);
 const Wrap = styled.div`
   width: 166px;
   height: 243px;
-  /* border: 1px solid gray; */
   margin-bottom: 10px;
   cursor: pointer;
   position: relative;
