@@ -4,9 +4,11 @@ import Cookies from 'js-cookie';
 // 매거진 데이터 조회
 export const getMagazine = async () => {
   const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get('https://lowest-price.store/magazines', { headers: { Authorization: accessToken } });
-    console.log(accessToken);
+    console.log(accessToken, '전체 조회 토큰');
+    console.log(response, '매거진 데이터 제발');
     return response.data.data;
   } catch (error) {
     console.error('매거진 데이터 조회 에러', error);
@@ -16,6 +18,7 @@ export const getMagazine = async () => {
 // 매거진 상세 조회
 export const getMagazineDetail = async (id: any) => {
   const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`https://lowest-price.store/magazines/${id}`, { headers: { Authorization: accessToken } });
     return response;
@@ -28,6 +31,7 @@ export const getMagazineDetail = async (id: any) => {
 // 매거진 등록
 export const postMagazine = async ({ title, content, image }: { title: any; content: any; image: any }) => {
   const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const formData = new FormData();
     formData.append('title', title);
@@ -57,6 +61,7 @@ export const postMagazine = async ({ title, content, image }: { title: any; cont
 // 매거진 수정
 export const putMagazine = async (props: any) => {
   const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   const { id, newTitle, newContent, newMainImage } = props;
   const formData = new FormData();
   formData.set('title', newTitle);
@@ -89,6 +94,7 @@ export const putMagazine = async (props: any) => {
 // 매거진 삭제
 export const deleteMagazine = async (props: any) => {
   const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   const id = props.id;
   try {
     const response = await axios.delete(`https://lowest-price.store/magazines/${id}`, { headers: { Authorization: accessToken } });
@@ -101,7 +107,10 @@ export const deleteMagazine = async (props: any) => {
 // 매거진 좋아요 등록/취소
 export const postMagazineLike = async (props: any) => {
   const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
+  console.log(accessToken, '매거진 좋아요 액세스토큰');
   const id = props.id;
+  console.log(id, '좋아요 한 매거진 id');
 
   try {
     const response = await axios.post(`https://lowest-price.store/magazines/${id}/like`, { headers: { Authorization: accessToken } });
@@ -114,7 +123,7 @@ export const postMagazineLike = async (props: any) => {
 // 다른 매거진 리스트 조회
 export const getNextMagazine = async (id: any) => {
   try {
-    const response = await axios.get(`https://lowest-price.store/${id}/list`);
+    const response = await axios.get(`https://lowest-price.store/magazines/${id}/list`);
     return response;
   } catch (error) {
     console.error('다른 매거진 리스트 조회 에러', error);
@@ -124,6 +133,7 @@ export const getNextMagazine = async (id: any) => {
 // 좋아요 한 매거진 조회
 export const getLikedMagazineLists = async () => {
   const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`https://lowest-price.store/magazines/like`, { headers: { Authorization: accessToken } });
     return response;

@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Container,
   TopBox,
-  InfoBox,
+  TitleWrap,
   Title,
   Editor,
   TextArea,
@@ -28,13 +27,6 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   // 데이터 불러오기
   const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
   const magazineData = dataDetail?.data.data;
-
-  // 토큰이 없는 비로그인 유저 로그인 화면으로 이동
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate('/login');
-  //   }
-  // }, [token]);
 
   // 데이터 삭제하기
   const deletePosts = useMutation(deleteMagazine, {
@@ -67,10 +59,10 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   return (
     <Container>
       <TopBox>
-        <InfoBox>
+        <TitleWrap>
           <Title>{magazineData.title}</Title>
           <Editor>{magazineData.editor}</Editor>
-        </InfoBox>
+        </TitleWrap>
         <Flex>
           <Button onClick={() => navigate('/magazine')} key={magazineData.magazineId}></Button>
           <MagazineTitle>{magazineData.title}</MagazineTitle>

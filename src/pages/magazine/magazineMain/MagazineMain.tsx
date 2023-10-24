@@ -38,27 +38,30 @@ const Magazine: React.FC<MagazineProps> = () => {
 
   useEffect(() => {
     if (data) {
+      setMagazines(data);
       setLike(data.isLiked);
       setLikeCount(data.LikeMagazine);
     }
   }, [data]);
 
-  // 좋아요
+  // 좋아요 하기
   const magazineLike = useMutation(postMagazineLike, {
     onSuccess: () => {
       queryclient.invalidateQueries('posts');
-      setLike((prevLike: any) => {
-        setLikeCount((prevCount: any) => (prevLike ? prevCount - 1 : prevCount + 1));
-        return !prevLike;
-      });
     },
     onError: (error) => {
       console.error('좋아요 error 발생', error);
     },
   });
 
-  const handleLikeClick = (event: React.MouseEvent, magazineId: string) => {
+  const handleLikeClick = (event: React.MouseEvent, magazineId: string, index: number) => {
     event.stopPropagation();
+    setMagazines((prevMagazines) => {
+      const updatedMagazines = [...prevMagazines];
+      updatedMagazines[index].isLiked = !updatedMagazines[index].isLiked;
+      updatedMagazines[index].LikeMagazine += updatedMagazines[index].isLiked ? 1 : -1;
+      return updatedMagazines;
+    });
     magazineLike.mutate({ id: magazineId });
   };
 
@@ -81,17 +84,17 @@ const Magazine: React.FC<MagazineProps> = () => {
           <Title>Apple 트렌드</Title>
           <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
           <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
-          {magazines?.map((data, index) => (
-            <Box key={index} onClick={() => navigate(`/magazine/${data.magazineId}`)}>
-              <Img src={data.mainImage} />
+          {magazines?.map((magazineData, index) => (
+            <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`)}>
+              <Img src={magazineData.mainImage} />
               <BoxPadding>
-                <BoxTitle>{data.title}</BoxTitle>
-                <Content>{data.content.length > 53 ? `${data.content.substring(0, 53)}...` : data.content}</Content>
+                <BoxTitle>{magazineData.title}</BoxTitle>
+                <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
                 <Flex>
-                  <div>{data.editor}</div>
+                  <div>{magazineData.editor}</div>
                   <LikeFlex>
-                    <Heart like={like} onClick={(event) => handleLikeClick(event, data.magazineId)} />
-                    <div>{likeCount}</div>
+                    <Heart like={magazineData.isLiked} onClick={(event) => handleLikeClick(event, magazineData.magazineId, index)} />
+                    <div>{magazineData.LikeMagazine}</div>
                   </LikeFlex>
                 </Flex>
               </BoxPadding>

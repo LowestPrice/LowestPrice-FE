@@ -37,7 +37,7 @@ export const Title = styled.div`
   font-weight: 700;
   text-align: left;
   width: 100%;
-  padding-top: 10px;
+  padding-top: 17.82px;
   padding-left: 40px;
   line-height: 100%;
 `;
@@ -74,16 +74,18 @@ export const Box = styled.div`
   width: 335px;
   height: 315px;
   margin-top: 26px;
-  border-radius: 10px;
+  border-radius: 4px;
+  overflow: hidden;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   background-color: white;
 `;
 
 export const Img = styled.img`
-  width: 100%;
+  width: 335px;
   height: 60%;
   object-fit: cover;
-  /* display: block */
+  object-position: center;
+  flex-shrink: 0;
 `;
 
 export const BoxPadding = styled.div`
