@@ -1,24 +1,25 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import PageFooter from '../../../components/footer/PageFooter';
-
-// type Props = {};
+import { useQuery } from 'react-query';
+import { getUserinfo } from '../../../api/mypage';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
+import styled from 'styled-components';
 
 function Mypage() {
-  // 상태 관리 ---------------------------------------
-  const [imageSrc, setImageSrc]: any = useState(null);
-
   // 네비게이트 ----------------------------------------
   const navigate = useNavigate();
 
-  const handleSetImageSrc = () => {
-    setImageSrc('');
-  };
+  const { data, status } = useQuery('userInfo', getUserinfo);
 
-  useEffect(() => {
-    handleSetImageSrc();
-  }, []);
+  if (status === 'loading') {
+    return <Loading />;
+  }
+  if (status === 'error') {
+    return <Error />;
+  }
+
+  console.log(data);
 
   return (
     <div>
@@ -26,11 +27,11 @@ function Mypage() {
         <h3>마이페이지</h3>
       </Header>
       <Wrap>
-        <Title>안녕하세요 ooo님</Title>
+        <Title>안녕하세요 {data.nickname}님</Title>
         <Profile>
-          <ProfileImage src={imageSrc} />
-          <ImageInput $imageSrc={imageSrc} accept='image/*' multiple type='file' id='profileImg'></ImageInput>
-          <EditProfileImage onClick={() => navigate('/editmypage')}>프로필 수정</EditProfileImage>
+          <ProfileImage src={data.image} />
+          <ImageInput $imageSrc={data.image} accept='image/*' multiple type='file' id='profileImg'></ImageInput>
+          <EditProfileImage onClick={() => navigate(`/editmypage`)}>프로필 수정</EditProfileImage>
         </Profile>
         <Article onClick={() => navigate('/likemagazine')}>좋아요한 매거진 보기</Article>
         <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>

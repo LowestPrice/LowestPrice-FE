@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { useQueries } from 'react-query';
 import React, { useEffect } from 'react';
 
-import { getCategory } from '../../../api/product';
-import { getCategoryFilter } from '../../../api/product';
+import { getCategory } from '../../../../api/product';
+import { getCategoryFilter } from '../../../../api/product';
 
-import CategoryOnProduct from './CategoryProduct';
-import Loading from '../../../components/Loading';
-import Error from '../../../components/Error';
+import CategoryOnProduct from '../CategoryProduct';
+import Loading from '../../../../components/Loading';
+import Error from '../../../../components/Error';
 interface Props {
   categoryId: number;
   filterName: string;
@@ -15,13 +15,11 @@ interface Props {
 }
 
 function CategoryOnProductList(props: Props) {
-  useEffect(() => {
-    console.log('CategoryOnProductList 렌더링');
-  }, []);
   // 카테고리 이름 -----------------------------------------------------------------------
   const categoryNameList = ['iPad', 'iPad', 'MacBook', 'Mac', 'AirPods', 'iPhone', 'AppleWatch'];
 
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
+  
   const result = useQueries([
     { queryKey: ['categoryProduct'], queryFn: () => getCategory(categoryNameList[props.categoryId]) },
     {
@@ -31,12 +29,14 @@ function CategoryOnProductList(props: Props) {
   ]);
 
   // 데이터가 변경될 때마다 실행 -------------------
+
   useEffect(() => {
     result[0].refetch();
     result[1].refetch();
   }, [props.categoryId, props.filterName]);
 
   // 데이터 로딩 중 관리 -------------------------
+  
   if (result[0].status === 'loading') {
     return <Loading />;
   }
@@ -69,13 +69,13 @@ function CategoryOnProductList(props: Props) {
 export default React.memo(CategoryOnProductList);
 
 const Wrap = styled.div`
-  width: 370px;
-  padding: 10px 40px 10px 40px;
+  width: 346px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   position: absolute;
   top: 210px;
-  padding-bottom: 78px;
+  padding-bottom: 165px;
 `;
