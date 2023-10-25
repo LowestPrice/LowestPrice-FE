@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import { useQuery, useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-
 import { getUserinfo, postUserinfo } from '../../../api/mypage';
-
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
+import { useNavigate } from 'react-router';
+import { DeleteIdWithKakao } from '../../../api/login';
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
+
 
 export default function EditMypage() {
   // 리액트 쿼리로 유저정보 가져오기 -----------------------------------------
 
   const { data, status } = useQuery('userInfo', getUserinfo);
+  const queryClient = useQueryClient();
 
   // 상태 관리 -------------------------------------------------------------
 
@@ -61,6 +66,22 @@ export default function EditMypage() {
     },
   });
 
+  // 회원 탈퇴
+  const deleteId = useMutation(DeleteIdWithKakao, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('KakaoId');
+    },
+    onError: (error) => {
+      console.log('error 발생', error);
+    },
+  });
+
+  const onDeleteButtonHandler = () => {
+    deleteId.mutate();
+    alert('탈퇴되었습니다.');
+    navigate('/');
+  };
+
   return (
     <div>
       <Header>
@@ -90,6 +111,7 @@ export default function EditMypage() {
           >
             수정하기
           </button>
+          <button onClick={onDeleteButtonHandler}>회원탈퇴</button>
         </Profile>
       </Wrap>
       <PageFooter />

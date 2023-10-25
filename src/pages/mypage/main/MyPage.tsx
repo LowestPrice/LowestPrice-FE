@@ -34,7 +34,7 @@ function Mypage() {
   };
 
   const accessToken = Cookies.get('Authorization');
-  console.log(accessToken);
+  // console.log(accessToken);
 
   return (
     <div>
