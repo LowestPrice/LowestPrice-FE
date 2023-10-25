@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import {
   MyPageIcon,
   BellIcon,
@@ -9,9 +10,15 @@ import {
   ColorFooterMagazineIcon,
   ColorHomeIcon,
 } from '../../assets/icon/icon';
-import { useLocation } from 'react-router-dom';
-import { useState, useEffect, ButtonHTMLAttributes } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+
+import { useState, useEffect, ButtonHTMLAttributes } from 'react';
+
+interface ButtonStyleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  $active?: boolean;
+}
 
 const PageFooter = () => {
   const navigate = useNavigate();
@@ -26,6 +33,29 @@ const PageFooter = () => {
     navigate(path);
     setActiveIcon(path);
   };
+
+  const accessToken = Cookies.get('Authorization');
+
+  const handleAlarmButton = () => {
+    if (!accessToken) {
+      toast.error('로그인 이후 알림목록을 확인하실 수 있습니다.');
+      navigate('/yetlogin');
+      return;
+    } else {
+      navigate('/notification');
+    }
+  };
+
+  const handleMypageButton = () => {
+    if (!accessToken) {
+      toast.error('로그인 이후 마이페이지를 확인하실 수 있습니다.');
+      navigate('/yetlogin');
+      return;
+    } else {
+      navigate('/mypage');
+    }
+  };
+
   return (
     <FlexBox>
       <ButtonStyle $active={location.pathname === '/'} onClick={() => handleNavigation('/')}>
@@ -36,11 +66,11 @@ const PageFooter = () => {
         {activeIcon === '/magazine' ? <ColorFooterMagazineIcon /> : <FooterMagazineIcon />}
         <Text>매거진</Text>
       </ButtonStyle>
-      <ButtonStyle $active={location.pathname === '/notification'} onClick={() => handleNavigation('/notification')}>
+      <ButtonStyle $active={location.pathname === '/notification'} onClick={handleAlarmButton}>
         {activeIcon === '/notification' ? <ColorBellIcon /> : <BellIcon />}
         <Text>내 알림</Text>
       </ButtonStyle>
-      <ButtonStyle $active={location.pathname === '/mypage'} onClick={() => handleNavigation('/mypage')}>
+      <ButtonStyle $active={location.pathname === '/mypage'} onClick={handleMypageButton}>
         {activeIcon === '/mypage' ? <ColorMyPageIcon /> : <MyPageIcon />}
         <Text>마이페이지</Text>
       </ButtonStyle>
@@ -49,10 +79,6 @@ const PageFooter = () => {
 };
 
 export default PageFooter;
-
-interface ButtonStyleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  $active?: boolean;
-}
 
 export const FlexBox = styled.div`
   width: 375px;
