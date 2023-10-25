@@ -1,12 +1,7 @@
-import { FC, MouseEventHandler } from 'react';
 import { ColorHeartIcon, LineHeartIcon } from '../../assets/icon/icon';
+import { HeartProps } from '../../type/type';
 
-interface HeartProps {
-  like: boolean;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-}
-
-const Heart: FC<HeartProps> = ({ like, onClick }) => {
+const Heart: React.FC<HeartProps> = ({ like, onClick }) => {
   return (
     <button
       onClick={onClick}

@@ -68,9 +68,6 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
     }
   }, [data, setMinPrice, setMaxPrice]);
 
-  console.log(data, '데이터 결과');
-  console.log(data?.priceHistoryForWeek, 'pricehistoryforweek');
-
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
     datasets: [
@@ -127,7 +124,7 @@ const PriceArea = styled.div`
   display: flex;
   flex: shrink;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const Text = styled.div`
