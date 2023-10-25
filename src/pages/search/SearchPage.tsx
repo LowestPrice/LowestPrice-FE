@@ -22,16 +22,17 @@ function Search() {
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [filterName, setFilterName] = useState<string>(``);
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
+  const [isSoldout, setIsSoldout] = useState<boolean>(false);
 
   // 데이터 불러오기 -----------------------------
 
   const result = useQueries([
-    { queryKey: ['searchProduct', params.searchWord], queryFn: () => getSearch(params.searchWord) },
-    { queryKey: ['FilteredSearchProduct'], queryFn: () => getFilteredSearch(filterName, params.searchWord) },
+    { queryKey: ['searchProduct', params.searchWord], queryFn: () => getSearch(params.searchWord, isSoldout) },
+    { queryKey: ['FilteredSearchProduct'], queryFn: () => getFilteredSearch(filterName, params.searchWord, isSoldout) },
   ]);
 
   // 리패치 -------------------------------------
-  
+
   useEffect(() => {
     result[1].refetch();
   }, [filterButton]);
@@ -109,6 +110,14 @@ function Search() {
                   <FilterOption key={index} index={index} filterButton={filterButton} handleFilterButton={handleFilterButton} isFilter={isFilter} {...item} />
                 );
               })}
+              <Soldout
+                onClick={() => {
+                  setIsSoldout(!isSoldout);
+                }}
+                $isSoldout={isSoldout}
+              >
+                품절상품제외
+              </Soldout>
             </Options>
           </Filterbar>
           <SearchProductList>
@@ -175,11 +184,10 @@ const Filterbar = styled.div`
 const Options = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   gap: 7px;
   height: 12px;
   padding-top: 10px;
-  width: 156px;
+  width: 375px;
   height: 13px;
 `;
 
@@ -201,4 +209,10 @@ const SearchProductList = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+`;
+
+const Soldout = styled.div<{ $isSoldout: boolean }>`
+  margin-left: 150px;
+  cursor: pointer;
+  color: ${(props) => (!props.$isSoldout ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};
 `;

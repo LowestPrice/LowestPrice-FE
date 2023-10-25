@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
+
 import { Product } from '../../../type';
+import { toggleAlarm } from '../../../api/alarm';
 import Alarmbell from '../../../assets/icon/Alarmbell';
 import getParametersForUnsplash from '../../../optimization/imgcdn';
-import { toggleAlarm } from '../../../api/alarm';
-import { useMutation } from 'react-query';
 
 interface Props extends Product {
   index: number;
@@ -40,7 +41,7 @@ function ToptenProduct(props: Props) {
           alarmMutation.mutate(props.productId);
         }}
       >
-        <Alarmbell />
+        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
       </BellImage>
       <div className='rank'>{props.index + 1}</div>
       <Content>

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 function KakaoLogin() {
@@ -11,7 +10,7 @@ function KakaoLogin() {
   const accessToken = 'Bearer ' + queryString.get('Authorization');
 
   useEffect(() => {
-    Cookies.set('Authorization', accessToken);
+    document.cookie = `Authorization=${accessToken}; max-age=5h`;
     navigate('/');
   }, []);
 

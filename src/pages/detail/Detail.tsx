@@ -17,10 +17,10 @@ import { useState } from 'react';
 
 import { ChartArea } from './style';
 import { PriceChart } from './PriceChart';
-import Alarmbell from '../../assets/icon/Alarmbell';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
+
   const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
 
   // 네비게이트(페이지 이동) ----------------------
@@ -63,10 +63,12 @@ function Detail() {
     // history.push(`/detail/${productId}`);
   };
 
+  // 천 단위 콤마 찍기 -------------------------------------------------------------------------
+
   const currentPrice = data.currentPrice.toLocaleString();
   const originalPrice = data.originalPrice.toLocaleString();
 
-  console.log(data.isAlertOn);
+  // 화면 --------------------------------------------------------------------------------------
 
   return (
     <>
@@ -81,9 +83,6 @@ function Detail() {
         </Header>
         <ProductImageWrap>
           <ProductImage src={data.productImage}></ProductImage>
-          <AlarmbellWrap>
-            <Alarmbell productId={data.productId} isAlertOn={data.isAlertOn} />
-          </AlarmbellWrap>
         </ProductImageWrap>
         <Content>
           <div className='title'>{data.productName}</div>
@@ -98,6 +97,7 @@ function Detail() {
             </DiscountWrap>
           </PriceNDiscountWrap>
         </Content>
+        
         <OptionWrap>
           <Option
             onClick={(e) => {
@@ -263,10 +263,4 @@ const Option = styled.div`
     right: 20px;
     margin-top: 5px;
   }
-`;
-
-const AlarmbellWrap = styled.div`
-  position: absolute;
-  right: 10px;
-  top: 10px;
 `;
