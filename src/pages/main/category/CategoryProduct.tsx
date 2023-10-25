@@ -1,13 +1,17 @@
-import styled from 'styled-components';
-import { Product } from '../../../type';
-import { useNavigate } from 'react-router-dom';
-import Alarmbell from '../../../assets/icon/Alarmbell';
 import React from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
+import { Product } from '../../../type';
+
+import Alarmbell from '../../../assets/icon/Alarmbell';
 
 interface Props extends Product {}
 
 function CategoryProduct(props: Props) {
   const navigate = useNavigate();
+
+  // 숫자 천 단위로 데이터 가공 --------------------------------------
 
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();

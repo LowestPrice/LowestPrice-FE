@@ -1,9 +1,11 @@
-import styled from 'styled-components';
-import { Product } from '../../../type';
-import { useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from 'react-query';
-import { toggleAlarm } from '../../../api/alarm';
+import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import styled from 'styled-components';
+
+import { Product } from '../../../type';
+
+import { toggleAlarm } from '../../../api/alarm';
 
 interface Props extends Product {}
 
@@ -11,6 +13,8 @@ export default function NProductItem(props: Props) {
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
+
+  // 알림상품 제거하기 ------------------------------------------
 
   const alarmMutation = useMutation(toggleAlarm, {
     onSuccess: () => {
@@ -25,6 +29,8 @@ export default function NProductItem(props: Props) {
   const handleAlarmButton = () => {
     alarmMutation.mutate(props.productId);
   };
+
+  // 상품가격 천 단위 콤마 생성하기 ----------------------------
 
   const originalPrice = props.originalPrice.toLocaleString();
   const currentPrice = props.currentPrice.toLocaleString();

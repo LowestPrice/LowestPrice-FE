@@ -1,33 +1,35 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ToptenProduct from './ToptenProduct';
 import { useQuery } from 'react-query';
+
 import { getTopten } from '../../../api/product';
+
+import ToptenProduct from './ToptenProduct';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 
 function Topten() {
-  //슬라이드
   const slideRef = useRef(null);
   const [index, setIndex] = useState<number>(0); // 인덱스를 만들어줍니다.
   const [isSlide, setIsSlide] = useState<boolean>(false); // 슬라이드 중인지 체크해줍니다. 슬라이드 중에 여러번 빠르게 클릭 못하게 하는 역할
-  const [x, setX] = useState(0); // css에서 슬라이드 애니메이션 효과를 주기위해 x만큼 이동시키는 역할입니다.
+  const [x, setX] = useState(0); // css 에서 슬라이드 애니메이션 효과를 주기위해 x 만큼 이동시키는 역할입니다.
 
   // 자동 넘기기---------------------------------------------------
+
   useEffect(() => {
     const autoPage = setTimeout(() => {
-      setX(-264);
-      setIsSlide(true);
+      setX(-264); // 애니메이션 효과를 주기 위해 x 만큼 이동합니다.
+      setIsSlide(true); // 버튼클릭으로 직접 슬라이드할 수 있습니다.
       setTimeout(() => {
-        setIndex((prev) => (prev === 9 ? 0 : prev + 1));
-        setX(0);
-        setIsSlide(false);
+        setIndex((prev) => (prev === 9 ? 0 : prev + 1)); // Carousel 위한 index 새로고침입니다.
+        setX(0); // 한 칸씩 움직여야 하기 때문에 멈춥니다.
+        setIsSlide(false); // autoPage 에 의해 자동으로 슬라이드가 움직이고, 멈췄으므로 다시 슬라이드를 진행할 수 있는 상태로 바꿔줍니다.
       }, 500);
     }, 3500);
     return () => {
-      clearTimeout(autoPage);
+      clearTimeout(autoPage); // 우연치 않게 로직이 겹치는 것을 방지합니다.
     };
-  }, [index]);
+  }, [index]); // index 값이 변경될 때마다 실행합니다.(= 3.5초 지나면, 다시 실행.)
 
   // 할인율 상위 10위 API ----------------------------------------------------------
 

@@ -23,13 +23,13 @@ export default function Main() {
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
   const [isSoldout, setIsSoldout] = useState<boolean>(false);
 
-  // 카테고리 리스트 ------------------------------------------------------------------------------------
+  // 카테고리 리스트 ------------------------------------------------
 
   const categoryList: string[] = useMemo(() => {
     return ['아이패드', '맥북', '맥', '에어팟', '아이폰', '애플워치'];
   }, []);
 
-  // 필터 리스트 -------------------------------------------
+  // 필터 리스트 -----------------------------------------------------
 
   const filterList: Filter[] = useMemo(() => {
     return [
@@ -39,11 +39,11 @@ export default function Main() {
     ];
   }, []);
 
-  // 네비게이트 ------------------------
+  // 네비게이트 -------------------
 
   const navigate = useNavigate();
 
-  // 카테고리 버튼 클릭 ------------------------------------
+  // 카테고리 버튼 클릭 ----------------------------------------------
 
   const handleCategoryButton = useCallback(
     (idx: any) => {
@@ -51,14 +51,21 @@ export default function Main() {
       setCategoryId(idx + 1);
       setIsCategorySelect(() => {
         const newArr = Array(6).fill(false);
-        newArr[idx] = true;
+        if (isCategorySelect[idx] === true) {
+          newArr[idx] = false;
+          setIsOnCategory(false);
+        } else {
+          newArr[idx] = true;
+        }
         return newArr;
       });
     },
     [isCategorySelect, isOnCategory, categoryId]
   );
 
-  // 카테고리 필터 버튼 클릭 ---------------------------------------------------------
+  console.log();
+
+  // 필터 버튼 클릭 ----------------------------------------
 
   const handleFilterButton = useCallback(
     (idx: number, value: string) => {
@@ -66,20 +73,25 @@ export default function Main() {
       setFilterName(value);
       setFilterButton(() => {
         const newArr = Array(3).fill(false);
-        newArr[idx] = !newArr[idx];
+        if (filterButton[idx] === true) {
+          newArr[idx] = false;
+          setIsFilter(false);
+        } else {
+          newArr[idx] = true;
+        }
         return newArr;
       });
     },
     [isFilter, filterButton, filterName]
   );
 
-  // 품절 상품 버튼 클릭 -----------------------------------------------
+  // 품절 상품 버튼 클릭 --------------------------------------------
 
   const handleSoldoutButton = () => {
     setIsSoldout(!isSoldout);
   };
 
-  // 검색어 입력 --------------------------------------------------
+  // 검색어 입력 ----------------------------------------------------
 
   const onChangeSearchWord = (e: any) => {
     setSearchWord(e.target.value);
@@ -165,7 +177,6 @@ export default function Main() {
             e.preventDefault();
           }}
         >
-          
           <PageFooter />
         </div>
       </form>

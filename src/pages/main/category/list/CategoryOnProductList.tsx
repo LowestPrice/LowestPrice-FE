@@ -30,14 +30,14 @@ function CategoryOnProductList(props: Props) {
     },
   ]);
 
-  // 데이터가 변경될 때마다 실행 -------------------
+  // 카테고리, 필터가 변경될 때마다 서버로 refetch---------------------------------------------------------
 
   useEffect(() => {
     result[0].refetch();
     result[1].refetch();
   }, [props.categoryId, props.filterName, props.isSoldout]);
 
-  // 데이터 로딩 중 관리 -------------------------
+  // 데이터 로딩 중 & 에러 관리 ----------------------------------------------------------------------------------
 
   if (result[0].status === 'loading') {
     return <Loading />;
@@ -79,5 +79,5 @@ const Wrap = styled.div`
   justify-content: space-between;
   position: absolute;
   top: 210px;
-  padding-bottom: 165px;
+  padding-bottom: 80px;
 `;

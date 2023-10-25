@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { getProduct } from '../../api/product';
@@ -8,11 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import SimilarProduct from './SimilarProduct';
-
 import OptionModal from './option/OptionModal';
 import AlarmFooter from '../../components/footer/AlarmFooter';
-import { useState } from 'react';
-
 import { ChartArea } from './style';
 import { PriceChart, PriceDataWrap } from './PriceHistory';
 
