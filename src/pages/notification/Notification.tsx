@@ -1,26 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+
 import NProductList from './NProductList/NProductList';
 import NPriceAlarmList from './NPriceAlarmList/NPriceAlarmList';
 import PageFooter from '../../components/footer/PageFooter';
-import { getAlarmProducts } from '../../api/alarm';
 
 type Props = {};
 
 export default function Notification({}: Props) {
   const [tab, setTab] = useState<boolean>(true);
 
+  // 알림상품목록 ------------------------------------
+
   const switchProductTab = (): void => {
     setTab(true);
   };
 
+  // 알림 글 목록 ------------------------------------
+
   const switchPriceTab = (): void => {
     setTab(false);
   };
-
-  useEffect(() => {
-    getAlarmProducts();
-  }, []);
 
   return (
     <div>

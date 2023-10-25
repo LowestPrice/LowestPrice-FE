@@ -1,16 +1,12 @@
-import {  useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import PageFooter from '../../components/footer/PageFooter';
 
+import PageFooter from '../../components/footer/PageFooter';
 
 type Props = {};
 
 function YetLogin({}: Props) {
   const navigate = useNavigate();
-  const params = useParams();
-  console.log(params);
-
- 
 
   return (
     <div>

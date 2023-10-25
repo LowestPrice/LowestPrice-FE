@@ -1,12 +1,17 @@
 import { useQuery } from 'react-query';
-import NProductItem from './NProductItem';
-import { getAlarmProducts } from '../../../api/alarm';
-import Loading from '../../../components/Loading';
-import Error from '../../../components/Error';
-import { Product } from '../../../type';
 import styled from 'styled-components';
 
+import { getAlarmProducts } from '../../../api/alarm';
+
+import { Product } from '../../../type';
+
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
+import NProductItem from './NProductItem';
+
 export default function NProductList() {
+  // 알림설정한 상품 불러오기 --------------------------------------------------------
+
   const { status, data } = useQuery('alarmProducts', getAlarmProducts);
   if (status === 'loading') {
     return <Loading />;
@@ -15,7 +20,8 @@ export default function NProductList() {
     return <Error />;
   }
 
-  console.log(data);
+  // 화면 ----------------------------------------------------------------------
+
   return (
     <Wrap>
       {data.map((item: Product, index: number) => {
