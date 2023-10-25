@@ -309,6 +309,7 @@ const Options = styled.div`
   padding-top: 10px;
 `;
 
+
 const Soldout = styled.div<{ $isSoldout: boolean }>`
   margin-left: 150px;
   cursor: pointer;
