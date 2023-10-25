@@ -6,6 +6,8 @@ import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 import styled from 'styled-components';
 
+import Cookies from 'js-cookie';
+
 function Mypage() {
   // 네비게이트 ----------------------------------------
   const navigate = useNavigate();
@@ -19,7 +21,13 @@ function Mypage() {
     return <Error />;
   }
 
-  console.log(data);
+  const logout = () => {
+    Cookies.remove('Authorization');
+    navigate('/');
+  };
+
+  const accessToken = Cookies.get('Authorization');
+  console.log(accessToken);
 
   return (
     <div>
@@ -34,7 +42,7 @@ function Mypage() {
           <EditProfileImage onClick={() => navigate(`/editmypage`)}>프로필 수정</EditProfileImage>
         </Profile>
         <Article onClick={() => navigate('/likemagazine')}>좋아요한 매거진 보기</Article>
-        <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>
+        {accessToken ? <Article onClick={logout}>로그아웃하기</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
       </Wrap>
       <PageFooter />
     </div>

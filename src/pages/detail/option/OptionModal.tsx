@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import OptionModalItem from './OptionModalItem';
 import { useQuery } from 'react-query';
+
 import { getOptions } from '../../../api/product';
+
+import OptionModalItem from './OptionModalItem';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 
@@ -24,16 +26,11 @@ function OptionModal(props: Props) {
     return <Error />;
   }
 
-  // 옵션 데이터 5개로 추리기 -------------------------------
-
-  // const optionList = [];
-  // for (let i = 0; i < 5; i++) {
-  //   optionList.push(data[Math.floor(Math.random() * 5)]);
-  // }
+  // 해당상품 제외시키기 ---------------------------------------------------------------
 
   const withoutOptionList = [...data].filter((it) => it.productId !== props.productId);
 
-  //? 화면 -------------------------------------------------------
+  // 화면 ===============================================================================
 
   return (
     <div>

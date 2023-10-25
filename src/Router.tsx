@@ -27,12 +27,6 @@ const MagazineEditing = React.lazy(() => import('./pages/magazine/magazineWritin
 const MagazineDetail = React.lazy(() => import('./pages/magazine/magazineDetail/MagazineDetail'));
 const LikeMagazine = React.lazy(() => import('./pages/likeMagazine/LikeMagazine'));
 
-/**
- * @author : Jinhyeok
- * @returns : createBrowserRouter를 사용한 깔끔한 Route 설계.
- *            React lazy를 이용한 초기 번들 사이즈 최적화.
- */
-
 const router = createBrowserRouter([
   {
     path: '/',
