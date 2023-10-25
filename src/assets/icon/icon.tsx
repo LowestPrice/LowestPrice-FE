@@ -1,17 +1,16 @@
 import { SVGProps } from 'react';
 
-
 // 좋아요 하트 아이콘
 export const LineHeartIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
     <path
-      fill-rule='evenodd'
-      clip-rule='evenodd'
+      fillRule='evenodd'
+      clipRule='evenodd'
       d='M3.80641 6.20641C4.70654 5.30655 5.92722 4.80104 7.20001 4.80104C8.47279 4.80104 9.69347 5.30655 10.5936 6.20641L12 7.61161L13.4064 6.20641C13.8492 5.74796 14.3788 5.38229 14.9645 5.13072C15.5501 4.87916 16.1799 4.74675 16.8173 4.74121C17.4546 4.73567 18.0867 4.85712 18.6766 5.09847C19.2665 5.33982 19.8024 5.69623 20.2531 6.14691C20.7038 6.5976 21.0602 7.13353 21.3015 7.72343C21.5429 8.31333 21.6643 8.9454 21.6588 9.58274C21.6533 10.2201 21.5209 10.8499 21.2693 11.4356C21.0177 12.0212 20.6521 12.5508 20.1936 12.9936L12 21.1884L3.80641 12.9936C2.90655 12.0935 2.40103 10.8728 2.40103 9.60001C2.40103 8.32722 2.90655 7.10654 3.80641 6.20641Z'
       fill='none'
       stroke='black'
-      stroke-width='2'
-      stroke-linejoin='round'
+      strokeWidth='2'
+      strokeLinejoin='round'
     />
   </svg>
 );
@@ -19,13 +18,13 @@ export const LineHeartIcon = (props: SVGProps<SVGSVGElement>) => (
 export const ColorHeartIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
     <path
-      fill-rule='evenodd'
-      clip-rule='evenodd'
+      fillRule='evenodd'
+      clipRule='evenodd'
       d='M3.80641 6.20641C4.70654 5.30655 5.92722 4.80104 7.20001 4.80104C8.47279 4.80104 9.69347 5.30655 10.5936 6.20641L12 7.61161L13.4064 6.20641C13.8492 5.74796 14.3788 5.38229 14.9645 5.13072C15.5501 4.87916 16.1799 4.74675 16.8173 4.74121C17.4546 4.73567 18.0867 4.85712 18.6766 5.09847C19.2665 5.33982 19.8024 5.69623 20.2531 6.14691C20.7038 6.5976 21.0602 7.13353 21.3015 7.72343C21.5429 8.31333 21.6643 8.9454 21.6588 9.58274C21.6533 10.2201 21.5209 10.8499 21.2693 11.4356C21.0177 12.0212 20.6521 12.5508 20.1936 12.9936L12 21.1884L3.80641 12.9936C2.90655 12.0935 2.40103 10.8728 2.40103 9.60001C2.40103 8.32722 2.90655 7.10654 3.80641 6.20641Z'
       fill='#00ABF9'
       stroke='#00ABF9'
-      stroke-width='2'
-      stroke-linejoin='round'
+      strokeWidth='2'
+      strokeLinejoin='round'
     />
   </svg>
 );
@@ -124,6 +123,7 @@ export const ColorMyPageIcon = (props: SVGProps<SVGSVGElement>) => {
   );
 };
 
+// 하얀 배경, 파란색 로고
 export const BlueLogo = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='23.603' viewBox='0 0 16 24' fill='none' {...props}>
@@ -136,23 +136,67 @@ export const BlueLogo = (props: SVGProps<SVGSVGElement>) => {
   );
 };
 
+// 뒤로가기 버튼 아이콘
 export const BackIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' width='17' height='18' viewBox='0 0 17 18' fill='none' {...props}>
-      <path d='M9 1L1 9L9 17' stroke='#6F6F6F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+      <path d='M9 1L1 9L9 17' stroke='#FFF' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   );
 };
 
+// 매거진 작성 페이지 사진 추가 아이콘
 export const AddImageIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' {...props}>
       <path
         d='M5.36541 21L14.9007 11.9677L19.388 16.4838M5.36541 21H16.5835C18.4421 21 19.9489 19.4835 19.9489 17.6129V11.9677M5.36541 21C3.50675 21 2 19.4835 2 17.6129V6.32246C2 4.4518 3.50675 2.93533 5.36541 2.93533H12.6571M18.8271 8.38683L18.8271 5.19341M18.8271 5.19341L18.8271 2M18.8271 5.19341L15.6541 5.19341M18.8271 5.19341L22 5.19341M8.73082 8.01602C8.73082 8.95135 7.97745 9.70958 7.04812 9.70958C6.11879 9.70958 5.36541 8.95135 5.36541 8.01602C5.36541 7.08069 6.11879 6.32246 7.04812 6.32246C7.97745 6.32246 8.73082 7.08069 8.73082 8.01602Z'
         stroke='#6F6F6F'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </svg>
+  );
+};
+
+// 매거진 상세보기 드롭다운 아이콘(수정/삭제용)
+export const DropDownIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='#FFFFF' {...props}>
+      <circle cx='12' cy='4' r='2' fill='white' />
+      <circle cx='12' cy='12' r='2' fill='white' />
+      <circle cx='12' cy='20' r='2' fill='white' />
+    </svg>
+  );
+};
+
+// 공유하기 아이콘
+export const ShareIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' {...props}>
+      <path d='M12.425 14.5V1M12.425 1L8.675 4.675M12.425 1L16.025 4.675' stroke='white' strokeWidth='1.9125' strokeLinecap='round' strokeLinejoin='round' />
+      <path
+        d='M8.675 8.34998H8.15C6.4103 8.34998 5 9.76028 5 11.5V18.85C5 20.5897 6.4103 22 8.15 22H16.55C18.2897 22 19.7 20.5897 19.7 18.85V11.5C19.7 9.76028 18.2897 8.34998 16.55 8.34998H16.025'
+        stroke='white'
+        strokeWidth='1.785'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </svg>
+  );
+};
+
+export const GreyShareIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' {...props}>
+      <path d='M12.425 14.5V1M12.425 1L8.675 4.675M12.425 1L16.025 4.675' stroke='#6F6F6F' strokeWidth='1.9125' strokeLinecap='round' strokeLinejoin='round' />
+      <path
+        d='M8.675 8.34998H8.15C6.4103 8.34998 5 9.76028 5 11.5V18.85C5 20.5897 6.4103 22 8.15 22H16.55C18.2897 22 19.7 20.5897 19.7 18.85V11.5C19.7 9.76028 18.2897 8.34998 16.55 8.34998H16.025'
+        stroke='#6F6F6F'
+        strokeWidth='1.785'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   );

@@ -1,3 +1,5 @@
+import { MouseEventHandler } from 'react';
+
 export type MagazineProps = {
   data?: magazine[];
 };
@@ -16,4 +18,23 @@ export interface PriceData {
   maxPrice: number;
   minPrice: number;
   priceHistoryForWeek: any;
+}
+
+export interface DropDownProps {
+  onEditClick?: () => void;
+  onDeleteClick?: () => void;
+}
+
+export interface HeartProps {
+  like: boolean;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface LikeProps {
+  isLiked: boolean;
+  magazineId: string;
+  likeCount: number;
+  handleLikeClick: (event: React.MouseEvent, magazineId: string, index: number) => void;
+  index: number;
+  style?: React.CSSProperties;
 }

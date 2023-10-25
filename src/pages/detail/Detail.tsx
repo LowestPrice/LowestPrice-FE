@@ -12,12 +12,14 @@ import SimilarProduct from './SimilarProduct';
 import OptionModal from './option/OptionModal';
 import AlarmFooter from '../../components/footer/AlarmFooter';
 import { ChartArea } from './style';
-import { PriceChart } from './PriceChart';
+import { PriceChart, PriceDataWrap } from './PriceHistory';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
 
   const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
+  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
+  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
 
   // 네비게이트(페이지 이동) ----------------------
 
@@ -124,12 +126,12 @@ function Detail() {
           </Option>
           <OptionModal handleOptionButton={handleOptionButton} productId={data.productId} isOpenOption={isOpenOption} realId={data.realId}></OptionModal>
         </OptionWrap>
-
+        {/* 최고가, 최저가 */}
+        <PriceDataWrap minPrice={minPrice} maxPrice={maxPrice} />
         <ChartArea>
-          <div>가격 그래프</div>
-          <PriceChart id={params.id as string} />
+          <GraphText>가격 그래프</GraphText>
+          <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
         </ChartArea>
-
         <SimilarProuctWrap>
           <div className='title'>해당 상품과 비슷한 상품</div>
           <SimilarProductList>
@@ -282,4 +284,12 @@ const Option = styled.div`
     right: 20px;
     margin-top: 5px;
   }
+`;
+
+const GraphText = styled.div`
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 121.5%;
+  margin-top: 18px;
 `;
