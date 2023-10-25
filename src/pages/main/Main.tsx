@@ -152,7 +152,7 @@ export default function Main() {
                     );
                   })}
                   <Soldout onClick={handleSoldoutButton} $isSoldout={isSoldout}>
-                    품정상품제외
+                    품절상품제외
                   </Soldout>
                 </Options>
               </Filterbar>
