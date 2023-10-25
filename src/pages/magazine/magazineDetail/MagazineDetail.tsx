@@ -7,7 +7,6 @@ import { useRef } from 'react';
 import useDropDown from '../../../hooks/useDropDown';
 import { DropDownProps } from '../../../type/type';
 import styled from 'styled-components';
-import Like from '../Like';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   const { id } = useParams();

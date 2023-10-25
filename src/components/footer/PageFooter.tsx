@@ -36,8 +36,8 @@ const PageFooter = () => {
         {activeIcon === '/magazine' ? <ColorFooterMagazineIcon /> : <FooterMagazineIcon />}
         <Text>매거진</Text>
       </ButtonStyle>
-      <ButtonStyle $active={location.pathname === '/notice'} onClick={() => handleNavigation('/notice')}>
-        {activeIcon === '/notice' ? <ColorBellIcon /> : <BellIcon />}
+      <ButtonStyle $active={location.pathname === '/notification'} onClick={() => handleNavigation('/notification')}>
+        {activeIcon === '/notification' ? <ColorBellIcon /> : <BellIcon />}
         <Text>내 알림</Text>
       </ButtonStyle>
       <ButtonStyle $active={location.pathname === '/mypage'} onClick={() => handleNavigation('/mypage')}>

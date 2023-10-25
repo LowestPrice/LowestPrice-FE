@@ -8,11 +8,18 @@ interface Props {
   categoryId: number;
   filterName: string;
   isFilter: boolean;
+  isSoldout: boolean;
 }
 
-function CategoryList({ isOnCategory, categoryId, filterName, isFilter }: Props) {
+function CategoryList({ isOnCategory, categoryId, filterName, isFilter, isSoldout }: Props) {
   return (
-    <Wrap>{isOnCategory ? <CategoryOnProductList categoryId={categoryId} filterName={filterName} isFilter={isFilter} /> : <CategoryOffProductList />}</Wrap>
+    <Wrap>
+      {isOnCategory ? (
+        <CategoryOnProductList categoryId={categoryId} filterName={filterName} isFilter={isFilter} isSoldout={isSoldout} />
+      ) : (
+        <CategoryOffProductList isSoldout={isSoldout} />
+      )}
+    </Wrap>
   );
 }
 

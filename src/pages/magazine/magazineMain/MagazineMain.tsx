@@ -19,6 +19,8 @@ const Magazine: React.FC<MagazineProps> = () => {
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   console.log(data, '매거진 메인 데이터');
+  console.log(like);
+  console.log(likeCount);
 
   useEffect(() => {
     if (data) {

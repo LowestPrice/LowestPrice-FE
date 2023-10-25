@@ -30,6 +30,8 @@ interface PriceChartProps extends ParamsProps {
 
 interface ParamsProps {
   id: string | number;
+  setMinPrice?: Function;
+  setMaxPrice?: Function;
 }
 
 export interface PriceWrapProps {

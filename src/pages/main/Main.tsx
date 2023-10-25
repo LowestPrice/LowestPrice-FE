@@ -21,6 +21,7 @@ export default function Main() {
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [filterName, setFilterName] = useState<string>('');
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
+  const [isSoldout, setIsSoldout] = useState<boolean>(false);
 
   // 카테고리 리스트 ------------------------------------------------------------------------------------
 
@@ -72,6 +73,12 @@ export default function Main() {
     [isFilter, filterButton, filterName]
   );
 
+  // 품절 상품 버튼 클릭 -----------------------------------------------
+
+  const handleSoldoutButton = () => {
+    setIsSoldout(!isSoldout);
+  };
+
   // 검색어 입력 --------------------------------------------------
 
   const onChangeSearchWord = (e: any) => {
@@ -87,7 +94,6 @@ export default function Main() {
         }}
       >
         <div style={{ height: '100%', position: 'relative', width: '100%' }}>
-          {/* 헤더 ---------------------------------------------- */}
           <Header>
             <Logo />
             <h3>내일은 최저가</h3>
@@ -145,9 +151,12 @@ export default function Main() {
                       ></FilterOption>
                     );
                   })}
+                  <Soldout onClick={handleSoldoutButton} $isSoldout={isSoldout}>
+                    품정상품제외
+                  </Soldout>
                 </Options>
               </Filterbar>
-              <CategoryList isOnCategory={isOnCategory} categoryId={categoryId} filterName={filterName} isFilter={isFilter} />
+              <CategoryList isOnCategory={isOnCategory} categoryId={categoryId} filterName={filterName} isFilter={isFilter} isSoldout={isSoldout} />
             </CategoryWrap>
           </Wrap>
         </div>
@@ -303,4 +312,10 @@ const BusinessInfo = styled.div`
   width: 375px;
   font-size: 12px;
   font-weight: 600;
+`;
+
+const Soldout = styled.div<{ $isSoldout: boolean }>`
+  margin-left: 150px;
+  cursor: pointer;
+  color: ${(props) => (!props.$isSoldout ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};
 `;

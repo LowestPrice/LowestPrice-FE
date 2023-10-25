@@ -16,15 +16,15 @@ import AlarmFooter from '../../components/footer/AlarmFooter';
 import { useState } from 'react';
 
 import { ChartArea } from './style';
-import { PriceDataWrap, PriceChart } from './PriceHistory';
-import Alarmbell from '../../assets/icon/Alarmbell';
+import { PriceChart } from './PriceHistory';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
+
   const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
-  // 최고가, 최저가
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
+  console.log(minPrice, maxPrice);
 
   // 네비게이트(페이지 이동) ----------------------
 
@@ -66,10 +66,12 @@ function Detail() {
     // history.push(`/detail/${productId}`);
   };
 
+  // 천 단위 콤마 찍기 -------------------------------------------------------------------------
+
   const currentPrice = data.currentPrice.toLocaleString();
   const originalPrice = data.originalPrice.toLocaleString();
 
-  console.log(data.isAlertOn);
+  // 화면 --------------------------------------------------------------------------------------
 
   return (
     <>
@@ -84,9 +86,6 @@ function Detail() {
         </Header>
         <ProductImageWrap>
           <ProductImage src={data.productImage}></ProductImage>
-          <AlarmbellWrap>
-            <Alarmbell productId={data.productId} isAlertOn={data.isAlertOn} />
-          </AlarmbellWrap>
         </ProductImageWrap>
         <Content>
           <div className='title'>{data.productName}</div>
@@ -101,6 +100,7 @@ function Detail() {
             </DiscountWrap>
           </PriceNDiscountWrap>
         </Content>
+
         <OptionWrap>
           <Option
             onClick={(e) => {
@@ -115,13 +115,12 @@ function Detail() {
           </Option>
           <OptionModal handleOptionButton={handleOptionButton} productId={data.productId} isOpenOption={isOpenOption} realId={data.realId}></OptionModal>
         </OptionWrap>
-        {/* 최고가, 최저가  */}
-        <PriceDataWrap minPrice={minPrice} maxPrice={maxPrice} />
-        {/* 차트 */}
+
         <ChartArea>
           <div>가격 그래프</div>
           <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
         </ChartArea>
+
         <SimilarProuctWrap>
           <div className='title'>해당 상품과 비슷한 상품</div>
           <SimilarProductList>
@@ -267,10 +266,4 @@ const Option = styled.div`
     right: 20px;
     margin-top: 5px;
   }
-`;
-
-const AlarmbellWrap = styled.div`
-  position: absolute;
-  right: 10px;
-  top: 10px;
 `;

@@ -8,10 +8,12 @@ import { getCategoryFilter } from '../../../../api/product';
 import CategoryOnProduct from '../CategoryProduct';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
+
 interface Props {
   categoryId: number;
   filterName: string;
   isFilter: boolean;
+  isSoldout: boolean;
 }
 
 function CategoryOnProductList(props: Props) {
@@ -19,12 +21,12 @@ function CategoryOnProductList(props: Props) {
   const categoryNameList = ['iPad', 'iPad', 'MacBook', 'Mac', 'AirPods', 'iPhone', 'AppleWatch'];
 
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
-  
+
   const result = useQueries([
-    { queryKey: ['categoryProduct'], queryFn: () => getCategory(categoryNameList[props.categoryId]) },
+    { queryKey: ['categoryProduct'], queryFn: () => getCategory(categoryNameList[props.categoryId], props.isSoldout) },
     {
       queryKey: ['filterProduct'],
-      queryFn: () => getCategoryFilter(categoryNameList[props.categoryId], props.filterName),
+      queryFn: () => getCategoryFilter(categoryNameList[props.categoryId], props.filterName, props.isSoldout),
     },
   ]);
 
@@ -33,10 +35,10 @@ function CategoryOnProductList(props: Props) {
   useEffect(() => {
     result[0].refetch();
     result[1].refetch();
-  }, [props.categoryId, props.filterName]);
+  }, [props.categoryId, props.filterName, props.isSoldout]);
 
   // 데이터 로딩 중 관리 -------------------------
-  
+
   if (result[0].status === 'loading') {
     return <Loading />;
   }
