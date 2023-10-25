@@ -70,9 +70,6 @@ const MagazineEditing: React.FC = () => {
       }
     );
   };
-  // console.log(newTitle, '새로운 타이틀');
-  // console.log(newContent, '새로운 내용');
-  // console.log(newMainImage, '새로운 이미지');
 
   const adjustHeight = () => {
     const targetTextarea = contentRef.current;
