@@ -307,7 +307,7 @@ const Options = styled.div`
 
 const BusinessInfo = styled.div`
   position: absolute;
-  bottom: -942px;
+  bottom: -950px;
   display: flex;
   flex-direction: column;
   justify-content: center;
