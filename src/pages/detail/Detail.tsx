@@ -14,12 +14,15 @@ import AlarmFooter from '../../components/footer/AlarmFooter';
 import { useState } from 'react';
 
 import { ChartArea } from './style';
-import { PriceChart } from './PriceChart';
+import { PriceChart } from './PriceHistory';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
 
   const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
+  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
+  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
+  console.log(minPrice, maxPrice);
 
   // 네비게이트(페이지 이동) ----------------------
 
@@ -129,7 +132,7 @@ function Detail() {
 
         <ChartArea>
           <div>가격 그래프</div>
-          <PriceChart id={params.id as string} />
+          <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
         </ChartArea>
 
         <SimilarProuctWrap>

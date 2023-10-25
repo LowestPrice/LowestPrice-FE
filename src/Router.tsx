@@ -90,7 +90,7 @@ const router = createBrowserRouter([
         element: <SearchPage />,
       },
       {
-        path: 'likemagazine/:userId',
+        path: 'likemagazine',
         element: <LikeMagazine />,
       },
       {
