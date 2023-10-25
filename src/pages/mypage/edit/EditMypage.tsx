@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import { useQuery, useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { getUserinfo, postUserinfo } from '../../../api/mypage';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import Loading from '../../../components/Loading';
-import Error from '../../../components/Error';
-import { useNavigate } from 'react-router';
 import { DeleteIdWithKakao } from '../../../api/login';
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
-
 
 export default function EditMypage() {
   // 리액트 쿼리로 유저정보 가져오기 -----------------------------------------
