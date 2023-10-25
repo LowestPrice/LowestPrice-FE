@@ -32,7 +32,8 @@ const Magazine: React.FC<MagazineProps> = () => {
 
   // 매거진 데이터 불러오기
   const { isLoading, isError, data } = useQuery('magazineData', getMagazine);
-
+  const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   console.log(data, '매거진 메인 데이터');
 
   useEffect(() => {
