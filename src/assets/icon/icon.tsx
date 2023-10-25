@@ -123,6 +123,7 @@ export const ColorMyPageIcon = (props: SVGProps<SVGSVGElement>) => {
   );
 };
 
+// 하얀 배경, 파란색 로고
 export const BlueLogo = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='23.603' viewBox='0 0 16 24' fill='none' {...props}>
@@ -135,14 +136,16 @@ export const BlueLogo = (props: SVGProps<SVGSVGElement>) => {
   );
 };
 
+// 뒤로가기 버튼 아이콘
 export const BackIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' width='17' height='18' viewBox='0 0 17 18' fill='none' {...props}>
-      <path d='M9 1L1 9L9 17' stroke='#6F6F6F' strokeWidth='2' stroke-linecap='round' stroke-linejoin='round' />
+      <path d='M9 1L1 9L9 17' stroke='#FFF' strokeWidth='2' stroke-linecap='round' stroke-linejoin='round' />
     </svg>
   );
 };
 
+// 매거진 작성 페이지 사진 추가 아이콘
 export const AddImageIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' {...props}>
@@ -152,6 +155,33 @@ export const AddImageIcon = (props: SVGProps<SVGSVGElement>) => {
         strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
+      />
+    </svg>
+  );
+};
+
+// 매거진 상세보기 드롭다운 아이콘(수정/삭제용)
+export const DropDownIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='#FFFFF' {...props}>
+      <circle cx='12' cy='4' r='2' fill='white' />
+      <circle cx='12' cy='12' r='2' fill='white' />
+      <circle cx='12' cy='20' r='2' fill='white' />
+    </svg>
+  );
+};
+
+// 공유하기 아이콘
+export const ShareIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' {...props}>
+      <path d='M12.425 14.5V1M12.425 1L8.675 4.675M12.425 1L16.025 4.675' stroke='white' stroke-width='1.9125' stroke-linecap='round' stroke-linejoin='round' />
+      <path
+        d='M8.675 8.34998H8.15C6.4103 8.34998 5 9.76028 5 11.5V18.85C5 20.5897 6.4103 22 8.15 22H16.55C18.2897 22 19.7 20.5897 19.7 18.85V11.5C19.7 9.76028 18.2897 8.34998 16.55 8.34998H16.025'
+        stroke='white'
+        stroke-width='1.785'
+        stroke-linecap='round'
+        stroke-linejoin='round'
       />
     </svg>
   );

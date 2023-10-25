@@ -1,29 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { MagazineProps } from '../../../type/type';
-import {
-  Container,
-  Header,
-  Title,
-  Line,
-  Subtitle,
-  Box,
-  Img,
-  BoxPadding,
-  BoxTitle,
-  Flex,
-  Content,
-  Writing,
-  LikeFlex,
-  InnerContainer,
-  LogoTitle,
-} from './styles';
 import PageFooter from '../../../components/footer/PageFooter';
 import { useState, useEffect } from 'react';
 import { getMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { postMagazineLike } from '../../../api/magazine';
-import Heart from '../Heart';
 import { BlueLogo } from '../../../assets/icon/icon';
+import styled from 'styled-components';
+import Like from '../Like';
 
 const Magazine: React.FC<MagazineProps> = () => {
   const [magazines, setMagazines] = useState<any[]>([]);
@@ -35,6 +19,8 @@ const Magazine: React.FC<MagazineProps> = () => {
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   console.log(data, '매거진 메인 데이터');
+  console.log(like);
+  console.log(likeCount);
 
   useEffect(() => {
     if (data) {
@@ -92,10 +78,13 @@ const Magazine: React.FC<MagazineProps> = () => {
                 <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
                 <Flex>
                   <div>{magazineData.editor}</div>
-                  <LikeFlex>
-                    <Heart like={magazineData.isLiked} onClick={(event) => handleLikeClick(event, magazineData.magazineId, index)} />
-                    <div>{magazineData.LikeMagazine}</div>
-                  </LikeFlex>
+                  <Like
+                    isLiked={magazineData.isLiked}
+                    magazineId={magazineData.magazineId}
+                    likeCount={magazineData.LikeMagazine}
+                    handleLikeClick={handleLikeClick}
+                    index={index}
+                  />
                 </Flex>
               </BoxPadding>
             </Box>
@@ -108,3 +97,114 @@ const Magazine: React.FC<MagazineProps> = () => {
 };
 
 export default Magazine;
+
+const Container = styled.div`
+  width: 375px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-bottom: 82px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f3f3f3;
+`;
+
+const InnerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 26px 274px 18px 20px;
+`;
+
+const LogoTitle = styled.div`
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 110%;
+  margin-left: 6px;
+`;
+
+const Title = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  width: 100%;
+  padding-top: 17.82px;
+  padding-left: 40px;
+  line-height: 100%;
+`;
+
+const Line = styled.div`
+  border-top: 1px solid grey;
+`;
+
+const Subtitle = styled.div`
+  font-size: 14px;
+  color: grey;
+  margin-top: 1%;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+  margin-left: 40px;
+`;
+
+const Writing = styled.div`
+  width: 323px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #b5b5b5;
+  cursor: pointer;
+  width: 100%;
+  margin-right: 56px;
+  margin-bottom: -16px;
+  text-align: right;
+  line-height: 110%;
+  text-decoration-line: underline;
+`;
+
+const Box = styled.div`
+  width: 335px;
+  height: 315px;
+  margin-top: 26px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: white;
+`;
+
+const Img = styled.img`
+  width: 335px;
+  height: 60%;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+`;
+
+const BoxPadding = styled.div`
+  padding: 5% 3% 5% 3%;
+`;
+
+const BoxTitle = styled.div`
+  font-size: 18px;
+  font-weight: 700;
+`;
+
+const Content = styled.div`
+  margin: 1% 0% 1% 0%;
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+const Flex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 400;
+`;
