@@ -167,8 +167,11 @@ export default function Main() {
         >
           <BusinessInfo>
             <h5>사업자 정보</h5>
+            <div>대표자: 이준석</div>
+            <div>전화번호: 010-3599-6345</div>
             <div>업체명: 아담 인터네셔널</div>
             <div>사업자 등록번호: 394-27-00969</div>
+            <div>서울특별시 경희대로 26 삼의원 창업센터 311호</div>
           </BusinessInfo>
           <PageFooter />
         </div>
