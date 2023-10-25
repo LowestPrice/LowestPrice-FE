@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { Product } from '../../../type';
 import { toggleAlarm } from '../../../api/alarm';
+
 import Alarmbell from '../../../assets/icon/Alarmbell';
 import getParametersForUnsplash from '../../../optimization/imgcdn';
 
@@ -14,8 +15,12 @@ interface Props extends Product {
 function ToptenProduct(props: Props) {
   const navigate = useNavigate();
 
+  // 상품 가격 천 단위 콤마 생성하기 -------------------------------
+
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
+
+  // 알람 설정하기 ------------------------------------------------
 
   const alarmMutation = useMutation(toggleAlarm, {
     onSuccess: () => {
