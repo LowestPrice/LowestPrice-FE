@@ -3,53 +3,27 @@ import { MagazineProps } from '../../../type/type';
 import PageFooter from '../../../components/footer/PageFooter';
 import { useState, useEffect } from 'react';
 import { getMagazine } from '../../../api/magazine';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { postMagazineLike } from '../../../api/magazine';
+import { useQuery } from 'react-query';
 import { BlueLogo } from '../../../assets/icon/icon';
 import styled from 'styled-components';
+import { useLike } from '../../../hooks/useLike';
 import Like from '../Like';
 
 const Magazine: React.FC<MagazineProps> = () => {
   const [magazines, setMagazines] = useState<any[]>([]);
   const navigate = useNavigate();
-  const queryclient = useQueryClient();
 
   // 매거진 데이터 불러오기
   const { isLoading, isError, data } = useQuery('magazineData', getMagazine);
-  const [like, setLike] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
-  console.log(data, '매거진 메인 데이터');
-  console.log(like);
-  console.log(likeCount);
 
   useEffect(() => {
     if (data) {
       setMagazines(data);
-      setLike(data.isLiked);
-      setLikeCount(data.LikeMagazine);
     }
   }, [data]);
 
-  // 좋아요 하기
-  const magazineLike = useMutation(postMagazineLike, {
-    onSuccess: () => {
-      queryclient.invalidateQueries('posts');
-    },
-    onError: (error) => {
-      console.error('좋아요 error 발생', error);
-    },
-  });
-
-  const handleLikeClick = (event: React.MouseEvent, magazineId: string, index: number) => {
-    event.stopPropagation();
-    setMagazines((prevMagazines) => {
-      const updatedMagazines = [...prevMagazines];
-      updatedMagazines[index].isLiked = !updatedMagazines[index].isLiked;
-      updatedMagazines[index].LikeMagazine += updatedMagazines[index].isLiked ? 1 : -1;
-      return updatedMagazines;
-    });
-    magazineLike.mutate({ id: magazineId });
-  };
+  //
+  const { handleLikeClick } = useLike(false, 0);
 
   if (isLoading) {
     return <h1>로딩중입니다</h1>;
@@ -71,7 +45,7 @@ const Magazine: React.FC<MagazineProps> = () => {
           <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
           <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
           {magazines?.map((magazineData, index) => (
-            <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`)}>
+            <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
               <Img src={magazineData.mainImage} />
               <BoxPadding>
                 <BoxTitle>{magazineData.title}</BoxTitle>
@@ -82,7 +56,7 @@ const Magazine: React.FC<MagazineProps> = () => {
                     isLiked={magazineData.isLiked}
                     magazineId={magazineData.magazineId}
                     likeCount={magazineData.LikeMagazine}
-                    handleLikeClick={handleLikeClick}
+                    handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
                     index={index}
                   />
                 </Flex>

@@ -2,11 +2,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { MagazineProps } from '../../../type/type';
 import { deleteMagazine, getMagazineDetail, getAnotherMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { BackIcon, DropDownIcon, ShareIcon } from '../../../assets/icon/icon';
+import { BackIcon, DropDownIcon, ShareIcon, GreyShareIcon } from '../../../assets/icon/icon';
 import { useRef } from 'react';
 import useDropDown from '../../../hooks/useDropDown';
 import { DropDownProps } from '../../../type/type';
 import styled from 'styled-components';
+import Like from '../Like';
+import { useLike } from '../../../hooks/useLike';
+import { useLocation } from 'react-router-dom';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   const { id } = useParams();
@@ -14,6 +17,8 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const navigate = useNavigate();
   const dropDownRef = useRef(null);
   const [isOpen, setIsOpen] = useDropDown(dropDownRef, false);
+  const location = useLocation();
+  const index = location.state?.index;
 
   // 데이터 불러오기
   const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
@@ -34,6 +39,9 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
     alert('삭제되었습니다.');
   };
 
+  // 좋아요
+  const { handleLikeClick } = useLike(false, 0);
+
   // 다른 매거진
   const { isLoading: isLoadingAnother, isError: isErrorAnother, data: dataAnother } = useQuery('anotherPosts', () => getAnotherMagazine(id));
   const anotherMagazine = dataAnother?.data.data;
@@ -42,8 +50,8 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const DropDown: React.FC<DropDownProps> = ({ onEditClick, onDeleteClick }) => {
     return (
       <>
-        <li onClick={onEditClick}>수정</li>
-        <li onClick={onDeleteClick}>삭제</li>
+        <DropDownList onClick={onEditClick}>수정</DropDownList>
+        <DropDownList onClick={onDeleteClick}>삭제</DropDownList>
       </>
     );
   };
@@ -59,7 +67,9 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   return (
     <Container>
       <TopBox>
-        <Img src={magazineData.mainImage} alt='매거진 이미지' />
+        <ImgBackground>
+          <Img src={magazineData.mainImage} alt='매거진 이미지' />
+        </ImgBackground>
         <TitleWrap>
           <Title>{magazineData.title}</Title>
           <EditorShareFlex>
@@ -71,7 +81,9 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
         </TitleWrap>
         <Flex>
           <Button onClick={() => navigate('/magazine')} key={magazineData.magazineId}>
-            <BackIcon />
+            <StyledBackIcon>
+              <BackIcon />
+            </StyledBackIcon>
           </Button>
           <MagazineTitle>
             <TopText>매거진</TopText>
@@ -91,17 +103,34 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
                 }}
               />
             )}
-            <DropDownIcon />
+            <StyledDropDownIcon>
+              <DropDownIcon />
+            </StyledDropDownIcon>
           </Button>
         </Flex>
       </TopBox>
       <TextArea>{magazineData.content}</TextArea>
-      <AnotherMagazine>다른 매거진 보기</AnotherMagazine>
+      <LikeShareIconFlex>
+        <Like
+          isLiked={magazineData.isLiked}
+          magazineId={magazineData.magazineId}
+          likeCount={magazineData.LikeMagazine}
+          index={index}
+          handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
+          style={{ marginLeft: '20px' }}
+        />
+        <StyledGreyShareIcon>
+          <GreyShareIcon />
+        </StyledGreyShareIcon>
+      </LikeShareIconFlex>
+      <AnotherMagazine>
+        <AnotherText>다른 매거진 보기</AnotherText>
+      </AnotherMagazine>
       {anotherMagazine &&
         anotherMagazine.slice(0, 4).map((magazine: any, index: any) => (
           <AnotherContentButton
             key={index}
-            style={{ backgroundImage: `url(${magazine.mainImage})` }}
+            style={{ backgroundImage: `url(${magazine.mainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
             onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
           >
             <AnotherContentTitle>{magazine.title}</AnotherContentTitle>
@@ -117,6 +146,8 @@ export default MagazineDetail;
 const Container = styled.div`
   width: 100%;
   margin: 0 auto 0 auto;
+  margin-bottom: 61px;
+  position: relative;
 `;
 
 const TopBox = styled.div`
@@ -139,12 +170,12 @@ const Title = styled.div`
   font-weight: 500;
   color: #ffffff;
   margin-left: 20px;
+  margin-bottom: 10px;
 `;
 
 const Editor = styled.div`
   font-size: 14px;
   font-weight: 400;
-  margin-top: 12.5px;
   margin-left: 20px;
   margin-bottom: 18.5px;
   color: #fff;
@@ -168,12 +199,20 @@ const AnotherContentButton = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  border-bottom: 1px solid #fff;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), lightgray -2px -168.615px / 101.067% 375% no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #fff;
 `;
 
 const AnotherContentTitle = styled.div`
   font-size: 20px;
+  line-height: 110%;
   font-weight: 500;
   margin-left: 20px;
+  color: #fff;
 `;
 
 const AnotherContentEditor = styled.div`
@@ -181,6 +220,8 @@ const AnotherContentEditor = styled.div`
   font-weight: 500;
   line-height: 22px;
   margin: 0px 0px 20px 20px;
+  color: #fff;
+  padding-top: 12px;
 `;
 
 const MagazineTitle = styled.div`
@@ -228,21 +269,34 @@ const Button = styled.div`
 `;
 
 const Img = styled.img`
-  width: 100%;
+  width: 375px;
   height: 301px;
   object-fit: cover;
   position: absolute;
   z-index: 10;
 `;
 
+const ImgBackground = styled.div`
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), lightgray;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #b5b5b5;
+`;
+
 const AnotherMagazine = styled.div`
   font-size: 20px;
   font-weight: 600;
-  height: 125px;
+  height: 89px;
   display: flex;
   align-items: center;
+  border-top: 8px solid #f3f3f3;
+  padding-left: 16px;
 `;
 
+const AnotherText = styled.div`
+  padding-top: 49px;
+  padding-bottom: 20px;
+`;
 const EditorShareFlex = styled.div`
   width: 375px;
   display: flex;
@@ -254,4 +308,35 @@ const EditorShareFlex = styled.div`
 const StyledShareIcon = styled(ShareIcon)`
   margin-right: 20px;
   margin-bottom: 12px;
+`;
+
+const LikeShareIconFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 37.5px;
+  margin-bottom: 14px;
+`;
+
+const StyledGreyShareIcon = styled(GreyShareIcon)`
+  margin-right: 20px;
+`;
+
+const StyledBackIcon = styled(BackIcon)`
+  margin-left: 20px;
+`;
+
+const StyledDropDownIcon = styled(DropDownIcon)`
+  margin-right: 20px;
+  position: absolute;
+  top: 22px;
+`;
+
+const DropDownList = styled.li`
+  width: 50px;
+  height: 30px;
+  list-style-type: none;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

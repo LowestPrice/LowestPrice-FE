@@ -1,13 +1,6 @@
 import Heart from './Heart';
 import styled from 'styled-components';
-
-interface LikeProps {
-  isLiked: boolean;
-  magazineId: string;
-  likeCount: number;
-  handleLikeClick: (event: React.MouseEvent, magazineId: string, index: number) => void;
-  index: number;
-}
+import { LikeProps } from '../../type/type';
 
 const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount, handleLikeClick, index }) => {
   return (
