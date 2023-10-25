@@ -16,12 +16,12 @@ export const getProducts = async (isSoldout: boolean) => {
 
 // 상품 상세 조회
 
-export const getProduct = async (productId: string | undefined, isSoldout: boolean) => {
+export const getProduct = async (productId: string | undefined) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(productId);
-    const response = await axios.get(`https://lowest-price.store/product/${productId}?isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`https://lowest-price.store/product/${productId}`);
     return response.data.data;
   } catch (err) {
     console.log(err);

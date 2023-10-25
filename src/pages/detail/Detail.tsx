@@ -9,8 +9,6 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import SimilarProduct from './SimilarProduct';
 
-import { BsCaretDownFill } from 'react-icons/bs';
-import { BsChevronDown } from 'react-icons/bs';
 import OptionModal from './option/OptionModal';
 import AlarmFooter from '../../components/footer/AlarmFooter';
 import { useState } from 'react';
@@ -80,6 +78,15 @@ function Detail() {
       >
         <Header>
           <h3>{data.Category[0].categoryName}</h3>
+          <XButton
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
+              <path d='M18 6L6 18M18 18L6 6' stroke='#6F6F6F' stroke-width='2' stroke-linecap='round' />
+            </svg>
+          </XButton>
         </Header>
         <ProductImageWrap>
           <ProductImage src={data.productImage}></ProductImage>
@@ -90,14 +97,19 @@ function Detail() {
           <PriceNDiscountWrap>
             <div>{currentPrice}원</div>
             <DiscountWrap>
-              <div style={{ marginTop: '5px' }}>
-                <BsCaretDownFill size='16' />
+              <div style={{ marginRight: '2px' }}>
+                <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none'>
+                  <path
+                    d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
+                    fill='#0C77F7'
+                  />
+                </svg>
               </div>
               <div>{data.discountRate}%</div>
             </DiscountWrap>
           </PriceNDiscountWrap>
         </Content>
-        
+
         <OptionWrap>
           <Option
             onClick={(e) => {
@@ -107,7 +119,9 @@ function Detail() {
           >
             제품 옵션 선택
             <div>
-              <BsChevronDown color='#B1B1B1' size='20' />
+              <svg xmlns='http://www.w3.org/2000/svg' width='14' height='13' viewBox='0 0 14 13' fill='none'>
+                <path d='M1 6L7 12L13 6' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+              </svg>
             </div>
           </Option>
           <OptionModal handleOptionButton={handleOptionButton} productId={data.productId} isOpenOption={isOpenOption} realId={data.realId}></OptionModal>
@@ -146,6 +160,13 @@ const Header = styled.div`
   flex-direction: row;
   align-items: center;
   padding-left: 15px;
+  position: relative;
+`;
+
+const XButton = styled.div`
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
 `;
 
 const ProductImageWrap = styled.div`
