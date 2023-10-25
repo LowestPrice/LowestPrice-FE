@@ -145,6 +145,14 @@ export const BackIcon = (props: SVGProps<SVGSVGElement>) => {
   );
 };
 
+export const GreyBackIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='17' height='18' viewBox='0 0 17 18' fill='none' {...props}>
+      <path d='M9 1L1 9L9 17' stroke='#6F6F6F' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+    </svg>
+  );
+};
+
 // 매거진 작성 페이지 사진 추가 아이콘
 export const AddImageIcon = (props: SVGProps<SVGSVGElement>) => {
   return (

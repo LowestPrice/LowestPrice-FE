@@ -1,12 +1,19 @@
 import styled from 'styled-components';
 import MagazineItem from './MagazineItem';
 import PageFooter from '../../components/footer/PageFooter';
+import { GreyBackIcon } from '../../assets/icon/icon';
+import { useNavigate } from 'react-router';
 
 const LikeMagazine = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <Header>
-        <h1>좋아요한 매거진</h1>
+        <StyledBackButton onClick={() => navigate('/mypage')}>
+          <GreyBackIcon />
+        </StyledBackButton>
+        <Title>좋아요 한 매거진</Title>
+        <div></div>
       </Header>
       <LikeMagazineList>
         <MagazineItem></MagazineItem>
@@ -19,17 +26,32 @@ const LikeMagazine = () => {
 export default LikeMagazine;
 
 const Header = styled.div`
-  height: 80px;
+  width: 375px;
+  height: 68px;
   border-bottom: 1px solid rgba(217, 217, 217, 1);
-  padding: 10px;
   display: flex;
-  justify-content: row;
-  flex-direction: center;
+  justify-content: space-around;
   align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 110%;
 `;
 
 const LikeMagazineList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+`;
+
+const Title = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 95.858px;
+  flex-shrink: 0;
+  margin-right: 35px;
+`;
+
+const StyledBackButton = styled.button`
+  background-color: transparent;
+  border: none;
 `;

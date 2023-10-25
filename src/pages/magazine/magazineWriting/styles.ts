@@ -47,6 +47,7 @@ export const Content = styled.textarea`
   color: #b1b1b1;
   margin-top: 13px;
   border: none;
+  line-height: 1.5;
 
   &:focus {
     outline: none;
