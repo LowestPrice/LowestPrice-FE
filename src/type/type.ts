@@ -17,3 +17,8 @@ export interface PriceData {
   minPrice: number;
   priceHistoryForWeek: any;
 }
+
+export interface DropDownProps {
+  onEditClick?: () => void;
+  onDeleteClick?: () => void;
+}
