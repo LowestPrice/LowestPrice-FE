@@ -1,14 +1,17 @@
+import { useEffect, useState, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useQueries } from 'react-query';
 import styled from 'styled-components';
+
+import { Params, Product } from '../../type';
+import { Filter } from '../../type';
+
+import { getFilteredSearch, getSearch } from '../../api/product';
+
 import SearchProduct from './SearchProduct';
 import PageFooter from '../../components/footer/PageFooter';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Params, Product } from '../../type';
-import { useEffect, useState } from 'react';
-import { getFilteredSearch, getSearch } from '../../api/product';
-import { useQueries } from 'react-query';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import { Filter } from '../../type';
 import FilterOption from './FilterOption';
 
 function Search() {
@@ -16,7 +19,7 @@ function Search() {
 
   const params: Params = useParams();
 
-  const navigate = useNavigate();
+  // 상태 관리 ------------------------------------------------------------------------
 
   const [searchWord, setSearchWord] = useState<string>(`${params.searchWord}`);
   const [isFilter, setIsFilter] = useState<boolean>(false);
@@ -24,20 +27,22 @@ function Search() {
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
   const [isSoldout, setIsSoldout] = useState<boolean>(false);
 
-  // 데이터 불러오기 -----------------------------
+  // 검색한 상품과 검색한 상품을 필터링한 데이터 불러오기 -----------------------------------------------------------------
 
   const result = useQueries([
     { queryKey: ['searchProduct', params.searchWord], queryFn: () => getSearch(params.searchWord, isSoldout) },
-    { queryKey: ['FilteredSearchProduct'], queryFn: () => getFilteredSearch(filterName, params.searchWord, isSoldout) },
+    { queryKey: ['FilteredSearchProduct'], queryFn: () => getFilteredSearch(filterName, params.searchWord, isSoldout), enabled: !!filterButton },
   ]);
 
-  // 리패치 -------------------------------------
+  // 필터버튼 클릭할 때마다 리패치 -------------------------------------------------------------------------
 
   useEffect(() => {
+    result[0].refetch();
     result[1].refetch();
-  }, [filterButton]);
+  }, [filterButton, isFilter]);
 
   // 로딩, 에러 관리 ---------------------------------------------------------
+
   if (result[0].status === 'loading') {
     return <Loading />;
   }
@@ -68,17 +73,25 @@ function Search() {
 
   // 필터 버튼 클릭 ------------------------------------------------------------
 
-  const handleFilterButton = (idx: number, value: string) => {
-    const newArr = Array(3).fill(false);
-    console.log(idx, value);
-    newArr[idx] = !newArr[idx];
-    console.log(newArr);
-    setIsFilter(true);
-    setFilterButton(newArr);
-    setFilterName(value);
-  };
+  const handleFilterButton = useCallback(
+    (idx: number, value: string) => {
+      setIsFilter(true);
+      setFilterName(value);
+      setFilterButton(() => {
+        const newArr = Array(3).fill(false);
+        if (filterButton[idx] === true) {
+          newArr[idx] = false;
+          setIsFilter(false);
+        } else {
+          newArr[idx] = true;
+        }
+        return newArr;
+      });
+    },
+    [isFilter, filterButton, filterName]
+  );
 
-  // 필터 색상 변경 --------------------------------------------
+  const navigate = useNavigate();
 
   // 화면 ================================================================
 

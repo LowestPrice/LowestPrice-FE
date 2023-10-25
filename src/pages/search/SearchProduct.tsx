@@ -1,6 +1,8 @@
-import styled from 'styled-components';
-import { Product } from '../../type';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { Product } from '../../type';
+
 import Alarmbell from '../../assets/icon/Alarmbell';
 
 interface Props extends Product {

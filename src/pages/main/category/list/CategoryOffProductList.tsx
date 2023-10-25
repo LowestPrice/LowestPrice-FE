@@ -41,6 +41,14 @@ function CategoryOffProductList(props: Props) {
       {eightProducts.map((productItem, index) => (
         <CategoryProduct key={index} {...productItem} />
       ))}
+      <BusinessInfo>
+        <h5>사업자 정보</h5>
+        <div>대표자: 이준석</div>
+        <div>전화번호: 010-3599-6345</div>
+        <div>업체명: 아담 인터네셔널</div>
+        <div>사업자 등록번호: 394-27-00969</div>
+        <div>서울특별시 경희대로 26 삼의원 창업센터 311호</div>
+      </BusinessInfo>
     </Wrap>
   );
 }
@@ -56,5 +64,16 @@ const Wrap = styled.div`
   justify-content: space-between;
   position: absolute;
   top: 210px;
-  padding-bottom: 165px;
+  padding-bottom: 80px;
+`;
+
+const BusinessInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 375px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.1;
 `;

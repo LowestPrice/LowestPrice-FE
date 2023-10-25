@@ -1,16 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import PageFooter from '../../../components/footer/PageFooter';
 import { useQuery } from 'react-query';
+import styled from 'styled-components';
+
 import { getUserinfo } from '../../../api/mypage';
+
+import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
-import styled from 'styled-components';
 
 import Cookies from 'js-cookie';
 
 function Mypage() {
   // 네비게이트 ----------------------------------------
+
   const navigate = useNavigate();
+
+  // 서버로 유저정보 가져오기 -----------------------------------
 
   const { data, status } = useQuery('userInfo', getUserinfo);
 
@@ -20,6 +25,8 @@ function Mypage() {
   if (status === 'error') {
     return <Error />;
   }
+
+  // 로그아웃(토큰 쿠키에서 지우기)----------------------------
 
   const logout = () => {
     Cookies.remove('Authorization');

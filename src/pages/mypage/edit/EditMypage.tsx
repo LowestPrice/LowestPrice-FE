@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
+import { useQuery, useMutation } from 'react-query';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-// import { useNavigate } from 'react-router-dom';
-import PageFooter from '../../../components/footer/PageFooter';
 import { getUserinfo, postUserinfo } from '../../../api/mypage';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 import { useNavigate } from 'react-router';
 import { DeleteIdWithKakao } from '../../../api/login';
+import PageFooter from '../../../components/footer/PageFooter';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
+
 
 export default function EditMypage() {
+  // 리액트 쿼리로 유저정보 가져오기 -----------------------------------------
+
   const { data, status } = useQuery('userInfo', getUserinfo);
   const queryClient = useQueryClient();
 
-  // 상태 관리 ---------------------------------------
+  // 상태 관리 -------------------------------------------------------------
+
   const [name, setName] = useState<string | undefined>(data.nickname);
   const [imageFile, setImageFile]: any = useState();
   const [imageSrc, setImageSrc]: any = useState();
@@ -25,10 +32,12 @@ export default function EditMypage() {
     return <Error />;
   }
 
-  // 네비게이트 ----------------------------------------
+  // 네비게이트 ---------------------------------------------------------------
+
   const navigate = useNavigate();
 
-  // 프로필 이미지 수정
+  // 프로필 이미지 수정 --------------------------------------------------------
+
   const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files !== null) {
       const file = e.target.files[0];
@@ -41,6 +50,8 @@ export default function EditMypage() {
       };
     }
   };
+
+  // 프로필 이름 수정 -----------------------------------------------------------
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
