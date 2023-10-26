@@ -43,13 +43,13 @@ function Topten() {
 
   // 오른쪽 넘기기---------------------------------------------------
 
-  const increaseClick = async () => {
+  const increaseClick = () => {
     if (isSlide) {
       return;
     }
     setX(-264);
     setIsSlide(true);
-    await setTimeout(() => {
+    setTimeout(() => {
       setIndex((prev) => (prev === 9 ? 0 : prev + 1));
       setX(0);
       setIsSlide(false);
@@ -58,13 +58,13 @@ function Topten() {
 
   // 왼쪽 넘기기---------------------------------------------------
 
-  const decreaseClick = async () => {
+  const decreaseClick = () => {
     if (isSlide) {
       return;
     }
     setX(+264);
     setIsSlide(true);
-    await setTimeout(() => {
+    setTimeout(() => {
       setIndex((prev) => (prev === 0 ? 9 : prev - 1));
       setX(0);
       setIsSlide(false);

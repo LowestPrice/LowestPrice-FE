@@ -72,7 +72,7 @@ const Wrap = styled.div`
   position: relative;
   .rank {
     font-size: 53.19px;
-    color: tomato;
+    color: black;
     line-height: 58, 51px;
     position: absolute;
     left: 16px;
