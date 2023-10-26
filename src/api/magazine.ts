@@ -35,7 +35,7 @@ export const postMagazine = async ({ title, content, image }: { title: any; cont
     formData.append('content', content);
     formData.append('file', image);
 
-    const response = await axios.post('${import.meta.env.VITE_API_KEY}/magazines', formData, {
+    const response = await axios.post(`${import.meta.env.VITE_API_KEY}/magazines`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: accessToken,
