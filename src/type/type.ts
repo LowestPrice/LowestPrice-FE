@@ -38,3 +38,36 @@ export interface LikeProps {
   index: number;
   style?: React.CSSProperties;
 }
+
+export interface PriceData {
+  priceHistoryForWeek: any;
+  maxPrice: number;
+  minPrice: number;
+}
+
+export interface ChartData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    borderColor: string;
+    borderWidth: number;
+    backgroundColor?: any;
+  }[];
+}
+
+export interface PriceChartProps extends ParamsProps {
+  setMinPrice: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setMaxPrice: React.Dispatch<React.SetStateAction<number | undefined>>;
+}
+
+export interface ParamsProps {
+  id: string | number;
+  setMinPrice?: Function;
+  setMaxPrice?: Function;
+}
+
+export interface PriceWrapProps {
+  minPrice: number | undefined;
+  maxPrice: number | undefined;
+}
