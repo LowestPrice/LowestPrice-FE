@@ -6,39 +6,9 @@ import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 Chart.register(CategoryScale);
 import styled from 'styled-components';
+import { PriceData, ChartData, PriceChartProps, PriceWrapProps } from '../../type/type';
 
-interface PriceData {
-  priceHistoryForWeek: any;
-  maxPrice: number;
-  minPrice: number;
-}
-
-interface ChartData {
-  labels: string[];
-  datasets: {
-    label: string;
-    data: number[];
-    borderColor: string;
-    borderWidth: number;
-  }[];
-}
-
-interface PriceChartProps extends ParamsProps {
-  setMinPrice: React.Dispatch<React.SetStateAction<number | undefined>>;
-  setMaxPrice: React.Dispatch<React.SetStateAction<number | undefined>>;
-}
-
-interface ParamsProps {
-  id: string | number;
-  setMinPrice?: Function;
-  setMaxPrice?: Function;
-}
-
-export interface PriceWrapProps {
-  minPrice: number | undefined;
-  maxPrice: number | undefined;
-}
-
+// 최고가, 최저가
 export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) => {
   // 문자열로 변환 후 천 단위 쉼표 기재
   const semicolonMinPrice = minPrice !== undefined ? minPrice.toLocaleString() : '0';
@@ -58,32 +28,48 @@ export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) 
   );
 };
 
+// 차트
 export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxPrice }) => {
+  interface FormattedData {
+    [key: string]: number;
+  }
+
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
-
-  useEffect(() => {
-    if (data) {
-      setMinPrice(data?.minPrice);
-      setMaxPrice(data?.maxPrice);
-    }
-  }, [data, setMinPrice, setMaxPrice]);
-
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
-    datasets: [
-      {
-        label: 'Lowest Price',
-        data: [],
-        borderColor: 'black',
-        borderWidth: 2,
-      },
-    ],
+    datasets: [],
   });
+  const [formattedData, setFormattedData] = useState<FormattedData>({});
+
+  // 날짜 형식 변경 (년월일 -> 월일)
+  const DeleteYear = (date: string) => {
+    const dateData = new Date(date);
+    return `${dateData.getMonth() + 1}-${dateData.getDate()}`;
+  };
+
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
+
+  useEffect(() => {
+    if (data?.priceHistoryForWeek) {
+      const newFormattedData: { [key: string]: any } = {};
+      for (const [key, value] of Object.entries(data.priceHistoryForWeek)) {
+        const newKey = DeleteYear(key);
+        newFormattedData[newKey] = value;
+      }
+      setFormattedData(newFormattedData);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (data) {
-      const labels = Object.keys(data.priceHistoryForWeek);
-      const datasetData = Object.values(data.priceHistoryForWeek) as number[];
+      const labels = Object.keys(formattedData);
+      const datasetData = Object.values(formattedData) as number[];
 
       setPriceData({
         labels: labels,
@@ -91,13 +77,18 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
           {
             label: 'Price History',
             data: datasetData,
-            borderColor: 'black',
+            borderColor: '#00ABF9',
             borderWidth: 2,
           },
         ],
       });
     }
-  }, [data]);
+  }, [formattedData]);
+
+  if (data) {
+    setMinPrice(data?.minPrice);
+    setMaxPrice(data?.maxPrice);
+  }
 
   if (isLoading) {
     return <h1>로딩중입니다</h1>;
@@ -107,7 +98,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
     return <h1>에러가 발생했습니다.</h1>;
   }
 
-  return <Line data={priceData} />;
+  return <Line data={priceData} options={options} />;
 };
 
 const PriceWrap = styled.div`
