@@ -1,23 +1,19 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQueries } from 'react-query';
 import styled from 'styled-components';
 
-import { Params, Product } from '../../type';
+import { Params } from '../../type';
 import { Filter } from '../../type';
 
-import { getFilteredSearch, getSearch } from '../../api/product';
-
-import SearchProduct from './SearchProduct';
+import SearchProductList from './SearchProductList';
 import PageFooter from '../../components/footer/PageFooter';
-import Loading from '../../components/Loading';
-import Error from '../../components/Error';
 import FilterOption from './FilterOption';
 
 function Search() {
   // params 를 통해 productId 받아오기 -------------------------
 
   const params: Params = useParams();
+  const navigate = useNavigate();
 
   // 상태 관리 ------------------------------------------------------------------------
 
@@ -27,36 +23,11 @@ function Search() {
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
   const [isSoldout, setIsSoldout] = useState<boolean>(false);
 
-  // 검색한 상품과 검색한 상품을 필터링한 데이터 불러오기 -----------------------------------------------------------------
-
-  const result = useQueries([
-    { queryKey: ['searchProduct', params.searchWord], queryFn: () => getSearch(params.searchWord, isSoldout) },
-    { queryKey: ['FilteredSearchProduct'], queryFn: () => getFilteredSearch(filterName, params.searchWord, isSoldout), enabled: !!filterButton },
-  ]);
-
   // 필터버튼 클릭할 때마다 리패치 -------------------------------------------------------------------------
 
   useEffect(() => {
-    result[0].refetch();
-    result[1].refetch();
-  }, [filterButton, isFilter]);
-
-  // 로딩, 에러 관리 ---------------------------------------------------------
-
-  if (result[0].status === 'loading') {
-    return <Loading />;
-  }
-  if (result[0].status === 'error') {
-    return <Error />;
-  }
-
-  if (result[1].status === 'loading') {
-    return <Loading />;
-  }
-  if (result[1].status === 'error') {
-    return <Error />;
-  }
-
+    console.log('서치페이지 렌더링');
+  }, []);
   // 필터 리스트 -------------------------------------------
 
   const filterList: Filter[] = [
@@ -73,25 +44,20 @@ function Search() {
 
   // 필터 버튼 클릭 ------------------------------------------------------------
 
-  const handleFilterButton = useCallback(
-    (idx: number, value: string) => {
-      setIsFilter(true);
-      setFilterName(value);
-      setFilterButton(() => {
-        const newArr = Array(3).fill(false);
-        if (filterButton[idx] === true) {
-          newArr[idx] = false;
-          setIsFilter(false);
-        } else {
-          newArr[idx] = true;
-        }
-        return newArr;
-      });
-    },
-    [isFilter, filterButton, filterName]
-  );
-
-  const navigate = useNavigate();
+  const handleFilterButton = (idx: number, value: string) => {
+    setIsFilter(true);
+    setFilterName(value);
+    setFilterButton(() => {
+      const newArr = Array(3).fill(false);
+      if (filterButton[idx] === true) {
+        newArr[idx] = false;
+        setIsFilter(false);
+      } else {
+        newArr[idx] = true;
+      }
+      return newArr;
+    });
+  };
 
   // 화면 ================================================================
 
@@ -133,15 +99,7 @@ function Search() {
               </Soldout>
             </Options>
           </Filterbar>
-          <SearchProductList>
-            {isFilter
-              ? result[1].data.map((item: Product, index: number) => {
-                  return <SearchProduct key={index} {...item} />;
-                })
-              : result[0].data.map((item: Product, index: number) => {
-                  return <SearchProduct key={index} {...item} />;
-                })}
-          </SearchProductList>
+          <SearchProductList searchWord={params.searchWord} isSoldout={isSoldout} isFilter={isFilter} filterName={filterName} filterButton={filterButton} />
         </div>
         <PageFooter />
       </form>
@@ -202,26 +160,6 @@ const Options = styled.div`
   padding-top: 10px;
   width: 375px;
   height: 13px;
-`;
-
-const SearchProductList = styled.div`
-  width: 346px;
-  max-height: 710px;
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
-    background: rgba(181, 181, 181, 1);
-
-    border-radius: 10px;
-  }
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 const Soldout = styled.div<{ $isSoldout: boolean }>`

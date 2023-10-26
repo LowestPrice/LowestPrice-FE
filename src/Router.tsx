@@ -4,7 +4,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Main from './pages/main/Main';
 import Error from './components/Error';
-import Loading from './components/Loading';
 
 // 로그인
 const Login = React.lazy(() => import('./pages/login/Login'));
@@ -53,8 +52,9 @@ const router = createBrowserRouter([
         element: <Notification />,
       },
       {
-        path: 'search',
+        path: 'search/:searchWord',
         element: <SearchPage />,
+        errorElement: <Main />,
       },
       {
         path: 'mypage',
@@ -93,12 +93,7 @@ const router = createBrowserRouter([
         path: 'likemagazine',
         element: <LikeMagazine />,
       },
-      {
-        path: 'loading',
-        element: <Loading />,
-      },
     ],
-    errorElement: <Error />,
   },
 ]);
 
