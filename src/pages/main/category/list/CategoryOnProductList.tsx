@@ -18,6 +18,7 @@ interface Props {
 
 function CategoryOnProductList(props: Props) {
   // 카테고리 이름 -----------------------------------------------------------------------
+  
   const categoryNameList = ['iPad', 'iPad', 'MacBook', 'Mac', 'AirPods', 'iPhone', 'AppleWatch'];
 
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
@@ -35,7 +36,15 @@ function CategoryOnProductList(props: Props) {
   useEffect(() => {
     result[0].refetch();
     result[1].refetch();
-  }, [props.categoryId, props.filterName, props.isSoldout]);
+  }, [props.isSoldout]);
+
+  useEffect(() => {
+    result[1].refetch();
+  }, [props.filterName]);
+
+  useEffect(() => {
+    result[0].refetch();
+  }, [props.categoryId]);
 
   // 데이터 로딩 중 & 에러 관리 ----------------------------------------------------------------------------------
 
