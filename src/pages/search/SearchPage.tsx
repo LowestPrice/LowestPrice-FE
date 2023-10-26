@@ -18,6 +18,7 @@ function Search() {
   // params 를 통해 productId 받아오기 -------------------------
 
   const params: Params = useParams();
+  const navigate = useNavigate();
 
   // 상태 관리 ------------------------------------------------------------------------
 
@@ -73,25 +74,20 @@ function Search() {
 
   // 필터 버튼 클릭 ------------------------------------------------------------
 
-  const handleFilterButton = useCallback(
-    (idx: number, value: string) => {
-      setIsFilter(true);
-      setFilterName(value);
-      setFilterButton(() => {
-        const newArr = Array(3).fill(false);
-        if (filterButton[idx] === true) {
-          newArr[idx] = false;
-          setIsFilter(false);
-        } else {
-          newArr[idx] = true;
-        }
-        return newArr;
-      });
-    },
-    [isFilter, filterButton, filterName]
-  );
-
-  const navigate = useNavigate();
+  const handleFilterButton = (idx: number, value: string) => {
+    setIsFilter(true);
+    setFilterName(value);
+    setFilterButton(() => {
+      const newArr = Array(3).fill(false);
+      if (filterButton[idx] === true) {
+        newArr[idx] = false;
+        setIsFilter(false);
+      } else {
+        newArr[idx] = true;
+      }
+      return newArr;
+    });
+  };
 
   // 화면 ================================================================
 
