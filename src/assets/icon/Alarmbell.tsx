@@ -15,6 +15,7 @@ function Alarmbell(props: Props) {
 
   const queryClient = useQueryClient();
 
+  // 알람 설정하기 / 취소하기 ------------------------
   const alarmMutation = useMutation(toggleAlarm, {
     onSuccess: () => {
       queryClient.invalidateQueries(['product']);
