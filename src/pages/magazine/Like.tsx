@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { LikeProps } from '../../type/type';
-import { ColorHeartIcon, LineHeartIcon } from '../../assets/icon/Icons';
+import { ColorHeartIcon, LineHeartIcon } from '../../assets/icon/icon';
 import { HeartProps } from '../../type/type';
 
 const Heart: React.FC<HeartProps> = ({ like, onClick }) => {

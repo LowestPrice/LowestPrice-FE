@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import MagazineItem from './MagazineItem';
 import PageFooter from '../../components/footer/PageFooter';
-import { GreyBackIcon } from '../../assets/icon/Icons';
+import { GreyBackIcon } from '../../assets/icon/icon';
 import { useNavigate } from 'react-router';
 
 const LikeMagazine = () => {

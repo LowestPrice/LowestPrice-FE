@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { postMagazine } from '../../../api/magazine';
 import PageFooter from '../../../components/footer/PageFooter';
-import { BackIcon, AddImageIcon } from '../../../assets/icon/Icons';
+import { BackIcon, AddImageIcon } from '../../../assets/icon/icon';
 
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
