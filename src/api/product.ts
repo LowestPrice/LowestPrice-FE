@@ -8,7 +8,7 @@ export const getProducts = async (isSoldout: boolean) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    const response = await axios.get(`https://lowest-price.store/product?isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product?isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -22,7 +22,7 @@ export const getProduct = async (productId: string | undefined) => {
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(productId);
-    const response = await axios.get(`https://lowest-price.store/product/${productId}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/${productId}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -35,7 +35,7 @@ export const getTopten = async () => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    const response = await axios.get(`https://lowest-price.store/product/top`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/top`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -48,7 +48,7 @@ export const getCategory = async (categoryName: string | undefined, isSoldout: b
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    const response = await axios.get(`https://lowest-price.store/product/category/${categoryName}?isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/category/${categoryName}?isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -62,7 +62,7 @@ export const getCategoryFilter = async (categoryName: string | undefined, filter
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(categoryName, filterName);
-    const response = await axios.get(`https://lowest-price.store/product/category/${categoryName}/${filterName}?isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/category/${categoryName}/${filterName}?isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -75,7 +75,7 @@ export const getOptions = async (realId: string | undefined) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    const response = await axios.get(`https://lowest-price.store/option/${realId}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/option/${realId}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -89,7 +89,7 @@ export const getSearch = async (searchWord: string | undefined, isSoldout: boole
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(searchWord);
-    const response = await axios.get(`https://lowest-price.store/search?search=${searchWord}&isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/search?search=${searchWord}&isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     toast.error('찾으시는 상품이 존재하지 않습니다.');
@@ -104,7 +104,7 @@ export const getFilteredSearch = async (filterName: string | undefined, searchWo
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(filterName, searchWord);
-    const response = await axios.get(`https://lowest-price.store/search/${filterName}?search=${searchWord}&isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/search/${filterName}?search=${searchWord}&isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -124,7 +124,7 @@ export type PriceData = {
 export const getPriceHistory = async (id: any): Promise<PriceData | undefined> => {
   // console.log(id, 'api는 id값이 나올까?');
   try {
-    const response = await axios.get(`https://lowest-price.store/price-history/${id}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/price-history/${id}`);
     return response.data;
   } catch (error) {
     console.error('가격 히스토리 에러', error);

@@ -84,7 +84,7 @@ function Detail() {
             }}
           >
             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
-              <path d='M18 6L6 18M18 18L6 6' stroke='#6F6F6F' stroke-width='2' stroke-linecap='round' />
+              <path d='M18 6L6 18M18 18L6 6' stroke='#6F6F6F' strokeWidth='2' strokeLinecap='round' />
             </svg>
           </XButton>
         </Header>
@@ -120,7 +120,7 @@ function Detail() {
             제품 옵션 선택
             <div>
               <svg xmlns='http://www.w3.org/2000/svg' width='14' height='13' viewBox='0 0 14 13' fill='none'>
-                <path d='M1 6L7 12L13 6' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+                <path d='M1 6L7 12L13 6' stroke='black' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
               </svg>
             </div>
           </Option>
