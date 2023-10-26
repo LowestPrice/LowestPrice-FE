@@ -9,7 +9,7 @@ import {
   ColorBellIcon,
   ColorFooterMagazineIcon,
   ColorHomeIcon,
-} from '../../assets/icon/icon';
+} from '../../assets/icon/Icons';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';

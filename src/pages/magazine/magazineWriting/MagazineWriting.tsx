@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { postMagazine } from '../../../api/magazine';
 import PageFooter from '../../../components/footer/PageFooter';
-import { BackIcon, AddImageIcon } from '../../../assets/icon/icon';
+import { BackIcon, AddImageIcon } from '../../../assets/icon/Icons';
 
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
@@ -108,7 +108,7 @@ const MagazineWriting: React.FC = () => {
             </PhotoAdd>
           </PhotoDiv>
           <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} ref={titleRef} />
-          <input placeholder='이미지' onChange={onImageChangeHandler} type='file' accept='image/*' style ={{display: "none"}}/>
+          <input placeholder='이미지' onChange={onImageChangeHandler} type='file' accept='image/*' style={{ display: 'none' }} />
           <Content
             placeholder='내용을 입력하세요'
             onChange={onContentChangeHandler}

@@ -85,10 +85,12 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
     }
   }, [formattedData]);
 
-  if (data) {
-    setMinPrice(data?.minPrice);
-    setMaxPrice(data?.maxPrice);
-  }
+  useEffect(() => {
+    if (data) {
+      setMinPrice(data?.minPrice);
+      setMaxPrice(data?.maxPrice);
+    }
+  }, [data]);
 
   if (isLoading) {
     return <h1>로딩중입니다</h1>;

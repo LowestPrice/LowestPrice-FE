@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { MagazineProps } from '../../../type/type';
 import { deleteMagazine, getMagazineDetail, getAnotherMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { BackIcon, DropDownIcon, ShareIcon, GreyShareIcon } from '../../../assets/icon/icon';
+import { BackIcon, DropDownIcon, ShareIcon, GreyShareIcon } from '../../../assets/icon/Icons';
 import { useRef } from 'react';
 import useDropDown from '../../../hooks/useDropDown';
 import { DropDownProps } from '../../../type/type';

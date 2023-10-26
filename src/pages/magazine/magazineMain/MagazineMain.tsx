@@ -4,7 +4,7 @@ import PageFooter from '../../../components/footer/PageFooter';
 import { useState, useEffect } from 'react';
 import { getMagazine } from '../../../api/magazine';
 import { useQuery } from 'react-query';
-import { BlueLogo } from '../../../assets/icon/icon';
+import { BlueLogo } from '../../../assets/icon/Icons';
 import styled from 'styled-components';
 import { useLike } from '../../../hooks/useLike';
 import Like from '../Like';
