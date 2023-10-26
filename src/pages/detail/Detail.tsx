@@ -143,7 +143,7 @@ function Detail() {
           </SimilarProductList>
         </SimilarProuctWrap>
       </div>
-      <AlarmFooter productUrl={data.productUrl} />
+      <AlarmFooter productUrl={data.productUrl} productId={params.id} isAlertOn={data.isAlertOn} />
     </>
   );
 }

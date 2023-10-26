@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 // 상품 전체 조회
 
@@ -91,6 +92,7 @@ export const getSearch = async (searchWord: string | undefined, isSoldout: boole
     const response = await axios.get(`https://lowest-price.store/search?search=${searchWord}&isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
+    toast.error('찾으시는 상품이 존재하지 않습니다.');
     console.log(err);
   }
 };

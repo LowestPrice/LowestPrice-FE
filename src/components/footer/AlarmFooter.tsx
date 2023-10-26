@@ -1,21 +1,57 @@
-import styled from 'styled-components';
+import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import Cookies from 'js-cookie';
+
+import { toggleAlarm } from '../../api/alarm';
 
 interface Props {
- 
   productUrl: string;
+  productId: string | undefined;
+  isAlertOn: boolean;
 }
 
 function AlarmFooter(props: Props) {
+  const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  const alarmMutation = useMutation(toggleAlarm, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['product']);
+      queryClient.invalidateQueries(['categoryProduct']);
+      queryClient.invalidateQueries(['filterProduct']);
+      queryClient.invalidateQueries(['searchProduct']);
+      queryClient.invalidateQueries(['FilteredSearchProduct']);
+      queryClient.invalidateQueries(['topProduct']);
+    },
+    onError: () => {
+      console.log('alarm 실패');
+    },
+  });
+
+  const accessToken = Cookies.get('Authorization');
+
+  const handleAlarmButton = () => {
+    alarmMutation.mutate(Number(props.productId));
+    if (!accessToken) {
+      toast.error('로그인 이후 알림목록에 추가하실 수 있습니다.');
+      navigate('/yetlogin');
+      return;
+    }
+    if (props.isAlertOn) {
+      toast.error('더 이상 알림을 보내지 않습니다.');
+    } else {
+      toast.success('알림을 받아보실 수 있습니다.');
+    }
+  };
+
   return (
     <div>
       <Wrap>
         <Content>
-          <Alarm
-            onClick={() => {
-              toast.success('알람을 받아보실 수 있습니다.');
-            }}
-          >
+          <Alarm onClick={handleAlarmButton}>
             <div>
               <svg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path
