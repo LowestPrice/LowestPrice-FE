@@ -9,7 +9,7 @@ function YetLogin({}: Props) {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <>
       <Header>
         <h3>로그인 / 회원가입</h3>
       </Header>
@@ -27,7 +27,7 @@ function YetLogin({}: Props) {
         </Content>
       </Wrap>
       <PageFooter />
-    </div>
+    </>
   );
 }
 
