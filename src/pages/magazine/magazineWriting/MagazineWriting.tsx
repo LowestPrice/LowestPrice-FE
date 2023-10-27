@@ -54,7 +54,7 @@ const MagazineWriting: React.FC = () => {
     );
   };
 
-  // textarea 높이 조정
+  // textarea 높이 조정(내용)
   const adjustHeight = () => {
     const targetTextarea = contentRef.current;
     if (targetTextarea) {
@@ -67,6 +67,7 @@ const MagazineWriting: React.FC = () => {
     }
   };
 
+  // textarea 높이 조정(제목)
   const adjustTitleHeight = () => {
     const targetTextarea = titleRef.current;
     if (targetTextarea) {

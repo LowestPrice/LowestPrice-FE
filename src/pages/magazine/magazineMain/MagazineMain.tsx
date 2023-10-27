@@ -38,44 +38,60 @@ const Magazine: React.FC<MagazineProps> = () => {
         <BlueLogo />
         <LogoTitle>매거진</LogoTitle>
       </Header>
-      <Container>
-        <InnerContainer>
-          <Line></Line>
-          <Title>Apple 트렌드</Title>
-          <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
-          <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
-          {magazines?.map((magazineData, index) => (
-            <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
-              <Img src={magazineData.mainImage} />
-              <BoxPadding>
-                <BoxTitle>{magazineData.title}</BoxTitle>
-                <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
-                <Flex>
-                  <div>{magazineData.editor}</div>
-                  <Like
-                    isLiked={magazineData.isLiked}
-                    magazineId={magazineData.magazineId}
-                    likeCount={magazineData.LikeMagazine}
-                    handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
-                    index={index}
-                  />
-                </Flex>
-              </BoxPadding>
-            </Box>
-          ))}
-          <PageFooter />
-        </InnerContainer>
-      </Container>
+      <Wrap>
+        <Container>
+          <InnerContainer>
+            <Line></Line>
+            <Title>Apple 트렌드</Title>
+            <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
+            <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
+            {magazines?.map((magazineData, index) => (
+              <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
+                <Img src={magazineData.mainImage} />
+                <BoxPadding>
+                  <BoxTitle>{magazineData.title}</BoxTitle>
+                  <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
+                  <Flex>
+                    <div>{magazineData.editor}</div>
+                    <Like
+                      isLiked={magazineData.isLiked}
+                      magazineId={magazineData.magazineId}
+                      likeCount={magazineData.LikeMagazine}
+                      handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
+                      index={index}
+                    />
+                  </Flex>
+                </BoxPadding>
+              </Box>
+            ))}
+            <PageFooter />
+          </InnerContainer>
+        </Container>
+      </Wrap>
     </>
   );
 };
 
 export default Magazine;
 
+const Wrap = styled.div`
+  width: 380px;
+  max-height: 683px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: rgba(181, 181, 181, 1);
+
+    border-radius: 10px;
+  }
+  overflow-x: hidden;
+`;
+
 const Container = styled.div`
-  width: 375px;
   min-height: 100vh;
-  margin: 0 auto;
   padding-bottom: 82px;
   display: flex;
   flex-direction: column;

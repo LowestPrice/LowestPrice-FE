@@ -8,7 +8,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <>
       <Header>
         <h3>로그인</h3>
       </Header>
@@ -21,7 +21,7 @@ export default function Login() {
         </Content>
       </Wrap>
       <PageFooter />
-    </div>
+    </>
   );
 }
 
