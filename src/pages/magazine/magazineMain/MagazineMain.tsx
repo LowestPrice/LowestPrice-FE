@@ -93,7 +93,6 @@ const Header = styled.div`
 
 const Scroll = styled.div`
   width: 380px;
-  max-height: 75vh;
   overflow: scroll;
   &::-webkit-scrollbar {
     width: 5px;
@@ -104,6 +103,7 @@ const Scroll = styled.div`
 
     border-radius: 10px;
   }
+  max-height: 75vh;
 `;
 
 const Item = styled.div`

@@ -5,7 +5,7 @@ export const getUserinfo = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    const response = await axios.get(`https://lowest-price.store/mypage`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/mypage`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -27,7 +27,7 @@ export const postUserinfo = async ({ name, imageFile }: { name: any; imageFile: 
   }
 
   try {
-    await axios.put(`https://lowest-price.store/mypage`, formData);
+    await axios.put(`${import.meta.env.VITE_API_KEY}/mypage`, formData);
   } catch (err) {
     console.log(err);
   }
