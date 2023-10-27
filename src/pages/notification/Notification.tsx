@@ -23,7 +23,7 @@ export default function Notification({}: Props) {
   };
 
   return (
-    <div>
+    <>
       <Header>
         <h3>내 알림</h3>
       </Header>
@@ -47,7 +47,7 @@ export default function Notification({}: Props) {
       </Navigate>
       {tab ? <NProductList /> : <NPriceAlarmList />}
       <PageFooter />
-    </div>
+    </>
   );
 }
 

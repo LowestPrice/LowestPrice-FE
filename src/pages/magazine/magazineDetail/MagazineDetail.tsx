@@ -133,8 +133,10 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             style={{ backgroundImage: `url(${magazine.mainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
             onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
           >
-            <AnotherContentTitle>{magazine.title}</AnotherContentTitle>
-            <AnotherContentEditor>by 관리자</AnotherContentEditor>
+            <Overlay>
+              <AnotherContentTitle>{magazine.title}</AnotherContentTitle>
+              <AnotherContentEditor>by 관리자</AnotherContentEditor>
+            </Overlay>
           </AnotherContentButton>
         ))}
     </Container>
@@ -163,6 +165,8 @@ const TitleWrap = styled.div`
   left: 0;
   z-index: 999;
   padding-bottom: 10px;
+  padding-top: 220px;
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 const Title = styled.div`
@@ -205,6 +209,7 @@ const AnotherContentButton = styled.button`
   background-position: center;
   background-repeat: no-repeat;
   border: 1px solid #fff;
+  position: relative;
 `;
 
 const AnotherContentTitle = styled.div`
@@ -213,6 +218,7 @@ const AnotherContentTitle = styled.div`
   font-weight: 500;
   margin-left: 20px;
   color: #fff;
+  padding: 2px;
 `;
 
 const AnotherContentEditor = styled.div`
@@ -221,7 +227,8 @@ const AnotherContentEditor = styled.div`
   line-height: 22px;
   margin: 0px 0px 20px 20px;
   color: #fff;
-  padding-top: 12px;
+  margin-top: 12px;
+  padding: 1px;
 `;
 
 const MagazineTitle = styled.div`
@@ -297,6 +304,7 @@ const AnotherText = styled.div`
   padding-top: 49px;
   padding-bottom: 20px;
 `;
+
 const EditorShareFlex = styled.div`
   width: 375px;
   display: flex;
@@ -340,4 +348,19 @@ const DropDownList = styled.li`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 55px;
+  padding-bottom: 23px;
 `;

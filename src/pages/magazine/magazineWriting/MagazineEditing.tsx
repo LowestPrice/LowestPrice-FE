@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { putMagazine } from '../../../api/magazine';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const MagazineEditing: React.FC = () => {
   const location = useLocation();
@@ -61,7 +62,7 @@ const MagazineEditing: React.FC = () => {
       },
       {
         onSuccess: () => {
-          alert('수정 완료');
+          toast.success('수정되었습니다.');
           navigate('/magazine');
         },
         onError: (error) => {
