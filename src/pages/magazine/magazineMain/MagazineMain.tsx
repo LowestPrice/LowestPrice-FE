@@ -39,37 +39,35 @@ const Magazine: React.FC<MagazineProps> = () => {
         <LogoTitle>매거진</LogoTitle>
       </Header>
       <Container>
-        <InnerContainer>
-          <Line></Line>
-          <Title>Apple 트렌드</Title>
-          <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
-          <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
-          <div>
-            <Scroll>
-              {magazines?.map((magazineData, index) => (
-                <Item>
-                  <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
-                    <Img src={magazineData.mainImage} />
-                    <BoxPadding>
-                      <BoxTitle>{magazineData.title}</BoxTitle>
-                      <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
-                      <Flex>
-                        <div>{magazineData.editor}</div>
-                        <Like
-                          isLiked={magazineData.isLiked}
-                          magazineId={magazineData.magazineId}
-                          likeCount={magazineData.LikeMagazine}
-                          handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
-                          index={index}
-                        />
-                      </Flex>
-                    </BoxPadding>
-                  </Box>
-                </Item>
-              ))}
-            </Scroll>
-          </div>
-        </InnerContainer>
+        <Line></Line>
+        <Title>Apple 트렌드</Title>
+        <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
+        <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
+        <div>
+          <Scroll>
+            {magazines?.map((magazineData, index) => (
+              <Item>
+                <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
+                  <Img src={magazineData.mainImage} />
+                  <BoxPadding>
+                    <BoxTitle>{magazineData.title}</BoxTitle>
+                    <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
+                    <Flex>
+                      <div>{magazineData.editor}</div>
+                      <Like
+                        isLiked={magazineData.isLiked}
+                        magazineId={magazineData.magazineId}
+                        likeCount={magazineData.LikeMagazine}
+                        handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
+                        index={index}
+                      />
+                    </Flex>
+                  </BoxPadding>
+                </Box>
+              </Item>
+            ))}
+          </Scroll>
+        </div>
       </Container>
       <PageFooter />
     </>
@@ -83,15 +81,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #f3f3f3;
-  max-height: 100vh;
-  padding-bottom: 200px;
-`;
-
-const InnerContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-height: 85vh;
 `;
 
 const Header = styled.div`
@@ -114,7 +104,7 @@ const Scroll = styled.div`
 
     border-radius: 10px;
   }
-  height: 80vh;
+  max-height: 75vh;
 `;
 
 const Item = styled.div`
