@@ -38,65 +38,53 @@ const Magazine: React.FC<MagazineProps> = () => {
         <BlueLogo />
         <LogoTitle>매거진</LogoTitle>
       </Header>
-      <Wrap>
-        <Container>
-          <InnerContainer>
-            <Line></Line>
-            <Title>Apple 트렌드</Title>
-            <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
-            <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
-            {magazines?.map((magazineData, index) => (
-              <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
-                <Img src={magazineData.mainImage} />
-                <BoxPadding>
-                  <BoxTitle>{magazineData.title}</BoxTitle>
-                  <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
-                  <Flex>
-                    <div>{magazineData.editor}</div>
-                    <Like
-                      isLiked={magazineData.isLiked}
-                      magazineId={magazineData.magazineId}
-                      likeCount={magazineData.LikeMagazine}
-                      handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
-                      index={index}
-                    />
-                  </Flex>
-                </BoxPadding>
-              </Box>
-            ))}
-            <PageFooter />
-          </InnerContainer>
-        </Container>
-      </Wrap>
+      <Container>
+        <InnerContainer>
+          <Line></Line>
+          <Title>Apple 트렌드</Title>
+          <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
+          <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
+          <div>
+            <Scroll>
+              {magazines?.map((magazineData, index) => (
+                <Item>
+                  <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
+                    <Img src={magazineData.mainImage} />
+                    <BoxPadding>
+                      <BoxTitle>{magazineData.title}</BoxTitle>
+                      <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
+                      <Flex>
+                        <div>{magazineData.editor}</div>
+                        <Like
+                          isLiked={magazineData.isLiked}
+                          magazineId={magazineData.magazineId}
+                          likeCount={magazineData.LikeMagazine}
+                          handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
+                          index={index}
+                        />
+                      </Flex>
+                    </BoxPadding>
+                  </Box>
+                </Item>
+              ))}
+            </Scroll>
+          </div>
+        </InnerContainer>
+      </Container>
+      <PageFooter />
     </>
   );
 };
 
 export default Magazine;
 
-const Wrap = styled.div`
-  width: 380px;
-  max-height: 683px;
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
-    background: rgba(181, 181, 181, 1);
-
-    border-radius: 10px;
-  }
-  overflow-x: hidden;
-`;
-
 const Container = styled.div`
-  min-height: 100vh;
-  padding-bottom: 82px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f3f3f3;
+  max-height: 100vh;
+  padding-bottom: 200px;
 `;
 
 const InnerContainer = styled.div`
@@ -111,6 +99,29 @@ const Header = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 26px 274px 18px 20px;
+`;
+
+const Scroll = styled.div`
+  width: 380px;
+  /* max-height: 683px; */
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: rgba(181, 181, 181, 1);
+
+    border-radius: 10px;
+  }
+  height: 80vh;
+`;
+
+const Item = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 `;
 
 const LogoTitle = styled.div`
@@ -150,18 +161,18 @@ const Writing = styled.div`
   font-weight: 600;
   color: #b5b5b5;
   cursor: pointer;
-  width: 100%;
-  margin-right: 56px;
-  margin-bottom: -16px;
+  margin-bottom: 26px;
   text-align: right;
   line-height: 110%;
   text-decoration-line: underline;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const Box = styled.div`
   width: 335px;
   height: 315px;
-  margin-top: 26px;
+  margin-bottom: 26px;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
