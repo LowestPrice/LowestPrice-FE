@@ -18,7 +18,7 @@ interface Props {
 
 function CategoryOnProductList(props: Props) {
   // 카테고리 이름 -----------------------------------------------------------------------
-  
+
   const categoryNameList = ['iPad', 'iPad', 'MacBook', 'Mac', 'AirPods', 'iPhone', 'AppleWatch'];
 
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
@@ -40,11 +40,8 @@ function CategoryOnProductList(props: Props) {
 
   useEffect(() => {
     result[1].refetch();
-  }, [props.filterName]);
-
-  useEffect(() => {
     result[0].refetch();
-  }, [props.categoryId]);
+  }, [props.categoryId, props.filterName]);
 
   // 데이터 로딩 중 & 에러 관리 ----------------------------------------------------------------------------------
 
@@ -81,6 +78,7 @@ export default React.memo(CategoryOnProductList);
 
 const Wrap = styled.div`
   width: 346px;
+  height: 700px;
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -89,4 +87,14 @@ const Wrap = styled.div`
   position: absolute;
   top: 210px;
   padding-bottom: 80px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: rgba(181, 181, 181, 1);
+
+    border-radius: 10px;
+  }
 `;

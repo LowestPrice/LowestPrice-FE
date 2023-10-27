@@ -56,7 +56,8 @@ function CategoryOffProductList(props: Props) {
 export default React.memo(CategoryOffProductList);
 
 const Wrap = styled.div`
-  width: 346px;
+  width: 350px;
+  height: 750px;
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -65,6 +66,16 @@ const Wrap = styled.div`
   position: absolute;
   top: 210px;
   padding-bottom: 80px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: rgba(181, 181, 181, 1);
+
+    border-radius: 10px;
+  }
 `;
 
 const BusinessInfo = styled.div`
