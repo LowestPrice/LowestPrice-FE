@@ -6,7 +6,7 @@ import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 Chart.register(CategoryScale);
 import styled from 'styled-components';
-import { PriceData, ChartData, PriceChartProps, PriceWrapProps } from '../../type/type';
+import { PriceData, ChartData, PriceChartProps, PriceWrapProps, FormattedData } from '../../type/type';
 
 // 최고가, 최저가
 export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) => {
@@ -30,10 +30,6 @@ export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) 
 
 // 차트
 export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxPrice }) => {
-  interface FormattedData {
-    [key: string]: number;
-  }
-
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
@@ -68,6 +64,12 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
 
   useEffect(() => {
     if (data) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d')!;
+      const gradient = ctx.createLinearGradient(0, 0, 0, 180);
+      gradient.addColorStop(0, 'rgba(0, 171, 249, 0.12)');
+      gradient.addColorStop(1, 'rgba(0, 171, 249, 0)');
+
       const labels = Object.keys(formattedData);
       const datasetData = Object.values(formattedData) as number[];
 
@@ -75,10 +77,12 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
         labels: labels,
         datasets: [
           {
-            label: 'Price History',
+            label: '',
             data: datasetData,
             borderColor: '#00ABF9',
             borderWidth: 2,
+            fill: true,
+            backgroundColor: gradient,
           },
         ],
       });

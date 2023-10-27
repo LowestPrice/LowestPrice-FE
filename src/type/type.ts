@@ -52,6 +52,7 @@ export interface ChartData {
     data: number[];
     borderColor: string;
     borderWidth: number;
+    fill: boolean;
     backgroundColor?: any;
   }[];
 }
@@ -70,4 +71,8 @@ export interface ParamsProps {
 export interface PriceWrapProps {
   minPrice: number | undefined;
   maxPrice: number | undefined;
+}
+
+export interface FormattedData {
+  [key: string]: number;
 }
