@@ -63,8 +63,6 @@ export default function Main() {
     [isCategorySelect, isOnCategory, categoryId]
   );
 
-  console.log();
-
   // 필터 버튼 클릭 ----------------------------------------
 
   const handleFilterButton = useCallback(
@@ -98,7 +96,7 @@ export default function Main() {
   };
 
   return (
-    <div>
+    <MainWrap>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -180,9 +178,24 @@ export default function Main() {
           <PageFooter />
         </div>
       </form>
-    </div>
+    </MainWrap>
   );
 }
+
+const MainWrap = styled.div`
+  height: 100vh;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+    display: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%; /* 스크롤바의 길이 */
+    background: rgba(181, 181, 181, 1);
+
+    border-radius: 10px;
+  }
+`;
 
 const Header = styled.div`
   width: 375px;
@@ -308,7 +321,6 @@ const Options = styled.div`
   height: 12px;
   padding-top: 10px;
 `;
-
 
 const Soldout = styled.div<{ $isSoldout: boolean }>`
   margin-left: 150px;

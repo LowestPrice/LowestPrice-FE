@@ -7,6 +7,7 @@ import { DeleteIdWithKakao } from '../../../api/login';
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
+import { toast } from 'react-toastify';
 
 export default function EditMypage() {
   // 리액트 쿼리로 유저정보 가져오기 -----------------------------------------
@@ -18,7 +19,7 @@ export default function EditMypage() {
 
   const [name, setName] = useState<string | undefined>(data.nickname);
   const [imageFile, setImageFile]: any = useState();
-  const [imageSrc, setImageSrc]: any = useState();
+  const [imageSrc, setImageSrc]: any = useState(data.image);
 
   if (status === 'loading') {
     return <Loading />;
@@ -26,6 +27,7 @@ export default function EditMypage() {
   if (status === 'error') {
     return <Error />;
   }
+  console.log(data);
 
   // 네비게이트 ---------------------------------------------------------------
 
@@ -81,6 +83,24 @@ export default function EditMypage() {
     <div>
       <Header>
         <h2>프로필 수정</h2>
+        <CompleteButton
+          onClick={() => {
+            userInfoMutation.mutate(
+              { name, imageFile },
+              {
+                onSuccess: () => {
+                  toast.success('수정 완료!');
+                  navigate('/mypage');
+                },
+                onError: (error) => {
+                  console.error('마이페이지 수정 에러', error);
+                },
+              }
+            );
+          }}
+        >
+          완료
+        </CompleteButton>
       </Header>
       <Wrap>
         <Profile>
@@ -88,25 +108,7 @@ export default function EditMypage() {
           <ImageInput onChange={(e) => onUpload(e)} multiple type='file' accept='image/*' id='profileimage'></ImageInput>
           <EditImageLabel htmlFor='profileimage'>수정</EditImageLabel>
           <EditName onChange={onChangeName} value={name}></EditName>
-          <button
-            onClick={() => {
-              userInfoMutation.mutate(
-                { name, imageFile },
-                {
-                  onSuccess: () => {
-                    alert('추가 완료');
-                    navigate('/mypage');
-                  },
-                  onError: (error) => {
-                    console.error('마이페이지 수정 에러', error);
-                  },
-                }
-              );
-            }}
-          >
-            수정하기
-          </button>
-          <button onClick={onDeleteButtonHandler}>회원탈퇴</button>
+          <Withdrawal onClick={onDeleteButtonHandler}>회원탈퇴</Withdrawal>
         </Profile>
       </Wrap>
       <PageFooter />
@@ -122,8 +124,17 @@ const Header = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
+const CompleteButton = styled.div`
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+`;
 const Wrap = styled.div`
   height: 600px;
 `;
@@ -155,6 +166,7 @@ const EditImageLabel = styled.label`
   width: 110px;
   height: 110px;
   border-radius: 60px;
+  top: 176px;
 `;
 
 const EditName = styled.input`
@@ -165,4 +177,17 @@ const EditName = styled.input`
   background-color: rgba(217, 217, 217, 1);
   border: none;
   color: black;
+`;
+
+const Withdrawal = styled.div`
+  color: var(--gray02, #b5b5b5);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%; /* 17.6px */
+  text-decoration-line: underline;
+  position: absolute;
+  bottom: 300px;
 `;
