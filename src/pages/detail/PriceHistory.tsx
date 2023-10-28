@@ -35,20 +35,12 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
     labels: [],
     datasets: [],
   });
-  const [formattedData, setFormattedData] = useState<FormattedData>({});
+  const [_, setFormattedData] = useState<FormattedData>({});
 
   // 날짜 형식 변경 (년월일 -> 월일)
   const DeleteYear = (date: string) => {
     const dateData = new Date(date);
     return `${dateData.getMonth() + 1}-${dateData.getDate()}`;
-  };
-
-  const options = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
   };
 
   useEffect(() => {
@@ -59,19 +51,15 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
         newFormattedData[newKey] = value;
       }
       setFormattedData(newFormattedData);
-    }
-  }, [data]);
 
-  useEffect(() => {
-    if (data) {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d')!;
       const gradient = ctx.createLinearGradient(0, 0, 0, 180);
       gradient.addColorStop(0, 'rgba(0, 171, 249, 0.12)');
       gradient.addColorStop(1, 'rgba(0, 171, 249, 0)');
 
-      const labels = Object.keys(formattedData);
-      const datasetData = Object.values(formattedData) as number[];
+      const labels = Object.keys(newFormattedData);
+      const datasetData = Object.values(newFormattedData) as number[];
 
       setPriceData({
         labels: labels,
@@ -86,15 +74,19 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
           },
         ],
       });
-    }
-  }, [formattedData]);
 
-  useEffect(() => {
-    if (data) {
       setMinPrice(data?.minPrice);
       setMaxPrice(data?.maxPrice);
     }
-  }, [data]);
+  }, [data, setMinPrice, setMaxPrice]);
+
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
   if (isLoading) {
     return <h1>로딩중입니다</h1>;
@@ -122,6 +114,7 @@ const PriceArea = styled.div`
   flex: shrink;
   align-items: center;
   margin-bottom: 5px;
+  padding-left: 18px;
 `;
 
 const Text = styled.div`

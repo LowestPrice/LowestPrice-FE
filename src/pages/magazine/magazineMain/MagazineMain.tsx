@@ -88,7 +88,8 @@ const Header = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 26px 274px 18px 20px;
+  padding: 18.72px 282px 18.72px 20px;
+  width: 150px;
 `;
 
 const Scroll = styled.div`
@@ -114,10 +115,10 @@ const Item = styled.div`
 `;
 
 const LogoTitle = styled.div`
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 110%;
-  margin-left: 6px;
+  margin-left: 10px;
 `;
 
 const Title = styled.div`
