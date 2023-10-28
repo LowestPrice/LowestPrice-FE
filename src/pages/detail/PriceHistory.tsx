@@ -40,7 +40,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
   // 날짜 형식 변경 (년월일 -> 월일)
   const DeleteYear = (date: string) => {
     const dateData = new Date(date);
-    return `${dateData.getMonth() + 1}-${dateData.getDate()}`;
+    return `${dateData.getMonth() + 1}/${dateData.getDate()}`;
   };
 
   useEffect(() => {

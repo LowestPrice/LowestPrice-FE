@@ -15,14 +15,16 @@ const Magazine: React.FC<MagazineProps> = () => {
 
   // 매거진 데이터 불러오기
   const { isLoading, isError, data } = useQuery('magazineData', getMagazine);
+  const isAdmin = data?.admin;
 
   useEffect(() => {
     if (data) {
-      setMagazines(data);
+      const responseData = data.data;
+      setMagazines(responseData);
     }
   }, [data]);
 
-  //
+  // 좋아요 클릭 시 좋아요 상태와 좋아요 수 업데이트
   const { handleLikeClick } = useLike(false, 0);
 
   if (isLoading) {
@@ -42,11 +44,11 @@ const Magazine: React.FC<MagazineProps> = () => {
         <Line></Line>
         <Title>Apple 트렌드</Title>
         <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
-        <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>
+        {isAdmin && <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>}
         <div>
           <Scroll>
             {magazines?.map((magazineData, index) => (
-              <Item>
+              <Item key={magazineData.magazineId}>
                 <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
                   <Img src={magazineData.mainImage} />
                   <BoxPadding>
@@ -115,7 +117,7 @@ const Item = styled.div`
 `;
 
 const LogoTitle = styled.div`
-  font-size: 18px;
+  font-size: 1.17em;
   font-weight: 600;
   line-height: 110%;
   margin-left: 10px;
@@ -135,7 +137,7 @@ const Line = styled.div`
   border-top: 1px solid grey;
 `;
 
-const Subtitle = styled.div`
+const Subtitle = styled.div<{ isAdmin?: boolean }>`
   font-size: 14px;
   color: grey;
   margin-top: 1%;
@@ -143,6 +145,7 @@ const Subtitle = styled.div`
   text-align: left;
   width: 100%;
   margin-left: 40px;
+  margin-bottom: ${(props) => (props.isAdmin ? '0px' : '20px')};
 `;
 
 const Writing = styled.div`
@@ -151,7 +154,7 @@ const Writing = styled.div`
   font-weight: 600;
   color: #b5b5b5;
   cursor: pointer;
-  margin-bottom: 26px;
+  margin-bottom: 12px;
   text-align: right;
   line-height: 110%;
   text-decoration-line: underline;
