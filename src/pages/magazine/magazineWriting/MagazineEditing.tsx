@@ -105,13 +105,12 @@ const MagazineEditing: React.FC = () => {
           <PhotoDiv>
             <PhotoAdd></PhotoAdd>
           </PhotoDiv>
-          <Title value={newTitle} defaultValue={magazineData.title} onChange={onTitleChangeHandler} />
+          <Title value={newTitle} onChange={onTitleChangeHandler} />
           <StyledImage src={previewImage} alt='매거진 이미지' />
           <input type='file' accept='image/*' onChange={onImageChangeHandler} />
           <textarea style={{ display: 'none' }} />
           <Content
             value={newContent}
-            defaultValue={magazineData.content}
             onChange={onContentChangeHandler}
             ref={contentRef}
             style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box' }}
