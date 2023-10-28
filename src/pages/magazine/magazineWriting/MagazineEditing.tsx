@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv } from './styles';
+import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv, StyledImage } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { putMagazine } from '../../../api/magazine';
@@ -106,7 +106,7 @@ const MagazineEditing: React.FC = () => {
             <PhotoAdd></PhotoAdd>
           </PhotoDiv>
           <Title value={newTitle} defaultValue={magazineData.title} onChange={onTitleChangeHandler} />
-          <img src={previewImage} alt='매거진 이미지' />
+          <StyledImage src={previewImage} alt='매거진 이미지' />
           <input type='file' accept='image/*' onChange={onImageChangeHandler} />
           <textarea style={{ display: 'none' }} />
           <Content

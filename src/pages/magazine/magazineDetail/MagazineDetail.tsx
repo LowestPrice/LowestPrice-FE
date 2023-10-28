@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import Like from '../Like';
 import { useLike } from '../../../hooks/useLike';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const deletePosts = useMutation(deleteMagazine, {
     onSuccess: () => {
       queryClient.invalidateQueries(['posts', id]);
+      queryClient.invalidateQueries('magazineData');
     },
     onError: (error) => {
       console.log('error 발생', error);
@@ -37,7 +39,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 
   const onDeleteButtonHandler = (id: any) => {
     deletePosts.mutate({ id });
-    alert('삭제되었습니다.');
+    toast.success('삭제되었습니다.');
   };
 
   // 좋아요
@@ -88,7 +90,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           </Button>
           <MagazineTitle>
             <TopText>매거진</TopText>
-            {magazineData.title}
+            <TitleText>{magazineData.title}</TitleText>
           </MagazineTitle>
           {isAdmin ? (
             <Button ref={dropDownRef} onClick={() => setIsOpen(!isOpen)}>
@@ -237,12 +239,19 @@ const AnotherContentEditor = styled.div`
 
 const MagazineTitle = styled.div`
   z-index: 999;
+  display: flex;
+  align-items: center;
+  width: 130px;
+`;
+
+const TitleText = styled.div`
+  flex-grow: 1;
   font-size: 12px;
   font-weight: 300;
   color: #fff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const TopText = styled.div`
@@ -255,12 +264,13 @@ const TopText = styled.div`
   line-height: 110%;
   border-radius: 10px;
   border: 0.4px solid #fff;
-  width: 32px;
+  width: auto;
   padding: 0px 6px 0px 6px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 6px;
+  white-space: nowrap;
 `;
 
 const Flex = styled.div`
