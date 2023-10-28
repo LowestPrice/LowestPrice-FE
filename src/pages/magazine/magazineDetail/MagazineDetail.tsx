@@ -22,7 +22,8 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 
   // 데이터 불러오기
   const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
-  const magazineData = dataDetail?.data.data;
+  const magazineData = dataDetail?.data;
+  const isAdmin = dataDetail?.admin;
 
   // 데이터 삭제하기
   const deletePosts = useMutation(deleteMagazine, {
@@ -89,24 +90,28 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             <TopText>매거진</TopText>
             {magazineData.title}
           </MagazineTitle>
-          <Button ref={dropDownRef} onClick={() => setIsOpen(!isOpen)}>
-            {isOpen && (
-              <DropDown
-                onEditClick={() => {
-                  navigate(`/magazineEditing/${magazineData.magazineId}`, { state: { props: magazineData } });
-                  setIsOpen(false);
-                }}
-                onDeleteClick={() => {
-                  onDeleteButtonHandler(id);
-                  navigate('/magazine');
-                  setIsOpen(false);
-                }}
-              />
-            )}
-            <StyledDropDownIcon>
-              <DropDownIcon />
-            </StyledDropDownIcon>
-          </Button>
+          {isAdmin ? (
+            <Button ref={dropDownRef} onClick={() => setIsOpen(!isOpen)}>
+              {isOpen && (
+                <DropDown
+                  onEditClick={() => {
+                    navigate(`/magazineEditing/${magazineData.magazineId}`, { state: { props: magazineData } });
+                    setIsOpen(false);
+                  }}
+                  onDeleteClick={() => {
+                    onDeleteButtonHandler(id);
+                    navigate('/magazine');
+                    setIsOpen(false);
+                  }}
+                />
+              )}
+              <StyledDropDownIcon>
+                <DropDownIcon />
+              </StyledDropDownIcon>
+            </Button>
+          ) : (
+            <div></div>
+          )}
         </Flex>
       </TopBox>
       <TextArea>{magazineData.content}</TextArea>
