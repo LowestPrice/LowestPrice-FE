@@ -20,9 +20,9 @@ function SimilarProduct(props: Props) {
         <SimilarProductImage src={props.productImage} />
         <SimilarProductContent>
           <div className='Stitle'>{props.productName}</div>
-          <div className='SexistingPrice'>{currentPrice}원</div>
+          <div className='SexistingPrice'>{originalPrice}원</div>
           <SimilarProductPriceWrap>
-            <div className='Sprice'>{originalPrice}원</div>
+            <div className='Sprice'>{currentPrice}원</div>
             <DiscountRateWrap>
               <div>
                 <svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'>
