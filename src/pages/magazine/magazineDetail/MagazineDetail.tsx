@@ -28,7 +28,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   // 데이터 삭제하기
   const deletePosts = useMutation(deleteMagazine, {
     onSuccess: () => {
-      queryClient.invalidateQueries('posts');
+      queryClient.invalidateQueries(['posts', id]);
     },
     onError: (error) => {
       console.log('error 발생', error);
@@ -122,7 +122,6 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           likeCount={magazineData.LikeMagazine}
           index={index}
           handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
-          style={{ marginLeft: '20px' }}
         />
         <StyledGreyShareIcon>
           <GreyShareIcon />
@@ -320,7 +319,7 @@ const EditorShareFlex = styled.div`
 
 const StyledShareIcon = styled(ShareIcon)`
   margin-right: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 `;
 
 const LikeShareIconFlex = styled.div`
@@ -328,10 +327,12 @@ const LikeShareIconFlex = styled.div`
   justify-content: space-between;
   margin-top: 37.5px;
   margin-bottom: 14px;
+  margin-left: 10px;
 `;
 
 const StyledGreyShareIcon = styled(GreyShareIcon)`
   margin-right: 20px;
+  margin-top: -1px;
 `;
 
 const StyledBackIcon = styled(BackIcon)`
