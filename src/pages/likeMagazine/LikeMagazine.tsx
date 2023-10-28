@@ -40,7 +40,7 @@ const Header = styled.div`
 const LikeMagazineList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  margin-bottom: 4px;
 `;
 
 const Title = styled.div`
