@@ -1,4 +1,3 @@
-import React from 'react';
 import CategoryOffProductList from './CategoryOffProductList';
 import CategoryOnProductList from './CategoryOnProductList';
 import styled from 'styled-components';
@@ -23,7 +22,7 @@ function CategoryList({ isOnCategory, categoryId, filterName, isFilter, isSoldou
   );
 }
 
-export default React.memo(CategoryList);
+export default CategoryList;
 
 const Wrap = styled.div`
   width: 370px;
