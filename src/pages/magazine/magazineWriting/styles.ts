@@ -66,7 +66,7 @@ export const PhotoAdd = styled.button`
 `;
 
 export const PhotoDiv = styled.div`
-  width: 375px;
+  max-width: 375px;
   height: 50px;
   border-top: 1px solid #b1b1b1;
   border-bottom: 1px solid #b1b1b1;
