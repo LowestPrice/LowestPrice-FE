@@ -41,7 +41,7 @@ const Item = styled.button`
   width: 100%;
   height: 125px;
   background-color: rgba(217, 217, 217, 1);
-  margin-bottom: 12px;
+  margin-bottom: 4px;
   display: flex;
   flex-direction: column;
   position: relative;
