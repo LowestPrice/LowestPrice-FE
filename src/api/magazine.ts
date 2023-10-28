@@ -7,7 +7,9 @@ export const getMagazine = async () => {
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/magazines`, { headers: { Authorization: accessToken } });
-    return response.data.data;
+    const responseData = response.data.data;
+    const admin = response.data.access;
+    return { data: responseData, admin: admin };
   } catch (error) {
     console.error('매거진 데이터 조회 에러', error);
   }
