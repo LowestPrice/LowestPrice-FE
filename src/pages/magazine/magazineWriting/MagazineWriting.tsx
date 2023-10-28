@@ -54,6 +54,15 @@ const MagazineWriting: React.FC = () => {
     );
   };
 
+  // textarea 높이 조정(제목)
+  const adjustTitleHeight = () => {
+    const targetTextarea = titleRef.current;
+    if (targetTextarea) {
+      targetTextarea.style.height = 'auto';
+      targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
+    }
+  };
+
   // textarea 높이 조정(내용)
   const adjustHeight = () => {
     const targetTextarea = contentRef.current;
@@ -67,28 +76,17 @@ const MagazineWriting: React.FC = () => {
     }
   };
 
-  // textarea 높이 조정(제목)
-  const adjustTitleHeight = () => {
-    const targetTextarea = titleRef.current;
-    if (targetTextarea) {
-      targetTextarea.style.height = 'auto';
-      targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
-    }
-  };
-
-  useEffect(() => {
-    adjustTitleHeight();
-  }, [title]);
-
-  useEffect(() => {
-    adjustHeight();
-  }, [content]);
-
   // 컴포넌트가 마운트 될 때 길이 조정
   useEffect(() => {
     adjustHeight();
     adjustTitleHeight();
   }, []);
+
+  // title, content 값이 변경될 때 길이 조정
+  useEffect(() => {
+    adjustTitleHeight();
+    adjustHeight();
+  }, [title, content]);
 
   return (
     <>
