@@ -53,8 +53,13 @@ const Wrap = styled.div<{ $isOpen: boolean }>`
   z-index: 10;
   width: 300px;
   overflow: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   opacity: ${(props) => (props.$isOpen ? '1' : '0')};
   height: ${(props) => (props.$isOpen ? 'auto' : '0px')};
+  max-height: 250px;
+  overflow: scroll;
   transition: all 400ms ease-in-out 0s;
   border-radius: 10px;
 `;

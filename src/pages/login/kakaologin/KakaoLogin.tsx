@@ -10,7 +10,7 @@ function KakaoLogin() {
   const accessToken = 'Bearer ' + queryString.get('Authorization');
 
   useEffect(() => {
-    document.cookie = `Authorization=${accessToken}; max-age=4h`;
+    document.cookie = `Authorization=${accessToken}; max-age=17999`;
     navigate('/');
   }, []);
 
