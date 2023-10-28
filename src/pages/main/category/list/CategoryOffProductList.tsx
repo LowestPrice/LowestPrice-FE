@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
@@ -53,7 +52,7 @@ function CategoryOffProductList(props: Props) {
   );
 }
 
-export default React.memo(CategoryOffProductList);
+export default CategoryOffProductList;
 
 const Wrap = styled.div`
   width: 350px;

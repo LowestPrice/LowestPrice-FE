@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useQueries } from 'react-query';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { getCategory } from '../../../../api/product';
 import { getCategoryFilter } from '../../../../api/product';
@@ -74,7 +74,7 @@ function CategoryOnProductList(props: Props) {
   );
 }
 
-export default React.memo(CategoryOnProductList);
+export default CategoryOnProductList;
 
 const Wrap = styled.div`
   width: 346px;

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -62,7 +61,7 @@ function CategoryProduct(props: Props) {
   );
 }
 
-export default React.memo(CategoryProduct);
+export default CategoryProduct;
 
 const Wrap = styled.div`
   width: 166px;
