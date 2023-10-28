@@ -1,16 +1,22 @@
 import styled from 'styled-components';
 import { Product } from '../../../type';
+import { useNavigate } from 'react-router';
 
 interface Props extends Product {}
 
 function SimilarProduct(props: Props) {
   // 상품 가격 천 단위 콤마 생성하기 -------------------------------
+  const navigate = useNavigate();
 
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
   return (
     <div>
-      <Wrap>
+      <Wrap
+        onClick={() => {
+          navigate(`/detail/${props.productId}`);
+        }}
+      >
         <SimilarProductImage src={props.productImage} />
         <SimilarProductContent>
           <div className='Stitle'>{props.productName}</div>
@@ -40,6 +46,7 @@ export default SimilarProduct;
 const Wrap = styled.div`
   width: 125.34px;
   height: 165px;
+  cursor: pointer;
 `;
 
 const SimilarProductImage = styled.img`
@@ -58,8 +65,11 @@ const SimilarProductContent = styled.div`
     height: 28.38px;
     font-size: 11.11px;
     font-weight: 400;
-    overflow: hidden;
     text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
   .SexistingPrice {
     width: 70.6px;
