@@ -37,20 +37,24 @@ function CategoryProduct(props: Props) {
         </CProductImage>
         <CProductContent>
           <div className='title'>{props.productName}</div>
-          <div className='originalPrice'>{originalPrice}원</div>
+          {props.discountRate !== 0 ? <div className='originalPrice'>{originalPrice}원</div> : <div></div>}
           <DiscountWrap>
             <div className='currentPrice'>{currentPrice}원</div>
-            <DiscountRateWrap>
-              <div>
-                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'>
-                  <path
-                    d='M4.256 6.67159C4.65334 7.11401 5.34666 7.11401 5.744 6.67159L9.56398 2.41818C10.1421 1.77442 9.68526 0.75 8.81998 0.75H1.18001C0.31474 0.75 -0.142143 1.77442 0.436019 2.41818L4.256 6.67159Z'
-                    fill='#137FFF'
-                  />
-                </svg>
-              </div>
-              <div>{props.discountRate}%</div>
-            </DiscountRateWrap>
+            {props.discountRate !== 0 ? (
+              <DiscountRateWrap>
+                <div>
+                  <svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'>
+                    <path
+                      d='M4.256 6.67159C4.65334 7.11401 5.34666 7.11401 5.744 6.67159L9.56398 2.41818C10.1421 1.77442 9.68526 0.75 8.81998 0.75H1.18001C0.31474 0.75 -0.142143 1.77442 0.436019 2.41818L4.256 6.67159Z'
+                      fill='#137FFF'
+                    />
+                  </svg>
+                </div>
+                <div>{props.discountRate}%</div>
+              </DiscountRateWrap>
+            ) : (
+              <div></div>
+            )}
           </DiscountWrap>
         </CProductContent>
       </Wrap>

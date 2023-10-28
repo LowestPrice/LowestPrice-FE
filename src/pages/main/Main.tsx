@@ -145,7 +145,7 @@ export default function Main() {
                   );
                 })}
               </CategoryTabWrap>
-              <Filterbar>
+              <Filterbar $isCategoryOn={isOnCategory}>
                 <Options>
                   {filterList.map((item, index) => {
                     return (
@@ -289,6 +289,7 @@ const CategoryTabWrap = styled.div`
   position: absolute;
   top: 94px;
   left: -1px;
+  padding-left: 2px;
   &::-webkit-scrollbar {
     height: 5px;
   }
@@ -300,7 +301,7 @@ const CategoryTabWrap = styled.div`
   }
 `;
 
-const Filterbar = styled.div`
+const Filterbar = styled.div<{ $isCategoryOn: boolean }>`
   width: 375px;
   height: 31px;
   border-bottom: 1px solid rgba(243, 243, 243, 1);
@@ -311,6 +312,7 @@ const Filterbar = styled.div`
   color: rgba(181, 181, 181, 1);
   position: absolute;
   top: 174px;
+  display: ${(props) => (props.$isCategoryOn ? 'block' : 'none')};
 `;
 
 const Options = styled.div`

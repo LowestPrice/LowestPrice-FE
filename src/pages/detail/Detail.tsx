@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import SimilarProduct from './SimilarProduct';
 import OptionModal from './option/OptionModal';
 import AlarmFooter from '../../components/footer/AlarmFooter';
 import { ChartArea } from './style';
 import { PriceChart, PriceDataWrap } from './PriceHistory';
+import SimilarProductList from './similar/SimilarProductList';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
@@ -134,13 +134,7 @@ function Detail() {
         </ChartArea>
         <SimilarProuctWrap>
           <div className='title'>해당 상품과 비슷한 상품</div>
-          <SimilarProductList>
-            <SimilarProduct />
-            <SimilarProduct />
-            <SimilarProduct />
-            <SimilarProduct />
-            <SimilarProduct />
-          </SimilarProductList>
+          <SimilarProductList productId={data.productId} />
         </SimilarProuctWrap>
       </div>
       <AlarmFooter productUrl={data.productUrl} productId={params.id} isAlertOn={data.isAlertOn} />
@@ -235,25 +229,6 @@ const SimilarProuctWrap = styled.div`
     width: 179px;
     font-size: 16px;
     font-weight: 600;
-  }
-`;
-
-const SimilarProductList = styled.div`
-  width: 375px;
-  height: 185px;
-  margin-top: 14px;
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  overflow-x: scroll;
-  &::-webkit-scrollbar {
-    height: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    width: 10%; /* 스크롤바의 길이 */
-    height: 5px;
-    background: rgba(181, 181, 181, 1);
-    border-radius: 10px;
   }
 `;
 

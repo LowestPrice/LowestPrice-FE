@@ -82,6 +82,19 @@ export const getOptions = async (realId: string | undefined) => {
   }
 };
 
+// 유사 상품 보기
+
+export const getSimilarProducts = async (productId: string | undefined) => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/${productId}/similar`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // 검색 상품
 
 export const getSearch = async (searchWord: string | undefined, isSoldout: boolean) => {
