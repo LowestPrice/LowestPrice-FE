@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { BackIcon, DropDownIcon, ShareIcon, GreyShareIcon } from '../../../assets/icon/icon';
 import { useRef } from 'react';
 import useDropDown from '../../../hooks/useDropDown';
+import useShare from '../../../hooks/useShare';
 import { DropDownProps } from '../../../type/type';
 import styled from 'styled-components';
 import Like from '../Like';
@@ -27,6 +28,19 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
   const magazineData = dataDetail?.data;
   const isAdmin = dataDetail?.admin;
+
+  const dateData = dataDetail?.data.createdAt;
+
+  // 날짜 데이터 형식 변환하기
+  const WrittenDate = () => {
+    if (!dateData) return '날짜 정보 없음';
+
+    const [formattedDate] = dateData.split('T');
+    const [year, month, day] = formattedDate.split('-');
+    return `${year}년 ${month}월 ${day}일`;
+  };
+
+  const writtenDate = WrittenDate();
 
   // 데이터 삭제하기
   const deletePosts = useMutation(deleteMagazine, {
@@ -61,6 +75,19 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
     );
   };
 
+  // 공유하기
+  const { shareToKakaoTalk } = useShare({
+    objectType: 'feed',
+    content: {
+      title: dataDetail?.data.title,
+      imageUrl: dataDetail?.data.mainImage,
+    },
+    url: `https://lowest-price.store/magazine/${id}`,
+  });
+  const handleShareClick = () => {
+    shareToKakaoTalk();
+  };
+
   if (isLoadingDetail || isLoadingAnother) {
     return <h1>로딩중입니다</h1>;
   }
@@ -78,9 +105,9 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
         <TitleWrap>
           <Title>{magazineData.title}</Title>
           <EditorShareFlex>
-            <Editor>에디터 관리자</Editor>
+            <Editor>작성 날짜: {writtenDate}</Editor>
             <StyledShareIcon>
-              <ShareIcon />
+              <ShareIcon onClick={handleShareClick} />
             </StyledShareIcon>
           </EditorShareFlex>
         </TitleWrap>
@@ -130,7 +157,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
         />
         <StyledGreyShareIcon>
-          <GreyShareIcon />
+          <GreyShareIcon onClick={handleShareClick} />
         </StyledGreyShareIcon>
       </LikeShareIconFlex>
       <AnotherMagazine>
@@ -331,9 +358,11 @@ const EditorShareFlex = styled.div`
   align-items: center;
 `;
 
-const StyledShareIcon = styled(ShareIcon)`
+const StyledShareIcon = styled.button`
   margin-right: 20px;
   margin-bottom: 15px;
+  background-color: transparent;
+  border: none;
 `;
 
 const LikeShareIconFlex = styled.div`
@@ -344,9 +373,11 @@ const LikeShareIconFlex = styled.div`
   margin-left: 10px;
 `;
 
-const StyledGreyShareIcon = styled(GreyShareIcon)`
+const StyledGreyShareIcon = styled.button`
   margin-right: 20px;
   margin-top: -1px;
+  background-color: transparent;
+  border: none;
 `;
 
 const StyledBackIcon = styled(BackIcon)`

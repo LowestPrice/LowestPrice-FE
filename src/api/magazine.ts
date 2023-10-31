@@ -30,7 +30,7 @@ export const getMagazineDetail = async (id: any) => {
 };
 
 // 매거진 등록
-export const postMagazine = async ({ title, content, image }: { title: any; content: any; image: any }) => {
+export const postMagazine = async ({ title, content, image, quillInstance }: { title: any; content: any; image: any; quillInstance: any }) => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
 
@@ -50,8 +50,13 @@ export const postMagazine = async ({ title, content, image }: { title: any; cont
         Authorization: accessToken,
       },
     });
-    console.log('성공 시, 백엔드가 보내주는 데이터', response.data.request);
-    return response.data;
+
+    if (response.data && quillInstance) {
+      console.log('서버로부터 반환된 이미지 URL: ', response.data);
+      // 서버로부터 반환된 데이터를 처리하는 로직(서버로부터 이미지 url 반환 받아, Quill에 처리)
+      const range = quillInstance.getSelection(true);
+      quillInstance.insertEmbed(range.index, 'image', response.data.imageUrl);
+    }
   } catch (error) {
     console.error('매거진 작성 에러', error);
     throw error;
