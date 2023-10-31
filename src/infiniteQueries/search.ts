@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from 'react-query';
-import { getSearch } from '../api/product';
+import { getFilteredSearch, getSearch } from '../api/product';
 
 export function infiniteSearch(searchWord: string | undefined, isSoldout: boolean) {
   const result = useInfiniteQuery(['infiniteSearchProduct', searchWord], ({ pageParam = '' }) => getSearch(searchWord, pageParam, isSoldout), {
@@ -8,9 +8,14 @@ export function infiniteSearch(searchWord: string | undefined, isSoldout: boolea
   return result;
 }
 
-export function infiniteSearchFilter(filterName: string | undefined, searchWord: string | undefined, isSoldout: boolean) {
-  const result = useInfiniteQuery(['infiniteSearchFilterProduct', searchWord], ({ pageParam = '' }) => getSearch(searchWord, pageParam, isSoldout), {
-    getNextPageParam: (searchProducts) => (searchProducts ? searchProducts[searchProducts.length - 1].productId : undefined),
-  });
+export function infiniteSearchFilter(filterName: string | undefined, searchWord: string | undefined, isSoldout: boolean, filterButton: boolean[]) {
+  const result = useInfiniteQuery(
+    ['infiniteSearchFilterProduct', searchWord, filterName],
+    ({ pageParam = '' }) => getFilteredSearch(filterName, searchWord, pageParam, isSoldout),
+    {
+      enabled: !!filterButton,
+      getNextPageParam: (searchFilterProducts) => (searchFilterProducts ? searchFilterProducts[searchFilterProducts.length - 1].productId : undefined),
+    }
+  );
   return result;
 }

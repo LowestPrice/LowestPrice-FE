@@ -1,11 +1,15 @@
 name: Deploy Frontend to S3 and CloudFront(ver. vite react)
 
 on:
+  # master 브랜치에 push할 때
   push:
-    branches: ["master"]
+    branches:
+      - master
 
+  # master 브랜치로 PR 할 때
   pull_request:
-    branches: ["master"]
+    branches:
+      - master
 
 jobs:
   build-and-deploy:
@@ -20,7 +24,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: "npm"
+          cache: 'npm'
 
       # 코드에서 사용할 .env 설정
       - name: create env file
