@@ -11,6 +11,8 @@ import Like from '../Like';
 import { useLike } from '../../../hooks/useLike';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   const { id } = useParams();
@@ -116,7 +118,9 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           )}
         </Flex>
       </TopBox>
-      <TextArea>{magazineData.content}</TextArea>
+      <TextArea>
+        <ReactQuill value={magazineData.content} readOnly={true} theme={'bubble'} />
+      </TextArea>
       <LikeShareIconFlex>
         <Like
           isLiked={magazineData.isLiked}

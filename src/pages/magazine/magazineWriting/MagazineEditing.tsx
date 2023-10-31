@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv, StyledImage } from './styles';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { FlexBox, Button, ContentBox, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { putMagazine } from '../../../api/magazine';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const MagazineEditing: React.FC = () => {
   const location = useLocation();
@@ -23,9 +25,8 @@ const MagazineEditing: React.FC = () => {
     setNewTitle(newTitle);
   };
 
-  const onContentChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    const newContent = e.target.value;
-    setNewContent(newContent);
+  const onContentChangeHandler = (value: string): void => {
+    setNewContent(value);
   };
 
   const contentRef = useRef<HTMLTextAreaElement>(null);
@@ -94,6 +95,22 @@ const MagazineEditing: React.FC = () => {
     adjustHeight();
   }, []);
 
+  const modules = useMemo(() => {
+    return {
+      toolbar: {
+        container: [
+          ['image'],
+          [{ header: [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+          [{ font: [] }],
+          [{ color: [] }, { background: [] }],
+          [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+          [{ align: [] }],
+        ],
+      },
+    };
+  }, []);
+
   return (
     <>
       <FlexBox>
@@ -109,10 +126,11 @@ const MagazineEditing: React.FC = () => {
           <StyledImage src={previewImage} alt='매거진 이미지' />
           <input type='file' accept='image/*' onChange={onImageChangeHandler} />
           <textarea style={{ display: 'none' }} />
-          <Content
+          <ReactQuill
             value={newContent}
+            theme='snow'
             onChange={onContentChangeHandler}
-            ref={contentRef}
+            modules={modules}
             style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box' }}
           />
         </DirectionCol>

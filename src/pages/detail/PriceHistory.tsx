@@ -11,8 +11,8 @@ import { PriceData, ChartData, PriceChartProps, PriceWrapProps, FormattedData } 
 // 최고가, 최저가
 export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) => {
   // 문자열로 변환 후 천 단위 쉼표 기재
-  const semicolonMinPrice = minPrice !== undefined ? minPrice.toLocaleString() : '0';
-  const semicolonMaxPrice = maxPrice !== undefined ? maxPrice.toLocaleString() : '0';
+  const semicolonMinPrice = minPrice != null ? minPrice.toLocaleString() : '0';
+  const semicolonMaxPrice = maxPrice != null ? maxPrice.toLocaleString() : '0';
 
   return (
     <PriceWrap>
@@ -31,6 +31,7 @@ export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) 
 // 차트
 export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxPrice }) => {
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
+  console.log(data, '가격 히스토리 데이터');
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
     datasets: [],
