@@ -1,15 +1,12 @@
 import styled from 'styled-components';
-import { useInfiniteQuery } from 'react-query';
 import { useEffect } from 'react';
-
-import { getCategory } from '../../../../api/product';
-import { getCategoryFilter } from '../../../../api/product';
 
 import CategoryOnProduct from '../CategoryProduct';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 import { Product } from '../../../../type';
-import Observer from '../Observer';
+import Observer from '../../../../components/Observer';
+import { infiniteCategory, infiniteCategoryFilter } from '../../../../infiniteQueries/category';
 
 interface Props {
   categoryId: number;
@@ -23,63 +20,77 @@ function CategoryOnProductList(props: Props) {
 
   const categoryNameList = ['iPad', 'iPad', 'MacBook', 'Mac', 'AirPods', 'iPhone', 'AppleWatch'];
 
-  const infiniteCategory = useInfiniteQuery(
-    ['infiniteCategory'],
-    ({ pageParam = '' }) => getCategory(categoryNameList[props.categoryId], pageParam, props.isSoldout),
-    {
-      getNextPageParam: (categoryProducts) => (categoryProducts ? categoryProducts[categoryProducts.length - 1].productId : undefined),
-    }
-  );
+  // 무한스크롤 데이터 불러오기 ---------------------------------------------------------------
 
-  const infiniteFilter = useInfiniteQuery(
-    ['infiniteFilter'],
-    ({ pageParam = '' }) => getCategoryFilter(categoryNameList[props.categoryId], props.filterName, pageParam, props.isSoldout),
-    {
-      getNextPageParam: (filterProducts) => (filterProducts ? filterProducts[filterProducts.length - 1].productId : undefined),
-    }
-  );
+  const infiniteCategoryData = infiniteCategory(categoryNameList[props.categoryId], props.isSoldout);
+
+  const infiniteFilterData = infiniteCategoryFilter(categoryNameList[props.categoryId], props.filterName, props.isSoldout);
 
   // 카테고리, 필터가 변경될 때마다 서버로 refetch---------------------------------------------------------
+  
   useEffect(() => {
-    infiniteCategory.refetch();
-    infiniteFilter.refetch();
+    infiniteCategoryData.refetch();
+    infiniteFilterData.refetch();
   }, [props.categoryId, props.filterName, props.isSoldout]);
 
   // 데이터 로딩 중 & 에러 관리 ----------------------------------------------------------------------------------
 
-  if (infiniteCategory.status === 'loading') {
+  if (infiniteCategoryData.status === 'loading') {
     return <Loading />;
   }
-  if (infiniteCategory.status === 'error') {
+  if (infiniteCategoryData.status === 'error') {
     return <Error />;
   }
-  if (infiniteFilter.status === 'loading') {
+  if (infiniteFilterData.status === 'loading') {
     return <Loading />;
   }
-  if (infiniteFilter.status === 'error') {
+  if (infiniteFilterData.status === 'error') {
     return <Error />;
   }
 
-  // 처음 렌더링 할 랜덤 8가지 상품 ----------------------------
+  // 이차원배열에서 일차원배열 --------------------------------------------------------
 
-  const infiniteCategoryData: Product[] = infiniteCategory.data?.pages.reduce(function (acc, cur) {
-    return acc.concat(cur);
-  });
-  const infiniteFilterData: Product[] = infiniteFilter.data?.pages.reduce(function (acc, cur) {
-    return acc.concat(cur);
-  });
+  const infiniteCategoryDataList = (): Product[] | undefined => {
+    if (infiniteCategoryData.data) {
+      const copyData: Product[][] = [...infiniteCategoryData.data?.pages];
+      if (copyData[copyData.length - 1] === undefined) {
+        copyData.pop();
+      }
+      const result = copyData.reduce(function (acc, cur) {
+        return acc.concat(cur);
+      });
+      return result;
+    }
+  };
+
+  const infiniteFilterDataList = (): Product[] | undefined => {
+    if (infiniteFilterData.data) {
+      const copyData: Product[][] = [...infiniteFilterData.data?.pages];
+      if (copyData[copyData.length - 1] === undefined) {
+        copyData.pop();
+      }
+      const result = copyData.reduce(function (acc, cur) {
+        return acc.concat(cur);
+      });
+      return result;
+    }
+  };
+
+  // Observer 인식 후, 다음 데이터 조회하기 -----------------------------------------
 
   const handleIntersection = () => {
-    infiniteFilter.fetchNextPage();
-    infiniteCategory.fetchNextPage();
+    if ((props.isFilter ? infiniteCategoryData : infiniteFilterData).hasNextPage) {
+      infiniteCategoryData.fetchNextPage();
+      infiniteFilterData.fetchNextPage();
+    }
   };
 
   return (
     <Wrap>
       {props.isFilter
-        ? infiniteFilterData.map((productItem, index) => <CategoryOnProduct key={index} {...productItem} />)
-        : infiniteCategoryData.map((productItem, index) => <CategoryOnProduct key={index} {...productItem} />)}
-      {(props.isFilter ? infiniteFilter : infiniteCategory).hasNextPage && <Observer handleIntersection={handleIntersection} />}
+        ? infiniteFilterDataList()?.map((productItem: Product, index: number) => <CategoryOnProduct key={index} {...productItem} />)
+        : infiniteCategoryDataList()?.map((productItem: Product, index: number) => <CategoryOnProduct key={index} {...productItem} />)}
+      {(props.isFilter ? infiniteCategoryData : infiniteFilterData).hasNextPage && <Observer handleIntersection={handleIntersection} />}
     </Wrap>
   );
 }
