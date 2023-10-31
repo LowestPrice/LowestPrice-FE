@@ -1,15 +1,7 @@
 name: Deploy Frontend to S3 and CloudFront(ver. vite react)
 
 on:
-  # master 브랜치에 push할 때
-  push:
-    branches:
-      - master
-
-  # master 브랜치로 PR 할 때
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
