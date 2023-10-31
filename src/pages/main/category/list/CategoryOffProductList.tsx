@@ -33,8 +33,6 @@ function CategoryOffProductList(props: Props) {
     eightProducts.push(data[Math.floor(Math.random() * 300)]);
   }
 
-  console.log(eightProducts);
-
   return (
     <Wrap>
       {eightProducts.map((productItem, index) => (

@@ -44,11 +44,12 @@ export const getTopten = async () => {
 
 // 카테고리별 상품
 
-export const getCategory = async (categoryName: string | undefined, isSoldout: boolean) => {
+export const getCategory = async (categoryName: string | undefined, lastId: number | undefined, isSoldout: boolean) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
+  console.log(lastId);
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/category/${categoryName}?isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/category/${categoryName}?lastId=${lastId}&isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     console.log(err);
@@ -57,12 +58,14 @@ export const getCategory = async (categoryName: string | undefined, isSoldout: b
 
 // 카테고리 안에 필터
 
-export const getCategoryFilter = async (categoryName: string | undefined, filterName: string | undefined, isSoldout: boolean) => {
+export const getCategoryFilter = async (categoryName: string | undefined, filterName: string | undefined, lastId: number | undefined, isSoldout: boolean) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(categoryName, filterName);
-    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/category/${categoryName}/${filterName}?isOutOfStock=${isSoldout}`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_KEY}/product/category/${categoryName}/${filterName}?lastId=${lastId}&isOutOfStock=${isSoldout}`
+    );
     return response.data.data;
   } catch (err) {
     console.log(err);
