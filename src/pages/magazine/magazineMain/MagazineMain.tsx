@@ -47,27 +47,32 @@ const Magazine: React.FC<MagazineProps> = () => {
         {isAdmin && <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>}
         <div>
           <Scroll>
-            {magazines?.map((magazineData, index) => (
-              <Item key={magazineData.magazineId}>
-                <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
-                  <Img src={magazineData.mainImage} />
-                  <BoxPadding>
-                    <BoxTitle>{magazineData.title}</BoxTitle>
-                    <Content>{magazineData.content.length > 53 ? `${magazineData.content.substring(0, 53)}...` : magazineData.content}</Content>
-                    <Flex>
-                      <div>{magazineData.editor}</div>
-                      <Like
-                        isLiked={magazineData.isLiked}
-                        magazineId={magazineData.magazineId}
-                        likeCount={magazineData.LikeMagazine}
-                        handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
-                        index={index}
-                      />
-                    </Flex>
-                  </BoxPadding>
-                </Box>
-              </Item>
-            ))}
+            {magazines?.map((magazineData, index) => {
+              // html 마크업 제거 후 렌더링
+              const textOnly = magazineData.content.replace(/<\/?[^>]+(>|$)/g, '');
+              const displayText = textOnly.length > 53 ? `${textOnly.substring(0, 53)}...` : textOnly;
+              return (
+                <Item key={magazineData.magazineId}>
+                  <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
+                    <Img src={magazineData.mainImage} />
+                    <BoxPadding>
+                      <BoxTitle>{magazineData.title}</BoxTitle>
+                      <Content>{displayText}</Content>
+                      <Flex>
+                        <div>{magazineData.editor}</div>
+                        <Like
+                          isLiked={magazineData.isLiked}
+                          magazineId={magazineData.magazineId}
+                          likeCount={magazineData.LikeMagazine}
+                          handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
+                          index={index}
+                        />
+                      </Flex>
+                    </BoxPadding>
+                  </Box>
+                </Item>
+              );
+            })}
           </Scroll>
         </div>
       </Container>
