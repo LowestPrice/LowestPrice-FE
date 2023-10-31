@@ -18,12 +18,12 @@ function Alarmbell(props: Props) {
   // 알람 설정하기 / 취소하기 ------------------------
   const alarmMutation = useMutation(toggleAlarm, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['topProduct']);
       queryClient.invalidateQueries(['product']);
-      queryClient.invalidateQueries(['categoryProduct']);
-      queryClient.invalidateQueries(['filterProduct']);
-      queryClient.invalidateQueries(['searchProduct']);
+      queryClient.invalidateQueries(['infiniteCategoryProduct']);
+      queryClient.invalidateQueries(['infiniteCategoryFilterProduct']);
+      queryClient.invalidateQueries(['infiniteSearchProduct']);
       queryClient.invalidateQueries(['FilteredSearchProduct']);
+      queryClient.invalidateQueries(['topProduct']);
     },
     onError: () => {
       console.log('alarm 실패');

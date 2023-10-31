@@ -100,12 +100,12 @@ export const getSimilarProducts = async (productId: string | undefined) => {
 
 // 검색 상품
 
-export const getSearch = async (searchWord: string | undefined, isSoldout: boolean) => {
+export const getSearch = async (searchWord: string | undefined, lastId: number | undefined, isSoldout: boolean) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(searchWord);
-    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/search?search=${searchWord}&isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/search?search=${searchWord}&lastId=${lastId}&isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     toast.error('찾으시는 상품이 존재하지 않습니다.');

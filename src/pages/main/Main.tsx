@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 import Topten from './topten/Topten';
 import PageFooter from '../../components/footer/PageFooter';
@@ -100,7 +101,11 @@ export default function Main() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          navigate(`/search/${searchWord}`);
+          if (searchWord === '') {
+            toast.error('검색어를 입력해주세요.');
+          } else {
+            navigate(`/search/${searchWord}`);
+          }
         }}
       >
         <div style={{ height: '100%', position: 'relative', width: '100%' }}>
@@ -123,7 +128,11 @@ export default function Main() {
               <div
                 style={{ cursor: 'pointer' }}
                 onClick={() => {
-                  navigate(`/search/${searchWord}`);
+                  if (searchWord === '') {
+                    toast.error('검색어를 입력해주세요.');
+                  } else {
+                    navigate(`/search/${searchWord}`);
+                  }
                 }}
               >
                 <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>

@@ -20,11 +20,12 @@ function AlarmFooter(props: Props) {
   const alarmMutation = useMutation(toggleAlarm, {
     onSuccess: () => {
       queryClient.invalidateQueries(['product']);
-      queryClient.invalidateQueries(['categoryProduct']);
-      queryClient.invalidateQueries(['filterProduct']);
-      queryClient.invalidateQueries(['searchProduct']);
+      queryClient.invalidateQueries(['infiniteCategoryProduct']);
+      queryClient.invalidateQueries(['infiniteCategoryFilterProduct']);
+      queryClient.invalidateQueries(['infiniteSearchProduct']);
       queryClient.invalidateQueries(['FilteredSearchProduct']);
       queryClient.invalidateQueries(['topProduct']);
+      console.log('invalidate 완료');
     },
     onError: () => {
       console.log('alarm 실패');
