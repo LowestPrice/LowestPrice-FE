@@ -7,7 +7,9 @@ export const getMagazine = async () => {
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/magazines`, { headers: { Authorization: accessToken } });
-    return response.data.data;
+    const responseData = response.data.data;
+    const admin = response.data.access;
+    return { data: responseData, admin: admin };
   } catch (error) {
     console.error('매거진 데이터 조회 에러', error);
   }
@@ -19,7 +21,9 @@ export const getMagazineDetail = async (id: any) => {
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/magazines/${id}`, { headers: { Authorization: accessToken } });
-    return response;
+    const responseData = response.data.data;
+    const admin = response.data.access;
+    return { data: responseData, admin: admin };
   } catch (error) {
     console.error('매거진 상세 데이터 조회 에러', error);
   }
@@ -29,11 +33,16 @@ export const getMagazineDetail = async (id: any) => {
 export const postMagazine = async ({ title, content, image }: { title: any; content: any; image: any }) => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
+
   try {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
     formData.append('file', image);
+
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1], '폼데이터 매거진 등록 콘솔');
+    }
 
     const response = await axios.post(`${import.meta.env.VITE_API_KEY}/magazines`, formData, {
       headers: {
@@ -41,6 +50,7 @@ export const postMagazine = async ({ title, content, image }: { title: any; cont
         Authorization: accessToken,
       },
     });
+    console.log('성공 시, 백엔드가 보내주는 데이터', response.data.request);
     return response.data;
   } catch (error) {
     console.error('매거진 작성 에러', error);

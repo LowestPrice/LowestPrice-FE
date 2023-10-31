@@ -267,4 +267,5 @@ const GraphText = styled.div`
   font-weight: 700;
   line-height: 121.5%;
   margin-top: 18px;
+  margin-bottom: 15px;
 `;

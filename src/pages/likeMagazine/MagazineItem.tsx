@@ -23,10 +23,12 @@ const MagazineItem = () => {
           style={{ backgroundImage: `url(${item.mainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
           onClick={() => navigate(`/magazine/${item.magazineId}`)}
         >
-          <ItemMargin>
-            <Title>{item.title}</Title>
-            <Editor>by 관리자</Editor>
-          </ItemMargin>
+          <Overlay>
+            <ItemMargin>
+              <Title>{item.title}</Title>
+              <Editor>by 관리자</Editor>
+            </ItemMargin>
+          </Overlay>
         </Item>
       ))}
     </>
@@ -39,9 +41,11 @@ const Item = styled.button`
   width: 100%;
   height: 125px;
   background-color: rgba(217, 217, 217, 1);
-  margin-bottom: 12px;
+  margin-bottom: 4px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  border: none;
 `;
 
 const Title = styled.div`
@@ -50,6 +54,7 @@ const Title = styled.div`
   font-weight: 500;
   line-height: 110%;
   margin-bottom: 12px;
+  display: flex;
 `;
 
 const Editor = styled.div`
@@ -64,4 +69,16 @@ const ItemMargin = styled.div`
   margin-top: 60px;
   margin-left: 20px;
   margin-bottom: 23px;
+`;
+
+const Overlay = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;

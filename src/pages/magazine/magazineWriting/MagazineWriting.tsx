@@ -1,21 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FlexBox, Button, ContentBox, Title, Content, DirectionCol, PhotoAdd, PhotoDiv } from './styles';
+import React, { useState, useMemo } from 'react';
+import { FlexBox, Button, ContentBox, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { postMagazine } from '../../../api/magazine';
 import PageFooter from '../../../components/footer/PageFooter';
 import { BackIcon, AddImageIcon } from '../../../assets/icon/icon';
+import { toast } from 'react-toastify';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const contentRef = useRef<HTMLTextAreaElement>(null);
-  const titleRef = useRef<HTMLInputElement>(null);
 
   // 데이터 추가하기
   const [title, setTitle] = useState<any>('');
   const [content, setContent] = useState<any>('');
   const [image, setImage] = useState<any>(null);
+  const [previewImage, setPreviewImage] = useState<string>('');
 
   const addPosts = useMutation(postMagazine, {
     onSuccess: () => {
@@ -30,21 +32,39 @@ const MagazineWriting: React.FC = () => {
     setTitle(e.target.value);
   };
 
-  const onContentChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    setContent(e.target.value);
+  const onContentChangeHandler = (value: string): void => {
+    setContent(value);
   };
 
-  const onImageChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const imageFile = e.target.files?.[0];
-    setImage(imageFile);
+  // 이미지 처리
+  const imageHandlerCallback = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.addEventListener('change', imageHandler);
+    input.click();
+  };
+
+  const imageHandler = (e: any) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setImage(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const onSubmitButtonHandler = (title: any, content: any, image: any) => {
+    console.log(image, '메인 이미지');
+    console.log(imageHandlerCallback, '콜백 이미지');
     addPosts.mutate(
       { title, content, image },
       {
         onSuccess: () => {
-          alert('추가 완료');
+          toast.success('추가되었습니다');
           navigate('/magazine');
         },
         onError: (error) => {
@@ -54,40 +74,20 @@ const MagazineWriting: React.FC = () => {
     );
   };
 
-  // textarea 높이 조정(내용)
-  const adjustHeight = () => {
-    const targetTextarea = contentRef.current;
-    if (targetTextarea) {
-      targetTextarea.style.height = 'auto';
-      if (targetTextarea.scrollHeight > targetTextarea.clientHeight) {
-        targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
-      } else {
-        targetTextarea.style.height = window.innerHeight + 'px';
-      }
-    }
-  };
-
-  // textarea 높이 조정(제목)
-  const adjustTitleHeight = () => {
-    const targetTextarea = titleRef.current;
-    if (targetTextarea) {
-      targetTextarea.style.height = 'auto';
-      targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
-    }
-  };
-
-  useEffect(() => {
-    adjustTitleHeight();
-  }, [title]);
-
-  useEffect(() => {
-    adjustHeight();
-  }, [content]);
-
-  // 컴포넌트가 마운트 될 때 길이 조정
-  useEffect(() => {
-    adjustHeight();
-    adjustTitleHeight();
+  const modules = useMemo(() => {
+    return {
+      toolbar: {
+        container: [
+          ['image'],
+          [{ header: [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+          [{ font: [] }],
+          [{ color: [] }, { background: [] }],
+          [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+          [{ align: [] }],
+        ],
+      },
+    };
   }, []);
 
   return (
@@ -100,23 +100,24 @@ const MagazineWriting: React.FC = () => {
       </FlexBox>
       <ContentBox>
         <DirectionCol>
+          <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
           <PhotoDiv>
             <PhotoAdd>
               <label>
-                <input style={{ display: 'none' }} onChange={onImageChangeHandler} type='file' accept='image/*' />
+                <input style={{ display: 'none' }} onChange={imageHandler} type='file' accept='image/*' />
                 <AddImageIcon />
               </label>
             </PhotoAdd>
           </PhotoDiv>
-          <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} ref={titleRef} />
-          <input placeholder='이미지' onChange={onImageChangeHandler} type='file' accept='image/*' style={{ display: 'none' }} />
-          <Content
+          {previewImage && <StyledImage src={previewImage} alt='매거진 이미지' />}
+          <ReactQuill
+            theme='snow'
             placeholder='내용을 입력하세요'
             onChange={onContentChangeHandler}
             value={content}
-            ref={contentRef}
-            rows={100}
+            modules={modules}
             style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box' }}
+            preserveWhitespace
           />
         </DirectionCol>
       </ContentBox>

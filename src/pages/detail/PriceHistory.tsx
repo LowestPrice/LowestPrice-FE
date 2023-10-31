@@ -6,13 +6,13 @@ import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 Chart.register(CategoryScale);
 import styled from 'styled-components';
-import { PriceData, ChartData, PriceChartProps, PriceWrapProps } from '../../type/type';
+import { PriceData, ChartData, PriceChartProps, PriceWrapProps, FormattedData } from '../../type/type';
 
 // 최고가, 최저가
 export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) => {
   // 문자열로 변환 후 천 단위 쉼표 기재
-  const semicolonMinPrice = minPrice !== undefined ? minPrice.toLocaleString() : '0';
-  const semicolonMaxPrice = maxPrice !== undefined ? maxPrice.toLocaleString() : '0';
+  const semicolonMinPrice = minPrice != null ? minPrice.toLocaleString() : '0';
+  const semicolonMaxPrice = maxPrice != null ? maxPrice.toLocaleString() : '0';
 
   return (
     <PriceWrap>
@@ -30,29 +30,18 @@ export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) 
 
 // 차트
 export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxPrice }) => {
-  interface FormattedData {
-    [key: string]: number;
-  }
-
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
+  console.log(data, '가격 히스토리 데이터');
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
     datasets: [],
   });
-  const [formattedData, setFormattedData] = useState<FormattedData>({});
+  const [_, setFormattedData] = useState<FormattedData>({});
 
   // 날짜 형식 변경 (년월일 -> 월일)
   const DeleteYear = (date: string) => {
     const dateData = new Date(date);
-    return `${dateData.getMonth() + 1}-${dateData.getDate()}`;
-  };
-
-  const options = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
+    return `${dateData.getMonth() + 1}/${dateData.getDate()}`;
   };
 
   useEffect(() => {
@@ -63,34 +52,42 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
         newFormattedData[newKey] = value;
       }
       setFormattedData(newFormattedData);
-    }
-  }, [data]);
 
-  useEffect(() => {
-    if (data) {
-      const labels = Object.keys(formattedData);
-      const datasetData = Object.values(formattedData) as number[];
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d')!;
+      const gradient = ctx.createLinearGradient(0, 0, 0, 180);
+      gradient.addColorStop(0, 'rgba(0, 171, 249, 0.12)');
+      gradient.addColorStop(1, 'rgba(0, 171, 249, 0)');
+
+      const labels = Object.keys(newFormattedData);
+      const datasetData = Object.values(newFormattedData) as number[];
 
       setPriceData({
         labels: labels,
         datasets: [
           {
-            label: 'Price History',
+            label: '',
             data: datasetData,
             borderColor: '#00ABF9',
             borderWidth: 2,
+            fill: true,
+            backgroundColor: gradient,
           },
         ],
       });
-    }
-  }, [formattedData]);
 
-  useEffect(() => {
-    if (data) {
       setMinPrice(data?.minPrice);
       setMaxPrice(data?.maxPrice);
     }
-  }, [data]);
+  }, [data, setMinPrice, setMaxPrice]);
+
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
   if (isLoading) {
     return <h1>로딩중입니다</h1>;
@@ -118,6 +115,7 @@ const PriceArea = styled.div`
   flex: shrink;
   align-items: center;
   margin-bottom: 5px;
+  padding-left: 18px;
 `;
 
 const Text = styled.div`

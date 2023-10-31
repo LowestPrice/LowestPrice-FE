@@ -47,7 +47,6 @@ export const Content = styled.textarea`
   color: #b1b1b1;
   margin-top: 13px;
   border: none;
-  line-height: 1.5;
 
   &:focus {
     outline: none;
@@ -66,8 +65,12 @@ export const PhotoAdd = styled.button`
 `;
 
 export const PhotoDiv = styled.div`
-  width: 375px;
   height: 50px;
   border-top: 1px solid #b1b1b1;
   border-bottom: 1px solid #b1b1b1;
+`;
+
+export const StyledImage = styled.img`
+  max-width: 375px;
+  max-height: 300px;
 `;

@@ -10,6 +10,9 @@ import styled from 'styled-components';
 import Like from '../Like';
 import { useLike } from '../../../hooks/useLike';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   const { id } = useParams();
@@ -22,12 +25,14 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 
   // 데이터 불러오기
   const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
-  const magazineData = dataDetail?.data.data;
+  const magazineData = dataDetail?.data;
+  const isAdmin = dataDetail?.admin;
 
   // 데이터 삭제하기
   const deletePosts = useMutation(deleteMagazine, {
     onSuccess: () => {
-      queryClient.invalidateQueries('posts');
+      queryClient.invalidateQueries(['posts', id]);
+      queryClient.invalidateQueries('magazineData');
     },
     onError: (error) => {
       console.log('error 발생', error);
@@ -36,7 +41,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 
   const onDeleteButtonHandler = (id: any) => {
     deletePosts.mutate({ id });
-    alert('삭제되었습니다.');
+    toast.success('삭제되었습니다.');
   };
 
   // 좋아요
@@ -87,29 +92,35 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           </Button>
           <MagazineTitle>
             <TopText>매거진</TopText>
-            {magazineData.title}
+            <TitleText>{magazineData.title}</TitleText>
           </MagazineTitle>
-          <Button ref={dropDownRef} onClick={() => setIsOpen(!isOpen)}>
-            {isOpen && (
-              <DropDown
-                onEditClick={() => {
-                  navigate(`/magazineEditing/${magazineData.magazineId}`, { state: { props: magazineData } });
-                  setIsOpen(false);
-                }}
-                onDeleteClick={() => {
-                  onDeleteButtonHandler(id);
-                  navigate('/magazine');
-                  setIsOpen(false);
-                }}
-              />
-            )}
-            <StyledDropDownIcon>
-              <DropDownIcon />
-            </StyledDropDownIcon>
-          </Button>
+          {isAdmin ? (
+            <Button ref={dropDownRef} onClick={() => setIsOpen(!isOpen)}>
+              {isOpen && (
+                <DropDown
+                  onEditClick={() => {
+                    navigate(`/magazineEditing/${magazineData.magazineId}`, { state: { props: magazineData } });
+                    setIsOpen(false);
+                  }}
+                  onDeleteClick={() => {
+                    onDeleteButtonHandler(id);
+                    navigate('/magazine');
+                    setIsOpen(false);
+                  }}
+                />
+              )}
+              <StyledDropDownIcon>
+                <DropDownIcon />
+              </StyledDropDownIcon>
+            </Button>
+          ) : (
+            <div></div>
+          )}
         </Flex>
       </TopBox>
-      <TextArea>{magazineData.content}</TextArea>
+      <TextArea>
+        <ReactQuill value={magazineData.content} readOnly={true} theme={'bubble'} />
+      </TextArea>
       <LikeShareIconFlex>
         <Like
           isLiked={magazineData.isLiked}
@@ -117,7 +128,6 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           likeCount={magazineData.LikeMagazine}
           index={index}
           handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
-          style={{ marginLeft: '20px' }}
         />
         <StyledGreyShareIcon>
           <GreyShareIcon />
@@ -233,12 +243,19 @@ const AnotherContentEditor = styled.div`
 
 const MagazineTitle = styled.div`
   z-index: 999;
+  display: flex;
+  align-items: center;
+  width: 130px;
+`;
+
+const TitleText = styled.div`
+  flex-grow: 1;
   font-size: 12px;
   font-weight: 300;
   color: #fff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const TopText = styled.div`
@@ -251,12 +268,13 @@ const TopText = styled.div`
   line-height: 110%;
   border-radius: 10px;
   border: 0.4px solid #fff;
-  width: 32px;
+  width: auto;
   padding: 0px 6px 0px 6px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 6px;
+  white-space: nowrap;
 `;
 
 const Flex = styled.div`
@@ -315,7 +333,7 @@ const EditorShareFlex = styled.div`
 
 const StyledShareIcon = styled(ShareIcon)`
   margin-right: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 `;
 
 const LikeShareIconFlex = styled.div`
@@ -323,10 +341,12 @@ const LikeShareIconFlex = styled.div`
   justify-content: space-between;
   margin-top: 37.5px;
   margin-bottom: 14px;
+  margin-left: 10px;
 `;
 
 const StyledGreyShareIcon = styled(GreyShareIcon)`
   margin-right: 20px;
+  margin-top: -1px;
 `;
 
 const StyledBackIcon = styled(BackIcon)`
