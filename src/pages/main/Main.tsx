@@ -120,16 +120,31 @@ export default function Main() {
                 }}
               ></SearchInput>
               <button style={{ display: 'none' }} />
+              <div
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navigate(`/search/${searchWord}`);
+                }}
+              >
+                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                  <circle cx='11' cy='11' r='9' transform='rotate(180 11 11)' stroke='#6F6F6F' strokeWidth='2' />
+                  <path
+                    d='M22.2813 23.6954C22.6653 24.0923 23.2983 24.1028 23.6953 23.7189C24.0922 23.3349 24.1027 22.7018 23.7187 22.3048L22.2813 23.6954ZM23.7187 22.3048L17.615 15.9952L16.1776 17.3857L22.2813 23.6954L23.7187 22.3048Z'
+                    fill='#6F6F6F'
+                  />
+                </svg>
+              </div>
             </SearchInputWrap>
+
             <Title>
-              <div className='title'>오늘의 특가</div>
+              <div className='title'>오늘의 특가✔️</div>
               <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
             </Title>
             <Topten />
             <CategoryWrap>
               <CategoryTitle>
                 <div>Apple 제품</div>
-                <div>가장 저렴할 때 구매하세요.</div>
+                <div>가장 저렴할 때 구매하세요. 🔻</div>
               </CategoryTitle>
               <CategoryTabWrap>
                 {categoryList.map((item, index: number) => {
@@ -212,7 +227,7 @@ const Header = styled.div`
 const Wrap = styled.div`
   width: 375px;
   height: 550.32px;
-  background: linear-gradient(180deg, #cdcdcd 0%, rgba(213, 213, 213, 0.915044) 13.02%, rgba(171, 171, 171, 0.36) 58.85%, rgba(171, 171, 171, 0) 79.17%);
+  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -230,10 +245,17 @@ const SearchInputWrap = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  border-radius: 60px;
+  border: 0.5px solid var(--gray02, #b5b5b5);
+  background: #fff;
+
+  /* Shadow01 */
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.04), 0px 4px 6px 2px rgba(0, 0, 0, 0.03);
 `;
 
 const SearchInput = styled.input`
-  width: 250px;
+  width: 219px;
   height: 20px;
   border: none;
   outline: none;
@@ -243,11 +265,11 @@ const Title = styled.div`
   width: 199px;
   height: 50px;
   .title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
   }
   .subTitle {
-    font-size: 14px;
+    font-size: 16px;
   }
   gap: 5px;
   display: flex;

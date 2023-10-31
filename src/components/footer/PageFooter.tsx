@@ -39,7 +39,7 @@ const PageFooter = () => {
   const handleAlarmButton = () => {
     if (!accessToken) {
       toast.error('로그인 이후 알림목록을 확인하실 수 있습니다.');
-      navigate('/yetlogin');
+      navigate('/login');
       return;
     } else {
       navigate('/notification');
@@ -49,7 +49,7 @@ const PageFooter = () => {
   const handleMypageButton = () => {
     if (!accessToken) {
       toast.error('로그인 이후 마이페이지를 확인하실 수 있습니다.');
-      navigate('/yetlogin');
+      navigate('/login');
       return;
     } else {
       navigate('/mypage');
