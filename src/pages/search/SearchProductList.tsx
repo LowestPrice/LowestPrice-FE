@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Product } from '../../type';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import { infiniteSearch } from '../../infiniteQueries/search';
+import { infiniteSearch, infiniteSearchFilter } from '../../infiniteQueries/search';
 import Observer from '../../components/Observer';
 
 interface Props {
@@ -16,22 +16,18 @@ interface Props {
 }
 
 function SearchProductList(props: Props) {
-  // 검색한 상품과 검색한 상품을 필터링한 데이터 불러오기 -----------------------------------------------------------------
-
-  // const result = useQueries([
-  //   { queryKey: ['searchProduct', props.searchWord], queryFn: () => getSearch(props.searchWord, props.isSoldout) },
-  //   {
-  //     queryKey: ['FilteredSearchProduct'],
-  //     queryFn: () => getFilteredSearch(props.filterName, props.searchWord, props.isSoldout),
-  //     enabled: !!props.filterButton,
-  //   },
-  // ]);
+  // useInfiniteQuery 데이터 -----------------------------------------------------------
 
   const infiniteSearchData = infiniteSearch(props.searchWord, props.isSoldout);
 
+  const infiniteSearchFilterData = infiniteSearchFilter(props.filterName, props.searchWord, props.isSoldout, props.filterButton);
+
   // 필터버튼 클릭할 때마다 리패치 -------------------------------------------------------------------------
 
-  useEffect(() => {}, [props.filterButton, props.isFilter]);
+  useEffect(() => {
+    infiniteSearchData.refetch();
+    infiniteSearchFilterData.refetch();
+  }, [props.filterButton, props.isFilter]);
 
   // 로딩, 에러 관리 ---------------------------------------------------------
 
@@ -41,34 +37,63 @@ function SearchProductList(props: Props) {
   if (infiniteSearchData.status === 'error') {
     return <Error />;
   }
+  if (infiniteSearchFilterData.status === 'loading') {
+    return <Loading />;
+  }
+  if (infiniteSearchFilterData.status === 'error') {
+    return <Error />;
+  }
 
-  // if (result[1].status === 'loading') {
-  //   return <Loading />;
-  // }
-  // if (result[1].status === 'error') {
-  //   return <Error />;
-  // }
+  // 2차원 배열 -> 1차원 배열로 변경 ------------------------------------------
 
-  const infiniteSearchDataList: Product[] = infiniteSearchData.data?.pages.reduce(function (acc, cur) {
-    return acc.concat(cur);
-  });
+  const infiniteSearchDataList = (): Product[] | undefined => {
+    if (infiniteSearchData.data) {
+      const copyData: Product[][] = [...infiniteSearchData.data?.pages];
+      if (copyData[copyData.length - 1] === undefined) {
+        copyData.pop();
+      }
+      const result = copyData.reduce(function (acc, cur) {
+        return acc.concat(cur);
+      });
+      return result;
+    }
+  };
+
+  const infiniteSearchFilterDataList = (): Product[] | undefined => {
+    if (infiniteSearchFilterData.data) {
+      const copyData: Product[][] = [...infiniteSearchFilterData.data?.pages];
+      if (copyData[copyData.length - 1] === undefined) {
+        copyData.pop();
+      }
+      const result = copyData.reduce(function (acc, cur) {
+        return acc.concat(cur);
+      });
+      return result;
+    }
+  };
+
+  // Observer -------------------------------------------
 
   const handleIntersection = () => {
-    infiniteSearchData.fetchNextPage();
-    // infiniteCategoryData.fetchNextPage();
+    if ((props.isFilter ? infiniteSearchFilterData : infiniteSearchData).hasNextPage) {
+      infiniteSearchData.fetchNextPage();
+      infiniteSearchFilterData.fetchNextPage();
+    }
   };
+  console.log(props.isFilter);
+  console.log((props.isFilter ? infiniteSearchData : infiniteSearchFilterData).hasNextPage);
 
   return (
     <div>
       <Wrap>
         {props.isFilter
-          ? result[1].data.map((item: Product, index: number) => {
+          ? infiniteSearchFilterDataList()?.map((item: Product, index: number) => {
               return <SearchProduct key={index} {...item} />;
             })
-          : infiniteSearchDataList.map((item: Product, index: number) => {
+          : infiniteSearchDataList()?.map((item: Product, index: number) => {
               return <SearchProduct key={index} {...item} />;
             })}
-        <Observer handleIntersection={handleIntersection} />
+        {(props.isFilter ? infiniteSearchFilterData : infiniteSearchData).hasNextPage && <Observer handleIntersection={handleIntersection} />}
       </Wrap>
     </div>
   );

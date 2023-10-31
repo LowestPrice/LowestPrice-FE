@@ -115,12 +115,12 @@ export const getSearch = async (searchWord: string | undefined, lastId: number |
 
 // 검색한 상품 필터 -----------------------------------------------------------------------------
 
-export const getFilteredSearch = async (filterName: string | undefined, searchWord: string | undefined, isSoldout: boolean) => {
+export const getFilteredSearch = async (filterName: string | undefined, searchWord: string | undefined, lastId: number | undefined, isSoldout: boolean) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(filterName, searchWord);
-    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/search/${filterName}?search=${searchWord}&isOutOfStock=${isSoldout}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/search/${filterName}?search=${searchWord}&lastId=${lastId}&isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     console.log(err);

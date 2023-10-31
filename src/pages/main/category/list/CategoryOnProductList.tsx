@@ -48,7 +48,7 @@ function CategoryOnProductList(props: Props) {
     return <Error />;
   }
 
-  // 이차원배열에서 일차원배열 --------------------------------------------------------
+  // 2차원배열에서 1차원배열 --------------------------------------------------------
 
   const infiniteCategoryDataList = (): Product[] | undefined => {
     if (infiniteCategoryData.data) {
