@@ -74,6 +74,10 @@ function CategoryOnProductList(props: Props) {
     infiniteCategory.fetchNextPage();
   };
 
+  console.log(props.isFilter);
+
+  console.log(infiniteCategoryData);
+  console.log(infiniteFilterData);
 
   return (
     <Wrap>
