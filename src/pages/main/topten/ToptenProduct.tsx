@@ -57,7 +57,9 @@ function ToptenProduct(props: Props) {
         </div>
         <div className='title'>{props.productName}</div>
       </Content>
-      <ProductImage src={props.productImage + getParametersForUnsplash(257.997, 257.997, 80, 'jpg')} />
+      <ImageWrap>
+        <ProductImage src={props.productImage + getParametersForUnsplash(257.997, 257.997, 80, 'jpg')} />
+      </ImageWrap>
     </Wrap>
   );
 }
@@ -72,6 +74,7 @@ const Wrap = styled.div`
   position: relative;
   .rank {
     font-size: 53.19px;
+    font-weight: 700;
     color: black;
     line-height: 58, 51px;
     position: absolute;
@@ -85,16 +88,12 @@ const ProductImageWrap = styled.div`
   width: 100%;
   height: 100%;
   background-color: #f3f3f3;
-  background: linear-gradient(
-    180.08deg,
-    rgba(255, 255, 255, 0) 34.86%,
-    rgba(148, 148, 148, 0.04) 53.24%,
-    rgba(139, 139, 139, 0.17) 65.15%,
-    rgba(120, 120, 120, 0.33) 71.61%,
-    rgba(107, 107, 107, 0.62) 80.8%,
-    #4d4d4d 100.2%
-  );
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0.24%, rgba(0, 0, 0, 0.4) 3.99%, rgba(0, 0, 0, 0.4) 7.05%, rgba(0, 0, 0, 0.04) 32.56%);
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const BellImage = styled.div`
@@ -121,8 +120,9 @@ const Content = styled.div`
   }
 
   .discountRate {
+    color: #fa6161;
     font-size: 20.99px;
-    font-weight: bold;
+    font-weight: 700;
   }
   .price {
     font-size: 19.24px;
@@ -130,8 +130,8 @@ const Content = styled.div`
     margin-left: 5px;
   }
   .originalPrice {
-    font-size: 12.24px;
-    font-weight: bold;
+    font-size: 11.361px;
+    font-weight: 700;
     margin-left: 7px;
     text-decoration: line-through;
   }
@@ -139,14 +139,26 @@ const Content = styled.div`
     width: 240px;
     font-size: 13.99px;
     font-weight: 500;
+    margin-top: 5px;
   }
 `;
 
 const ProductImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 88%;
+  height: 85%;
   border-radius: 15px;
-  z-index: -1;
+  margin-top: 10px;
+`;
+
+const ImageWrap = styled.div`
+  width: 258px;
+  height: 258px;
+  background-color: white;
   position: absolute;
   top: 0px;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
