@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 // 카카오 로그인
+
 export const loginWithKakao = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
@@ -11,6 +12,7 @@ export const loginWithKakao = () => {
 };
 
 // 카카오 회원 탈퇴
+
 export const DeleteIdWithKakao = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;

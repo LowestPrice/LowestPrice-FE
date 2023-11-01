@@ -228,6 +228,7 @@ export default function Main() {
 const MainWrap = styled.div`
   height: 100vh;
   overflow: scroll;
+  position: fixed;
   &::-webkit-scrollbar {
     width: 5px;
     display: none;
