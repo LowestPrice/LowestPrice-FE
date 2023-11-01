@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
@@ -11,6 +11,7 @@ import FilterOption from './category/FilterOption';
 import CategoryList from './category/list/CategoryProductList';
 
 import { Filter } from '../../type';
+import Splash from './Splash';
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
@@ -23,6 +24,16 @@ export default function Main() {
   const [filterName, setFilterName] = useState<string>('');
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
   const [isSoldout, setIsSoldout] = useState<boolean>(false);
+  const [showSplash, setShowSplash] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (showSplash) {
+      const splashTime = setTimeout(() => {
+        setShowSplash(false);
+      }, 2000);
+      return () => clearTimeout(splashTime);
+    }
+  }, []);
 
   // 카테고리 리스트 ------------------------------------------------
 
@@ -96,113 +107,121 @@ export default function Main() {
     setSearchWord(e.target.value);
   };
 
+  console.log(showSplash);
+
   return (
-    <MainWrap>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (searchWord === '') {
-            toast.error('검색어를 입력해주세요.');
-          } else {
-            navigate(`/search/${searchWord}`);
-          }
-        }}
-      >
-        <div style={{ height: '100%', position: 'relative', width: '100%' }}>
-          <Header>
-            <Logo />
-            <h3>내일은 최저가</h3>
-          </Header>
+    <>
+      {showSplash ? (
+        <Splash />
+      ) : (
+        <MainWrap>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchWord === '') {
+                toast.error('검색어를 입력해주세요.');
+              } else {
+                navigate(`/search/${searchWord}`);
+              }
+            }}
+          >
+            <div style={{ height: '100%', position: 'relative', width: '100%' }}>
+              <Header>
+                <Logo />
+                <h3>내일은 최저가</h3>
+              </Header>
 
-          <Wrap>
-            <SearchInputWrap>
-              <SearchInput
-                type='text'
-                placeholder='검색'
-                value={searchWord}
-                onChange={(e) => {
-                  onChangeSearchWord(e);
-                }}
-              ></SearchInput>
-              <button style={{ display: 'none' }} />
-              <div
-                style={{ cursor: 'pointer' }}
-                onClick={() => {
-                  if (searchWord === '') {
-                    toast.error('검색어를 입력해주세요.');
-                  } else {
-                    navigate(`/search/${searchWord}`);
-                  }
-                }}
-              >
-                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
-                  <circle cx='11' cy='11' r='9' transform='rotate(180 11 11)' stroke='#6F6F6F' strokeWidth='2' />
-                  <path
-                    d='M22.2813 23.6954C22.6653 24.0923 23.2983 24.1028 23.6953 23.7189C24.0922 23.3349 24.1027 22.7018 23.7187 22.3048L22.2813 23.6954ZM23.7187 22.3048L17.615 15.9952L16.1776 17.3857L22.2813 23.6954L23.7187 22.3048Z'
-                    fill='#6F6F6F'
-                  />
-                </svg>
-              </div>
-            </SearchInputWrap>
+              <Wrap>
+                <SearchInputWrap>
+                  <SearchInput
+                    type='text'
+                    placeholder='검색'
+                    value={searchWord}
+                    onChange={(e) => {
+                      onChangeSearchWord(e);
+                    }}
+                  ></SearchInput>
+                  <button style={{ display: 'none' }} />
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      if (searchWord === '') {
+                        toast.error('검색어를 입력해주세요.');
+                      } else {
+                        navigate(`/search/${searchWord}`);
+                      }
+                    }}
+                  >
+                    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                      <circle cx='11' cy='11' r='9' transform='rotate(180 11 11)' stroke='#6F6F6F' strokeWidth='2' />
+                      <path
+                        d='M22.2813 23.6954C22.6653 24.0923 23.2983 24.1028 23.6953 23.7189C24.0922 23.3349 24.1027 22.7018 23.7187 22.3048L22.2813 23.6954ZM23.7187 22.3048L17.615 15.9952L16.1776 17.3857L22.2813 23.6954L23.7187 22.3048Z'
+                        fill='#6F6F6F'
+                      />
+                    </svg>
+                  </div>
+                </SearchInputWrap>
 
-            <Title>
-              <div className='title'>오늘의 특가✔️</div>
-              <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
-            </Title>
-            <Topten />
-            <CategoryWrap>
-              <CategoryTitle>
-                <div>Apple 제품</div>
-                <div>가장 저렴할 때 구매하세요. 🔻</div>
-              </CategoryTitle>
-              <CategoryTabWrap>
-                {categoryList.map((item, index: number) => {
-                  return (
-                    <CategoryTab
-                      key={index}
-                      children={index}
-                      isCategorySelected={isCategorySelect}
-                      handleCategoryButton={handleCategoryButton}
-                      index={index}
-                      content={item}
-                    />
-                  );
-                })}
-              </CategoryTabWrap>
-              <Filterbar $isCategoryOn={isOnCategory}>
-                <Options>
-                  {filterList.map((item, index) => {
-                    return (
-                      <FilterOption
-                        children={index}
-                        key={index}
-                        handleFilterButton={handleFilterButton}
-                        filterButton={filterButton}
-                        content={item.content}
-                        value={item.value}
-                        isFilter={isFilter}
-                        index={index}
-                      ></FilterOption>
-                    );
-                  })}
-                  <Soldout onClick={handleSoldoutButton} $isSoldout={isSoldout}>
-                    품절상품제외
-                  </Soldout>
-                </Options>
-              </Filterbar>
-              <CategoryList isOnCategory={isOnCategory} categoryId={categoryId} filterName={filterName} isFilter={isFilter} isSoldout={isSoldout} />
-            </CategoryWrap>
-          </Wrap>
-        </div>
-        <div
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <PageFooter />
-        </div>
-      </form>
-    </MainWrap>
+                <Title>
+                  <div className='title'>오늘의 특가✔️</div>
+                  <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
+                </Title>
+                <Topten />
+                <CategoryWrap>
+                  <CategoryTitle>
+                    <div>Apple 제품</div>
+                    <div>가장 저렴할 때 구매하세요. 🔻</div>
+                  </CategoryTitle>
+                  <CategoryTabWrap>
+                    {categoryList.map((item, index: number) => {
+                      return (
+                        <CategoryTab
+                          key={index}
+                          children={index}
+                          isCategorySelected={isCategorySelect}
+                          handleCategoryButton={handleCategoryButton}
+                          index={index}
+                          content={item}
+                        />
+                      );
+                    })}
+                  </CategoryTabWrap>
+                  <Filterbar $isCategoryOn={isOnCategory}>
+                    <Options>
+                      {filterList.map((item, index) => {
+                        return (
+                          <FilterOption
+                            children={index}
+                            key={index}
+                            handleFilterButton={handleFilterButton}
+                            filterButton={filterButton}
+                            content={item.content}
+                            value={item.value}
+                            isFilter={isFilter}
+                            index={index}
+                          ></FilterOption>
+                        );
+                      })}
+                      <Soldout onClick={handleSoldoutButton} $isSoldout={isSoldout}>
+                        품절상품제외
+                      </Soldout>
+                    </Options>
+                  </Filterbar>
+                  <CategoryList isOnCategory={isOnCategory} categoryId={categoryId} filterName={filterName} isFilter={isFilter} isSoldout={isSoldout} />
+                </CategoryWrap>
+              </Wrap>
+            </div>
+            <div
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <PageFooter />
+            </div>
+          </form>
+        </MainWrap>
+      )}
+    </>
   );
 }
 

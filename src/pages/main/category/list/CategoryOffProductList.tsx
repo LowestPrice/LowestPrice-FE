@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
-import { getProducts } from '../../../../api/product';
+import { getRandom } from '../../../../api/product';
 
 import CategoryProduct from '../CategoryProduct';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
+import { Product } from '../../../../type';
 
 interface Props {
   isSoldout: boolean;
@@ -14,7 +15,12 @@ interface Props {
 function CategoryOffProductList(props: Props) {
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
 
-  const { status, data } = useQuery('products', () => getProducts(props.isSoldout));
+  const { status, data } = useQuery('randomProduct', () => getRandom(props.isSoldout), {
+    staleTime: 300000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
 
   // 데이터 로딩 중 관리 -------------------------
 
@@ -25,17 +31,13 @@ function CategoryOffProductList(props: Props) {
     return <Error />;
   }
 
+  console.log(data);
+
   // 처음 렌더링 할 랜덤 8가지 상품 ----------------------------
-
-  const eightProducts = [];
-
-  for (let i = 0; i < 8; i++) {
-    eightProducts.push(data[Math.floor(Math.random() * 300)]);
-  }
 
   return (
     <Wrap>
-      {eightProducts.map((productItem, index) => (
+      {[...data].map((productItem: Product, index: number) => (
         <CategoryProduct key={index} {...productItem} />
       ))}
       <BusinessInfo>
