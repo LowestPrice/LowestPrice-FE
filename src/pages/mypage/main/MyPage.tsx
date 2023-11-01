@@ -72,7 +72,7 @@ function Mypage() {
             좋아요한 매거진 보기 <RightBackIcon />
           </Like>
         </Article>
-        {accessToken ? <Article onClick={logout}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
+        {accessToken ? <Article onClick={handleLogoutButton}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
       </Wrap>
       <PageFooter />
     </div>
