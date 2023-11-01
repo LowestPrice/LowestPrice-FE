@@ -30,7 +30,7 @@ export const getMagazineDetail = async (id: any) => {
 };
 
 // 매거진 등록
-export const postMagazine = async ({ title, content, image, quillInstance }: { title: any; content: any; image: any; quillInstance: any }) => {
+export const postMagazine = async ({ title, content, image }: { title: any; content: any; image: any }) => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
 
@@ -40,9 +40,9 @@ export const postMagazine = async ({ title, content, image, quillInstance }: { t
     formData.append('content', content);
     formData.append('file', image);
 
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1], '폼데이터 매거진 등록 콘솔');
-    }
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ', ' + pair[1], '폼데이터 매거진 등록 콘솔');
+    // }
 
     const response = await axios.post(`${import.meta.env.VITE_API_KEY}/magazines`, formData, {
       headers: {
@@ -50,16 +50,9 @@ export const postMagazine = async ({ title, content, image, quillInstance }: { t
         Authorization: accessToken,
       },
     });
-
-    if (response.data && quillInstance) {
-      console.log('서버로부터 반환된 이미지 URL: ', response.data);
-      // 서버로부터 반환된 데이터를 처리하는 로직(서버로부터 이미지 url 반환 받아, Quill에 처리)
-      const range = quillInstance.getSelection(true);
-      quillInstance.insertEmbed(range.index, 'image', response.data.imageUrl);
-    }
+    return response.data;
   } catch (error) {
     console.error('매거진 작성 에러', error);
-    throw error;
   }
 };
 
