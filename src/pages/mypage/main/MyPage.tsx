@@ -119,8 +119,7 @@ const Greeting = styled.div`
 const Name = styled.span`
   font-weight: 700;
   font-weight: bold;
-  padding: 20px;
-  padding-left: 10px;
+  padding: 20px 20px 20px 0px;
 `;
 
 const Profile = styled.div`
