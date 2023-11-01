@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FlexBox, Button, ContentBox, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
@@ -12,7 +12,6 @@ import 'react-quill/dist/quill.snow.css';
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const quillRef = useRef<ReactQuill>(null);
 
   // 데이터 추가하기
   const [title, setTitle] = useState<any>('');
@@ -38,13 +37,13 @@ const MagazineWriting: React.FC = () => {
   };
 
   // 이미지 처리
-  const imageHandlerCallback = () => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.addEventListener('change', imageHandler);
-    input.click();
-  };
+  // const imageHandlerCallback = () => {
+  //   const input = document.createElement('input');
+  //   input.setAttribute('type', 'file');
+  //   input.setAttribute('accept', 'image/*');
+  //   input.addEventListener('change', imageHandler);
+  //   input.click();
+  // };
 
   const imageHandler = async (e: any) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -56,18 +55,14 @@ const MagazineWriting: React.FC = () => {
         setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
-
-      // FormData 객체를 생성하고 파일을 추가
-      const formData = new FormData();
-      formData.append('contentImage', file);
     }
   };
+
   const onSubmitButtonHandler = (title: any, content: any, image: any) => {
-    const quillInstance = quillRef.current ? quillRef.current.getEditor() : null;
-    console.log(image, '메인 이미지');
-    console.log(imageHandlerCallback, '콜백 이미지');
+    // console.log(image, '메인 이미지');
+    // console.log(imageHandlerCallback, '콜백 이미지');
     addPosts.mutate(
-      { title, content, image, quillInstance },
+      { title, content, image },
       {
         onSuccess: () => {
           toast.success('추가되었습니다');
