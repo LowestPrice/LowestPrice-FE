@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Main from './pages/main/Main';
 import Error from './components/Error';
+import Splash from './pages/main/Splash';
 
 // 로그인
 const Login = React.lazy(() => import('./pages/login/Login'));
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: 'likemagazine',
         element: <LikeMagazine />,
+      },
+      {
+        path: 'splash',
+        element: <Splash />,
       },
     ],
   },

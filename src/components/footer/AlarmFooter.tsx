@@ -88,6 +88,9 @@ const Wrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 0px;
+  background: white;
 `;
 
 const Content = styled.div`

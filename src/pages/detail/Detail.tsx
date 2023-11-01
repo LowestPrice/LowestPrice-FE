@@ -13,6 +13,8 @@ import AlarmFooter from '../../components/footer/AlarmFooter';
 import { ChartArea } from './style';
 import { PriceChart, PriceDataWrap } from './PriceHistory';
 import SimilarProductList from './similar/SimilarProductList';
+import { GreyShareIcon } from '../../assets/icon/icon';
+import ShareFooter from '../../components/footer/ShareFooter';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
@@ -20,6 +22,7 @@ function Detail() {
   const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
+  const [share, setShare] = useState<boolean>(false);
 
   // 네비게이트(페이지 이동) ----------------------
 
@@ -61,6 +64,12 @@ function Detail() {
     // history.push(`/detail/${productId}`);
   };
 
+  // 공유버튼 클릭 --------------------------------------------------------
+
+  const handleShareButton = () => {
+    setShare(!share);
+  };
+
   // 천 단위 콤마 찍기 -------------------------------------------------------------------------
 
   const currentPrice = data.currentPrice.toLocaleString();
@@ -71,7 +80,7 @@ function Detail() {
   return (
     <>
       <div
-        style={{ paddingBottom: '40px' }}
+        style={{ paddingBottom: '110px' }}
         onClick={() => {
           OffOptionModal();
         }}
@@ -107,6 +116,7 @@ function Detail() {
               </div>
               <div>{data.discountRate}%</div>
             </DiscountWrap>
+            <GreyShareIcon onClick={handleShareButton} style={{ marginLeft: '116px' }} />
           </PriceNDiscountWrap>
         </Content>
 
@@ -137,6 +147,7 @@ function Detail() {
           <SimilarProductList productId={data.productId} />
         </SimilarProuctWrap>
       </div>
+      <ShareFooter share={share} handleShareButton={handleShareButton} />
       <AlarmFooter productUrl={data.productUrl} productId={params.id} isAlertOn={data.isAlertOn} />
     </>
   );
