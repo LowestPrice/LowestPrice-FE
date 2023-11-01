@@ -147,7 +147,7 @@ function Detail() {
           <SimilarProductList productId={data.productId} />
         </SimilarProuctWrap>
       </div>
-      <ShareFooter share={share} handleShareButton={handleShareButton} />
+      <ShareFooter share={share} handleShareButton={handleShareButton} id={data.productId} />
       <AlarmFooter productUrl={data.productUrl} productId={params.id} isAlertOn={data.isAlertOn} />
     </>
   );

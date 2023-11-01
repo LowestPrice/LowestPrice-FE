@@ -1,15 +1,58 @@
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import useShare from '../../hooks/useShare';
+import { toast } from 'react-toastify';
 
 interface Props {
   share: boolean;
   handleShareButton: () => void;
+  dataDetail?: {
+    title: string;
+    mainImage: string;
+  };
+  id: string;
 }
 
 function ShareFooter(props: Props) {
+  console.log(props, '상품 보이나');
+  const copyUrlRef = useRef<HTMLInputElement>(null);
+  const { shareToKakaoTalk } = useShare({
+    objectType: 'feed',
+    content: {
+      title: props.dataDetail?.title,
+      imageUrl: props.dataDetail?.mainImage,
+    },
+    url: `https://lowest-price.store/magazine/${props.id}`,
+  });
+
+  const handleShareClick = () => {
+    shareToKakaoTalk();
+  };
+
+  const copyUrl = (e: any) => {
+    if (!document.queryCommandSupported('copy')) {
+      return alert('복사 기능이 지원되지 않는 브라우저입니다.');
+    }
+
+    if (copyUrlRef.current) {
+      copyUrlRef.current.select();
+      document.execCommand('copy');
+      e.target.focus();
+    }
+
+    setTimeout(() => {
+      toast('링크가 복사되었습니다.'), 200;
+    });
+  };
+  useEffect(() => {
+    console.log(copyUrlRef.current, '복사할 링크');
+  }, []);
+
   return (
     <Wrap $share={props.share}>
       <LinkContent>
-        <LinkShareButton>
+        <LinkShareButton onClick={copyUrl}>
+          <input ref={copyUrlRef} value={`https://lowest-price.store/magazine/${props.id}`} readOnly style={{ position: 'absolute', left: '-9999px' }} />
           <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
             <path
               fillRule='evenodd'
@@ -25,7 +68,7 @@ function ShareFooter(props: Props) {
             />
           </svg>
         </LinkShareButton>
-        <KakaoShareButton>
+        <KakaoShareButton onClick={handleShareClick}>
           <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
             <path
               d='M12.5482 4C7.83195 4 4 7.1 4 10.9C4 13.3 5.57208 15.4 7.83195 16.7L7.24242 20L10.8779 17.6C11.3691 17.7 11.9587 17.7 12.4499 17.7C17.1662 17.7 20.9981 14.6 20.9981 10.8C21.0964 7.1 17.2645 4 12.5482 4Z'
