@@ -14,8 +14,8 @@ const MagazineWriting: React.FC = () => {
   const queryClient = useQueryClient();
 
   // 데이터 추가하기
-  const [title, setTitle] = useState<any>('');
-  const [content, setContent] = useState<any>('');
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
   const [image, setImage] = useState<any>(null);
   const [previewImage, setPreviewImage] = useState<string>('');
 
@@ -36,15 +36,6 @@ const MagazineWriting: React.FC = () => {
     setContent(value);
   };
 
-  // 이미지 처리
-  // const imageHandlerCallback = () => {
-  //   const input = document.createElement('input');
-  //   input.setAttribute('type', 'file');
-  //   input.setAttribute('accept', 'image/*');
-  //   input.addEventListener('change', imageHandler);
-  //   input.click();
-  // };
-
   const imageHandler = async (e: any) => {
     const file = e.target.files ? e.target.files[0] : null;
     setImage(file);
@@ -59,8 +50,6 @@ const MagazineWriting: React.FC = () => {
   };
 
   const onSubmitButtonHandler = (title: any, content: any, image: any) => {
-    // console.log(image, '메인 이미지');
-    // console.log(imageHandlerCallback, '콜백 이미지');
     addPosts.mutate(
       { title, content, image },
       {

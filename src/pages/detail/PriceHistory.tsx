@@ -31,7 +31,6 @@ export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) 
 // 차트
 export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxPrice }) => {
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
-  console.log(data, '가격 히스토리 데이터');
   const [priceData, setPriceData] = useState<ChartData>({
     labels: [],
     datasets: [],

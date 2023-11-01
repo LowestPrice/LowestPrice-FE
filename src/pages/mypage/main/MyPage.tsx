@@ -10,6 +10,7 @@ import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 
 import Cookies from 'js-cookie';
+import { MypageEditIcon, RightBackIcon } from '../../../assets/icon/icon';
 
 function Mypage() {
   // 네비게이트 ----------------------------------------
@@ -46,22 +47,32 @@ function Mypage() {
   };
 
   const accessToken = Cookies.get('Authorization');
-  // console.log(accessToken);
 
   return (
     <div>
-      <Header>
-        <h3>마이페이지</h3>
-      </Header>
+      <Header>마이페이지</Header>
       <Wrap>
-        <Title>안녕하세요 {data.nickname}님</Title>
+        <Title>
+          <Greeting>안녕하세요</Greeting>
+          <Name>{data.nickname}님</Name>
+        </Title>
         <Profile>
           <ProfileImage src={data.image} />
           <ImageInput $imageSrc={data.image} accept='image/*' multiple type='file' id='profileImg'></ImageInput>
-          <EditProfileImage onClick={() => navigate(`/editmypage`)}>프로필 수정</EditProfileImage>
+          <EditProfileImage onClick={() => navigate(`/editmypage`)}>
+            프로필 수정
+            <EditIcon>
+              <MypageEditIcon />
+            </EditIcon>
+          </EditProfileImage>
         </Profile>
-        <Article onClick={() => navigate('/likemagazine')}>좋아요한 매거진 보기</Article>
-        {accessToken ? <Article onClick={handleLogoutButton}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
+
+        <Article onClick={() => navigate('/likemagazine')}>
+          <Like>
+            좋아요한 매거진 보기 <RightBackIcon />
+          </Like>
+        </Article>
+        {accessToken ? <Article onClick={logout}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
       </Wrap>
       <PageFooter />
     </div>
@@ -73,11 +84,15 @@ export default Mypage;
 const Header = styled.div`
   height: 68px;
   border-bottom: 1px solid rgba(217, 217, 217, 1);
-  padding: 10px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 110%;
+  margin-top: 27px;
+  margin-bottom: 17px;
 `;
 
 const Wrap = styled.div`
@@ -87,9 +102,22 @@ const Wrap = styled.div`
 const Title = styled.div`
   height: 100px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
   font-size: 20px;
+  line-height: 110%;
+  margin-left: 18px;
+`;
+
+const Greeting = styled.div`
+  color: #000;
+  font-style: normal;
+  font-weight: 500;
+  margin-right: 9px;
+`;
+
+const Name = styled.span`
+  font-weight: 700;
   font-weight: bold;
   padding: 20px;
   padding-left: 10px;
@@ -119,6 +147,13 @@ const EditProfileImage = styled.div`
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+`;
+
+const EditIcon = styled.div`
+  margin-left: 8px;
 `;
 
 const Article = styled.div`
@@ -127,8 +162,16 @@ const Article = styled.div`
   flex-direction: column;
   justify-content: center;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid rgba(217, 217, 217, 1);
+  margin-left: 22px;
+`;
+
+const Like = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 18px;
 `;

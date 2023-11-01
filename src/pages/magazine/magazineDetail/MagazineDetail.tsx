@@ -29,10 +29,8 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
   const magazineData = dataDetail?.data;
   const isAdmin = dataDetail?.admin;
-  console.log(dataDetail, '매거진 데이터');
 
   const dateData = dataDetail?.data.createdAt;
-  console.log(dataDetail?.data.magazineId, '아이디 값');
 
   // 날짜 데이터 형식 변환하기
   const WrittenDate = () => {
@@ -81,19 +79,6 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const handleShareButton = () => {
     setShare(!share);
   };
-
-  // const { shareToKakaoTalk } = useShare({
-  //   objectType: 'feed',
-  //   content: {
-  //     title: dataDetail?.data.title,
-  //     imageUrl: dataDetail?.data.mainImage,
-  //   },
-  //   url: `https://lowest-price.store/magazine/${id}`,
-  // });
-
-  // const handleShareClick = () => {
-  //   shareToKakaoTalk();
-  // };
 
   if (isLoadingDetail || isLoadingAnother) {
     return <h1>로딩중입니다</h1>;
@@ -236,12 +221,9 @@ const Editor = styled.div`
 
 const TextArea = styled.div`
   width: 335px;
-  margin: 20px;
-  background-color: #f3f3f3;
   resize: none;
   overflow-y: auto;
   min-height: 344px;
-  line-height: 1.5;
 `;
 
 const AnotherContentButton = styled.button`

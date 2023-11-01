@@ -25,7 +25,7 @@ export default function Notification({}: Props) {
   return (
     <>
       <Header>
-        <h3>내 알림</h3>
+        <MyNotification>내 알림</MyNotification>
       </Header>
       <Navigate>
         <ProductList
@@ -60,6 +60,15 @@ const Header = styled.div`
   padding: 10px;
 `;
 
+const MyNotification = styled.div`
+  color: #000;
+  text-align: center;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+`;
+
 const Navigate = styled.div`
   height: 62px;
   display: flex;
@@ -78,6 +87,9 @@ const ProductList = styled.div<{ $tab: boolean }>`
   font-weight: bold;
   cursor: pointer;
   border-bottom: ${({ $tab }) => ($tab ? ' 2px solid black' : 'none')};
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
 `;
 
 const PriceAlarmList = styled.div<{ $tab: boolean }>`
@@ -90,4 +102,8 @@ const PriceAlarmList = styled.div<{ $tab: boolean }>`
   font-weight: bold;
   cursor: pointer;
   border-bottom: ${({ $tab }) => (!$tab ? ' 2px solid black' : 'none')};
+  color: #000;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
 `;
