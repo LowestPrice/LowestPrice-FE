@@ -29,6 +29,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
   const magazineData = dataDetail?.data;
   const isAdmin = dataDetail?.admin;
+  console.log(dataDetail, '매거진 데이터');
 
   const dateData = dataDetail?.data.createdAt;
   console.log(dataDetail?.data.magazineId, '아이디 값');
@@ -112,9 +113,6 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           <Title>{magazineData.title}</Title>
           <EditorShareFlex>
             <Editor>작성 날짜: {writtenDate}</Editor>
-            {/* <StyledShareIcon>
-              <ShareIcon onClick={handleShareButton} />
-            </StyledShareIcon> */}
           </EditorShareFlex>
         </TitleWrap>
         <Flex>
@@ -182,7 +180,13 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             </Overlay>
           </AnotherContentButton>
         ))}
-      <ShareFooter share={share} handleShareButton={handleShareButton} dataDetail={dataDetail?.data} id={dataDetail?.data.magazineId}></ShareFooter>
+      <ShareFooter
+        share={share}
+        handleShareButton={handleShareButton}
+        title={dataDetail?.data.title}
+        mainImage={dataDetail?.data.mainImage}
+        id={dataDetail?.data.magazineId}
+      ></ShareFooter>
     </Container>
   );
 };

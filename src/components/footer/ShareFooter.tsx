@@ -6,23 +6,22 @@ import { toast } from 'react-toastify';
 interface Props {
   share: boolean;
   handleShareButton: () => void;
-  dataDetail?: {
-    title: string;
-    mainImage: string;
-  };
+  title: string;
+  mainImage: string;
   id: string;
+  realId?: string;
 }
 
 function ShareFooter(props: Props) {
-  console.log(props, '상품 보이나');
   const copyUrlRef = useRef<HTMLInputElement>(null);
   const { shareToKakaoTalk } = useShare({
     objectType: 'feed',
     content: {
-      title: props.dataDetail?.title,
-      imageUrl: props.dataDetail?.mainImage,
+      title: props.title,
+      imageUrl: props.mainImage,
     },
-    url: `https://lowest-price.store/magazine/${props.id}`,
+
+    url: props.realId ? `https://lowest-price.store/detail/${props.id}` : `https://lowest-price.store/magazine/${props.id}`,
   });
 
   const handleShareClick = () => {
@@ -52,7 +51,12 @@ function ShareFooter(props: Props) {
     <Wrap $share={props.share}>
       <LinkContent>
         <LinkShareButton onClick={copyUrl}>
-          <input ref={copyUrlRef} value={`https://lowest-price.store/magazine/${props.id}`} readOnly style={{ position: 'absolute', left: '-9999px' }} />
+          <input
+            ref={copyUrlRef}
+            value={props.realId ? `https://lowest-price.store/detail/${props.id}` : `https://lowest-price.store/magazine/${props.id}`}
+            readOnly
+            style={{ position: 'absolute', left: '-9999px' }}
+          />
           <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
             <path
               fillRule='evenodd'
