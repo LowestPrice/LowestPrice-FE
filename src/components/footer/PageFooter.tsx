@@ -82,6 +82,7 @@ export default PageFooter;
 
 export const FlexBox = styled.div`
   width: 375px;
+  height: 65px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -99,7 +100,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   width: 52px;
   height: 52px;
   font-size: 11px;
-  margin: 6px 0px 6px 0px;
+  margin-top: 10px;
   border: none;
   display: flex;
   flex-direction: column;

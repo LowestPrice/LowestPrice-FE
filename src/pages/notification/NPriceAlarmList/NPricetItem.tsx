@@ -54,6 +54,7 @@ const NPriceimg = styled.div`
   height: 68px;
   border-radius: 7px;
   background-color: rgba(217, 217, 217, 1);
+  margin-right: 6px;
 `;
 
 const NPriceInfo = styled.div`

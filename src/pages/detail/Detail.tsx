@@ -35,7 +35,6 @@ function Detail() {
   // 해당 상품 데이터 불러오기 ----------------------------------------------
 
   const { status, data } = useQuery(['product', params.id], () => getProduct(params.id), { enabled: !!params.id });
-  console.log(data, '상품 데이터');
 
   if (status === 'loading') {
     return <Loading />;

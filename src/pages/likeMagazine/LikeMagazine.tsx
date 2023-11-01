@@ -15,9 +15,11 @@ const LikeMagazine = () => {
         <Title>좋아요 한 매거진</Title>
         <div></div>
       </Header>
-      <LikeMagazineList>
-        <MagazineItem></MagazineItem>
-      </LikeMagazineList>
+      <Scroll>
+        <LikeMagazineList>
+          <MagazineItem></MagazineItem>
+        </LikeMagazineList>
+      </Scroll>
       <PageFooter />
     </div>
   );
@@ -54,4 +56,21 @@ const Title = styled.div`
 const StyledBackButton = styled.button`
   background-color: transparent;
   border: none;
+  display: flex;
+  align-items: center;
+`;
+
+const Scroll = styled.div`
+  width: 380px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 8%; /* 스크롤바의 길이 */
+    background: rgba(181, 181, 181, 1);
+
+    border-radius: 10px;
+  }
+  max-height: 85vh;
 `;
