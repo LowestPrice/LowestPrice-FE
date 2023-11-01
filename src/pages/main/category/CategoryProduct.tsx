@@ -128,7 +128,7 @@ const DiscountWrap = styled.div`
 `;
 
 const DiscountRateWrap = styled.div`
-  margin-right: 18px;
+  margin-right: 4px;
   width: 42px;
   height: 15px;
   border-radius: 3px;
