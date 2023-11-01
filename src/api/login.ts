@@ -24,3 +24,16 @@ export const DeleteIdWithKakao = async () => {
     console.error('회원 탈퇴 에러', error);
   }
 };
+
+// 로그아웃
+
+export const postlogout = async () => {
+  const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_API_KEY}/logout`);
+    return response;
+  } catch (error) {
+    console.error('로그아웃 에러', error);
+  }
+};

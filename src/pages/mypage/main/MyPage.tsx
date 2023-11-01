@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import styled from 'styled-components';
 
 import { getUserinfo } from '../../../api/mypage';
+import { postlogout } from '../../../api/login';
 
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
@@ -19,6 +20,16 @@ function Mypage() {
 
   const { data, status } = useQuery('userInfo', getUserinfo);
 
+  // 로그아웃하기 -----------------------------------------
+  const logoutMutation = useMutation(postlogout, {
+    onSuccess: () => {
+      console.log('로그아웃 성공');
+    },
+    onError: () => {
+      console.log('로그아웃 실패');
+    },
+  });
+
   if (status === 'loading') {
     return <Loading />;
   }
@@ -26,10 +37,11 @@ function Mypage() {
     return <Error />;
   }
 
-  // 로그아웃(토큰 쿠키에서 지우기)----------------------------
+  // 로그아웃--------------------------------------------------------
 
-  const logout = () => {
-    Cookies.remove('Authorization');
+  const handleLogoutButton = () => {
+    logoutMutation.mutate();
+    // Cookies.remove('Authorization');
     navigate('/');
   };
 
@@ -49,7 +61,7 @@ function Mypage() {
           <EditProfileImage onClick={() => navigate(`/editmypage`)}>프로필 수정</EditProfileImage>
         </Profile>
         <Article onClick={() => navigate('/likemagazine')}>좋아요한 매거진 보기</Article>
-        {accessToken ? <Article onClick={logout}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
+        {accessToken ? <Article onClick={handleLogoutButton}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
       </Wrap>
       <PageFooter />
     </div>
@@ -80,7 +92,7 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
   padding: 20px;
-  padding-left: 5px;
+  padding-left: 10px;
 `;
 
 const Profile = styled.div`

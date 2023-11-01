@@ -110,7 +110,7 @@ const Content = styled.div`
   }
   .price {
     font-size: 19.24px;
-    font-weight: bold;
+    font-weight: 700;
     margin-left: 5px;
   }
   .originalPrice {
