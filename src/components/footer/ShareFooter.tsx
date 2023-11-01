@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import useShare from '../../hooks/useShare';
 import { toast } from 'react-toastify';
@@ -43,9 +43,6 @@ function ShareFooter(props: Props) {
       toast('링크가 복사되었습니다.'), 200;
     });
   };
-  useEffect(() => {
-    console.log(copyUrlRef.current, '복사할 링크');
-  }, []);
 
   return (
     <Wrap $share={props.share}>
