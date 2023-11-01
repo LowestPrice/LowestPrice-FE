@@ -18,9 +18,9 @@ export default function Notification({}: Props) {
 
   // 알림 글 목록 ------------------------------------
 
-  const switchPriceTab = (): void => {
-    setTab(false);
-  };
+  // const switchPriceTab = (): void => {
+  //   setTab(false);
+  // };
 
   return (
     <>
