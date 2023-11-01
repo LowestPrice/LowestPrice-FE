@@ -116,7 +116,7 @@ function Detail() {
               </div>
               <div>{data.discountRate}%</div>
             </DiscountWrap>
-            <GreyShareIcon onClick={handleShareButton} style={{ marginLeft: '116px' }} />
+            <GreyShareIcon onClick={handleShareButton} style={{ marginLeft: '116px', cursor: 'pointer' }} />
           </PriceNDiscountWrap>
         </Content>
 
@@ -172,6 +172,7 @@ const XButton = styled.div`
   position: absolute;
   right: 16px;
   cursor: pointer;
+  height: 24px;
 `;
 
 const ProductImageWrap = styled.div`
@@ -268,7 +269,6 @@ const Option = styled.div`
   div {
     position: absolute;
     right: 20px;
-    margin-top: 5px;
   }
 `;
 

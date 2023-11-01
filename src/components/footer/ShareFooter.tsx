@@ -8,7 +8,7 @@ interface Props {
 function ShareFooter(props: Props) {
   return (
     <Wrap $share={props.share}>
-      <LinkContent>
+      <LinkContent $share={props.share}>
         <LinkShareButton>
           <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
             <path
@@ -59,9 +59,9 @@ const Wrap = styled.div<{ $share: boolean }>`
   z-index: 1000;
 `;
 
-const LinkContent = styled.div`
+const LinkContent = styled.div<{ $share: boolean }>`
   height: 65px;
-  display: flex;
+  display: ${({ $share }) => ($share ? 'flex' : 'none')};
   flex-direction: row;
   justify-content: start;
   align-items: center;
