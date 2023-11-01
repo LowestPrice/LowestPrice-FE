@@ -2,10 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { MagazineProps } from '../../../type/type';
 import { deleteMagazine, getMagazineDetail, getAnotherMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { BackIcon, DropDownIcon, ShareIcon, GreyShareIcon } from '../../../assets/icon/icon';
-import { useRef } from 'react';
+import { BackIcon, DropDownIcon, GreyShareIcon } from '../../../assets/icon/icon';
+import { useState, useRef } from 'react';
 import useDropDown from '../../../hooks/useDropDown';
-import useShare from '../../../hooks/useShare';
 import { DropDownProps } from '../../../type/type';
 import styled from 'styled-components';
 import Like from '../Like';
@@ -14,6 +13,7 @@ import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import ShareFooter from '../../../components/footer/ShareFooter';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   const { id } = useParams();
@@ -23,18 +23,20 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const [isOpen, setIsOpen] = useDropDown(dropDownRef, false);
   const location = useLocation();
   const index = location.state?.index;
+  const [share, setShare] = useState<boolean>(false);
 
   // 데이터 불러오기
   const { isLoading: isLoadingDetail, isError: isErrorDetail, data: dataDetail } = useQuery(['posts', id], () => getMagazineDetail(id));
   const magazineData = dataDetail?.data;
   const isAdmin = dataDetail?.admin;
+  console.log(dataDetail, '매거진 데이터');
 
   const dateData = dataDetail?.data.createdAt;
+  console.log(dataDetail?.data.magazineId, '아이디 값');
 
   // 날짜 데이터 형식 변환하기
   const WrittenDate = () => {
     if (!dateData) return '날짜 정보 없음';
-
     const [formattedDate] = dateData.split('T');
     const [year, month, day] = formattedDate.split('-');
     return `${year}년 ${month}월 ${day}일`;
@@ -76,17 +78,22 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   };
 
   // 공유하기
-  const { shareToKakaoTalk } = useShare({
-    objectType: 'feed',
-    content: {
-      title: dataDetail?.data.title,
-      imageUrl: dataDetail?.data.mainImage,
-    },
-    url: `https://lowest-price.store/magazine/${id}`,
-  });
-  const handleShareClick = () => {
-    shareToKakaoTalk();
+  const handleShareButton = () => {
+    setShare(!share);
   };
+
+  // const { shareToKakaoTalk } = useShare({
+  //   objectType: 'feed',
+  //   content: {
+  //     title: dataDetail?.data.title,
+  //     imageUrl: dataDetail?.data.mainImage,
+  //   },
+  //   url: `https://lowest-price.store/magazine/${id}`,
+  // });
+
+  // const handleShareClick = () => {
+  //   shareToKakaoTalk();
+  // };
 
   if (isLoadingDetail || isLoadingAnother) {
     return <h1>로딩중입니다</h1>;
@@ -106,9 +113,6 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           <Title>{magazineData.title}</Title>
           <EditorShareFlex>
             <Editor>작성 날짜: {writtenDate}</Editor>
-            <StyledShareIcon>
-              <ShareIcon onClick={handleShareClick} />
-            </StyledShareIcon>
           </EditorShareFlex>
         </TitleWrap>
         <Flex>
@@ -157,7 +161,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
         />
         <StyledGreyShareIcon>
-          <GreyShareIcon onClick={handleShareClick} />
+          <GreyShareIcon onClick={handleShareButton} />
         </StyledGreyShareIcon>
       </LikeShareIconFlex>
       <AnotherMagazine>
@@ -176,6 +180,13 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             </Overlay>
           </AnotherContentButton>
         ))}
+      <ShareFooter
+        share={share}
+        handleShareButton={handleShareButton}
+        title={dataDetail?.data.title}
+        mainImage={dataDetail?.data.mainImage}
+        id={dataDetail?.data.magazineId}
+      ></ShareFooter>
     </Container>
   );
 };
@@ -356,13 +367,6 @@ const EditorShareFlex = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-const StyledShareIcon = styled.button`
-  margin-right: 20px;
-  margin-bottom: 15px;
-  background-color: transparent;
-  border: none;
 `;
 
 const LikeShareIconFlex = styled.div`
