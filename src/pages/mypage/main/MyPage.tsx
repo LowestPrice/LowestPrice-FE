@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
 import { getUserinfo } from '../../../api/mypage';
+// import { postlogout } from '../../../api/login';
 
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
@@ -20,6 +21,16 @@ function Mypage() {
 
   const { data, status } = useQuery('userInfo', getUserinfo);
 
+  // 로그아웃하기 -----------------------------------------
+  // const logoutMutation = useMutation(postlogout, {
+  //   onSuccess: () => {
+  //     console.log('로그아웃 성공');
+  //   },
+  //   onError: () => {
+  //     console.log('로그아웃 실패');
+  //   },
+  // });
+
   if (status === 'loading') {
     return <Loading />;
   }
@@ -27,9 +38,10 @@ function Mypage() {
     return <Error />;
   }
 
-  // 로그아웃(토큰 쿠키에서 지우기)----------------------------
+  // 로그아웃--------------------------------------------------------
 
-  const logout = () => {
+  const handleLogoutButton = () => {
+    // logoutMutation.mutate();
     Cookies.remove('Authorization');
     navigate('/');
   };
@@ -60,7 +72,6 @@ function Mypage() {
             좋아요한 매거진 보기 <RightBackIcon />
           </Like>
         </Article>
-
         {accessToken ? <Article onClick={logout}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
       </Wrap>
       <PageFooter />
@@ -107,6 +118,9 @@ const Greeting = styled.div`
 
 const Name = styled.span`
   font-weight: 700;
+  font-weight: bold;
+  padding: 20px;
+  padding-left: 10px;
 `;
 
 const Profile = styled.div`

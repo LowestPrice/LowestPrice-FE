@@ -34,9 +34,10 @@ function CategoryProduct(props: Props) {
             <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
           </BellImage>
         </CProductImage>
+
         <CProductContent>
           <div className='title'>{props.productName}</div>
-          {props.discountRate !== 0 ? <div className='originalPrice'>{originalPrice}원</div> : <div></div>}
+          {props.discountRate !== 0 ? <div className='originalPrice'>{originalPrice}원</div> : <div style={{ marginTop: '14px' }}></div>}
           <DiscountWrap>
             <div className='currentPrice'>{currentPrice}원</div>
             {props.discountRate !== 0 ? (
@@ -75,10 +76,11 @@ const CProductImage = styled.div`
   width: 166px;
   height: 152.6px;
   border-radius: 20px;
-  background-color: rgba(243, 243, 243, 1);
+  background-color: white;
   .productImage {
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
 `;
 
@@ -109,6 +111,7 @@ const CProductContent = styled.div`
     font-size: 12px;
     color: rgba(181, 181, 181, 1);
     text-decoration: line-through;
+    font-weight: 500;
   }
   .currentPrice {
     font-size: 16px;
@@ -125,7 +128,7 @@ const DiscountWrap = styled.div`
 `;
 
 const DiscountRateWrap = styled.div`
-  margin-right: 18px;
+  margin-right: 4px;
   width: 42px;
   height: 15px;
   border-radius: 3px;

@@ -114,10 +114,12 @@ const PriceArea = styled.div`
   flex: shrink;
   align-items: center;
   margin-bottom: 5px;
-  padding-left: 18px;
+  padding-left: 3px;
+  padding-right: 15px;
 `;
 
 const Text = styled.div`
+  font-weight: 700;
   margin-left: 14px;
 `;
 
@@ -128,6 +130,7 @@ const LowestPrice = styled.div`
   font-weight: 600;
   line-height: 121.5%;
   margin-left: 85px;
+  font-weight: 600;
 `;
 
 const HighestPrice = styled.div`

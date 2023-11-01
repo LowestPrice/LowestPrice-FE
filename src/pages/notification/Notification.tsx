@@ -39,7 +39,7 @@ export default function Notification({}: Props) {
         <PriceAlarmList
           $tab={tab}
           onClick={() => {
-            switchPriceTab();
+            // switchPriceTab();
           }}
         >
           가격변동알림

@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 // 카카오 로그인
+
 export const loginWithKakao = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
@@ -11,6 +12,7 @@ export const loginWithKakao = () => {
 };
 
 // 카카오 회원 탈퇴
+
 export const DeleteIdWithKakao = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
@@ -20,5 +22,18 @@ export const DeleteIdWithKakao = async () => {
     return response;
   } catch (error) {
     console.error('회원 탈퇴 에러', error);
+  }
+};
+
+// 로그아웃
+
+export const postlogout = async () => {
+  const accessToken = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_API_KEY}/logout`);
+    return response;
+  } catch (error) {
+    console.error('로그아웃 에러', error);
   }
 };

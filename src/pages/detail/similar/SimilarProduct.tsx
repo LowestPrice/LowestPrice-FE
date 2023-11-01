@@ -58,7 +58,8 @@ const SimilarProductImage = styled.img`
   height: 109.47px;
   border-radius: 15.87px;
   border: none;
-  background-color: rgba(243, 243, 243, 1);
+  background-color: white;
+  object-fit: contain;
 `;
 
 const SimilarProductContent = styled.div`
@@ -109,8 +110,8 @@ const SimilarProductPriceWrap = styled.div`
 `;
 
 const DiscountRateWrap = styled.div`
-  margin-right: 18px;
-  width: 42px;
+  margin-right: 2px;
+  width: 51px;
   height: 15px;
   border-radius: 3px;
   background-color: #9ecbff;
