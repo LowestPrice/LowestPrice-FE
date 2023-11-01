@@ -103,8 +103,9 @@ export default SearchProductList;
 
 const Wrap = styled.div`
   width: 346px;
-  max-height: 710px;
-  overflow: scroll;
+  max-height: 82vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 5px;
   }
