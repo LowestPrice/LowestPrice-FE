@@ -34,6 +34,7 @@ function CategoryProduct(props: Props) {
             <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
           </BellImage>
         </CProductImage>
+
         <CProductContent>
           <div className='title'>{props.productName}</div>
           {props.discountRate !== 0 ? <div className='originalPrice'>{originalPrice}원</div> : <div style={{ marginTop: '14px' }}></div>}
