@@ -80,6 +80,7 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
   padding: 20px;
+  padding-left: 5px;
 `;
 
 const Profile = styled.div`

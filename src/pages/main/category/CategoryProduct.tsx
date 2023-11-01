@@ -111,6 +111,7 @@ const CProductContent = styled.div`
     font-size: 12px;
     color: rgba(181, 181, 181, 1);
     text-decoration: line-through;
+    font-weight: 500;
   }
   .currentPrice {
     font-size: 16px;

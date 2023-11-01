@@ -110,8 +110,8 @@ const SimilarProductPriceWrap = styled.div`
 `;
 
 const DiscountRateWrap = styled.div`
-  margin-right: 0px;
-  width: 64px;
+  margin-right: 2px;
+  width: 51px;
   height: 15px;
   border-radius: 3px;
   background-color: #9ecbff;
