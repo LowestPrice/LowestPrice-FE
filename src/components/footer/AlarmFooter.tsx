@@ -109,6 +109,10 @@ const Alarm = styled.button`
   border-radius: 8px;
   border: none;
   outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   div {
     margin-top: 4px;
   }

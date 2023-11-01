@@ -30,7 +30,7 @@ export default function Main() {
     if (showSplash) {
       const splashTime = setTimeout(() => {
         setShowSplash(false);
-      }, 2000);
+      }, 1500);
       return () => clearTimeout(splashTime);
     }
   }, []);
@@ -295,7 +295,7 @@ const Title = styled.div`
   height: 50px;
   .title {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 600;
   }
   .subTitle {
     font-size: 16px;
@@ -323,6 +323,7 @@ const CategoryTitle = styled.div`
   font-size: 20px;
   font-weight: 700;
   gap: 22px;
+  font-weight: 700;
 `;
 
 const CategoryTabWrap = styled.div`
@@ -355,12 +356,11 @@ const CategoryTabWrap = styled.div`
 const Filterbar = styled.div<{ $isCategoryOn: boolean }>`
   width: 375px;
   height: 31px;
-  border-bottom: 1px solid rgba(243, 243, 243, 1);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
-  color: rgba(181, 181, 181, 1);
+  color: var(--gray03, #6f6f6f);
   position: absolute;
   top: 174px;
   display: ${(props) => (props.$isCategoryOn ? 'block' : 'none')};
@@ -378,5 +378,6 @@ const Options = styled.div`
 const Soldout = styled.div<{ $isSoldout: boolean }>`
   margin-left: 150px;
   cursor: pointer;
-  color: ${(props) => (!props.$isSoldout ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};
+  font-weight: 500;
+  color: ${(props) => (!props.$isSoldout ? 'var(--gray03, #6F6F6F)' : 'var(--maincolor_dark, #00ABF9)')};
 `;
