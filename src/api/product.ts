@@ -21,7 +21,6 @@ export const getProduct = async (productId: string | undefined) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    console.log(productId);
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/${productId}`);
     return response.data.data;
   } catch (err) {
@@ -36,6 +35,19 @@ export const getTopten = async () => {
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/top`);
+    return response.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 랜덤 상품 조회
+
+export const getRandom = async (isSoldout: boolean) => {
+  const accessToken: string | undefined = Cookies.get('Authorization');
+  axios.defaults.headers.common['Authorization'] = accessToken;
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/random?isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
     console.log(err);

@@ -24,7 +24,7 @@ function OptionModalItem(props: Props) {
 export default OptionModalItem;
 
 const Wrap = styled.div`
-  width: 100%;
+  width: 288px;
   height: 40px;
   padding-left: 13px;
   background-color: white;

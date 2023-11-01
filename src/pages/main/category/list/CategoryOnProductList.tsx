@@ -27,7 +27,7 @@ function CategoryOnProductList(props: Props) {
   const infiniteFilterData = infiniteCategoryFilter(categoryNameList[props.categoryId], props.filterName, props.isSoldout);
 
   // 카테고리, 필터가 변경될 때마다 서버로 refetch---------------------------------------------------------
-  
+
   useEffect(() => {
     infiniteCategoryData.refetch();
     infiniteFilterData.refetch();
@@ -79,7 +79,7 @@ function CategoryOnProductList(props: Props) {
   // Observer 인식 후, 다음 데이터 조회하기 -----------------------------------------
 
   const handleIntersection = () => {
-    if ((props.isFilter ? infiniteCategoryData : infiniteFilterData).hasNextPage) {
+    if ((props.isFilter ? infiniteFilterData : infiniteCategoryData).hasNextPage) {
       infiniteCategoryData.fetchNextPage();
       infiniteFilterData.fetchNextPage();
     }
@@ -90,7 +90,7 @@ function CategoryOnProductList(props: Props) {
       {props.isFilter
         ? infiniteFilterDataList()?.map((productItem: Product, index: number) => <CategoryOnProduct key={index} {...productItem} />)
         : infiniteCategoryDataList()?.map((productItem: Product, index: number) => <CategoryOnProduct key={index} {...productItem} />)}
-      {(props.isFilter ? infiniteCategoryData : infiniteFilterData).hasNextPage && <Observer handleIntersection={handleIntersection} />}
+      {(props.isFilter ? infiniteFilterData : infiniteCategoryData).hasNextPage && <Observer handleIntersection={handleIntersection} />}
     </Wrap>
   );
 }

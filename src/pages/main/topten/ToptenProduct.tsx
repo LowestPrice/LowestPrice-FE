@@ -1,9 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
 import { Product } from '../../../type';
-import { toggleAlarm } from '../../../api/alarm';
 
 import Alarmbell from '../../../assets/icon/Alarmbell';
 import getParametersForUnsplash from '../../../optimization/imgcdn';
@@ -20,17 +18,6 @@ function ToptenProduct(props: Props) {
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
 
-  // 알람 설정하기 ------------------------------------------------
-
-  const alarmMutation = useMutation(toggleAlarm, {
-    onSuccess: () => {
-      console.log('alarm 완료');
-    },
-    onError: () => {
-      console.log('alarm 실패');
-    },
-  });
-
   return (
     <Wrap
       onClick={() => {
@@ -39,11 +26,8 @@ function ToptenProduct(props: Props) {
     >
       <ProductImageWrap />
       <BellImage
-        style={{ zIndex: '999' }}
         onClick={(e) => {
-          console.log('알람클릭');
           e.stopPropagation();
-          alarmMutation.mutate(props.productId);
         }}
       >
         <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
