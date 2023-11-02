@@ -19,6 +19,7 @@ export const DeleteIdWithKakao = async () => {
   console.log(accessToken, '탈퇴 토큰');
   try {
     const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/kakao/deactivate`, { headers: { Authorization: accessToken } });
+    document.cookie = 'Authorization=; max-age=0; path=/';
     return response;
   } catch (error) {
     console.error('회원 탈퇴 에러', error);
