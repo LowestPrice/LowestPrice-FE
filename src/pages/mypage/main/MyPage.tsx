@@ -167,7 +167,7 @@ const Article = styled.div`
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid rgba(217, 217, 217, 1);
-  margin-left: 22px;
+  padding-left: 22px;
 `;
 
 const Like = styled.div`
