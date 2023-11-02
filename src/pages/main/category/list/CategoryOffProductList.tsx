@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
@@ -16,7 +17,8 @@ function CategoryOffProductList(props: Props) {
   // 리액트 쿼리로 데이터 불러오기 --------------------------------------
 
   const { status, data } = useQuery('randomProduct', () => getRandom(props.isSoldout), {
-    staleTime: 300000,
+    cacheTime: 500000,
+    staleTime: 500000,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -52,7 +54,7 @@ function CategoryOffProductList(props: Props) {
   );
 }
 
-export default CategoryOffProductList;
+export default React.memo(CategoryOffProductList);
 
 const Wrap = styled.div`
   width: 350px;

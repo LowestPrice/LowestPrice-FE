@@ -106,7 +106,7 @@ const Title = styled.div`
   align-items: center;
   font-size: 20px;
   line-height: 110%;
-  margin-left: 18px;
+  margin-left: 22px;
 `;
 
 const Greeting = styled.div`

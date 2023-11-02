@@ -8,6 +8,7 @@ import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 export default function EditMypage() {
   // 리액트 쿼리로 유저정보 가져오기 -----------------------------------------
@@ -75,8 +76,7 @@ export default function EditMypage() {
 
   const onDeleteButtonHandler = () => {
     deleteId.mutate();
-    // document.cookie = 'Authorization=; max-age=0; path=/';
-    // document.cookie = 'refreshToken=; max-age=0; path=/';
+    Cookies.remove('Authorization');
     alert('탈퇴되었습니다.');
     navigate('/');
   };
@@ -192,4 +192,5 @@ const Withdrawal = styled.div`
   text-decoration-line: underline;
   position: absolute;
   bottom: 300px;
+  cursor: pointer;
 `;
