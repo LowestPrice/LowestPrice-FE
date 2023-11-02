@@ -10,7 +10,6 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import OptionModal from './option/OptionModal';
 import AlarmFooter from '../../components/footer/AlarmFooter';
-import { ChartArea } from './style';
 import { PriceChart, PriceDataWrap } from './PriceHistory';
 import SimilarProductList from './similar/SimilarProductList';
 import { GreyShareIcon } from '../../assets/icon/icon';
@@ -287,4 +286,9 @@ const Message = styled.div`
   color: lightgray;
   margin-top: 70px;
   margin-bottom: -20px;
+`;
+
+const ChartArea = styled.div`
+  margin-left: 10px;
+  margin-bottom: 30px;
 `;
