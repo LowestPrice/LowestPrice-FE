@@ -135,7 +135,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
         </Flex>
       </TopBox>
       <TextArea>
-        <ReactQuill value={magazineData.content} readOnly={true} theme={'bubble'} />
+        <ReactQuill value={magazineData.content} readOnly={true} theme={'bubble'} style={{ overflow: 'hidden' }} />
       </TextArea>
       <LikeShareIconFlex>
         <Like
@@ -224,6 +224,9 @@ const TextArea = styled.div`
   resize: none;
   overflow-y: auto;
   min-height: 344px;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 `;
 
 const AnotherContentButton = styled.button`
@@ -311,6 +314,7 @@ const Button = styled.div`
   height: 24px;
   background-color: transparent;
   z-index: 999;
+  cursor: pointer;
 `;
 
 const Img = styled.img`
