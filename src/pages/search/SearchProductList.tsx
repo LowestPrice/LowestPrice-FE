@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { Product } from '../../type';
 import Loading from '../../components/Loading';
-import Error from '../../components/Error';
 import { infiniteSearch, infiniteSearchFilter } from '../../infiniteQueries/search';
 import Observer from '../../components/Observer';
+import { toast } from 'react-toastify';
 
 interface Props {
   searchWord: string | undefined;
@@ -35,13 +35,13 @@ function SearchProductList(props: Props) {
     return <Loading />;
   }
   if (infiniteSearchData.status === 'error') {
-    return <Error />;
+    toast.error('찾으시는 상품이 존재하지 않습니다.');
   }
   if (infiniteSearchFilterData.status === 'loading') {
     return <Loading />;
   }
   if (infiniteSearchFilterData.status === 'error') {
-    return <Error />;
+    toast.error('찾으시는 상품이 존재하지 않습니다.');
   }
 
   // 2차원 배열 -> 1차원 배열로 변경 ------------------------------------------
@@ -80,8 +80,8 @@ function SearchProductList(props: Props) {
       infiniteSearchFilterData.fetchNextPage();
     }
   };
-  console.log(props.isFilter);
-  console.log((props.isFilter ? infiniteSearchData : infiniteSearchFilterData).hasNextPage);
+
+  console.log(infiniteSearchData.data);
 
   return (
     <div>

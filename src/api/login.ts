@@ -11,6 +11,16 @@ export const loginWithKakao = () => {
   window.location.href = kakaoOauthURL;
 };
 
+// 임시 로그인
+
+export const temporaryLogin = () => {
+  const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
+  const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
+    `${SERVER_URL}/api/kakao/temporary-login`
+  )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
+  window.location.href = kakaoOauthURL;
+};
+
 // 카카오 회원 탈퇴
 
 export const DeleteIdWithKakao = async () => {
@@ -27,7 +37,7 @@ export const DeleteIdWithKakao = async () => {
 
 // 로그아웃
 
-export const postlogout = async () => {
+export const WWWWWW = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
