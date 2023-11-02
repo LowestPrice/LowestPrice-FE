@@ -108,14 +108,4 @@ const Wrap = styled.div`
   position: absolute;
   top: 210px;
   padding-bottom: 80px;
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
-    background: rgba(181, 181, 181, 1);
-
-    border-radius: 10px;
-  }
 `;

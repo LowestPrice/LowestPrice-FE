@@ -142,6 +142,7 @@ function Detail() {
           <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
         </ChartArea>
         <SimilarProductList productId={data.productId} />
+        <Message>구매하기 버튼을 통해 구매를 할 경우, '내일은 최저가'에 수익이 발생합니다. 발생한 수익은 가격 추적 서비스 운영을 위해 사용됩니다.</Message>
       </div>
       <ShareFooter
         share={share}
@@ -278,4 +279,12 @@ const GraphText = styled.div`
   line-height: 121.5%;
   margin-top: 18px;
   margin-bottom: 15px;
+`;
+
+const Message = styled.div`
+  width: 300px;
+  font-size: 10px;
+  color: lightgray;
+  margin-top: 70px;
+  margin-bottom: -20px;
 `;
