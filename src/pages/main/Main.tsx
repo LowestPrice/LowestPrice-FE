@@ -243,7 +243,7 @@ const MainWrap = styled.div`
 `;
 
 const Header = styled.div`
-  width: 375px;
+  width: 360px;
   height: 62px;
   top: 34px;
   border-bottom: 1px solid rgba(243, 243, 243, 1);
