@@ -224,6 +224,9 @@ const TextArea = styled.div`
   resize: none;
   overflow-y: auto;
   min-height: 344px;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 `;
 
 const AnotherContentButton = styled.button`
