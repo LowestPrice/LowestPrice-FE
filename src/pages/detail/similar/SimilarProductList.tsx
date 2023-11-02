@@ -20,16 +20,35 @@ function SimilarProductList(props: Props) {
   console.log(data);
   return (
     <div>
-      <Wrap>
-        {data.map((item: Product, index: number) => {
-          return <SimilarProduct key={index} {...item} />;
-        })}
-      </Wrap>
+      {data.length !== 0 ? (
+        <SimilarProuctWrap>
+          <div className='title'>해당 상품과 비슷한 상품</div>
+          <Wrap>
+            {data.map((item: Product, index: number) => {
+              return <SimilarProduct key={index} {...item} />;
+            })}
+          </Wrap>
+        </SimilarProuctWrap>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
 
 export default SimilarProductList;
+
+const SimilarProuctWrap = styled.div`
+  width: 546.35px;
+  height: 195px;
+  gap: 14px;
+  margin-left: 10px;
+  .title {
+    width: 179px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+`;
 
 const Wrap = styled.div`
   width: 375px;

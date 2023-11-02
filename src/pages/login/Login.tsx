@@ -6,6 +6,9 @@ export default function Login() {
   const handleKakaoLogin = () => {
     loginWithKakao();
   };
+  // const handleTempLogin = () => {
+  //   temporaryLogin();
+  // };
 
   return (
     <>
@@ -26,6 +29,7 @@ export default function Login() {
           <h2>내일은 최저가</h2>
           <span>Apple 제품을 최저가로 만나보세요.</span>
           <LoginButton onClick={handleKakaoLogin}>카카오 로그인</LoginButton>
+          {/* <LoginButton onClick={handleTempLogin}>임시 로그인</LoginButton> */}
         </Content>
       </Wrap>
       <PageFooter />

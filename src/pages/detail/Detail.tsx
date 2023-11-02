@@ -140,10 +140,7 @@ function Detail() {
           <GraphText>가격 그래프</GraphText>
           <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
         </ChartArea>
-        <SimilarProuctWrap>
-          <div className='title'>해당 상품과 비슷한 상품</div>
-          <SimilarProductList productId={data.productId} />
-        </SimilarProuctWrap>
+        <SimilarProductList productId={data.productId} />
       </div>
       <ShareFooter
         share={share}
@@ -237,18 +234,6 @@ const DiscountWrap = styled.div`
   justify-content: center;
   color: #0c77f6;
   margin-left: 20px;
-`;
-
-const SimilarProuctWrap = styled.div`
-  width: 546.35px;
-  height: 195px;
-  gap: 14px;
-  margin-left: 10px;
-  .title {
-    width: 179px;
-    font-size: 16px;
-    font-weight: 600;
-  }
 `;
 
 const OptionWrap = styled.div`

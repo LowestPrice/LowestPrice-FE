@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 import Topten from './topten/Topten';
 import PageFooter from '../../components/footer/PageFooter';
@@ -25,6 +26,8 @@ export default function Main() {
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
   const [isSoldout, setIsSoldout] = useState<boolean>(false);
   const [showSplash, setShowSplash] = useState<boolean>(true);
+
+  const isLogin = Cookies.get('isLogin');
 
   useEffect(() => {
     if (showSplash) {
@@ -107,11 +110,9 @@ export default function Main() {
     setSearchWord(e.target.value);
   };
 
-  console.log(showSplash);
-
   return (
     <>
-      {showSplash ? (
+      {showSplash && isLogin ? (
         <Splash />
       ) : (
         <MainWrap>
