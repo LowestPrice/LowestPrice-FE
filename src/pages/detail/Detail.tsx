@@ -10,7 +10,6 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import OptionModal from './option/OptionModal';
 import AlarmFooter from '../../components/footer/AlarmFooter';
-import { ChartArea } from './style';
 import { PriceChart, PriceDataWrap } from './PriceHistory';
 import SimilarProductList from './similar/SimilarProductList';
 import { GreyShareIcon } from '../../assets/icon/icon';
@@ -278,4 +277,9 @@ const GraphText = styled.div`
   line-height: 121.5%;
   margin-top: 18px;
   margin-bottom: 15px;
+`;
+
+const ChartArea = styled.div`
+  margin-left: 10px;
+  margin-bottom: 30px;
 `;

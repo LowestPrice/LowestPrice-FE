@@ -23,6 +23,7 @@ export const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 `;
 
 export const Title = styled.input`
@@ -71,6 +72,31 @@ export const PhotoDiv = styled.div`
 `;
 
 export const StyledImage = styled.img`
-  max-width: 375px;
+  width: 100%;
+  max-width: 350px;
   max-height: 300px;
+  object-fit: contain;
+`;
+
+export const styleString = `
+  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="12px"]::before,
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before {
+    content: '12px';
+  }
+  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="14px"]::before,
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
+    content: '14px';
+  }
+  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="16px"]::before,
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
+    content: '16px';
+  }
+  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="18px"]::before,
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
+    content: '18px';
+  }
+  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="20px"]::before,
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="20px"]::before {
+    content: '20px';
+  }
 `;

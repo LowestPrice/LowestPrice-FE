@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { FlexBox, Button, ContentBox, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage } from './styles';
+import React, { useState, useMemo } from 'react';
+import { FlexBox, Button, ContentBox, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { putMagazine } from '../../../api/magazine';
@@ -7,6 +7,11 @@ import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { AddImageIcon } from '../../../assets/icon/icon';
+
+const CustomSize = ReactQuill.Quill.import('attributors/style/size');
+CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+ReactQuill.Quill.register(CustomSize, true);
 
 const MagazineEditing: React.FC = () => {
   const location = useLocation();
@@ -29,8 +34,6 @@ const MagazineEditing: React.FC = () => {
     setNewContent(value);
   };
 
-  const contentRef = useRef<HTMLTextAreaElement>(null);
-
   const onImageChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newMainImage = e.target.files?.[0];
     setNewImage(newMainImage);
@@ -43,7 +46,6 @@ const MagazineEditing: React.FC = () => {
     }
   };
 
-  // 데이터 변경하기
   const changePost = useMutation(putMagazine, {
     onSuccess: () => {
       queryClient.invalidateQueries('posts');
@@ -73,28 +75,6 @@ const MagazineEditing: React.FC = () => {
     );
   };
 
-  const adjustHeight = () => {
-    const targetTextarea = contentRef.current;
-    if (targetTextarea) {
-      targetTextarea.style.height = 'auto';
-      if (targetTextarea.scrollHeight > targetTextarea.clientHeight) {
-        targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
-      } else {
-        targetTextarea.style.height = window.innerHeight + 'px';
-      }
-    }
-  };
-
-  // 내용이 변경될 때마다 높이 조정
-  useEffect(() => {
-    adjustHeight();
-  }, [newContent]);
-
-  // 컴포넌트가 마운트 될 때 높이 조정
-  useEffect(() => {
-    adjustHeight();
-  }, []);
-
   const modules = useMemo(() => {
     return {
       toolbar: {
@@ -102,6 +82,7 @@ const MagazineEditing: React.FC = () => {
           ['image'],
           [{ header: [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+          [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
           [{ font: [] }],
           [{ color: [] }, { background: [] }],
           [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
@@ -113,6 +94,7 @@ const MagazineEditing: React.FC = () => {
 
   return (
     <>
+      <style dangerouslySetInnerHTML={{ __html: styleString }} />
       <FlexBox>
         <Button onClick={() => navigate('/magazine')}></Button>
         <Button onClick={() => onSubmitButtonHandler(id, newTitle, newContent, newMainImage)}>수정</Button>
@@ -120,18 +102,21 @@ const MagazineEditing: React.FC = () => {
       <ContentBox>
         <DirectionCol>
           <PhotoDiv>
-            <PhotoAdd></PhotoAdd>
+            <PhotoAdd>
+              <label>
+                <input style={{ display: 'none' }} onChange={onImageChangeHandler} type='file' accept='image/*' />
+                <AddImageIcon />
+              </label>
+            </PhotoAdd>
           </PhotoDiv>
           <Title value={newTitle} onChange={onTitleChangeHandler} />
           <StyledImage src={previewImage} alt='매거진 이미지' />
-          <input type='file' accept='image/*' onChange={onImageChangeHandler} />
-          <textarea style={{ display: 'none' }} />
           <ReactQuill
             value={newContent}
             theme='snow'
             onChange={onContentChangeHandler}
             modules={modules}
-            style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box' }}
+            style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box', overflow: 'hidden' }}
           />
         </DirectionCol>
       </ContentBox>
