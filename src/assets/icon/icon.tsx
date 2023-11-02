@@ -157,7 +157,7 @@ export const GreyBackIcon = (props: SVGProps<SVGSVGElement>) => {
 export const RightBackIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg width='21' height='23' viewBox='0 0 21 23' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
-      <path d='M10 1.18469L20 11.1847L10 21.1847' stroke='#B5B5B5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+      <path d='M10 1.18469L20 11.1847L10 21.1847' stroke='#B5B5B5' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   );
 };
@@ -228,11 +228,11 @@ export const MypageEditIcon = (props: SVGProps<SVGSVGElement>) => {
           id='Icon'
           d='M9.47686 17H17M1 16.361L5.09643 16.068C5.34202 16.0186 5.56752 15.8977 5.74462 15.7205L16.1009 5.3608C16.5974 4.8641 16.5971 4.05899 16.1001 3.56271L13.9063 1.37183C13.4096 0.875761 12.6047 0.876099 12.1083 1.37259L1.75101 11.7334C1.57425 11.9102 1.45356 12.1352 1.40403 12.3802L1 16.361Z'
           stroke='#6F6F6F'
-          stroke-width='1.7'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.7'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
-        <line id='Line 19' x1='10.601' y1='3.39896' x2='14.601' y2='7.39896' stroke='#6F6F6F' stroke-width='1.7' />
+        <line id='Line 19' x1='10.601' y1='3.39896' x2='14.601' y2='7.39896' stroke='#6F6F6F' strokeWidth='1.7' />
       </g>
     </svg>
   );

@@ -75,6 +75,8 @@ export default function EditMypage() {
 
   const onDeleteButtonHandler = () => {
     deleteId.mutate();
+    // document.cookie = 'Authorization=; max-age=0; path=/';
+    // document.cookie = 'refreshToken=; max-age=0; path=/';
     alert('탈퇴되었습니다.');
     navigate('/');
   };
