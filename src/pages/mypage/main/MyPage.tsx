@@ -114,13 +114,14 @@ const Greeting = styled.div`
   font-style: normal;
   font-weight: 500;
   margin-right: 9px;
+  align-items: center;
 `;
 
 const Name = styled.span`
   font-weight: 700;
   font-weight: bold;
-  padding: 20px;
-  padding-left: 10px;
+  padding: 20px 20px 20px 0px;
+  align-items: center;
 `;
 
 const Profile = styled.div`

@@ -23,6 +23,7 @@ export const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const Title = styled.input`
@@ -71,6 +72,6 @@ export const PhotoDiv = styled.div`
 `;
 
 export const StyledImage = styled.img`
-  max-width: 375px;
+  max-width: 350px;
   max-height: 300px;
 `;
