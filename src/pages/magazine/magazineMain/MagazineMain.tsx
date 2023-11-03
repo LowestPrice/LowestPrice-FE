@@ -76,7 +76,9 @@ const Magazine: React.FC<MagazineProps> = () => {
           </Scroll>
         </div>
       </Container>
-      <PageFooter />
+      <StyledPageFooter>
+        <PageFooter />
+      </StyledPageFooter>
     </>
   );
 };
@@ -84,11 +86,13 @@ const Magazine: React.FC<MagazineProps> = () => {
 export default Magazine;
 
 const Container = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f3f3f3;
-  max-height: 85vh;
+  width: 375px;
+  padding-bottom: 70px;
 `;
 
 const Header = styled.div`
@@ -103,15 +107,9 @@ const Scroll = styled.div`
   width: 380px;
   overflow: scroll;
   &::-webkit-scrollbar {
-    width: 5px;
+    display: none;
   }
-  &::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
-    background: rgba(181, 181, 181, 1);
-
-    border-radius: 10px;
-  }
-  max-height: 75vh;
+  max-height: 100vh;
 `;
 
 const Item = styled.div`
@@ -206,4 +204,8 @@ const Flex = styled.div`
   justify-content: space-between;
   font-size: 14px;
   font-weight: 400;
+`;
+
+const StyledPageFooter = styled.div`
+  flex-shrink: 0;
 `;
