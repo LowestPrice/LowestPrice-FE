@@ -71,6 +71,7 @@ function Mypage() {
           </Like>
         </Article>
         {accessToken ? <Article onClick={handleLogoutButton}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
+        {/* <Article>회원탈퇴</Article> */}
       </Wrap>
       <PageFooter />
     </div>
