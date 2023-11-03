@@ -17,7 +17,6 @@ function SimilarProductList(props: Props) {
   if (status === 'error') {
     return <Error />;
   }
-  console.log(data);
   return (
     <div>
       {data.length !== 0 ? (

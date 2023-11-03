@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { loginWithKakao } from '../../api/login';
 import PageFooter from '../../components/footer/PageFooter';
+// import { temporaryLogin } from '../../api/login';
 
 export default function Login() {
   const handleKakaoLogin = () => {
@@ -11,7 +12,7 @@ export default function Login() {
   // };
 
   return (
-    <>
+    <div style={{ position: 'fixed', width: '375px' }}>
       <Header>
         <h3>로그인</h3>
       </Header>
@@ -33,7 +34,7 @@ export default function Login() {
         </Content>
       </Wrap>
       <PageFooter />
-    </>
+    </div>
   );
 }
 

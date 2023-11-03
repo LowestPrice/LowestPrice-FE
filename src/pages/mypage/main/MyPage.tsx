@@ -49,7 +49,7 @@ function Mypage() {
   const accessToken = Cookies.get('Authorization');
 
   return (
-    <div>
+    <div style={{ position: 'fixed', width: '375px' }}>
       <Header>마이페이지</Header>
       <Wrap>
         <Title>

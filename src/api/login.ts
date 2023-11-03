@@ -29,6 +29,7 @@ export const DeleteIdWithKakao = async () => {
   console.log(accessToken, '탈퇴 토큰');
   try {
     const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/kakao/deactivate`, { headers: { Authorization: accessToken } });
+    Cookies.remove('Authorization');
     return response;
   } catch (error) {
     console.error('회원 탈퇴 에러', error);
@@ -41,8 +42,8 @@ export const WWWWWW = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_KEY}/logout`);
-    return response;
+    const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=${import.meta.env.KAKAO_CLINT_ID}&logout_redirect_uri=http://localhost:5173`;
+    window.location.href = kakaoOauthURL;
   } catch (error) {
     console.error('로그아웃 에러', error);
   }

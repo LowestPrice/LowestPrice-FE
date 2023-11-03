@@ -6,7 +6,6 @@ export const toggleAlarm = async (productId: number | undefined) => {
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     await axios.post(`${import.meta.env.VITE_API_KEY}/notification/product/${productId}`);
-    console.log('post 성공');
   } catch (err) {
     console.log(err);
   }
