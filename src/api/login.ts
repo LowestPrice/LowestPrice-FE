@@ -7,7 +7,7 @@ export const loginWithKakao = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
     `${SERVER_URL}/api/kakao/callback`
-  )}&client_id=${encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID)}`;
+  )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
   window.location.href = kakaoOauthURL;
 };
 
@@ -17,7 +17,7 @@ export const temporaryLogin = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
     `${SERVER_URL}/api/kakao/temporary-login`
-  )}&client_id=${encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID)}`;
+  )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
   window.location.href = kakaoOauthURL;
 };
 
@@ -44,9 +44,7 @@ export const postLogout = async () => {
 
   try {
     Cookies.remove('Authorization');
-    const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=${encodeURIComponent(
-      import.meta.env.VITE_KAKAO_CLIENT_ID
-    )}&logout_redirect_uri=https://lowest-price.store`;
+    const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=1b3c349efac233223cb5b44ca84c0ff6&logout_redirect_uri=https://lowest-price.store`;
     window.location.href = kakaoOauthURL;
   } catch (error) {
     console.error('로그아웃 에러', error);
