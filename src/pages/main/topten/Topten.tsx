@@ -181,7 +181,8 @@ const Button = styled.button`
   justify-content: center;
   border: none;
   font-size: 12px;
-  height: 50px;
+  height: 60px;
+  width: 15px;
   border-radius: 60px;
   padding: 25px 10px;
   opacity: 0.5;
@@ -198,12 +199,14 @@ const LeftButton = styled(Button)`
   transition: all 0.5s ease-in-out;
   position: absolute;
   left: 10px;
+  background-color: lightgray;
 `;
 
 const RightButton = styled(Button)`
   transition: all 0.5s ease-in-out;
   position: absolute;
   right: 10px;
+  background-color: lightgray;
 `;
 
 const IndexWrapper = styled.div`
