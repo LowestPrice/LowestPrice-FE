@@ -105,6 +105,8 @@ export default function Main() {
     setSearchWord(e.target.value);
   };
 
+  console.log(import.meta.env.VITE_KAKAO_CLIENT_ID);
+
   return (
     <>
       {showSplash && isLogin ? (
