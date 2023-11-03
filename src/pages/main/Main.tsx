@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 import Topten from './topten/Topten';
 import PageFooter from '../../components/footer/PageFooter';
@@ -17,14 +18,15 @@ export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
 
   const [searchWord, setSearchWord] = useState<string>('');
-  const [isOnCategory, setIsOnCategory] = useState<boolean>(false);
-  const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([false, false, false, false, false]);
+  const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([true, false, false, false, false]);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [filterName, setFilterName] = useState<string>('');
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
   const [isSoldout, setIsSoldout] = useState<boolean>(false);
   const [showSplash, setShowSplash] = useState<boolean>(true);
+
+  const isLogin = Cookies.get('isLogin');
 
   useEffect(() => {
     if (showSplash) {
@@ -59,20 +61,16 @@ export default function Main() {
 
   const handleCategoryButton = useCallback(
     (idx: any) => {
-      setIsOnCategory(true);
       setCategoryId(idx + 1);
       setIsCategorySelect(() => {
         const newArr = Array(6).fill(false);
-        if (isCategorySelect[idx] === true) {
-          newArr[idx] = false;
-          setIsOnCategory(false);
-        } else {
-          newArr[idx] = true;
-        }
+
+        newArr[idx] = true;
+
         return newArr;
       });
     },
-    [isCategorySelect, isOnCategory, categoryId]
+    [isCategorySelect, categoryId]
   );
 
   // 필터 버튼 클릭 ----------------------------------------
@@ -107,11 +105,12 @@ export default function Main() {
     setSearchWord(e.target.value);
   };
 
-  console.log(showSplash);
+  // console.log(encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID));
+  // console.log(import.meta.env.VITE_KAKAO_CLIENT_ID);
 
   return (
     <>
-      {showSplash ? (
+      {showSplash && isLogin ? (
         <Splash />
       ) : (
         <MainWrap>
@@ -142,6 +141,15 @@ export default function Main() {
                     }}
                   ></SearchInput>
                   <button style={{ display: 'none' }} />
+                  <XButton
+                    onClick={() => {
+                      setSearchWord('');
+                    }}
+                  >
+                    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                      <path d='M18 6L6 18M18 18L6 6' stroke='#6F6F6F' strokeWidth='2' strokeLinecap='round' />
+                    </svg>
+                  </XButton>
                   <div
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
@@ -166,7 +174,9 @@ export default function Main() {
                   <div className='title'>오늘의 특가✔️</div>
                   <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
                 </Title>
+
                 <Topten />
+
                 <CategoryWrap>
                   <CategoryTitle>
                     <div>Apple 제품</div>
@@ -186,7 +196,8 @@ export default function Main() {
                       );
                     })}
                   </CategoryTabWrap>
-                  <Filterbar $isCategoryOn={isOnCategory}>
+
+                  <Filterbar>
                     <Options>
                       {filterList.map((item, index) => {
                         return (
@@ -207,7 +218,8 @@ export default function Main() {
                       </Soldout>
                     </Options>
                   </Filterbar>
-                  <CategoryList isOnCategory={isOnCategory} categoryId={categoryId} filterName={filterName} isFilter={isFilter} isSoldout={isSoldout} />
+
+                  <CategoryList categoryId={categoryId} filterName={filterName} isFilter={isFilter} isSoldout={isSoldout} />
                 </CategoryWrap>
               </Wrap>
             </div>
@@ -242,7 +254,7 @@ const MainWrap = styled.div`
 `;
 
 const Header = styled.div`
-  width: 375px;
+  width: 360px;
   height: 62px;
   top: 34px;
   border-bottom: 1px solid rgba(243, 243, 243, 1);
@@ -288,6 +300,17 @@ const SearchInput = styled.input`
   height: 20px;
   border: none;
   outline: none;
+`;
+
+const XButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
@@ -353,7 +376,7 @@ const CategoryTabWrap = styled.div`
   }
 `;
 
-const Filterbar = styled.div<{ $isCategoryOn: boolean }>`
+const Filterbar = styled.div`
   width: 375px;
   height: 31px;
   display: flex;
@@ -363,7 +386,6 @@ const Filterbar = styled.div<{ $isCategoryOn: boolean }>`
   color: var(--gray03, #6f6f6f);
   position: absolute;
   top: 174px;
-  display: ${(props) => (props.$isCategoryOn ? 'block' : 'none')};
 `;
 
 const Options = styled.div`

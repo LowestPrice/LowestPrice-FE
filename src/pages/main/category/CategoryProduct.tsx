@@ -27,7 +27,6 @@ function CategoryProduct(props: Props) {
           <BellImage
             style={{ zIndex: '999' }}
             onClick={(e) => {
-              console.log('알람클릭');
               e.stopPropagation();
             }}
           >

@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 import { loginWithKakao } from '../../api/login';
 import PageFooter from '../../components/footer/PageFooter';
+// import { temporaryLogin } from '../../api/login';
 
 export default function Login() {
   const handleKakaoLogin = () => {
     loginWithKakao();
   };
+  // const handleTempLogin = () => {
+  //   temporaryLogin();
+  // };
 
   return (
-    <>
+    <div style={{ position: 'fixed', width: '375px' }}>
       <Header>
         <h3>로그인</h3>
       </Header>
@@ -26,10 +30,11 @@ export default function Login() {
           <h2>내일은 최저가</h2>
           <span>Apple 제품을 최저가로 만나보세요.</span>
           <LoginButton onClick={handleKakaoLogin}>카카오 로그인</LoginButton>
+          {/* <LoginButton onClick={handleTempLogin}>임시 로그인</LoginButton> */}
         </Content>
       </Wrap>
       <PageFooter />
-    </>
+    </div>
   );
 }
 

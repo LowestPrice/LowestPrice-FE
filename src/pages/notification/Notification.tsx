@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 import NProductList from './NProductList/NProductList';
 import NPriceAlarmList from './NPriceAlarmList/NPriceAlarmList';
@@ -18,12 +19,13 @@ export default function Notification({}: Props) {
 
   // 알림 글 목록 ------------------------------------
 
-  // const switchPriceTab = (): void => {
-  //   setTab(false);
-  // };
+  const switchPriceTab = (): void => {
+    toast.error('죄송합니다. 해당 정보는 개발중에 있습니다. 조금만 기다려주시면 감사하겠습니다.😂');
+    // setTab(false);
+  };
 
   return (
-    <>
+    <div style={{ position: 'fixed', width: '375px' }}>
       <Header>
         <MyNotification>내 알림</MyNotification>
       </Header>
@@ -39,7 +41,7 @@ export default function Notification({}: Props) {
         <PriceAlarmList
           $tab={tab}
           onClick={() => {
-            // switchPriceTab();
+            switchPriceTab();
           }}
         >
           가격변동알림
@@ -47,7 +49,7 @@ export default function Notification({}: Props) {
       </Navigate>
       {tab ? <NProductList /> : <NPriceAlarmList />}
       <PageFooter />
-    </>
+    </div>
   );
 }
 

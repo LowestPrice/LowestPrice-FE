@@ -18,7 +18,6 @@ import ShareFooter from '../../components/footer/ShareFooter';
 function Detail() {
   // 상태 관리 ------------------------------------------------------
 
-  const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
   const [share, setShare] = useState<boolean>(false);
@@ -42,27 +41,6 @@ function Detail() {
     return <Error />;
   }
 
-  // 옵션(셀렉트)모달 켜고 닫기 ------------------------------------------------------------
-
-  const handleOptionModalButton = () => {
-    setIsOpenOption(!isOpenOption);
-  };
-
-  // 옵션(셀렉트)모달 켜고 닫기 ------------------------------------------------------------
-
-  const OffOptionModal = () => {
-    setIsOpenOption(false);
-  };
-
-  // 옵션 버튼 선택시 페이지 이동 --------------------------------------------------------------
-
-  const handleOptionButton = (productId: number) => {
-    console.log('click', productId);
-
-    navigate(`/detail/${productId}`);
-    // history.push(`/detail/${productId}`);
-  };
-
   // 공유버튼 클릭 --------------------------------------------------------
 
   const handleShareButton = () => {
@@ -78,12 +56,7 @@ function Detail() {
 
   return (
     <>
-      <div
-        style={{ paddingBottom: '110px' }}
-        onClick={() => {
-          OffOptionModal();
-        }}
-      >
+      <div style={{ paddingBottom: '110px' }}>
         <Header>
           <h3>{data.Category[0].categoryName}</h3>
           <XButton
@@ -118,32 +91,15 @@ function Detail() {
             <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0px', cursor: 'pointer' }} />
           </PriceNDiscountWrap>
         </Content>
-        <OptionWrap>
-          <Option
-            onClick={(e) => {
-              e.stopPropagation();
-              handleOptionModalButton();
-            }}
-          >
-            제품 옵션 선택
-            <div>
-              <svg xmlns='http://www.w3.org/2000/svg' width='14' height='13' viewBox='0 0 14 13' fill='none'>
-                <path d='M1 6L7 12L13 6' stroke='black' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-              </svg>
-            </div>
-          </Option>
-          <OptionModal handleOptionButton={handleOptionButton} productId={data.productId} isOpenOption={isOpenOption} realId={data.realId}></OptionModal>
-        </OptionWrap>
+        <OptionModal realId={data.realId} productId={data.productId} />
         {/* 최고가, 최저가 */}
         <PriceDataWrap minPrice={minPrice} maxPrice={maxPrice} />
         <ChartArea>
           <GraphText>가격 그래프</GraphText>
           <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
         </ChartArea>
-        <SimilarProuctWrap>
-          <div className='title'>해당 상품과 비슷한 상품</div>
-          <SimilarProductList productId={data.productId} />
-        </SimilarProuctWrap>
+        <SimilarProductList productId={data.productId} />
+        <Message>구매하기 버튼을 통해 구매를 할 경우, '내일은 최저가'에 수익이 발생합니다. 발생한 수익은 가격 추적 서비스 운영을 위해 사용됩니다.</Message>
       </div>
       <ShareFooter
         share={share}
@@ -239,52 +195,6 @@ const DiscountWrap = styled.div`
   margin-left: 20px;
 `;
 
-const SimilarProuctWrap = styled.div`
-  width: 546.35px;
-  height: 195px;
-  gap: 14px;
-  margin-left: 10px;
-  .title {
-    width: 179px;
-    font-size: 16px;
-    font-weight: 600;
-  }
-`;
-
-const OptionWrap = styled.div`
-  width: 375px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-`;
-
-const Option = styled.div`
-  width: 335px;
-  height: 46px;
-  border-radius: 10px;
-  border: 1px solid #b5b5b5;
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 18px;
-  position: relative;
-  cursor: pointer;
-  font-weight: 600;
-  div {
-    position: absolute;
-    right: 14px;
-    height: 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
 const GraphText = styled.div`
   font-size: 16px;
   font-style: normal;
@@ -292,6 +202,14 @@ const GraphText = styled.div`
   line-height: 121.5%;
   margin-top: 18px;
   margin-bottom: 15px;
+`;
+
+const Message = styled.div`
+  width: 300px;
+  font-size: 10px;
+  color: lightgray;
+  margin-top: 70px;
+  margin-bottom: -20px;
 `;
 
 const ChartArea = styled.div`

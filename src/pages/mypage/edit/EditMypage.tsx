@@ -75,14 +75,12 @@ export default function EditMypage() {
 
   const onDeleteButtonHandler = () => {
     deleteId.mutate();
-    // document.cookie = 'Authorization=; max-age=0; path=/';
-    // document.cookie = 'refreshToken=; max-age=0; path=/';
     alert('탈퇴되었습니다.');
     navigate('/');
   };
 
   return (
-    <div>
+    <div style={{ position: 'fixed', width: '375px' }}>
       <Header>
         <h2>프로필 수정</h2>
         <CompleteButton
@@ -192,4 +190,5 @@ const Withdrawal = styled.div`
   text-decoration-line: underline;
   position: absolute;
   bottom: 300px;
+  cursor: pointer;
 `;

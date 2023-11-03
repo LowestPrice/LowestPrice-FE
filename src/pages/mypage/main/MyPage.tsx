@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
 
 import { getUserinfo } from '../../../api/mypage';
-// import { postlogout } from '../../../api/login';
+import { postLogout } from '../../../api/login';
 
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
@@ -22,14 +22,14 @@ function Mypage() {
   const { data, status } = useQuery('userInfo', getUserinfo);
 
   // 로그아웃하기 -----------------------------------------
-  // const logoutMutation = useMutation(postlogout, {
-  //   onSuccess: () => {
-  //     console.log('로그아웃 성공');
-  //   },
-  //   onError: () => {
-  //     console.log('로그아웃 실패');
-  //   },
-  // });
+  const logoutMutation = useMutation(postLogout, {
+    onSuccess: () => {
+      console.log('로그아웃 성공');
+    },
+    onError: () => {
+      console.log('로그아웃 실패');
+    },
+  });
 
   if (status === 'loading') {
     return <Loading />;
@@ -41,15 +41,13 @@ function Mypage() {
   // 로그아웃--------------------------------------------------------
 
   const handleLogoutButton = () => {
-    // logoutMutation.mutate();
-    Cookies.remove('Authorization');
-    navigate('/');
+    logoutMutation.mutate();
   };
 
   const accessToken = Cookies.get('Authorization');
 
   return (
-    <div>
+    <div style={{ position: 'fixed', width: '375px' }}>
       <Header>마이페이지</Header>
       <Wrap>
         <Title>
@@ -107,7 +105,7 @@ const Title = styled.div`
   align-items: center;
   font-size: 20px;
   line-height: 110%;
-  margin-left: 18px;
+  margin-left: 22px;
 `;
 
 const Greeting = styled.div`
