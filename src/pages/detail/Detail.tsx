@@ -69,37 +69,39 @@ function Detail() {
             </svg>
           </XButton>
         </Header>
-        <ProductImageWrap>
-          <ProductImage src={data.productImage}></ProductImage>
-        </ProductImageWrap>
-        <Content>
-          <div className='title'>{data.productName}</div>
-          <div className='originalPrice'>{originalPrice}원</div>
-          <PriceNDiscountWrap>
-            <div>{currentPrice}원</div>
-            <DiscountWrap>
-              <div style={{ marginRight: '2px' }}>
-                <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none'>
-                  <path
-                    d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
-                    fill='#0C77F7'
-                  />
-                </svg>
-              </div>
-              <div>{data.discountRate}%</div>
-            </DiscountWrap>
-            <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0px', cursor: 'pointer' }} />
-          </PriceNDiscountWrap>
-        </Content>
-        <OptionModal realId={data.realId} productId={data.productId} />
-        {/* 최고가, 최저가 */}
-        <PriceDataWrap minPrice={minPrice} maxPrice={maxPrice} />
-        <ChartArea>
-          <GraphText>가격 그래프</GraphText>
-          <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
-        </ChartArea>
-        <SimilarProductList productId={data.productId} />
-        <Message>구매하기 버튼을 통해 구매를 할 경우, '내일은 최저가'에 수익이 발생합니다. 발생한 수익은 가격 추적 서비스 운영을 위해 사용됩니다.</Message>
+        <Scroll>
+          <ProductImageWrap>
+            <ProductImage src={data.productImage}></ProductImage>
+          </ProductImageWrap>
+          <Content>
+            <div className='title'>{data.productName}</div>
+            <div className='originalPrice'>{originalPrice}원</div>
+            <PriceNDiscountWrap>
+              <div>{currentPrice}원</div>
+              <DiscountWrap>
+                <div style={{ marginRight: '2px' }}>
+                  <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none'>
+                    <path
+                      d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
+                      fill='#0C77F7'
+                    />
+                  </svg>
+                </div>
+                <div>{data.discountRate}%</div>
+              </DiscountWrap>
+              <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0px', cursor: 'pointer' }} />
+            </PriceNDiscountWrap>
+          </Content>
+          <OptionModal realId={data.realId} productId={data.productId} />
+          {/* 최고가, 최저가 */}
+          <PriceDataWrap minPrice={minPrice} maxPrice={maxPrice} />
+          <ChartArea>
+            <GraphText>가격 그래프</GraphText>
+            <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
+          </ChartArea>
+          <SimilarProductList productId={data.productId} />
+          <Message>구매하기 버튼을 통해 구매를 할 경우, '내일은 최저가'에 수익이 발생합니다. 발생한 수익은 가격 추적 서비스 운영을 위해 사용됩니다.</Message>
+        </Scroll>
       </div>
       <ShareFooter
         share={share}
@@ -215,4 +217,13 @@ const Message = styled.div`
 const ChartArea = styled.div`
   margin-left: 10px;
   margin-bottom: 30px;
+`;
+
+const Scroll = styled.div`
+  width: 23.75rem;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  max-height: 75vh;
 `;
