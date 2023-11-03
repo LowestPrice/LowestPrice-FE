@@ -35,7 +35,7 @@ const Magazine: React.FC<MagazineProps> = () => {
   }
 
   return (
-    <>
+    <Fixed>
       <Header>
         <BlueLogo />
         <LogoTitle>매거진</LogoTitle>
@@ -79,7 +79,7 @@ const Magazine: React.FC<MagazineProps> = () => {
       <StyledPageFooter>
         <PageFooter />
       </StyledPageFooter>
-    </>
+    </Fixed>
   );
 };
 
@@ -91,20 +91,20 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #f3f3f3;
-  width: 375px;
-  padding-bottom: 70px;
+  width: 23.4375rem;
+  padding-bottom: 4.375rem;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 18.72px 282px 18.72px 20px;
-  width: 150px;
+  padding: 1.17rem 17.625rem 1.17rem 1.25rem;
+  width: 9.375rem;
 `;
 
 const Scroll = styled.div`
-  width: 380px;
+  width: 23.75rem;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -127,12 +127,12 @@ const LogoTitle = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
   text-align: left;
   width: 100%;
-  padding-top: 17.82px;
-  padding-left: 40px;
+  padding-top: 1.11375rem;
+  padding-left: 2.5rem;
   line-height: 100%;
 `;
 
@@ -141,23 +141,23 @@ const Line = styled.div`
 `;
 
 const Subtitle = styled.div<{ isAdmin?: boolean }>`
-  font-size: 14px;
+  font-size: 0.875rem;
   color: grey;
   margin-top: 1%;
   font-weight: 600;
   text-align: left;
   width: 100%;
-  margin-left: 40px;
-  margin-bottom: ${(props) => (props.isAdmin ? '0px' : '20px')};
+  margin-left: 2.5rem;
+  margin-bottom: ${(props) => (props.isAdmin ? '0' : '1.25rem')};
 `;
 
 const Writing = styled.div`
-  width: 323px;
-  font-size: 18px;
+  width: 20.1875rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: #b5b5b5;
   cursor: pointer;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
   text-align: right;
   line-height: 110%;
   text-decoration-line: underline;
@@ -166,17 +166,17 @@ const Writing = styled.div`
 `;
 
 const Box = styled.div`
-  width: 335px;
-  height: 315px;
-  margin-bottom: 26px;
-  border-radius: 4px;
+  width: 20.9375rem;
+  height: 19.6875rem;
+  margin-bottom: 1.625rem;
+  border-radius: 0.25rem;
   overflow: hidden;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
   background-color: white;
 `;
 
 const Img = styled.img`
-  width: 335px;
+  width: 20.9375rem;
   height: 60%;
   object-fit: cover;
   object-position: center;
@@ -188,13 +188,13 @@ const BoxPadding = styled.div`
 `;
 
 const BoxTitle = styled.div`
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
 `;
 
 const Content = styled.div`
-  margin: 1% 0% 1% 0%;
-  font-size: 14px;
+  margin: 1% 0 1% 0;
+  font-size: 0.875rem;
   font-weight: 400;
 `;
 
@@ -202,10 +202,14 @@ const Flex = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 `;
 
 const StyledPageFooter = styled.div`
   flex-shrink: 0;
+`;
+
+const Fixed = styled.div`
+  position: fixed;
 `;
