@@ -33,18 +33,11 @@ export default function NProductList() {
 
 const Wrap = styled.div`
   width: 380px;
-  max-height: 683px;
+  max-height: 75vh;
   overflow: scroll;
   &::-webkit-scrollbar {
-    width: 5px;
+    display: none;
   }
-  &::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
-    background: rgba(181, 181, 181, 1);
-
-    border-radius: 10px;
-  }
-
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

@@ -109,7 +109,7 @@ const Scroll = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  max-height: 100vh;
+  max-height: 75vh;
 `;
 
 const Item = styled.div`
@@ -123,7 +123,7 @@ const LogoTitle = styled.div`
   font-size: 1.17em;
   font-weight: 600;
   line-height: 110%;
-  margin-left: 10px;
+  margin-left: 1.17rem;
 `;
 
 const Title = styled.div`
@@ -137,7 +137,7 @@ const Title = styled.div`
 `;
 
 const Line = styled.div`
-  border-top: 1px solid grey;
+  border-top: 0.0625rem solid grey;
 `;
 
 const Subtitle = styled.div<{ isAdmin?: boolean }>`
