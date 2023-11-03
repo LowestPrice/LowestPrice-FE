@@ -7,7 +7,7 @@ export const loginWithKakao = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
     `${SERVER_URL}/api/kakao/callback`
-  )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
+  )}&client_id=${import.meta.env.VITE_KAKAO_CLIENT_ID}`;
   window.location.href = kakaoOauthURL;
 };
 
@@ -17,7 +17,7 @@ export const temporaryLogin = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
     `${SERVER_URL}/api/kakao/temporary-login`
-  )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
+  )}&client_id=${import.meta.env.VITE_KAKAO_CLIENT_ID}`;
   window.location.href = kakaoOauthURL;
 };
 
@@ -38,11 +38,15 @@ export const DeleteIdWithKakao = async () => {
 
 // 로그아웃
 
-export const WWWWWW = async () => {
+export const postLogout = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
+
   try {
-    const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=${import.meta.env.KAKAO_CLINT_ID}&logout_redirect_uri=http://localhost:5173`;
+    Cookies.remove('Authorization');
+    const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=${
+      import.meta.env.VITE_KAKAO_CLIENT_ID
+    }&logout_redirect_uri=https://lowest-price.store`;
     window.location.href = kakaoOauthURL;
   } catch (error) {
     console.error('로그아웃 에러', error);
