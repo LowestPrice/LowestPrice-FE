@@ -7,7 +7,7 @@ export const loginWithKakao = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
     `${SERVER_URL}/api/kakao/callback`
-  )}&client_id=${import.meta.env.VITE_KAKAO_CLIENT_ID}`;
+  )}&client_id=${encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID)}`;
   window.location.href = kakaoOauthURL;
 };
 
@@ -17,7 +17,7 @@ export const temporaryLogin = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
     `${SERVER_URL}/api/kakao/temporary-login`
-  )}&client_id=${import.meta.env.VITE_KAKAO_CLIENT_ID}`;
+  )}&client_id=${encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID)}`;
   window.location.href = kakaoOauthURL;
 };
 
@@ -28,7 +28,7 @@ export const DeleteIdWithKakao = async () => {
   axios.defaults.headers.common['Authorization'] = accessToken;
   console.log(accessToken, '탈퇴 토큰');
   try {
-    const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/kakao/deactivate`, { headers: { Authorization: accessToken } });
+    const response = await axios.delete(`${encodeURIComponent(import.meta.env.VITE_API_KEY)}/kakao/deactivate`, { headers: { Authorization: accessToken } });
     Cookies.remove('Authorization');
     return response;
   } catch (error) {
