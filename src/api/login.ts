@@ -26,7 +26,6 @@ export const temporaryLogin = () => {
 export const DeleteIdWithKakao = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
-  console.log(accessToken, '탈퇴 토큰');
   try {
     const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/kakao/deactivate`);
     Cookies.remove('Authorization');
@@ -43,11 +42,11 @@ export const postLogout = async () => {
   axios.defaults.headers.common['Authorization'] = accessToken;
 
   try {
-    Cookies.remove('Authorization');
     const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=${encodeURIComponent(
       `${import.meta.env.VITE_KAKAO_CLIENT_ID}`
     )}&logout_redirect_uri=https://lowest-price.store`;
     window.location.href = kakaoOauthURL;
+    Cookies.remove('Authorization');
   } catch (error) {
     console.error('로그아웃 에러', error);
   }
