@@ -105,6 +105,7 @@ export default function Main() {
     setSearchWord(e.target.value);
   };
 
+  console.log(encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID));
   console.log(import.meta.env.VITE_KAKAO_CLIENT_ID);
 
   return (
