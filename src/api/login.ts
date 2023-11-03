@@ -44,8 +44,8 @@ export const postLogout = async () => {
 
   try {
     Cookies.remove('Authorization');
-    const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=${
-      import.meta.env.VITE_KAKAO_CLIENT_ID
+    const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=${encodeURIComponent
+      (import.meta.env.VITE_KAKAO_CLIENT_ID)
     }&logout_redirect_uri=https://lowest-price.store`;
     window.location.href = kakaoOauthURL;
   } catch (error) {
