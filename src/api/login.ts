@@ -6,7 +6,7 @@ import axios from 'axios';
 export const loginWithKakao = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
-    `${SERVER_URL}/api/kakao/temporary-login`
+    `${SERVER_URL}/api/kakao/callback`
   )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
   window.location.href = kakaoOauthURL;
 };
@@ -29,7 +29,7 @@ export const DeleteIdWithKakao = async () => {
   console.log(accessToken, '탈퇴 토큰');
   try {
     const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/kakao/deactivate`, { headers: { Authorization: accessToken } });
-    document.cookie = 'Authorization=; max-age=0; path=/';
+    Cookies.remove('Authorization');
     return response;
   } catch (error) {
     console.error('회원 탈퇴 에러', error);
@@ -42,8 +42,8 @@ export const WWWWWW = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_KEY}/logout`);
-    return response;
+    const kakaoOauthURL = `https://kauth.kakao.com/oauth/logout?client_id=${import.meta.env.KAKAO_CLINT_ID}&logout_redirect_uri=http://localhost:5173`;
+    window.location.href = kakaoOauthURL;
   } catch (error) {
     console.error('로그아웃 에러', error);
   }

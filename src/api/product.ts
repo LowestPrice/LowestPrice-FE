@@ -73,7 +73,6 @@ export const getCategoryFilter = async (categoryName: string | undefined, filter
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
-    console.log(categoryName, filterName);
     const response = await axios.get(
       `${import.meta.env.VITE_API_KEY}/product/category/${categoryName}/${filterName}?lastId=${lastId}&isOutOfStock=${isSoldout}`
     );

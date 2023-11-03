@@ -25,7 +25,6 @@ function AlarmFooter(props: Props) {
       queryClient.invalidateQueries(['infiniteSearchProduct']);
       queryClient.invalidateQueries(['FilteredSearchProduct']);
       queryClient.invalidateQueries(['topProduct']);
-      console.log('invalidate 완료');
     },
     onError: () => {
       console.log('alarm 실패');
