@@ -6,8 +6,8 @@ import axios from 'axios';
 export const loginWithKakao = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
-    `${SERVER_URL}/api/kakao/temporary-login`
-  )}&client_id=1b3c349efac233223cb5b44ca84c0ff6`;
+    `${SERVER_URL}/api/kakao/callback`
+  )}&client_id=${encodeURIComponent(`${import.meta.env.VITE_KAKAO_CLIENT_ID}`)}`;
   window.location.href = kakaoOauthURL;
 };
 
