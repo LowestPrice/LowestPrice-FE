@@ -28,7 +28,7 @@ export const DeleteIdWithKakao = async () => {
   axios.defaults.headers.common['Authorization'] = accessToken;
   console.log(accessToken, '탈퇴 토큰');
   try {
-    const response = await axios.delete(`${encodeURIComponent(import.meta.env.VITE_API_KEY)}/kakao/deactivate`, { headers: { Authorization: accessToken } });
+    const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/kakao/deactivate`);
     Cookies.remove('Authorization');
     return response;
   } catch (error) {
