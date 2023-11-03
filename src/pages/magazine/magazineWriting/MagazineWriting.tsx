@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { FlexBox, Button, ContentBox, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage } from './styles';
+import { FlexBox, Button, ContentBox, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage, styleString } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { postMagazine } from '../../../api/magazine';
@@ -8,6 +8,11 @@ import { BackIcon, AddImageIcon } from '../../../assets/icon/icon';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+
+// React Quill 글자 크기 커스텀
+const CustomSize = ReactQuill.Quill.import('attributors/style/size');
+CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+ReactQuill.Quill.register(CustomSize, true);
 
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
@@ -71,6 +76,7 @@ const MagazineWriting: React.FC = () => {
           ['image'],
           [{ header: [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+          [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
           [{ font: [] }],
           [{ color: [] }, { background: [] }],
           [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
@@ -82,6 +88,7 @@ const MagazineWriting: React.FC = () => {
 
   return (
     <>
+      <style dangerouslySetInnerHTML={{ __html: styleString }} />
       <FlexBox>
         <Button onClick={() => navigate('/magazine')}>
           <BackIcon />
@@ -106,7 +113,7 @@ const MagazineWriting: React.FC = () => {
             onChange={onContentChangeHandler}
             value={content}
             modules={modules}
-            style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box' }}
+            style={{ overflowY: 'auto', minHeight: '150em', boxSizing: 'border-box', overflow: 'hidden' }}
             preserveWhitespace
           />
         </DirectionCol>

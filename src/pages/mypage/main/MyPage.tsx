@@ -114,12 +114,14 @@ const Greeting = styled.div`
   font-style: normal;
   font-weight: 500;
   margin-right: 9px;
+  align-items: center;
 `;
 
 const Name = styled.span`
   font-weight: 700;
   font-weight: bold;
   padding: 20px 20px 20px 0px;
+  align-items: center;
 `;
 
 const Profile = styled.div`
@@ -165,7 +167,7 @@ const Article = styled.div`
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid rgba(217, 217, 217, 1);
-  margin-left: 22px;
+  padding-left: 22px;
 `;
 
 const Like = styled.div`
