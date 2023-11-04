@@ -20,14 +20,14 @@ function SimilarProductList(props: Props) {
   return (
     <div>
       {data.length !== 0 ? (
-        <SimilarProuctWrap>
+        <SimilarProductWrap>
           <div className='title'>해당 상품과 비슷한 상품</div>
           <Wrap>
             {data.map((item: Product, index: number) => {
               return <SimilarProduct key={index} {...item} />;
             })}
           </Wrap>
-        </SimilarProuctWrap>
+        </SimilarProductWrap>
       ) : (
         <div></div>
       )}
@@ -37,33 +37,32 @@ function SimilarProductList(props: Props) {
 
 export default SimilarProductList;
 
-const SimilarProuctWrap = styled.div`
-  width: 546.35px;
-  height: 195px;
-  gap: 14px;
-  margin-left: 10px;
+const SimilarProductWrap = styled.div`
+  width: 34.1475rem;
+  height: 12.1875rem;
+  gap: 0.875rem;
+  margin-left: 0.625rem;
   .title {
-    width: 179px;
-    font-size: 16px;
+    width: 11.1875rem;
+    font-size: 1rem;
     font-weight: 600;
   }
 `;
 
 const Wrap = styled.div`
-  width: 375px;
-  height: 185px;
-  margin-top: 14px;
+  width: 23.4375rem;
+  height: 11.5625rem;
+  margin-top: 0.875rem;
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 0.9375rem;
   overflow-x: scroll;
   &::-webkit-scrollbar {
-    height: 5px;
+    height: 0.3125rem;
   }
   &::-webkit-scrollbar-thumb {
-    width: 10%; /* 스크롤바의 길이 */
-    height: 5px;
+    height: 0.3125rem;
     background: rgba(181, 181, 181, 1);
-    border-radius: 10px;
+    border-radius: 0.625rem;
   }
 `;

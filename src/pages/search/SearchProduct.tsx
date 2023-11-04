@@ -54,28 +54,28 @@ function SearchProduct(props: Props) {
 export default SearchProduct;
 
 const Wrap = styled.div`
-  width: 166px;
-  min-height: 230px;
-  /* border: 1px solid gray; */
-  margin-bottom: 15px;
+  width: 10.375rem;
+  min-height: 14.375rem;
+  /* border: 0.0625rem solid gray; */
+  margin-bottom: 0.9375rem;
   cursor: pointer;
   position: relative;
 `;
 
 const SProductImage = styled.img`
-  width: 166px;
-  height: 152.6px;
-  border-radius: 20px;
+  width: 10.375rem;
+  height: 9.5375rem;
+  border-radius: 1.25rem;
   background-color: rgba(243, 243, 243, 1);
 `;
 
 const SProductContent = styled.div`
-  width: 163.9px;
-  height: 69.66px;
-  top: 160.34px;
-  padding: 5px;
+  width: 10.24375rem;
+  height: 4.35375rem;
+  top: 10.02125rem;
+  padding: 0.3125rem;
   .productName {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -84,28 +84,28 @@ const SProductContent = styled.div`
     -webkit-line-clamp: 3;
   }
   .originalPrice {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: rgba(181, 181, 181, 1);
     text-decoration: line-through;
     font-weight: 500;
   }
   .currentPrice {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
   }
 `;
 
 const SProductDisount = styled.div`
-  margin-right: 18px;
-  width: 42px;
-  height: 15px;
-  border-radius: 3px;
+  margin-right: 1.125rem;
+  width: 2.625rem;
+  height: 0.9375rem;
+  border-radius: 0.1875rem;
   background-color: #9ecbff;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 500;
   display: flex;
   flex-direction: row;
-  gap: 3px;
+  gap: 0.1875rem;
   text-align: center;
   justify-content: center;
   color: #137fff;
@@ -119,7 +119,7 @@ const SProductDisount = styled.div`
 `;
 
 const SProductDiscountWrap = styled.div`
-  width: 153.9px;
+  width: 9.61875rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -128,6 +128,6 @@ const SProductDiscountWrap = styled.div`
 
 const AlarmWrap = styled.div`
   position: absolute;
-  top: 0px;
-  right: 3px;
+  top: 0;
+  right: 0.1875rem;
 `;

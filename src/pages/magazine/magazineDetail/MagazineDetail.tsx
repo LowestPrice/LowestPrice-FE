@@ -62,7 +62,14 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   const { handleLikeClick } = useLike(false, 0);
 
   // 다른 매거진
-  const { isLoading: isLoadingAnother, isError: isErrorAnother, data: dataAnother } = useQuery('anotherPosts', () => getAnotherMagazine(id));
+  const {
+    isLoading: isLoadingAnother,
+    isError: isErrorAnother,
+    data: dataAnother,
+  } = useQuery(['anotherPosts', id], () => getAnotherMagazine(id), {
+    keepPreviousData: true,
+  });
+
   const anotherMagazine = dataAnother?.data.data;
 
   // 드롭다운 (수정/삭제 이동)
@@ -134,37 +141,39 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
           )}
         </Flex>
       </TopBox>
-      <TextArea>
-        <ReactQuill value={magazineData.content} readOnly={true} theme={'bubble'} />
-      </TextArea>
-      <LikeShareIconFlex>
-        <Like
-          isLiked={magazineData.isLiked}
-          magazineId={magazineData.magazineId}
-          likeCount={magazineData.LikeMagazine}
-          index={index}
-          handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
-        />
-        <StyledGreyShareIcon>
-          <GreyShareIcon onClick={handleShareButton} />
-        </StyledGreyShareIcon>
-      </LikeShareIconFlex>
-      <AnotherMagazine>
-        <AnotherText>다른 매거진 보기</AnotherText>
-      </AnotherMagazine>
-      {anotherMagazine &&
-        anotherMagazine.slice(0, 4).map((magazine: any, index: any) => (
-          <AnotherContentButton
-            key={index}
-            style={{ backgroundImage: `url(${magazine.mainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
-            onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
-          >
-            <Overlay>
-              <AnotherContentTitle>{magazine.title}</AnotherContentTitle>
-              <AnotherContentEditor>by 관리자</AnotherContentEditor>
-            </Overlay>
-          </AnotherContentButton>
-        ))}
+      <Scroll>
+        <TextArea>
+          <ReactQuill value={magazineData.content} readOnly={true} theme={'bubble'} style={{ overflow: 'hidden' }} />
+        </TextArea>
+        <LikeShareIconFlex>
+          <Like
+            isLiked={magazineData.isLiked}
+            magazineId={magazineData.magazineId}
+            likeCount={magazineData.LikeMagazine}
+            index={index}
+            handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
+          />
+          <StyledGreyShareIcon>
+            <GreyShareIcon onClick={handleShareButton} />
+          </StyledGreyShareIcon>
+        </LikeShareIconFlex>
+        <AnotherMagazine>
+          <AnotherText>다른 매거진 보기</AnotherText>
+        </AnotherMagazine>
+        {anotherMagazine &&
+          anotherMagazine.map((magazine: any, index: any) => (
+            <AnotherContentButton
+              key={index}
+              style={{ backgroundImage: `url(${magazine.mainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+              onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
+            >
+              <Overlay>
+                <AnotherContentTitle>{magazine.title}</AnotherContentTitle>
+                <AnotherContentEditor>by 관리자</AnotherContentEditor>
+              </Overlay>
+            </AnotherContentButton>
+          ))}
+      </Scroll>
       <ShareFooter
         share={share}
         handleShareButton={handleShareButton}
@@ -181,12 +190,12 @@ export default MagazineDetail;
 const Container = styled.div`
   width: 100%;
   margin: 0 auto 0 auto;
-  margin-bottom: 61px;
+  margin-bottom: 3.8125rem;
   position: relative;
 `;
 
 const TopBox = styled.div`
-  height: 301px;
+  height: 18.8125rem;
   position: relative;
   width: 100%;
   object-fit: cover;
@@ -197,80 +206,83 @@ const TitleWrap = styled.div`
   bottom: 0;
   left: 0;
   z-index: 999;
-  padding-bottom: 10px;
-  padding-top: 220px;
+  padding-bottom: 0.625rem;
+  padding-top: 13.75rem;
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
 const Title = styled.div`
-  font-size: 26px;
+  font-size: 1.625rem;
   font-weight: 500;
   color: #ffffff;
-  margin-left: 20px;
-  margin-bottom: 10px;
+  margin-left: 1.25rem;
+  margin-bottom: 0.625rem;
 `;
 
 const Editor = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
-  margin-left: 20px;
-  margin-bottom: 18.5px;
+  margin-left: 1.25rem;
+  margin-bottom: 1.15625rem;
   color: #fff;
   line-height: 129%;
 `;
 
 const TextArea = styled.div`
-  width: 335px;
+  width: 20.9375rem;
   resize: none;
   overflow-y: auto;
-  min-height: 344px;
+  min-height: 21.5rem;
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem;
 `;
 
 const AnotherContentButton = styled.button`
-  width: 375px;
-  height: 125px;
-  background-color: ligthgrey;
+  width: 23.4375rem;
+  height: 7.8125rem;
+  background-color: lightgrey;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border-bottom: 1px solid #fff;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), lightgray -2px -168.615px / 101.067% 375% no-repeat;
+  border-bottom: 0.0625rem solid #fff;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), lightgray;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border: 1px solid #fff;
+  border: 0.0625rem solid #fff;
   position: relative;
 `;
 
 const AnotherContentTitle = styled.div`
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 110%;
   font-weight: 500;
-  margin-left: 20px;
+  margin-left: 1.25rem;
   color: #fff;
-  padding: 2px;
+  padding: 0.125rem;
 `;
 
 const AnotherContentEditor = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
-  line-height: 22px;
-  margin: 0px 0px 20px 20px;
+  line-height: 1.375rem;
+  margin: 0 1.25rem 1.25rem 1.25rem;
   color: #fff;
-  margin-top: 12px;
-  padding: 1px;
+  margin-top: 0.75rem;
+  padding: 0.0625rem;
 `;
 
 const MagazineTitle = styled.div`
   z-index: 999;
   display: flex;
   align-items: center;
-  width: 130px;
+  width: 8.125rem;
 `;
 
 const TitleText = styled.div`
   flex-grow: 1;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 300;
   color: #fff;
   white-space: nowrap;
@@ -282,40 +294,37 @@ const TopText = styled.div`
   z-index: 999;
   color: #fff;
   text-align: center;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 300;
   line-height: 110%;
-  border-radius: 10px;
-  border: 0.4px solid #fff;
-  width: auto;
-  padding: 0px 6px 0px 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 6px;
-  white-space: nowrap;
+  border-radius: 0.625rem;
+  border: 0.025rem solid #fff;
+  width: 5rem;
+  padding: 0 0.375rem;
+  margin-right: 0.375rem;
 `;
 
 const Flex = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding: 22px 0px 22px 0px;
+  padding: 1.375rem 0;
   background-color: transparent;
   z-index: 999;
 `;
 
 const Button = styled.div`
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   background-color: transparent;
   z-index: 999;
+  cursor: pointer;
 `;
 
 const Img = styled.img`
-  width: 375px;
-  height: 301px;
+  width: 23.438rem;
+  height: 18.812rem;
   object-fit: cover;
   position: absolute;
   z-index: 10;
@@ -329,22 +338,22 @@ const ImgBackground = styled.div`
 `;
 
 const AnotherMagazine = styled.div`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
-  height: 89px;
+  height: 5.562rem;
   display: flex;
   align-items: center;
-  border-top: 8px solid #f3f3f3;
-  padding-left: 16px;
+  border-top: 0.5rem solid #f3f3f3;
+  padding-left: 1rem;
 `;
 
 const AnotherText = styled.div`
-  padding-top: 49px;
-  padding-bottom: 20px;
+  padding-top: 3.062rem;
+  padding-bottom: 1.25rem;
 `;
 
 const EditorShareFlex = styled.div`
-  width: 375px;
+  width: 23.438rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -354,31 +363,31 @@ const EditorShareFlex = styled.div`
 const LikeShareIconFlex = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 37.5px;
-  margin-bottom: 14px;
-  margin-left: 10px;
+  margin-top: 2.344rem;
+  margin-bottom: 0.875rem;
+  margin-left: 0.625rem;
 `;
 
 const StyledGreyShareIcon = styled.button`
-  margin-right: 20px;
-  margin-top: -1px;
+  margin-right: 1.25rem;
+  margin-top: -0.0625rem;
   background-color: transparent;
   border: none;
 `;
 
 const StyledBackIcon = styled(BackIcon)`
-  margin-left: 20px;
+  margin-left: 1.25rem;
 `;
 
 const StyledDropDownIcon = styled(DropDownIcon)`
-  margin-right: 20px;
+  margin-right: 1.25rem;
   position: absolute;
-  top: 22px;
+  top: 1.375rem;
 `;
 
 const DropDownList = styled.li`
-  width: 50px;
-  height: 30px;
+  width: 3.125rem;
+  height: 1.875rem;
   list-style-type: none;
   background-color: #fff;
   display: flex;
@@ -398,6 +407,15 @@ const Overlay = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 55px;
-  padding-bottom: 23px;
+  padding-top: 3.4375rem;
+  padding-bottom: 1.4375rem;
+`;
+
+const Scroll = styled.div`
+  width: 23.75rem;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  max-height: 65vh;
 `;

@@ -60,6 +60,7 @@ const router = createBrowserRouter([
       {
         path: 'mypage',
         element: <MyPage />,
+        errorElement: <Main />,
       },
       {
         path: 'editmypage',

@@ -12,7 +12,7 @@ export default function Login() {
   };
 
   return (
-    <div style={{ position: 'fixed', width: '375px' }}>
+    <div style={{ position: 'fixed', width: '23.4375rem' }}>
       <Header>
         <h3>로그인</h3>
       </Header>
@@ -39,9 +39,9 @@ export default function Login() {
 }
 
 const Header = styled.div`
-  height: 68px;
-  border-bottom: 1px solid rgba(217, 217, 217, 1);
-  padding: 10px;
+  height: 4.25rem;
+  border-bottom: 0.0625rem solid rgba(217, 217, 217, 1);
+  padding: 0.625rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -49,7 +49,7 @@ const Header = styled.div`
 `;
 
 const Wrap = styled.div`
-  height: 600px;
+  height: 37.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,20 +61,20 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 25rem;
   position: absolute;
-  top: 190px;
-  span {
-    font-size: 16px;
+  top: 11.875rem;
+  / span {
+    font-size: 1rem;
   }
 `;
 
 const LoginButton = styled.button`
-  width: 299px;
-  height: 56px;
+  width: 18.6875rem;
+  height: 3.5rem;
   border: none;
-  border-radius: 9px;
+  border-radius: 0.5625rem;
   background-color: #f9e000;
-  margin-top: 30px;
+  margin-top: 1.875rem;
   font-weight: 600;
 `;

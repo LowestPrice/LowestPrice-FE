@@ -8,7 +8,7 @@ const Heart: React.FC<HeartProps> = ({ like, onClick }) => {
     <button
       onClick={onClick}
       style={{
-        marginTop: '-4px',
+        marginTop: '-0.25rem',
         background: 'none',
         border: 'none',
         outline: 'none',
@@ -35,5 +35,5 @@ export default Like;
 const LikeFlex = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right: 15px;
+  margin-right: 0.9375rem;
 `;

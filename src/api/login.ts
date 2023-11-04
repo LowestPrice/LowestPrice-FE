@@ -29,9 +29,9 @@ export const temporaryLogin = () => {
 export const DeleteIdWithKakao = async () => {
   const accessToken = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
+  Cookies.remove('Authorization');
   try {
     const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/kakao/deactivate`);
-    Cookies.remove('Authorization');
     return response;
   } catch (error) {
     console.error('회원 탈퇴 에러', error);

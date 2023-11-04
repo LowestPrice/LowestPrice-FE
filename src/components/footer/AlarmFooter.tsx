@@ -80,21 +80,21 @@ function AlarmFooter(props: Props) {
 export default AlarmFooter;
 
 const Wrap = styled.div`
-  width: 375px;
-  height: 78px;
-  border-top: 1px solid #d9d9d9;
+  width: 23.4375rem;
+  height: 4.875rem;
+  border-top: 0.0625rem solid #d9d9d9;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 0px;
+  bottom: 0rem;
   background: white;
 `;
 
 const Content = styled.div`
-  width: 335px;
-  height: 48px;
+  width: 20.9375rem;
+  height: 3rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -102,10 +102,10 @@ const Content = styled.div`
 `;
 
 const Alarm = styled.button`
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   background-color: #000000;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   border: none;
   outline: none;
   display: flex;
@@ -113,21 +113,21 @@ const Alarm = styled.button`
   justify-content: center;
   align-items: center;
   div {
-    margin-top: 4px;
+    margin-top: 0.25rem;
   }
 `;
 
 const CoupangButton = styled.button`
-  width: 271px;
-  height: 48px;
-  border-radius: 8px;
+  width: 16.9375rem;
+  height: 3rem;
+  border-radius: 0.5rem;
   background-color: #00adfc;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   border: none;
   outline: none;

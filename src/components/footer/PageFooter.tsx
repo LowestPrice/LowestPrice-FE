@@ -81,26 +81,26 @@ const PageFooter = () => {
 export default PageFooter;
 
 export const FlexBox = styled.div`
-  width: 375px;
-  height: 65px;
+  width: 23.4375rem;
+  height: 4.0625rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border-top: 1px solid grey;
+  border-top: 0.0625rem solid grey;
   position: fixed;
   bottom: 0;
   background-color: white;
   z-index: 1000;
-  margin-top: 5px;
+  margin-top: 0.3125rem;
 `;
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
   background-color: transparent;
-  width: 52px;
-  height: 52px;
-  font-size: 11px;
-  margin-top: 10px;
+  width: 3.25rem;
+  height: 3.25rem;
+  font-size: 0.6875rem;
+  margin-top: 0.625rem;
   border: none;
   display: flex;
   flex-direction: column;
@@ -109,6 +109,6 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 `;
 
 export const Text = styled.div`
-  font-size: 11px;
-  width: 48px;
+  font-size: 0.6875rem;
+  width: 3rem;
 `;
