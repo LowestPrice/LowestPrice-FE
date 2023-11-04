@@ -117,6 +117,12 @@ const Wrap = styled.div`
   justify-content: space-between;
   position: absolute;
   top: 210px;
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
 `;
 
 const BusinessInfo = styled.div`

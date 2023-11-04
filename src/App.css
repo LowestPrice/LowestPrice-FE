@@ -12,7 +12,10 @@
 }
 
 .wrap {
-  width: 23.4375rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 376px;
   margin: 0 auto;
 
   /* border: 1px solid black; */
@@ -21,7 +24,7 @@
     width: 744px;
   }
   @media screen and (max-width: 743px) and (min-width: 376px) {
-    width: 100vw;
+    width: 100%;
   }
 
   /* toastify */

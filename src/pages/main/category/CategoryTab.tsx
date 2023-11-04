@@ -30,5 +30,5 @@ const Wrap = styled.button<{ $isCategorySelected: boolean }>`
   font-size: 16px;
   font-weight: 500;
   flex-shrink: 0;
-  flex-basis: 96px;
+  /* flex-basis: 96px; */
 `;
