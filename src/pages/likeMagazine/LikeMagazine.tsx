@@ -28,13 +28,13 @@ const LikeMagazine = () => {
 export default LikeMagazine;
 
 const Header = styled.div`
-  width: 375px;
-  height: 68px;
-  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  width: 23.4375rem;
+  height: 4.25rem;
+  border-bottom: 0.0625rem solid rgba(217, 217, 217, 1);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 110%;
 `;
@@ -42,15 +42,16 @@ const Header = styled.div`
 const LikeMagazineList = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
+  width: 23.4375rem;
 `;
 
 const Title = styled.div`
   display: flex;
   align-items: center;
-  gap: 95.858px;
+  gap: 5.991125rem;
   flex-shrink: 0;
-  margin-right: 35px;
+  margin-right: 2.1875rem;
 `;
 
 const StyledBackButton = styled.button`
@@ -61,16 +62,11 @@ const StyledBackButton = styled.button`
 `;
 
 const Scroll = styled.div`
-  width: 380px;
+  width: 23.75rem;
   overflow: scroll;
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    height: 8%; /* 스크롤바의 길이 */
-    background: rgba(181, 181, 181, 1);
 
-    border-radius: 10px;
+  &::-webkit-scrollbar {
+    display: none;
   }
   max-height: 85vh;
 `;

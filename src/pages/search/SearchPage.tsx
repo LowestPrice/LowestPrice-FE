@@ -111,12 +111,12 @@ function Search() {
 export default Search;
 
 const Header = styled.div`
-  width: 375px;
-  height: 62px;
-  top: 34px;
-  padding: 12px, 51px, 12px, 12px;
-  border-bottom: 1px solid rgba(243, 243, 243, 1);
-  gap: 8px;
+  width: 23.4375rem;
+  height: 3.875rem;
+  top: 2.125rem;
+  padding: 0.75rem 3.1875rem 0.75rem 0.75rem;
+  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1);
+  gap: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -124,11 +124,11 @@ const Header = styled.div`
 `;
 
 const SearchInputWrap = styled.div`
-  width: 288px;
-  height: 38px;
-  border-radius: 46.21px;
+  width: 18rem;
+  height: 2.375rem;
+  border-radius: 2.888125rem;
   border: none;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -136,35 +136,35 @@ const SearchInputWrap = styled.div`
 `;
 
 const SearchInput = styled.input`
-  width: 243px;
-  height: 38px;
+  width: 15.1875rem;
+  height: 2.375rem;
   border: none;
   outline: none;
 `;
 
 const Filterbar = styled.div`
-  width: 375px;
-  height: 31px;
-  border-bottom: 1px solid rgba(243, 243, 243, 1);
+  width: 23.4375rem;
+  height: 1.9375rem;
+  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: rgba(181, 181, 181, 1);
 `;
 
 const Options = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 7px;
-  height: 12px;
-  padding-top: 10px;
-  width: 375px;
-  height: 13px;
+  gap: 0.4375rem;
+  height: 0.75rem;
+  padding-top: 0.625rem;
+  width: 23.4375rem;
+  height: 0.8125rem;
 `;
 
 const Soldout = styled.div<{ $isSoldout: boolean }>`
-  margin-left: 150px;
+  margin-left: 9.375rem;
   cursor: pointer;
   color: ${(props) => (!props.$isSoldout ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};
 `;

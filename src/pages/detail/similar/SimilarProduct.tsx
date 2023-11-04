@@ -20,7 +20,7 @@ function SimilarProduct(props: Props) {
         <SimilarProductImage src={props.productImage} />
         <SimilarProductContent>
           <div className='Stitle'>{props.productName}</div>
-          {props.discountRate !== 0 ? <div className='SexistingPrice'>{originalPrice}원</div> : <div style={{ height: '11px' }}></div>}
+          {props.discountRate !== 0 ? <div className='SexistingPrice'>{originalPrice}원</div> : <div style={{ height: '0.6875rem' }}></div>}
           <SimilarProductPriceWrap>
             <div className='Sprice'>{currentPrice}원</div>
             {props.discountRate !== 0 ? (
@@ -48,27 +48,27 @@ function SimilarProduct(props: Props) {
 export default SimilarProduct;
 
 const Wrap = styled.div`
-  width: 125.34px;
-  height: 165px;
+  width: 7.83375rem;
+  height: 10.3125rem;
   cursor: pointer;
 `;
 
 const SimilarProductImage = styled.img`
-  width: 125.34px;
-  height: 109.47px;
-  border-radius: 15.87px;
+  width: 7.83375rem;
+  height: 6.841875rem;
+  border-radius: 0.991875rem;
   border: none;
   background-color: white;
   object-fit: contain;
 `;
 
 const SimilarProductContent = styled.div`
-  width: 123.75px;
-  height: 49.98px;
+  width: 7.734375rem;
+  height: 3.12375rem;
   .Stitle {
-    width: 123.75px;
-    height: 28.38px;
-    font-size: 11.11px;
+    width: 7.734375rem;
+    height: 1.77375rem;
+    font-size: 0.694375rem;
     font-weight: 400;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -77,28 +77,28 @@ const SimilarProductContent = styled.div`
     -webkit-line-clamp: 2;
   }
   .SexistingPrice {
-    width: 70.6px;
-    font-size: 9.52px;
+    width: 4.4125rem;
+    font-size: 0.595rem;
     font-weight: 500;
     color: rgba(181, 181, 181, 1);
     text-decoration: line-through;
   }
   .Sprice {
-    width: 104.26px;
-    height: 14px;
-    font-size: 12.69px;
+    width: 6.51625rem;
+    height: 0.875rem;
+    font-size: 0.793125rem;
     font-weight: 600;
   }
   .discountRate {
-    width: 32.48px;
-    height: 11.6px;
-    padding: 1.59px;
-    margin-left: 5px;
+    width: 2.03rem;
+    height: 0.725rem;
+    padding: 0.099375rem;
+    margin-left: 0.3125rem;
     background-color: #9ecbff;
-    font-size: 7.93px;
+    font-size: 0.495625rem;
     font-weight: 500;
     color: #0c77f6;
-    border-radius: 2.32px;
+    border-radius: 0.145rem;
   }
 `;
 
@@ -110,16 +110,16 @@ const SimilarProductPriceWrap = styled.div`
 `;
 
 const DiscountRateWrap = styled.div`
-  margin-right: 2px;
-  width: 51px;
-  height: 15px;
-  border-radius: 3px;
+  margin-right: 0.125rem;
+  width: 3.1875rem;
+  height: 0.9375rem;
+  border-radius: 0.1875rem;
   background-color: #9ecbff;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 500;
   display: flex;
   flex-direction: row;
-  gap: 3px;
+  gap: 0.1875rem;
   text-align: center;
   justify-content: center;
   color: #137fff;

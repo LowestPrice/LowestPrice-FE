@@ -22,7 +22,7 @@ function FilterOption(props: Props) {
 export default FilterOption;
 
 const Wrap = styled.div<{ $filterButton: boolean }>`
-  font-size: 12px;
+  font-size: 0.75rem;
   color: ${(props) => (!props.$filterButton ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};
   cursor: pointer;
 `;

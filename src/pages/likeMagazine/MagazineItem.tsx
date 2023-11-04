@@ -39,9 +39,9 @@ export default MagazineItem;
 
 const Item = styled.button`
   width: 100%;
-  height: 125px;
+  height: 7.8125rem;
   background-color: rgba(217, 217, 217, 1);
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -50,25 +50,25 @@ const Item = styled.button`
 
 const Title = styled.div`
   color: #fff;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
   line-height: 110%;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
   display: flex;
 `;
 
 const Editor = styled.div`
   color: #fff;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   line-height: 110%;
   text-align: left;
 `;
 
 const ItemMargin = styled.div`
-  margin-top: 60px;
-  margin-left: 20px;
-  margin-bottom: 23px;
+  margin-top: 3.75rem;
+  margin-left: 1.25rem;
+  margin-bottom: 1.4375rem;
 `;
 
 const Overlay = styled.div`
