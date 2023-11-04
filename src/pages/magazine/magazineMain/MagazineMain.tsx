@@ -35,7 +35,7 @@ const Magazine: React.FC<MagazineProps> = () => {
   }
 
   return (
-    <Fixed>
+    <>
       <Header>
         <BlueLogo />
         <LogoTitle>매거진</LogoTitle>
@@ -45,41 +45,43 @@ const Magazine: React.FC<MagazineProps> = () => {
         <Title>Apple 트렌드</Title>
         <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
         {isAdmin && <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>}
-        <div>
-          <Scroll>
-            {magazines?.map((magazineData, index) => {
-              // html 마크업 제거 후 렌더링
-              const textOnly = magazineData.content.replace(/<\/?[^>]+(>|$)/g, '');
-              const displayText = textOnly.length > 53 ? `${textOnly.substring(0, 53)}...` : textOnly;
-              return (
-                <Item key={magazineData.magazineId}>
-                  <Box key={index} onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}>
-                    <Img src={magazineData.mainImage} />
-                    <BoxPadding>
-                      <BoxTitle>{magazineData.title}</BoxTitle>
-                      <Content>{displayText}</Content>
-                      <Flex>
-                        <div>{magazineData.editor}</div>
-                        <Like
-                          isLiked={magazineData.isLiked}
-                          magazineId={magazineData.magazineId}
-                          likeCount={magazineData.LikeMagazine}
-                          handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
-                          index={index}
-                        />
-                      </Flex>
-                    </BoxPadding>
-                  </Box>
-                </Item>
-              );
-            })}
-          </Scroll>
-        </div>
+
+        <Scroll>
+          {magazines?.map((magazineData, index) => {
+            // html 마크업 제거 후 렌더링
+            const textOnly = magazineData.content.replace(/<\/?[^>]+(>|$)/g, '');
+            const displayText = textOnly.length > 53 ? `${textOnly.substring(0, 53)}...` : textOnly;
+            return (
+              <Item key={magazineData.magazineId}>
+                <Box
+                  key={index}
+                  onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}
+                  style={index === magazines.length - 1 ? { marginBottom: '7rem' } : undefined}
+                >
+                  <Img src={magazineData.mainImage} />
+                  <BoxPadding>
+                    <BoxTitle>{magazineData.title}</BoxTitle>
+                    <Content>{displayText}</Content>
+                    <Flex>
+                      <div>{magazineData.editor}</div>
+                      <Like
+                        isLiked={magazineData.isLiked}
+                        magazineId={magazineData.magazineId}
+                        likeCount={magazineData.LikeMagazine}
+                        handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
+                        index={index}
+                      />
+                    </Flex>
+                  </BoxPadding>
+                </Box>
+              </Item>
+            );
+          })}
+        </Scroll>
       </Container>
-      <StyledPageFooter>
-        <PageFooter />
-      </StyledPageFooter>
-    </Fixed>
+
+      <PageFooter />
+    </>
   );
 };
 
@@ -89,18 +91,37 @@ const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: #f3f3f3;
-  width: 23.4375rem;
-  padding-bottom: 4.375rem;
+  padding-bottom: 9.375rem;
+  position: fixed;
+  margin-top: 68px;
+
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const Header = styled.div`
+  flex: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 1.17rem 17.625rem 1.17rem 1.25rem;
-  width: 9.375rem;
+  padding-top: 1.62rem;
+  padding-bottom: 1.12rem;
+  padding-left: 1.25rem;
+  padding-right: 17.62rem;
+
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const Scroll = styled.div`
@@ -120,10 +141,11 @@ const Item = styled.div`
 `;
 
 const LogoTitle = styled.div`
-  font-size: 1.17em;
+  font-size: 1.125rem;
   font-weight: 600;
   line-height: 110%;
-  margin-left: 1.17rem;
+  margin-left: 0.25rem;
+  width: 2.9375rem;
 `;
 
 const Title = styled.div`
@@ -204,12 +226,4 @@ const Flex = styled.div`
   justify-content: space-between;
   font-size: 0.875rem;
   font-weight: 400;
-`;
-
-const StyledPageFooter = styled.div`
-  flex-shrink: 0;
-`;
-
-const Fixed = styled.div`
-  position: fixed;
 `;

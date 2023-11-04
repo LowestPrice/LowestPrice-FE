@@ -10,9 +10,9 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 // React Quill 글자 크기 커스텀
-const CustomSize = ReactQuill.Quill.import('attributors/style/size');
-CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
-ReactQuill.Quill.register(CustomSize, true);
+// const CustomSize = ReactQuill.Quill.import('attributors/style/size');
+// CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+// ReactQuill.Quill.register(CustomSize, true);
 
 const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
@@ -76,8 +76,9 @@ const MagazineWriting: React.FC = () => {
           ['image'],
           [{ header: [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
-          [{ font: [] }],
+          // [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
+          // [{ font: [] }],
+          [{ size: ['small', false, 'large', 'huge'] }],
           [{ color: [] }, { background: [] }],
           [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
           [{ align: [] }],
