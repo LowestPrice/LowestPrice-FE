@@ -65,6 +65,7 @@ const router = createBrowserRouter([
       {
         path: 'editmypage',
         element: <EditMypage />,
+        errorElement: <Main />,
       },
       {
         path: 'detail/:id',

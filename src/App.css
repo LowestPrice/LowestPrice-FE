@@ -8,21 +8,21 @@
 
 * {
   font-family: 'Pretendard-Regular';
+  font-size: 16px;
 }
 
 .wrap {
   width: 23.4375rem;
   margin: 0 auto;
-  /* @media screen and (min-width: 744px) {
+
+  /* border: 1px solid black; */
+
+  @media screen and (min-width: 744px) {
     width: 744px;
   }
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100vw;
   }
-  @media screen and (max-width: 375px) {
-    width: 100vw;
-    margin: 0 auto;
-  } */
 
   /* toastify */
 
