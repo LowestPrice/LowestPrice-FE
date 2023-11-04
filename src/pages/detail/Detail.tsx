@@ -56,7 +56,7 @@ function Detail() {
 
   return (
     <>
-      <Wrap style={{ paddingBottom: '6.875rem' }}>
+      <Wrap>
         <Header>
           <h3>{data.Category[0].categoryName}</h3>
           <XButton
@@ -125,6 +125,7 @@ export default Detail;
 
 const Wrap = styled.div`
   width: 375px;
+  max-height: 823px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -187,7 +188,7 @@ const Scroll = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  max-height: 75vh;
+  /* max-height: 75vh; */
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
   }
@@ -270,8 +271,8 @@ const Message = styled.div`
   width: 18.75rem;
   font-size: 0.625rem;
   color: lightgray;
-  margin-top: 4.375rem;
-  margin-bottom: -1.25rem;
+  margin-top: 50px;
+  margin-bottom: 10px;
 `;
 
 const ChartArea = styled.div`
