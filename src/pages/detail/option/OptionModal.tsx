@@ -50,7 +50,7 @@ function OptionModal(props: Props) {
   // 화면 ===============================================================================
 
   return (
-    <div>
+    <Wrapper>
       <OptionWrap>
         <Option
           onClick={(e) => {
@@ -75,20 +75,30 @@ function OptionModal(props: Props) {
           <div></div>
         )}
       </OptionWrap>
-    </div>
+    </Wrapper>
   );
 }
 
 export default OptionModal;
 
+const Wrapper = styled.div`
+  width: 90%;
+`;
+
 const OptionWrap = styled.div`
-  width: 375px;
+  width: 339px;
   height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 100%;
+  }
 `;
 
 const Option = styled.div`
@@ -113,15 +123,20 @@ const Option = styled.div`
     justify-content: center;
     align-items: center;
   }
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 90%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 90%;
+  }
 `;
 
 const Wrap = styled.div<{ $isOpen: boolean }>`
+  width: 90%;
   position: absolute;
   top: 84px;
-  right: 39px;
   border: 1px solid #b5b5b5;
   z-index: 10;
-  width: 300px;
   overflow: hidden;
   &::-webkit-scrollbar {
     display: none;
