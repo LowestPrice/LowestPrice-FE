@@ -48,39 +48,37 @@ function AlarmFooter(props: Props) {
   };
 
   return (
-    <div>
-      <Wrap>
-        <Content>
-          <Alarm onClick={handleAlarmButton}>
-            <div>
-              <svg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M10.8889 23.4394C11.7145 24.0989 12.8048 24.5 14 24.5C15.1952 24.5 16.2855 24.0989 17.1111 23.4394M5.25891 20.0454C4.76703 20.0454 4.36921 19.6793 4.66675 19.25C5.35717 18.2538 6.14665 16.386 6.14665 14.6265L6.17513 12.0769C6.17513 7.34003 9.67845 3.5 14 3.5C18.3852 3.5 21.9401 7.39659 21.9401 12.2033L21.9117 14.6265C21.9117 16.3981 22.671 18.2534 23.3333 19.25C23.6194 19.6804 23.228 20.0454 22.7422 20.0454H5.25891Z'
-                  stroke='white'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-              </svg>
-            </div>
-          </Alarm>
-          <CoupangButton
-            onClick={() => {
-              window.open(props.productUrl);
-            }}
-          >
-            최저가로 사러 가기
-          </CoupangButton>
-        </Content>
-      </Wrap>
-    </div>
+    <Wrap>
+      <Content>
+        <Alarm onClick={handleAlarmButton}>
+          <div>
+            <svg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <path
+                d='M10.8889 23.4394C11.7145 24.0989 12.8048 24.5 14 24.5C15.1952 24.5 16.2855 24.0989 17.1111 23.4394M5.25891 20.0454C4.76703 20.0454 4.36921 19.6793 4.66675 19.25C5.35717 18.2538 6.14665 16.386 6.14665 14.6265L6.17513 12.0769C6.17513 7.34003 9.67845 3.5 14 3.5C18.3852 3.5 21.9401 7.39659 21.9401 12.2033L21.9117 14.6265C21.9117 16.3981 22.671 18.2534 23.3333 19.25C23.6194 19.6804 23.228 20.0454 22.7422 20.0454H5.25891Z'
+                stroke='white'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </div>
+        </Alarm>
+        <CoupangButton
+          onClick={() => {
+            window.open(props.productUrl);
+          }}
+        >
+          최저가로 사러 가기
+        </CoupangButton>
+      </Content>
+    </Wrap>
   );
 }
 
 export default AlarmFooter;
 
 const Wrap = styled.div`
-  width: 23.4375rem;
+  width: 100%;
   height: 4.875rem;
   border-top: 0.0625rem solid #d9d9d9;
   display: flex;
@@ -90,15 +88,28 @@ const Wrap = styled.div`
   position: fixed;
   bottom: 0rem;
   background: white;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const Content = styled.div`
-  width: 20.9375rem;
+  width: 90%;
   height: 3rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 30px;
   align-items: center;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 90%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 100%;
+  }
 `;
 
 const Alarm = styled.button`
@@ -118,7 +129,7 @@ const Alarm = styled.button`
 `;
 
 const CoupangButton = styled.button`
-  width: 16.9375rem;
+  width: 100%;
   height: 3rem;
   border-radius: 0.5rem;
   background-color: #00adfc;

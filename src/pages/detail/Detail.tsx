@@ -56,7 +56,7 @@ function Detail() {
 
   return (
     <>
-      <div style={{ paddingBottom: '6.875rem' }}>
+      <Wrap style={{ paddingBottom: '6.875rem' }}>
         <Header>
           <h3>{data.Category[0].categoryName}</h3>
           <XButton
@@ -70,39 +70,45 @@ function Detail() {
           </XButton>
         </Header>
         <Scroll>
-          <ProductImageWrap>
-            <ProductImage src={data.productImage}></ProductImage>
-          </ProductImageWrap>
-          <Content>
-            <div className='title'>{data.productName}</div>
-            <div className='originalPrice'>{originalPrice}원</div>
-            <PriceNDiscountWrap>
-              <div>{currentPrice}원</div>
-              <DiscountWrap>
-                <div style={{ marginRight: '0.125rem' }}>
-                  <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none'>
-                    <path
-                      d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
-                      fill='#0C77F7'
-                    />
-                  </svg>
-                </div>
-                <div>{data.discountRate}%</div>
-              </DiscountWrap>
-              <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0rem', cursor: 'pointer' }} />
-            </PriceNDiscountWrap>
-          </Content>
+          <ProductContent>
+            <ProductImageWrap>
+              <ProductImage src={data.productImage}></ProductImage>
+            </ProductImageWrap>
+            <Content>
+              <div className='title'>{data.productName}</div>
+              <div className='originalPrice'>{originalPrice}원</div>
+              <PriceNDiscountWrap>
+                <div>{currentPrice}원</div>
+                <DiscountWrap>
+                  <div style={{ marginRight: '0.125rem' }}>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none'>
+                      <path
+                        d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
+                        fill='#0C77F7'
+                      />
+                    </svg>
+                  </div>
+                  <div>{data.discountRate}%</div>
+                </DiscountWrap>
+                <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0rem', cursor: 'pointer' }} />
+              </PriceNDiscountWrap>
+            </Content>
+          </ProductContent>
           <OptionModal realId={data.realId} productId={data.productId} />
-          {/* 최고가, 최저가 */}
+
           <PriceDataWrap minPrice={minPrice} maxPrice={maxPrice} />
+
           <ChartArea>
             <GraphText>가격 그래프</GraphText>
             <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
           </ChartArea>
+
           <SimilarProductList productId={data.productId} />
+
           <Message>구매하기 버튼을 통해 구매를 할 경우, '내일은 최저가'에 수익이 발생합니다. 발생한 수익은 가격 추적 서비스 운영을 위해 사용됩니다.</Message>
+          <AlarmFooter productUrl={data.productUrl} productId={params.id} isAlertOn={data.isAlertOn} />
         </Scroll>
-      </div>
+      </Wrap>
       <ShareFooter
         share={share}
         handleShareButton={handleShareButton}
@@ -111,14 +117,28 @@ function Detail() {
         title={data.productName}
         mainImage={data.productImage}
       />
-      <AlarmFooter productUrl={data.productUrl} productId={params.id} isAlertOn={data.isAlertOn} />
     </>
   );
 }
 
 export default Detail;
 
+const Wrap = styled.div`
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
+`;
+
 const Header = styled.div`
+  width: 350px;
   height: 3.625rem;
   border-bottom: 0.0625rem solid rgba(217, 217, 217, 1);
   padding: 0.625rem;
@@ -129,6 +149,12 @@ const Header = styled.div`
   align-items: center;
   padding-left: 0.9375rem;
   position: relative;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 719px;
+  }
 `;
 
 const XButton = styled.div`
@@ -149,21 +175,48 @@ const ProductImage = styled.img`
   background-color: rgba(217, 217, 217, 1);
 `;
 
+const Scroll = styled.div`
+  width: 375px;
+  padding: 10px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  max-height: 75vh;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 100%;
+  }
+`;
+
+const ProductContent = styled.div`
+  padding-left: 10px;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 70%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 50%;
+  }
+`;
+
 const Content = styled.div`
-  width: 23.4375rem;
   min-height: 6.25rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.625rem;
   margin-top: 0.625rem;
   .title {
-    width: 20.9375rem;
     font-size: 1.1875rem;
     font-weight: 600;
   }
   .originalPrice {
-    width: 20.9375rem;
     font-size: 1rem;
     font-weight: 500;
     color: rgba(217, 217, 217, 1);
@@ -179,8 +232,14 @@ const PriceNDiscountWrap = styled.div`
   margin-top: -0.625rem;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   position: relative;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 100%;
+  }
 `;
 
 const DiscountWrap = styled.div`
@@ -218,13 +277,5 @@ const Message = styled.div`
 const ChartArea = styled.div`
   margin-left: 0.625rem;
   margin-bottom: 1.875rem;
-`;
-
-const Scroll = styled.div`
-  width: 23.75rem;
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  max-height: 75vh;
+  width: 85%;
 `;
