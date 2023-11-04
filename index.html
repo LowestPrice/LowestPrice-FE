@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>내일은 최저가</title>
     <link rel="stylesheet" href="https://unpkg.com/react-quill@1.3.3/dist/quill.snow.css" />
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+      integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해야 합니다.
+      // const JavaScript_KEY = 'f79493b1ae9c5befcbf8812d069bf54b';
+      // const key = '<%= VITE_JAVACRIPT_KEY %>';
+      Kakao.init('f79493b1ae9c5befcbf8812d069bf54b');
+
+      // SDK 초기화 여부를 판단합니다.
+      console.log(Kakao.isInitialized());
+    </script>
     <style>
       body {
         overflow-y: hidden;

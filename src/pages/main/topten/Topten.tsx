@@ -132,9 +132,12 @@ const Wrapper = styled.div`
   display: flex;
   overflow: hidden;
   align-items: center;
-  position: relative;
-  width: 375px;
   height: 375px;
+  position: relative;
+  @media screen and (min-width: 744px) {
+  }
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+  }
 `;
 
 const Container = styled.div`
@@ -147,7 +150,6 @@ const Container = styled.div`
 `;
 
 const Row = styled.div`
-  width: 375px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,7 +184,7 @@ const Button = styled.button`
   border: none;
   font-size: 12px;
   height: 60px;
-  width: 15px;
+  width: 25px;
   border-radius: 60px;
   padding: 25px 10px;
   opacity: 0.5;
@@ -198,15 +200,27 @@ const Button = styled.button`
 const LeftButton = styled(Button)`
   transition: all 0.5s ease-in-out;
   position: absolute;
-  left: 10px;
   background-color: lightgray;
+  left: 480px;
+  @media screen and (min-width: 744px) {
+    left: 300px;
+  }
+  @media screen and (max-width: 744px) and (min-width: 624px) {
+    left: 355px;
+  }
 `;
 
 const RightButton = styled(Button)`
   transition: all 0.5s ease-in-out;
   position: absolute;
-  right: 10px;
+  right: 480px;
   background-color: lightgray;
+  @media screen and (min-width: 744px) {
+    right: 300px;
+  }
+  @media screen and (max-width: 744px) and (min-width: 624px) {
+    right: 355px;
+  }
 `;
 
 const IndexWrapper = styled.div`
