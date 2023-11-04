@@ -98,9 +98,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   return (
     <Container>
       <TopBox>
-        <ImgBackground>
-          <Img src={magazineData.mainImage} alt='매거진 이미지' />
-        </ImgBackground>
+        <Img src={magazineData.mainImage} alt='매거진 이미지' />
         <TitleWrap>
           <Title>{magazineData.title}</Title>
           <EditorShareFlex>
@@ -197,8 +195,9 @@ const Container = styled.div`
 const TopBox = styled.div`
   height: 18.8125rem;
   position: relative;
-  width: 100%;
   object-fit: cover;
+  display: flex;
+  justify-content: center;
 `;
 
 const TitleWrap = styled.div`
@@ -209,6 +208,12 @@ const TitleWrap = styled.div`
   padding-bottom: 0.625rem;
   padding-top: 13.75rem;
   background-color: rgba(0, 0, 0, 0.3);
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const Title = styled.div`
@@ -229,8 +234,6 @@ const Editor = styled.div`
 `;
 
 const TextArea = styled.div`
-  width: 20.9375rem;
-  resize: none;
   overflow-y: auto;
   min-height: 21.5rem;
   display: flex;
@@ -239,12 +242,11 @@ const TextArea = styled.div`
 `;
 
 const AnotherContentButton = styled.button`
-  width: 23.4375rem;
   height: 7.8125rem;
   background-color: lightgrey;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   border-bottom: 0.0625rem solid #fff;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), lightgray;
   background-size: cover;
@@ -252,6 +254,12 @@ const AnotherContentButton = styled.button`
   background-repeat: no-repeat;
   border: 0.0625rem solid #fff;
   position: relative;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const AnotherContentTitle = styled.div`
@@ -309,9 +317,16 @@ const Flex = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: flex-start;
   padding: 1.375rem 0;
   background-color: transparent;
   z-index: 999;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const Button = styled.div`
@@ -328,13 +343,12 @@ const Img = styled.img`
   object-fit: cover;
   position: absolute;
   z-index: 10;
-`;
-
-const ImgBackground = styled.div`
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), lightgray;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: #b5b5b5;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const AnotherMagazine = styled.div`
@@ -409,6 +423,12 @@ const Overlay = styled.div`
   align-items: flex-start;
   padding-top: 3.4375rem;
   padding-bottom: 1.4375rem;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const Scroll = styled.div`
@@ -418,4 +438,10 @@ const Scroll = styled.div`
     display: none;
   }
   max-height: 65vh;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;

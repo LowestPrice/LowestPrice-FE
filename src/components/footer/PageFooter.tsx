@@ -86,13 +86,17 @@ export const FlexBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
   border-top: 0.0625rem solid grey;
   position: fixed;
   bottom: 0;
   background-color: white;
-  z-index: 1000;
-  margin-top: 0.3125rem;
+  z-index: 9999;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
