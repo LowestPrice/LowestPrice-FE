@@ -78,4 +78,5 @@ const BusinessInfo = styled.div`
   font-size: 12px;
   font-weight: 600;
   line-height: 1.1;
+  margin-top: -60px;
 `;

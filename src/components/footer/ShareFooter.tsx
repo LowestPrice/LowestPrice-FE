@@ -89,7 +89,7 @@ function ShareFooter(props: Props) {
 export default ShareFooter;
 
 const Wrap = styled.div<{ $share: boolean }>`
-  width: 23.4375rem;
+  width: 744px;
   height: ${({ $share }) => ($share ? '8.625rem' : '0rem')};
   opacity: ${({ $share }) => ($share ? '1' : '0')};
   border-top: 0.0625rem solid #d9d9d9;

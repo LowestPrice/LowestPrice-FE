@@ -103,6 +103,12 @@ const PriceWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 90%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 90%;
+  }
 `;
 
 const PriceArea = styled.div`
@@ -116,6 +122,16 @@ const PriceArea = styled.div`
   margin-bottom: 0.3125rem;
   padding-left: 0.1875rem;
   padding-right: 0.9375rem;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 92.2%;
+    padding-left: 6px;
+    padding-right: 0rem;
+  }
+  @media screen and (min-width: 744px) {
+    width: 92.2%;
+    padding-left: 6px;
+    padding-right: 0rem;
+  }
 `;
 
 const Text = styled.div`
