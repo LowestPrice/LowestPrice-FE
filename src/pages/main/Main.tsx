@@ -124,7 +124,7 @@ export default function Main() {
               }
             }}
           >
-            <div style={{ height: '100%', position: 'relative', width: '100%' }}>
+            <Wraper>
               <Header>
                 <Logo />
                 <h3>내일은 최저가</h3>
@@ -174,62 +174,59 @@ export default function Main() {
                   <div className='title'>오늘의 특가✔️</div>
                   <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
                 </Title>
-
                 <Topten />
+              </Wrap>
+              <CategoryWrap>
+                <CategoryTitle>
+                  <div>Apple 제품</div>
+                  <div>가장 저렴할 때 구매하세요. 🔻</div>
+                </CategoryTitle>
+                <CategoryTabWrap>
+                  {categoryList.map((item, index: number) => {
+                    return (
+                      <CategoryTab
+                        key={index}
+                        children={index}
+                        isCategorySelected={isCategorySelect}
+                        handleCategoryButton={handleCategoryButton}
+                        index={index}
+                        content={item}
+                      />
+                    );
+                  })}
+                </CategoryTabWrap>
 
-                <CategoryWrap>
-                  <CategoryTitle>
-                    <div>Apple 제품</div>
-                    <div>가장 저렴할 때 구매하세요. 🔻</div>
-                  </CategoryTitle>
-                  <CategoryTabWrap>
-                    {categoryList.map((item, index: number) => {
+                <Filterbar>
+                  <Options>
+                    {filterList.map((item, index) => {
                       return (
-                        <CategoryTab
-                          key={index}
+                        <FilterOption
                           children={index}
-                          isCategorySelected={isCategorySelect}
-                          handleCategoryButton={handleCategoryButton}
+                          key={index}
+                          handleFilterButton={handleFilterButton}
+                          filterButton={filterButton}
+                          content={item.content}
+                          value={item.value}
+                          isFilter={isFilter}
                           index={index}
-                          content={item}
-                        />
+                        ></FilterOption>
                       );
                     })}
-                  </CategoryTabWrap>
+                    <Soldout onClick={handleSoldoutButton} $isSoldout={isSoldout}>
+                      품절상품제외
+                    </Soldout>
+                  </Options>
+                </Filterbar>
 
-                  <Filterbar>
-                    <Options>
-                      {filterList.map((item, index) => {
-                        return (
-                          <FilterOption
-                            children={index}
-                            key={index}
-                            handleFilterButton={handleFilterButton}
-                            filterButton={filterButton}
-                            content={item.content}
-                            value={item.value}
-                            isFilter={isFilter}
-                            index={index}
-                          ></FilterOption>
-                        );
-                      })}
-                      <Soldout onClick={handleSoldoutButton} $isSoldout={isSoldout}>
-                        품절상품제외
-                      </Soldout>
-                    </Options>
-                  </Filterbar>
-
-                  <CategoryList categoryId={categoryId} filterName={filterName} isFilter={isFilter} isSoldout={isSoldout} />
-                </CategoryWrap>
-              </Wrap>
-            </div>
+                <CategoryList categoryId={categoryId} filterName={filterName} isFilter={isFilter} isSoldout={isSoldout} />
+              </CategoryWrap>
+            </Wraper>
             <div
               onClick={(e) => {
                 e.preventDefault();
               }}
-            >
-              <PageFooter />
-            </div>
+            ></div>
+            <PageFooter />
           </form>
         </MainWrap>
       )}
@@ -241,6 +238,9 @@ const MainWrap = styled.div`
   height: 100vh;
   overflow: scroll;
   position: fixed;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 376px;
   &::-webkit-scrollbar {
     width: 0.3125rem; /* 5px / 16 = 0.3125rem */
     display: none;
@@ -250,10 +250,26 @@ const MainWrap = styled.div`
     background: rgba(181, 181, 181, 1);
     border-radius: 0.625rem; /* 10px / 16 = 0.625rem */
   }
+
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+`;
+
+const Wraper = styled.div`
+  height: 100%;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Header = styled.div`
-  width: 22.5rem; /* 360px / 16 = 22.5rem */
   height: 3.875rem; /* 62px / 16 = 3.875rem */
   top: 2.125rem; /* 34px / 16 = 2.125rem */
   border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
@@ -262,19 +278,31 @@ const Header = styled.div`
   flex-direction: row;
   align-items: center;
   padding-left: 0.9375rem; /* 15px / 16 = 0.9375rem */
+
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
 `;
 
 const Wrap = styled.div`
-  width: 23.4375rem; /* 375px / 16 = 23.4375rem */
-  height: 34.395rem; /* 550.32px / 16 = 34.395rem */
+  width: 100%;
   background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const SearchInputWrap = styled.div`
-  width: 18.75rem; /* 300px / 16 = 18.75rem */
+  width: 20.9375rem;
   height: 3.75rem; /* 60px / 16 = 3.75rem */
   border-radius: 3.75rem; /* 60px / 16 = 3.75rem */
   margin-top: 1.25rem; /* 20px / 16 = 1.25rem */
@@ -292,10 +320,20 @@ const SearchInputWrap = styled.div`
 
   /* Shadow01 */
   box-shadow: 0px 0.125rem 0.1875rem 0px rgba(0, 0, 0, 0.04), 0px 0.25rem 0.375rem 0.125rem rgba(0, 0, 0, 0.03);
+  /* padding-left: 20px;
+  padding-right: 20px; */
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+    height: 3.25rem;
+  }
+  @media screen and (min-width: 744px) {
+    width: 100%;
+    height: 3.25rem;
+  }
 `;
 
 const SearchInput = styled.input`
-  width: 13.6875rem; /* 219px / 16 = 13.6875rem */
+  width: 80%;
   height: 1.25rem; /* 20px / 16 = 1.25rem */
   border: none;
   outline: none;
@@ -308,12 +346,11 @@ const XButton = styled.div`
   align-items: center;
   width: 1.125rem; /* 18px / 16 = 1.125rem */
   height: 1.125rem; /* 18px / 16 = 1.125rem */
-  margin-right: 0.625rem; /* 10px / 16 = 0.625rem */
+  margin-right: 15px; /* 10px / 16 = 0.625rem */
   cursor: pointer;
 `;
 
 const Title = styled.div`
-  width: 12.4375rem; /* 199px / 16 = 12.4375rem */
   height: 3.125rem; /* 50px / 16 = 3.125rem */
   .title {
     font-size: 1.5rem; /* 24px / 16 = 1.5rem */
@@ -330,15 +367,19 @@ const Title = styled.div`
 `;
 
 const CategoryWrap = styled.div`
-  width: 23.125rem; /* 374px / 16 = 23.125rem */
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
+  /* margin-top: -405px; */
+  @media screen and (min-width: 744px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
 `;
 
 const CategoryTitle = styled.div`
-  width: 21.875rem; /* 350px / 16 = 21.875rem */
   height: 4.375rem; /* 70px / 16 = 4.375rem */
   padding: 0.625rem; /* 10px / 16 = 0.625rem */
   border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
@@ -348,8 +389,8 @@ const CategoryTitle = styled.div`
 `;
 
 const CategoryTabWrap = styled.div`
+  width: 100%;
   display: flex;
-  width: 23.125rem; /* 370px / 16 = 23.125rem */
   height: 4.375rem; /* 70px / 16 = 4.375rem */
   flex-direction: row;
   white-space: nowrap;
@@ -375,7 +416,7 @@ const CategoryTabWrap = styled.div`
 `;
 
 const Filterbar = styled.div`
-  width: 23.4375rem; /* 375px / 16 = 23.4375rem */
+  width: 100%;
   height: 1.9375rem; /* 31px / 16 = 1.9375rem */
   display: flex;
   flex-direction: row;
@@ -387,17 +428,20 @@ const Filterbar = styled.div`
 `;
 
 const Options = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   gap: 0.4375rem; /* 7px / 16 = 0.4375rem */
   height: 0.75rem; /* 12px / 16 = 0.75rem */
   padding-top: 0.625rem; /* 10px / 16 = 0.625rem */
+  position: relative;
 `;
 
 const Soldout = styled.div<{ $isSoldout: boolean }>`
-  margin-left: 9.375rem; /* 150px / 16 = 9.375rem */
+  position: absolute;
+  right: 10px;
   cursor: pointer;
   font-weight: 500;
+  font-size: 0.75rem; /* 12px / 16 = 0.75rem */
   color: ${(props) => (!props.$isSoldout ? 'var(--gray03, #6F6F6F)' : 'var(--maincolor_dark, #00ABF9)')};
 `;
