@@ -56,7 +56,7 @@ function Detail() {
 
   return (
     <>
-      <div style={{ paddingBottom: '110px' }}>
+      <div style={{ paddingBottom: '6.875rem' }}>
         <Header>
           <h3>{data.Category[0].categoryName}</h3>
           <XButton
@@ -79,7 +79,7 @@ function Detail() {
             <PriceNDiscountWrap>
               <div>{currentPrice}원</div>
               <DiscountWrap>
-                <div style={{ marginRight: '2px' }}>
+                <div style={{ marginRight: '0.125rem' }}>
                   <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none'>
                     <path
                       d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
@@ -89,7 +89,7 @@ function Detail() {
                 </div>
                 <div>{data.discountRate}%</div>
               </DiscountWrap>
-              <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0px', cursor: 'pointer' }} />
+              <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0rem', cursor: 'pointer' }} />
             </PriceNDiscountWrap>
           </Content>
           <OptionModal realId={data.realId} productId={data.productId} />
@@ -119,29 +119,30 @@ function Detail() {
 export default Detail;
 
 const Header = styled.div`
-  height: 58px;
-  border-bottom: 1px solid rgba(217, 217, 217, 1);
-  padding: 10px;
+  height: 3.625rem;
+  border-bottom: 0.0625rem solid rgba(217, 217, 217, 1);
+  padding: 0.625rem;
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   justify-content: center;
   flex-direction: row;
   align-items: center;
-  padding-left: 15px;
+  padding-left: 0.9375rem;
   position: relative;
 `;
 
 const XButton = styled.div`
   position: absolute;
-  right: 16px;
+  right: 1rem;
   cursor: pointer;
-  height: 24px;
+  height: 1.5rem;
 `;
 
 const ProductImageWrap = styled.div`
-  padding: 10px 50px 10px 50px;
+  margin: 0.625rem 3.125rem;
   position: relative;
 `;
+
 const ProductImage = styled.img`
   width: 100%;
   height: 100%;
@@ -149,21 +150,21 @@ const ProductImage = styled.img`
 `;
 
 const Content = styled.div`
-  width: 375px;
-  min-height: 100px;
+  width: 23.4375rem;
+  min-height: 6.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 0.625rem;
+  margin-top: 0.625rem;
   .title {
-    width: 335px;
-    font-size: 19px;
+    width: 20.9375rem;
+    font-size: 1.1875rem;
     font-weight: 600;
   }
   .originalPrice {
-    width: 335px;
-    font-size: 16px;
+    width: 20.9375rem;
+    font-size: 1rem;
     font-weight: 500;
     color: rgba(217, 217, 217, 1);
     text-decoration: line-through;
@@ -171,11 +172,11 @@ const Content = styled.div`
 `;
 
 const PriceNDiscountWrap = styled.div`
-  width: 335px;
-  font-size: 22px;
+  width: 20.9375rem;
+  font-size: 1.375rem;
   font-weight: 700;
   color: rgba(0, 0, 0, 1);
-  margin-top: -10px;
+  margin-top: -0.625rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -183,40 +184,40 @@ const PriceNDiscountWrap = styled.div`
 `;
 
 const DiscountWrap = styled.div`
-  width: 48px;
-  height: 22px;
+  width: 3rem;
+  height: 1.375rem;
   background-color: #9ecbff;
-  border-radius: 3px;
-  font-size: 11px;
+  border-radius: 0.1875rem;
+  font-size: 0.6875rem;
   font-weight: 500;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   color: #0c77f6;
-  margin-left: 20px;
+  margin-left: 1.25rem;
 `;
 
 const GraphText = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 121.5%;
-  margin-top: 18px;
-  margin-bottom: 15px;
+  line-height: 1.215em;
+  margin-top: 1.125rem;
+  margin-bottom: 0.9375rem;
 `;
 
 const Message = styled.div`
-  width: 300px;
-  font-size: 10px;
+  width: 18.75rem;
+  font-size: 0.625rem;
   color: lightgray;
-  margin-top: 70px;
-  margin-bottom: -20px;
+  margin-top: 4.375rem;
+  margin-bottom: -1.25rem;
 `;
 
 const ChartArea = styled.div`
-  margin-left: 10px;
-  margin-bottom: 30px;
+  margin-left: 0.625rem;
+  margin-bottom: 1.875rem;
 `;
 
 const Scroll = styled.div`

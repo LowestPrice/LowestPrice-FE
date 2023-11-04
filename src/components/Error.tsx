@@ -19,10 +19,10 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 200px;
+  margin-top: 12.5rem;
   img {
-    width: 100px;
-    height: 100px;
+    width: 6.25rem;
+    height: 6.25rem;
     background-color: white;
   }
 `;
