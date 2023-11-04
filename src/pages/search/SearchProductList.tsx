@@ -102,20 +102,19 @@ function SearchProductList(props: Props) {
 export default SearchProductList;
 
 const Wrap = styled.div`
-  width: 346px;
+  width: 21.625rem;
   max-height: 82vh;
   overflow-x: hidden;
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 0.3125rem;
   }
   &::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
+    height: 10%;
     background: rgba(181, 181, 181, 1);
-
-    border-radius: 10px;
+    border-radius: 0.625rem;
   }
-  padding: 10px;
+  padding: 0.625rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

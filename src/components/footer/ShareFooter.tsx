@@ -52,7 +52,7 @@ function ShareFooter(props: Props) {
             ref={copyUrlRef}
             value={props.realId ? `https://lowest-price.store/detail/${props.id}` : `https://lowest-price.store/magazine/${props.id}`}
             readOnly
-            style={{ position: 'absolute', left: '-9999px' }}
+            style={{ position: 'absolute', left: '-624.9375rem' }}
           />
 
           <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
@@ -89,50 +89,50 @@ function ShareFooter(props: Props) {
 export default ShareFooter;
 
 const Wrap = styled.div<{ $share: boolean }>`
-  width: 375px;
-  height: ${({ $share }) => ($share ? '138px' : '0px')};
-  opacity: ${({ $share }) => ($share ? '100' : '0')};
-  border-top: 1px solid #d9d9d9;
+  width: 23.4375rem;
+  height: ${({ $share }) => ($share ? '8.625rem' : '0rem')};
+  opacity: ${({ $share }) => ($share ? '1' : '0')};
+  border-top: 0.0625rem solid #d9d9d9;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   background: white;
   transition: 380ms ease-in-out 0s;
   z-index: 1000;
 `;
 
 const LinkContent = styled.div<{ $share: boolean }>`
-  height: 65px;
+  height: 4.0625rem;
   display: ${({ $share }) => ($share ? 'flex' : 'none')};
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  gap: 20px;
+  gap: 1.25rem;
 `;
 
 const LinkShareButton = styled.button`
-  width: 59px;
-  height: 59px;
-  border-radius: 100px;
+  width: 3.6875rem;
+  height: 3.6875rem;
+  border-radius: 100rem;
   outline: none;
   border: none;
   background-color: #00adfc;
 `;
 
 const KakaoShareButton = styled.button`
-  width: 59px;
-  height: 59px;
-  border-radius: 100px;
+  width: 3.6875rem;
+  height: 3.6875rem;
+  border-radius: 100rem;
   outline: none;
   border: none;
   background-color: #fbe300;
 `;
 
 const CancelButtonWrap = styled.div`
-  height: 63px;
+  height: 3.9375rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -140,11 +140,11 @@ const CancelButtonWrap = styled.div`
 `;
 
 const CancelButton = styled.button`
-  height: 40px;
-  width: 330px;
+  height: 2.5rem;
+  width: 20.625rem;
   border: none;
   outline: none;
-  border-radius: 20px;
-  font-size: 17px;
+  border-radius: 1.25rem;
+  font-size: 1.0625rem;
   font-weight: 500;
 `;

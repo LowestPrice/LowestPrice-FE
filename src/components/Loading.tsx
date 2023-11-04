@@ -14,14 +14,14 @@ function Loading() {
 export default Loading;
 
 const Wrap = styled.div`
-  width: 375px;
-  height: 375px;
+  width: 23.4375rem;
+  height: 23.4375rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   div {
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: bold;
   }
 `;

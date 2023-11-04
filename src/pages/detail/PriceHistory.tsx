@@ -106,38 +106,35 @@ const PriceWrap = styled.div`
 `;
 
 const PriceArea = styled.div`
-  width: 335px;
-  height: 46px;
-  border: 1px solid #b5b5b5;
-  border-radius: 10px;
+  width: 20.9375rem;
+  height: 2.875rem;
+  border: 0.0625rem solid #b5b5b5;
+  border-radius: 0.625rem;
   display: flex;
-  flex: shrink;
+  flex-shrink: 1;
   align-items: center;
-  margin-bottom: 5px;
-  padding-left: 3px;
-  padding-right: 15px;
+  margin-bottom: 0.3125rem;
+  padding-left: 0.1875rem;
+  padding-right: 0.9375rem;
 `;
 
 const Text = styled.div`
   font-weight: 700;
-  margin-left: 14px;
+  margin-left: 0.875rem;
 `;
 
 const LowestPrice = styled.div`
   color: #458fff;
-  font-size: 14px;
-  font-style: normal;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 121.5%;
-  margin-left: 85px;
-  font-weight: 600;
+  margin-left: 5.3125rem;
 `;
 
 const HighestPrice = styled.div`
   color: #ff4545;
-  font-size: 14px;
-  font-style: normal;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 121.5%;
-  margin-left: 85px;
+  margin-left: 5.3125rem;
 `;
