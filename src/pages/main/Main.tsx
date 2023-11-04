@@ -105,8 +105,8 @@ export default function Main() {
     setSearchWord(e.target.value);
   };
 
-  console.log(encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID));
-  console.log(import.meta.env.VITE_KAKAO_CLIENT_ID);
+  // console.log(encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID));
+  // console.log(import.meta.env.VITE_KAKAO_CLIENT_ID);
 
   return (
     <>
@@ -242,32 +242,31 @@ const MainWrap = styled.div`
   overflow: scroll;
   position: fixed;
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 0.3125rem; /* 5px / 16 = 0.3125rem */
     display: none;
   }
   &::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
+    height: 0.625rem; /* 10px / 16 = 0.625rem */
     background: rgba(181, 181, 181, 1);
-
-    border-radius: 10px;
+    border-radius: 0.625rem; /* 10px / 16 = 0.625rem */
   }
 `;
 
 const Header = styled.div`
-  width: 360px;
-  height: 62px;
-  top: 34px;
-  border-bottom: 1px solid rgba(243, 243, 243, 1);
-  gap: 8px;
+  width: 22.5rem; /* 360px / 16 = 22.5rem */
+  height: 3.875rem; /* 62px / 16 = 3.875rem */
+  top: 2.125rem; /* 34px / 16 = 2.125rem */
+  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
+  gap: 0.5rem; /* 8px / 16 = 0.5rem */
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 15px;
+  padding-left: 0.9375rem; /* 15px / 16 = 0.9375rem */
 `;
 
 const Wrap = styled.div`
-  width: 375px;
-  height: 550.32px;
+  width: 23.4375rem; /* 375px / 16 = 23.4375rem */
+  height: 34.395rem; /* 550.32px / 16 = 34.395rem */
   background: white;
   display: flex;
   flex-direction: column;
@@ -275,10 +274,10 @@ const Wrap = styled.div`
 `;
 
 const SearchInputWrap = styled.div`
-  width: 300px;
-  height: 60px;
-  border-radius: 60px;
-  margin-top: 20px;
+  width: 18.75rem; /* 300px / 16 = 18.75rem */
+  height: 3.75rem; /* 60px / 16 = 3.75rem */
+  border-radius: 3.75rem; /* 60px / 16 = 3.75rem */
+  margin-top: 1.25rem; /* 20px / 16 = 1.25rem */
   border: none;
   outline: none;
   background-color: white;
@@ -287,17 +286,17 @@ const SearchInputWrap = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-radius: 60px;
-  border: 0.5px solid var(--gray02, #b5b5b5);
+  border-radius: 60px; /* 0.5px / 16 = 0.03125rem */
+  border: 0.03125rem solid var(--gray02, #b5b5b5); /* 0.5px / 16 = 0.03125rem */
   background: #fff;
 
   /* Shadow01 */
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.04), 0px 4px 6px 2px rgba(0, 0, 0, 0.03);
+  box-shadow: 0px 0.125rem 0.1875rem 0px rgba(0, 0, 0, 0.04), 0px 0.25rem 0.375rem 0.125rem rgba(0, 0, 0, 0.03);
 `;
 
 const SearchInput = styled.input`
-  width: 219px;
-  height: 20px;
+  width: 13.6875rem; /* 219px / 16 = 13.6875rem */
+  height: 1.25rem; /* 20px / 16 = 1.25rem */
   border: none;
   outline: none;
 `;
@@ -307,31 +306,31 @@ const XButton = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
+  width: 1.125rem; /* 18px / 16 = 1.125rem */
+  height: 1.125rem; /* 18px / 16 = 1.125rem */
+  margin-right: 0.625rem; /* 10px / 16 = 0.625rem */
   cursor: pointer;
 `;
 
 const Title = styled.div`
-  width: 199px;
-  height: 50px;
+  width: 12.4375rem; /* 199px / 16 = 12.4375rem */
+  height: 3.125rem; /* 50px / 16 = 3.125rem */
   .title {
-    font-size: 24px;
+    font-size: 1.5rem; /* 24px / 16 = 1.5rem */
     font-weight: 600;
   }
   .subTitle {
-    font-size: 16px;
+    font-size: 1rem; /* 16px / 16 = 1rem */
   }
-  gap: 5px;
+  gap: 0.3125rem; /* 5px / 16 = 0.3125rem */
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 1.25rem; /* 20px / 16 = 1.25rem */
 `;
 
 const CategoryWrap = styled.div`
-  width: 374px;
+  width: 23.125rem; /* 374px / 16 = 23.125rem */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -339,30 +338,29 @@ const CategoryWrap = styled.div`
 `;
 
 const CategoryTitle = styled.div`
-  width: 350px;
-  height: 70px;
-  padding: 10px;
-  border-bottom: 1px solid rgba(243, 243, 243, 1);
-  font-size: 20px;
-  font-weight: 700;
-  gap: 22px;
+  width: 21.875rem; /* 350px / 16 = 21.875rem */
+  height: 4.375rem; /* 70px / 16 = 4.375rem */
+  padding: 0.625rem; /* 10px / 16 = 0.625rem */
+  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
+  font-size: 1.25rem; /* 20px / 16 = 1.25rem */
+  gap: 1.375rem; /* 22px / 16 = 1.375rem */
   font-weight: 700;
 `;
 
 const CategoryTabWrap = styled.div`
   display: flex;
-  width: 370px;
-  height: 70px;
+  width: 23.125rem; /* 370px / 16 = 23.125rem */
+  height: 4.375rem; /* 70px / 16 = 4.375rem */
   flex-direction: row;
   white-space: nowrap;
   /* 넘쳐나는 내용 무조건 숨김 */
   overflow-x: auto;
   /* 넘친 텍스트 ... 으로 처리 */
   align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid rgba(243, 243, 243, 1);
+  gap: 0.625rem; /* 10px / 16 = 0.625rem */
+  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
   position: absolute;
-  top: 94px;
+  top: 5.875rem;
   left: -1px;
   padding-left: 2px;
   &::-webkit-scrollbar {
@@ -377,28 +375,28 @@ const CategoryTabWrap = styled.div`
 `;
 
 const Filterbar = styled.div`
-  width: 375px;
-  height: 31px;
+  width: 23.4375rem; /* 375px / 16 = 23.4375rem */
+  height: 1.9375rem; /* 31px / 16 = 1.9375rem */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 0.75rem; /* 12px / 16 = 0.75rem */
   color: var(--gray03, #6f6f6f);
   position: absolute;
-  top: 174px;
+  top: 10.875rem; /* 174px / 16 = 10.875rem */
 `;
 
 const Options = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 7px;
-  height: 12px;
-  padding-top: 10px;
+  gap: 0.4375rem; /* 7px / 16 = 0.4375rem */
+  height: 0.75rem; /* 12px / 16 = 0.75rem */
+  padding-top: 0.625rem; /* 10px / 16 = 0.625rem */
 `;
 
 const Soldout = styled.div<{ $isSoldout: boolean }>`
-  margin-left: 150px;
+  margin-left: 9.375rem; /* 150px / 16 = 9.375rem */
   cursor: pointer;
   font-weight: 500;
   color: ${(props) => (!props.$isSoldout ? 'var(--gray03, #6F6F6F)' : 'var(--maincolor_dark, #00ABF9)')};

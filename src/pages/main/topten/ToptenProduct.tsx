@@ -116,7 +116,7 @@ const Content = styled.div`
   .originalPrice {
     font-size: 11.361px;
     font-weight: 700;
-    margin-left: 7px;
+    margin-left: 2px;
     text-decoration: line-through;
   }
   .title {
@@ -124,6 +124,11 @@ const Content = styled.div`
     font-size: 13.99px;
     font-weight: 500;
     margin-top: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 `;
 

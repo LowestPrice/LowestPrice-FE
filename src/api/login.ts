@@ -5,14 +5,17 @@ import axios from 'axios';
 
 export const loginWithKakao = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
-  const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
-    `${SERVER_URL}/api/kakao/callback`
-  )}&client_id=${encodeURIComponent(`${import.meta.env.VITE_KAKAO_CLIENT_ID}`)}`;
-  window.location.href = kakaoOauthURL;
+  // const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(
+  //   `${SERVER_URL}/api/kakao/callback`
+  // )}&client_id=${encodeURIComponent(`${import.meta.env.VITE_KAKAO_CLIENT_ID}`)}`;
+  // window.location.href = kakaoOauthURL;
+
+  window.Kakao.Auth.authorize({
+    redirectUri: `${SERVER_URL}/api/kakao/callback`,
+  });
 };
 
 // 임시 로그인
-
 export const temporaryLogin = () => {
   const SERVER_URL = `${import.meta.env.VITE_API_KEY}` || 'http://localhost:5173';
   const kakaoOauthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=${encodeURIComponent(

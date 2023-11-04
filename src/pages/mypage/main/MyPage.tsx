@@ -80,48 +80,48 @@ function Mypage() {
 export default Mypage;
 
 const Header = styled.div`
-  height: 68px;
-  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  height: 4.25rem;
+  border-bottom: 0.0625rem solid rgba(217, 217, 217, 1);
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 1.375rem;
   line-height: 110%;
-  margin-top: 27px;
-  margin-bottom: 17px;
+  margin-top: 1.6875rem;
+  margin-bottom: 1.0625rem;
 `;
 
 const Wrap = styled.div`
-  height: 600px;
+  height: 37.5rem;
 `;
 
 const Title = styled.div`
-  height: 100px;
+  height: 6.25rem;
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 110%;
-  margin-left: 22px;
+  margin-left: 1.375rem;
 `;
 
 const Greeting = styled.div`
   color: #000;
   font-style: normal;
   font-weight: 500;
-  margin-right: 9px;
+  margin-right: 0.5625rem;
 `;
 
 const Name = styled.span`
   font-weight: 700;
   font-weight: bold;
-  padding: 20px 20px 20px 0px;
+  padding: 1.25rem 1.25rem 1.25rem 0;
 `;
 
 const Profile = styled.div`
-  height: 250px;
+  height: 15.625rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -132,43 +132,43 @@ const ImageInput = styled.input<{ $imageSrc: string }>`
 `;
 
 const ProfileImage = styled.img`
-  width: 120px;
-  height: 120px;
-  border-radius: 120px;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 7.5rem;
   background-color: rgba(217, 217, 217, 1);
   object-fit: cover;
 `;
 
 const EditProfileImage = styled.div`
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 `;
 
 const EditIcon = styled.div`
-  margin-left: 8px;
+  margin-left: 0.5rem;
 `;
 
 const Article = styled.div`
-  height: 80px;
+  height: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
-  padding: 10px;
+  padding: 0.625rem;
   cursor: pointer;
-  border-bottom: 1px solid rgba(217, 217, 217, 1);
-  margin-left: 22px;
+  border-bottom: 0.0625rem solid rgba(217, 217, 217, 1);
+  margin-left: 1.375rem;
 `;
 
 const Like = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-right: 18px;
+  margin-right: 1.125rem;
 `;

@@ -23,6 +23,7 @@ jobs:
         run: |
           echo VITE_API_KEY=${{ secrets.VITE_API_KEY }} > .env
           echo VITE_KAKAO_CLIENT_ID=${{ secrets.VITE_KAKAO_CLIENT_ID }} >> .env 
+          echo VITE_JAVASCRIPT_KEY=${{ secrets.VITE_JAVASCRIPT_KEY }} >> .env
 
       # 또는 npm install, 프로젝트 종속성 설치 명령
       - name: Install dependencies
