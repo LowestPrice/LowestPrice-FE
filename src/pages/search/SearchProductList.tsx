@@ -117,4 +117,10 @@ const Wrap = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
