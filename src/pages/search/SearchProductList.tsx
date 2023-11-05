@@ -84,18 +84,16 @@ function SearchProductList(props: Props) {
   console.log(infiniteSearchData.data);
 
   return (
-    <div>
-      <Wrap>
-        {props.isFilter
-          ? infiniteSearchFilterDataList()?.map((item: Product, index: number) => {
-              return <SearchProduct key={index} {...item} />;
-            })
-          : infiniteSearchDataList()?.map((item: Product, index: number) => {
-              return <SearchProduct key={index} {...item} />;
-            })}
-        {(props.isFilter ? infiniteSearchFilterData : infiniteSearchData).hasNextPage && <Observer handleIntersection={handleIntersection} />}
-      </Wrap>
-    </div>
+    <Wrap>
+      {props.isFilter
+        ? infiniteSearchFilterDataList()?.map((item: Product, index: number) => {
+            return <SearchProduct key={index} {...item} />;
+          })
+        : infiniteSearchDataList()?.map((item: Product, index: number) => {
+            return <SearchProduct key={index} {...item} />;
+          })}
+      {(props.isFilter ? infiniteSearchFilterData : infiniteSearchData).hasNextPage && <Observer handleIntersection={handleIntersection} />}
+    </Wrap>
   );
 }
 

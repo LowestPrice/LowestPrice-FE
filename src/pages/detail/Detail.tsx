@@ -125,7 +125,7 @@ export default Detail;
 
 const Wrap = styled.div`
   width: 375px;
-  max-height: 823px;
+  max-height: 88vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
