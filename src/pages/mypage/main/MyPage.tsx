@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
 
 import { getUserinfo } from '../../../api/mypage';
-import { DeleteIdWithKakao, postLogout } from '../../../api/login';
+import { postLogout } from '../../../api/login';
 
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
@@ -22,7 +22,7 @@ function Mypage() {
   const { data, status } = useQuery('userInfo', getUserinfo);
 
   // 리액트쿼리로 유저정보 가져오기 -----------------------------------
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   // 로그아웃하기 -----------------------------------------
   const logoutMutation = useMutation(postLogout, {
@@ -48,25 +48,25 @@ function Mypage() {
   };
 
   // 회원탈퇴 --------------------------------------------------------
-  const deleteId = useMutation(DeleteIdWithKakao, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('KakaoId');
-    },
-    onError: (error) => {
-      console.log('error 발생', error);
-    },
-  });
+  // const deleteId = useMutation(DeleteIdWithKakao, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries('KakaoId');
+  //   },
+  //   onError: (error) => {
+  //     console.log('error 발생', error);
+  //   },
+  // });
 
-  const onDeleteButtonHandler = () => {
-    deleteId.mutate();
-    alert('탈퇴되었습니다.');
-    navigate('/');
-  };
+  // const onDeleteButtonHandler = () => {
+  //   deleteId.mutate();
+  //   alert('탈퇴되었습니다.');
+  //   navigate('/');
+  // };
 
   const accessToken = Cookies.get('Authorization');
 
   return (
-    <div style={{ position: 'fixed', width: '375px' }}>
+    <div style={{ width: '100%' }}>
       <Header>마이페이지</Header>
       <Scroll>
         <Wrap>
@@ -91,9 +91,9 @@ function Mypage() {
             </Like>
           </Article>
           {accessToken ? <Article onClick={handleLogoutButton}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
-          <Article>
+          {/* <Article>
             <Unregister onClick={onDeleteButtonHandler}>회원탈퇴</Unregister>
-          </Article>
+          </Article> */}
         </Wrap>
       </Scroll>
       <PageFooter />
@@ -114,11 +114,23 @@ const Header = styled.div`
   font-size: 1.375rem;
   line-height: 110%;
   margin-top: 1.6875rem;
-  margin-bottom: 1.0625rem;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+  }
+  @media screen and (min-width: 744px) {
+    margin-top: 1.0625rem;
+  }
 `;
 
 const Wrap = styled.div`
   height: 37.5rem;
+`;
+
+const Scroll = styled.div`
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  max-height: 100vh;
 `;
 
 const Title = styled.div`
@@ -189,7 +201,7 @@ const Article = styled.div`
   padding: 0.625rem;
   cursor: pointer;
   border-bottom: 0.0625rem solid rgba(217, 217, 217, 1);
-  margin-left: 1.375rem;
+  padding-left: 22px;
 `;
 
 const Like = styled.div`
@@ -199,18 +211,9 @@ const Like = styled.div`
   margin-right: 1.125rem;
 `;
 
-const Unregister = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-right: 18px;
-`;
-
-const Scroll = styled.div`
-  width: 23.75rem;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  max-height: 100vh;
-`;
+// const Unregister = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   margin-right: 18px;
+// `;
