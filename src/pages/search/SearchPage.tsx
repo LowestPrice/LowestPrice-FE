@@ -63,7 +63,7 @@ function Search() {
   // 화면 ================================================================
 
   return (
-    <div>
+    <Wrap>
       <form
         onSubmit={(e) => {
           navigate(`/search/${searchWord}`);
@@ -104,12 +104,15 @@ function Search() {
         </div>
         <PageFooter />
       </form>
-    </div>
+    </Wrap>
   );
 }
 
 export default Search;
 
+const Wrap = styled.div`
+  width: 100%;
+`;
 const Header = styled.div`
   width: 23.4375rem;
   height: 3.875rem;
@@ -121,6 +124,13 @@ const Header = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+    padding: 0px;
+  }
 `;
 
 const SearchInputWrap = styled.div`
