@@ -238,7 +238,7 @@ export default function Main() {
 
 const MainWrap = styled.div`
   height: 92%;
-  overflow: scroll;
+  overflow-x: hidden;
   position: fixed;
   padding-left: 20px;
   padding-right: 20px;
