@@ -70,38 +70,42 @@ function Search() {
           e.preventDefault();
         }}
       >
-        <div>
-          <Header>
-            <SearchInputWrap>
-              <SearchInput
-                type='text'
-                value={searchWord}
-                onChange={(e) => {
-                  onChangeSearchWord(e);
-                }}
-              ></SearchInput>
-            </SearchInputWrap>
-            <button style={{ display: 'none' }} />
-          </Header>
-          <Filterbar>
-            <Options>
-              {filterList.map((item, index) => {
-                return (
-                  <FilterOption key={index} index={index} filterButton={filterButton} handleFilterButton={handleFilterButton} isFilter={isFilter} {...item} />
-                );
-              })}
-              <Soldout
-                onClick={() => {
-                  setIsSoldout(!isSoldout);
-                }}
-                $isSoldout={isSoldout}
-              >
-                품절상품제외
-              </Soldout>
-            </Options>
-          </Filterbar>
-          <SearchProductList searchWord={params.searchWord} isSoldout={isSoldout} isFilter={isFilter} filterName={filterName} filterButton={filterButton} />
-        </div>
+        <Header>
+          <div>
+            <svg xmlns='http://www.w3.org/2000/svg' width='17' height='18' viewBox='0 0 17 18' fill='none'>
+              <path d='M9 1L1 9L9 17' stroke='#6F6F6F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+            </svg>
+          </div>
+          <SearchInputWrap>
+            <SearchInput
+              type='text'
+              value={searchWord}
+              onChange={(e) => {
+                onChangeSearchWord(e);
+              }}
+            ></SearchInput>
+          </SearchInputWrap>
+          <button style={{ display: 'none' }} />
+        </Header>
+        <Filterbar>
+          <Options>
+            {filterList.map((item, index) => {
+              return (
+                <FilterOption key={index} index={index} filterButton={filterButton} handleFilterButton={handleFilterButton} isFilter={isFilter} {...item} />
+              );
+            })}
+            <Soldout
+              onClick={() => {
+                setIsSoldout(!isSoldout);
+              }}
+              $isSoldout={isSoldout}
+            >
+              품절상품제외
+            </Soldout>
+          </Options>
+        </Filterbar>
+        <SearchProductList searchWord={params.searchWord} isSoldout={isSoldout} isFilter={isFilter} filterName={filterName} filterButton={filterButton} />
+
         <PageFooter />
       </form>
     </Wrap>
@@ -117,19 +121,21 @@ const Header = styled.div`
   width: 23.4375rem;
   height: 3.875rem;
   top: 2.125rem;
-  padding: 0.75rem 3.1875rem 0.75rem 0.75rem;
+  padding: 0.75rem 0.75rem 0.75rem 0.75rem;
   border-bottom: 0.0625rem solid rgba(243, 243, 243, 1);
   gap: 0.5rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
+    padding: 0px;
+    padding-right: 10px;
   }
   @media screen and (min-width: 744px) {
     width: 744px;
     padding: 0px;
+    justify-content: space-between;
   }
 `;
 
@@ -141,8 +147,21 @@ const SearchInputWrap = styled.div`
   box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
+  padding-left: 20px;
+
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 90%;
+    height: 2.5rem;
+    border-radius: 0.1875rem;
+    background: var(--gray00, #f3f3f3);
+  }
+  @media screen and (min-width: 744px) {
+    width: 95%;
+    height: 2.5rem;
+    border-radius: 0.1875rem;
+    background: var(--gray00, #f3f3f3);
+  }
 `;
 
 const SearchInput = styled.input`
@@ -150,6 +169,19 @@ const SearchInput = styled.input`
   height: 2.375rem;
   border: none;
   outline: none;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+    height: 1.25rem;
+    color: var(--black, #000);
+    background: var(--gray00, #f3f3f3);
+  }
+  @media screen and (min-width: 744px) {
+    width: 80%;
+    padding: 0px;
+    height: 1.25rem;
+    color: var(--black, #000);
+    background: var(--gray00, #f3f3f3);
+  }
 `;
 
 const Filterbar = styled.div`
@@ -158,9 +190,16 @@ const Filterbar = styled.div`
   border-bottom: 0.0625rem solid rgba(243, 243, 243, 1);
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   font-size: 0.75rem;
   color: rgba(181, 181, 181, 1);
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+    position: relative;
+  }
+  @media screen and (min-width: 744px) {
+    width: 100%;
+    position: relative;
+  }
 `;
 
 const Options = styled.div`
@@ -177,4 +216,12 @@ const Soldout = styled.div<{ $isSoldout: boolean }>`
   margin-left: 9.375rem;
   cursor: pointer;
   color: ${(props) => (!props.$isSoldout ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    position: absolute;
+    right: 10px;
+  }
+  @media screen and (min-width: 744px) {
+    position: absolute;
+    right: 10px;
+  }
 `;
