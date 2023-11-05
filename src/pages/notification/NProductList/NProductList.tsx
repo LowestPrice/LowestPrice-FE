@@ -32,7 +32,7 @@ export default function NProductList() {
 }
 
 const Wrap = styled.div`
-  width: 380px;
+  width: 100%;
   max-height: 75vh;
   overflow: scroll;
   &::-webkit-scrollbar {

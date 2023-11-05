@@ -25,7 +25,7 @@ export default function Notification({}: Props) {
   };
 
   return (
-    <div style={{ position: 'fixed', width: '375px' }}>
+    <Wrap>
       <Header>
         <MyNotification>내 알림</MyNotification>
       </Header>
@@ -49,9 +49,14 @@ export default function Notification({}: Props) {
       </Navigate>
       {tab ? <NProductList /> : <NPriceAlarmList />}
       <PageFooter />
-    </div>
+    </Wrap>
   );
 }
+
+const Wrap = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
 
 const Header = styled.div`
   height: 68px;
@@ -60,6 +65,18 @@ const Header = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 10px;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+  }
 `;
 
 const MyNotification = styled.div`
@@ -80,7 +97,7 @@ const Navigate = styled.div`
 `;
 
 const ProductList = styled.div<{ $tab: boolean }>`
-  width: 187.5px;
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -95,7 +112,7 @@ const ProductList = styled.div<{ $tab: boolean }>`
 `;
 
 const PriceAlarmList = styled.div<{ $tab: boolean }>`
-  width: 187.5px;
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
