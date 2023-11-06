@@ -8,6 +8,21 @@ interface Props {
 function SearchKeywordItem(props: Props) {
   const navigate = useNavigate();
 
+  const storedRecentList = localStorage.getItem('recentSearchKeywordList');
+
+  let recentList: { id: string; keyword: string }[] = [];
+
+  if (storedRecentList) {
+    recentList = JSON.parse(storedRecentList);
+  }
+
+  const handleXButton = () => {
+    console.log('지웁니다.');
+    const newRecentList = [...recentList.filter((item) => item.keyword !== props.keyword)];
+    localStorage.setItem('recentSearchKeywordList', JSON.stringify(newRecentList));
+    console.log('지웠습니다.');
+  };
+
   return (
     <Wrap
       onClick={(e) => {
@@ -27,7 +42,12 @@ function SearchKeywordItem(props: Props) {
         </svg>
       </TimeIcon>
       <div>{props.keyword}</div>
-      <XButton>
+      <XButton
+        onClick={(e) => {
+          e.stopPropagation();
+          handleXButton();
+        }}
+      >
         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
           <path d='M18 6L6 18M18 18L6 6' stroke='#B5B5B5' strokeWidth='2' strokeLinecap='round' />
         </svg>

@@ -73,7 +73,7 @@ function Search() {
         <Header>
           <div onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
             <svg xmlns='http://www.w3.org/2000/svg' width='17' height='18' viewBox='0 0 17 18' fill='none'>
-              <path d='M9 1L1 9L9 17' stroke='#6F6F6F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+              <path d='M9 1L1 9L9 17' stroke='#6F6F6F' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
             </svg>
           </div>
           <SearchInputWrap>

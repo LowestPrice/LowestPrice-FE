@@ -15,12 +15,18 @@ function SearchHistory(props: Props) {
   }
 
   return (
-    <Wrap $onOff={props.onOff}>
-      <Title>최근 검색어</Title>
-      {recentList.map((item, index) => {
-        return <SearchKeywordItem key={index} keyword={item.keyword} />;
-      })}
-    </Wrap>
+    <>
+      {recentList.length !== 0 ? (
+        <Wrap $onOff={props.onOff}>
+          <Title>최근 검색어</Title>
+          {recentList.map((item, index) => {
+            return <SearchKeywordItem key={index} keyword={item.keyword} />;
+          })}
+        </Wrap>
+      ) : (
+        <div></div>
+      )}
+    </>
   );
 }
 
