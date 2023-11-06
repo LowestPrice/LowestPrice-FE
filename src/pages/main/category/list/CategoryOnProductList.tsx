@@ -122,6 +122,7 @@ const Wrap = styled.div`
   }
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
+    justify-content: space-around;
   }
 `;
 
@@ -130,10 +131,8 @@ const BusinessInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 375px;
-  height: 300px;
+  width: 100%;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.1;
-  margin-top: -100px;
 `;

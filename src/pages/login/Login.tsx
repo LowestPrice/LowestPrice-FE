@@ -12,7 +12,7 @@ export default function Login() {
   };
 
   return (
-    <div style={{ position: 'fixed', width: '23.4375rem' }}>
+    <div style={{ width: '100%' }}>
       <Header>
         <h3>로그인</h3>
       </Header>
