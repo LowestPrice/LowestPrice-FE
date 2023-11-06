@@ -16,7 +16,7 @@ const MagazineItem = () => {
   }
 
   return (
-    <>
+    <List>
       {data?.data.data.map((item: any, index: any) => (
         <Item
           key={index}
@@ -31,21 +31,31 @@ const MagazineItem = () => {
           </Overlay>
         </Item>
       ))}
-    </>
+    </List>
   );
 };
 
 export default MagazineItem;
 
+const List = styled.div`
+  margin-bottom: 3rem;
+`;
+
 const Item = styled.button`
-  width: 100%;
   height: 7.8125rem;
   background-color: rgba(217, 217, 217, 1);
   margin-bottom: 0.25rem;
   display: flex;
   flex-direction: column;
+  width: 23.4375rem;
   position: relative;
   border: none;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const Title = styled.div`
@@ -73,7 +83,7 @@ const ItemMargin = styled.div`
 
 const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
-  width: 100%;
+  width: 23.4375rem;
   height: 100%;
   position: absolute;
   top: 0;
@@ -81,4 +91,10 @@ const Overlay = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
