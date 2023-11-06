@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { FlexBox, Button, ContentBox, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString } from './styles';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { putMagazine } from '../../../api/magazine';
@@ -24,11 +24,23 @@ const MagazineEditing: React.FC = () => {
   const [newMainImage, setNewImage] = useState(magazineData.mainImage);
   const [previewImage, setPreviewImage] = useState<string>(magazineData.mainImage);
   const queryClient = useQueryClient();
+  const titleRef = useRef<HTMLTextAreaElement>(null);
 
-  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const newTitle = e.target.value;
-    setNewTitle(newTitle);
+  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    setNewTitle(e.target.value);
   };
+
+  const adjustTitleHeight = () => {
+    const targetTextarea = titleRef.current;
+    if (targetTextarea) {
+      targetTextarea.style.height = 'auto';
+      targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
+    }
+  };
+
+  useEffect(() => {
+    adjustTitleHeight();
+  }, [newTitle]);
 
   const onContentChangeHandler = (value: string): void => {
     setNewContent(value);
@@ -94,13 +106,13 @@ const MagazineEditing: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <Container>
       <style dangerouslySetInnerHTML={{ __html: styleString }} />
       <FlexBox>
         <Button onClick={() => navigate('/magazine')}></Button>
         <Button onClick={() => onSubmitButtonHandler(id, newTitle, newContent, newMainImage)}>수정</Button>
       </FlexBox>
-      <ContentBox>
+      <Scroll>
         <DirectionCol>
           <PhotoDiv>
             <PhotoAdd>
@@ -110,18 +122,18 @@ const MagazineEditing: React.FC = () => {
               </label>
             </PhotoAdd>
           </PhotoDiv>
-          <Title value={newTitle} onChange={onTitleChangeHandler} />
+          <Title value={newTitle} onChange={onTitleChangeHandler} rows={1} />
           <StyledImage src={previewImage} alt='매거진 이미지' />
           <ReactQuill
             value={newContent}
             theme='snow'
             onChange={onContentChangeHandler}
             modules={modules}
-            style={{ overflowY: 'auto', minHeight: '50em', boxSizing: 'border-box', overflow: 'hidden' }}
+            style={{ overflowY: 'hidden', minHeight: '78vh', boxSizing: 'border-box', overflow: 'hidden', border: '1px solid #D9D9D9' }}
           />
         </DirectionCol>
-      </ContentBox>
-    </>
+      </Scroll>
+    </Container>
   );
 };
 
