@@ -80,7 +80,7 @@ export default function EditMypage() {
   };
 
   return (
-    <div style={{ position: 'fixed', width: '375px' }}>
+    <div style={{ width: '100%' }}>
       <Header>
         <h2>프로필 수정</h2>
         <CompleteButton
