@@ -6,7 +6,7 @@ import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 import { Product } from '../../../type';
 type Props = {
-  productId: string;
+  productId: number | undefined;
 };
 
 function SimilarProductList(props: Props) {
