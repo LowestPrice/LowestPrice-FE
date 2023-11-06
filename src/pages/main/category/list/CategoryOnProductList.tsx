@@ -99,6 +99,7 @@ function CategoryOnProductList(props: Props) {
           <div>업체명: 아담 인터네셔널</div>
           <div>사업자 등록번호: 394-27-00969</div>
           <div>서울특별시 경희대로 26 삼의원 창업센터 311호</div>
+          <div style={{ marginBottom: '10px' }}></div>
         </BusinessInfo>
       </Wrap>
     </div>

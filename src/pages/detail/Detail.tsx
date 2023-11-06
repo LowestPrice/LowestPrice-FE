@@ -14,6 +14,7 @@ import { PriceChart, PriceDataWrap } from './PriceHistory';
 import SimilarProductList from './similar/SimilarProductList';
 import { GreyShareIcon } from '../../assets/icon/icon';
 import ShareFooter from '../../components/footer/ShareFooter';
+import { Product } from '../../type';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
@@ -32,7 +33,7 @@ function Detail() {
 
   // 해당 상품 데이터 불러오기 ----------------------------------------------
 
-  const { status, data } = useQuery(['product', params.id], () => getProduct(params.id), { enabled: !!params.id });
+  const { status, data } = useQuery<Product, unknown>(['product', params.id], () => getProduct(params.id), { enabled: !!params.id });
 
   if (status === 'loading') {
     return <Loading />;
@@ -43,22 +44,28 @@ function Detail() {
 
   // 공유버튼 클릭 --------------------------------------------------------
 
-  const handleShareButton = () => {
+  const handleShareButton = (): void => {
     setShare(!share);
   };
 
   // 천 단위 콤마 찍기 -------------------------------------------------------------------------
 
-  const currentPrice = data.currentPrice.toLocaleString();
-  const originalPrice = data.originalPrice.toLocaleString();
+  const currentPrice: string | undefined = data?.currentPrice.toLocaleString();
+  const originalPrice: string | undefined = data?.originalPrice.toLocaleString();
 
+  console.log(data);
   // 화면 --------------------------------------------------------------------------------------
 
   return (
     <>
       <Wrap>
         <Header>
-          <h3>{data.Category[0].categoryName}</h3>
+          <BackButton onClick={() => navigate(-1)}>
+            <svg xmlns='http://www.w3.org/2000/svg' width='17' height='18' viewBox='0 0 17 18' fill='none'>
+              <path d='M9 1L1 9L9 17' stroke='#6F6F6F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+            </svg>
+          </BackButton>
+          <h3>{data?.Category[0].categoryName}</h3>
           <XButton
             onClick={() => {
               navigate('/');
@@ -72,29 +79,33 @@ function Detail() {
         <Scroll>
           <ProductContent>
             <ProductImageWrap>
-              <ProductImage src={data.productImage}></ProductImage>
+              <ProductImage src={data?.productImage}></ProductImage>
             </ProductImageWrap>
             <Content>
-              <div className='title'>{data.productName}</div>
-              <div className='originalPrice'>{originalPrice}원</div>
+              <div className='title'>{data?.productName}</div>
+              {data?.discountRate !== 0 ? <div className='originalPrice'>{originalPrice}원</div> : <div style={{ marginBottom: '10px' }}></div>}
               <PriceNDiscountWrap>
                 <div>{currentPrice}원</div>
-                <DiscountWrap>
-                  <div style={{ marginRight: '0.125rem' }}>
-                    <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none'>
-                      <path
-                        d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
-                        fill='#0C77F7'
-                      />
-                    </svg>
-                  </div>
-                  <div>{data.discountRate}%</div>
-                </DiscountWrap>
+                {data?.discountRate !== 0 ? (
+                  <DiscountWrap>
+                    <div style={{ marginRight: '0.125rem' }}>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none'>
+                        <path
+                          d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
+                          fill='#0C77F7'
+                        />
+                      </svg>
+                    </div>
+                    <div>{data?.discountRate}%</div>
+                  </DiscountWrap>
+                ) : (
+                  <div></div>
+                )}
                 <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0rem', cursor: 'pointer' }} />
               </PriceNDiscountWrap>
             </Content>
           </ProductContent>
-          <OptionModal realId={data.realId} productId={data.productId} />
+          <OptionModal realId={data?.realId} productId={data?.productId} />
 
           <PriceDataWrap minPrice={minPrice} maxPrice={maxPrice} />
 
@@ -103,19 +114,19 @@ function Detail() {
             <PriceChart id={params.id as string} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} />
           </ChartArea>
 
-          <SimilarProductList productId={data.productId} />
+          <SimilarProductList productId={data?.productId} />
 
           <Message>구매하기 버튼을 통해 구매를 할 경우, '내일은 최저가'에 수익이 발생합니다. 발생한 수익은 가격 추적 서비스 운영을 위해 사용됩니다.</Message>
-          <AlarmFooter productUrl={data.productUrl} productId={params.id} isAlertOn={data.isAlertOn} />
+          <AlarmFooter productUrl={data?.productUrl} productId={params.id} isAlertOn={data?.isAlertOn} />
         </Scroll>
       </Wrap>
       <ShareFooter
         share={share}
         handleShareButton={handleShareButton}
-        id={data.productId}
-        realId={data.realId}
-        title={data.productName}
-        mainImage={data.productImage}
+        id={data?.productId}
+        realId={data?.realId}
+        title={data?.productName}
+        mainImage={data?.productImage}
       />
     </>
   );
@@ -156,6 +167,12 @@ const Header = styled.div`
   @media screen and (min-width: 744px) {
     width: 719px;
   }
+`;
+
+const BackButton = styled.div`
+  position: absolute;
+  left: 20px;
+  cursor: pointer;
 `;
 
 const XButton = styled.div`

@@ -10,8 +10,8 @@ import Error from '../../../components/Error';
 import { useNavigate } from 'react-router';
 
 interface Props {
-  realId: string;
-  productId: number;
+  realId: string | undefined;
+  productId: number | undefined;
 }
 
 function OptionModal(props: Props) {
