@@ -96,50 +96,50 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
   }
 
   return (
-    <Container>
-      <TopBox>
-        <Img src={magazineData.mainImage} alt='매거진 이미지' />
-        <TitleWrap>
-          <Title>{magazineData.title}</Title>
-          <EditorShareFlex>
-            <Editor>작성 날짜: {writtenDate}</Editor>
-          </EditorShareFlex>
-        </TitleWrap>
-        <Flex>
-          <Button onClick={() => navigate('/magazine')} key={magazineData.magazineId}>
-            <StyledBackIcon>
-              <BackIcon />
-            </StyledBackIcon>
-          </Button>
-          <MagazineTitle>
-            <TopText>매거진</TopText>
-            <TitleText>{magazineData.title}</TitleText>
-          </MagazineTitle>
-          {isAdmin ? (
-            <Button ref={dropDownRef} onClick={() => setIsOpen(!isOpen)}>
-              {isOpen && (
-                <DropDown
-                  onEditClick={() => {
-                    navigate(`/magazineEditing/${magazineData.magazineId}`, { state: { props: magazineData } });
-                    setIsOpen(false);
-                  }}
-                  onDeleteClick={() => {
-                    onDeleteButtonHandler(id);
-                    navigate('/magazine');
-                    setIsOpen(false);
-                  }}
-                />
-              )}
-              <StyledDropDownIcon>
-                <DropDownIcon />
-              </StyledDropDownIcon>
+    <Scroll>
+      <Container>
+        <TopBox>
+          <Img src={magazineData.mainImage} alt='매거진 이미지' />
+          <TitleWrap>
+            <Title>{magazineData.title}</Title>
+            <EditorShareFlex>
+              <Editor>작성 날짜: {writtenDate}</Editor>
+            </EditorShareFlex>
+          </TitleWrap>
+          <Flex>
+            <Button onClick={() => navigate('/magazine')} key={magazineData.magazineId}>
+              <StyledBackIcon>
+                <BackIcon />
+              </StyledBackIcon>
             </Button>
-          ) : (
-            <div></div>
-          )}
-        </Flex>
-      </TopBox>
-      <Scroll>
+            <MagazineTitle>
+              <TopText>매거진</TopText>
+              <TitleText>{magazineData.title}</TitleText>
+            </MagazineTitle>
+            {isAdmin ? (
+              <Button ref={dropDownRef} onClick={() => setIsOpen(!isOpen)}>
+                {isOpen && (
+                  <DropDown
+                    onEditClick={() => {
+                      navigate(`/magazineEditing/${magazineData.magazineId}`, { state: { props: magazineData } });
+                      setIsOpen(false);
+                    }}
+                    onDeleteClick={() => {
+                      onDeleteButtonHandler(id);
+                      navigate('/magazine');
+                      setIsOpen(false);
+                    }}
+                  />
+                )}
+                <StyledDropDownIcon>
+                  <DropDownIcon />
+                </StyledDropDownIcon>
+              </Button>
+            ) : (
+              <div></div>
+            )}
+          </Flex>
+        </TopBox>
         <TextArea>
           <ReactQuill value={magazineData.content} readOnly={true} theme={'bubble'} style={{ overflow: 'hidden' }} />
         </TextArea>
@@ -171,15 +171,15 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
               </Overlay>
             </AnotherContentButton>
           ))}
-      </Scroll>
-      <ShareFooter
-        share={share}
-        handleShareButton={handleShareButton}
-        title={dataDetail?.data.title}
-        mainImage={dataDetail?.data.mainImage}
-        id={dataDetail?.data.magazineId}
-      ></ShareFooter>
-    </Container>
+        <ShareFooter
+          share={share}
+          handleShareButton={handleShareButton}
+          title={dataDetail?.data.title}
+          mainImage={dataDetail?.data.mainImage}
+          id={dataDetail?.data.magazineId}
+        ></ShareFooter>
+      </Container>
+    </Scroll>
   );
 };
 
@@ -286,6 +286,13 @@ const MagazineTitle = styled.div`
   display: flex;
   align-items: center;
   width: 8.125rem;
+
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 18.125rem;
+  }
+  @media screen and (min-width: 744px) {
+    width: 18.125rem;
+  }
 `;
 
 const TitleText = styled.div`
@@ -314,11 +321,11 @@ const TopText = styled.div`
 `;
 
 const Flex = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
-  padding: 1.375rem 0;
+  padding: 1.375rem 1.5rem;
   background-color: transparent;
   z-index: 999;
   @media screen and (max-width: 743px) and (min-width: 376px) {
@@ -396,7 +403,7 @@ const StyledBackIcon = styled(BackIcon)`
 const StyledDropDownIcon = styled(DropDownIcon)`
   margin-right: 1.25rem;
   position: absolute;
-  top: 1.375rem;
+  top: 1.22rem;
 `;
 
 const DropDownList = styled.li`
@@ -437,7 +444,7 @@ const Scroll = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  max-height: 65vh;
+  max-height: 100vh;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
   }
