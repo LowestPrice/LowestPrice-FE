@@ -37,7 +37,7 @@ function Alarmbell(props: Props) {
     alarmMutation.mutate(props.productId);
     if (!accessToken) {
       toast.error('로그인 이후 알림목록에 추가하실 수 있습니다.');
-      navigate('/yetlogin');
+      navigate('/login');
       return;
     }
     if (props.isAlertOn) {

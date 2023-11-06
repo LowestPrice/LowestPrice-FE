@@ -8,8 +8,7 @@ import Splash from './pages/main/Splash';
 
 // 로그인
 const Login = React.lazy(() => import('./pages/login/Login'));
-const YetLogin = React.lazy(() => import('./pages/login/YetLogin'));
-const KakaoLogin = React.lazy(() => import('./pages/login/kakaologin/KakaoLogin'));
+const KakaoLogin = React.lazy(() => import('./pages/login/KakaoLogin'));
 
 // 상품 검색, 상세, 알림
 const SearchPage = React.lazy(() => import('./pages/search/SearchPage'));
@@ -39,10 +38,6 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
-      },
-      {
-        path: 'yetlogin',
-        element: <YetLogin />,
       },
       {
         path: 'kakaologin',
