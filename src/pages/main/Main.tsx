@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import uuid from 'react-uuid';
 import Cookies from 'js-cookie';
 
 import Topten from './topten/Topten';
@@ -10,14 +11,30 @@ import CategoryTab from './category/CategoryTab';
 import Logo from '../../assets/icon/Logo';
 import FilterOption from './category/FilterOption';
 import CategoryList from './category/list/CategoryProductList';
+import SearchHistory from './recentSearch/SearchHistory';
 
 import { Filter } from '../../type';
 import Splash from './Splash';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+
+interface InitialSearch {
+  searchKeyword: string;
+  searchFocus: boolean;
+}
 
 export default function Main() {
+  const initialSearch = {
+    searchKeyword: '',
+    searchFocus: false,
+  };
+
   // 상태 관리 ------------------------------------------------------------------------------------------------
 
-  const [searchWord, setSearchWord] = useState<string>('');
+  const [searchState, setSearchState] = useState<InitialSearch>(initialSearch);
   const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([true, false, false, false, false]);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [isFilter, setIsFilter] = useState<boolean>(false);
@@ -35,7 +52,7 @@ export default function Main() {
       }, 1500);
       return () => clearTimeout(splashTime);
     }
-  }, []);
+  });
 
   // 카테고리 리스트 ------------------------------------------------
 
@@ -56,6 +73,30 @@ export default function Main() {
   // 네비게이트 -------------------
 
   const navigate = useNavigate();
+
+  // 검색창 포커스 onOff -----------------------------------
+
+  const handleFocusOn = () => {
+    setSearchState({ ...searchState, searchFocus: true });
+  };
+
+  // 최근검색어 localStorage 에 저장 --------------------------------------------
+
+  const addRecentSearchKeyword = (keyword: string) => {
+    if (!keyword) {
+      return;
+    }
+    const storedRecentList = localStorage.getItem('recentSearchKeywordList');
+
+    let recentList: { id: string; keyword: string }[] = [];
+
+    if (storedRecentList) {
+      recentList = JSON.parse(storedRecentList);
+    }
+    const newKeywordObj = { id: uuid(), keyword: keyword };
+    const newRecentList = [...recentList, newKeywordObj];
+    localStorage.setItem('recentSearchKeywordList', JSON.stringify(newRecentList));
+  };
 
   // 카테고리 버튼 클릭 ----------------------------------------------
 
@@ -102,11 +143,8 @@ export default function Main() {
   // 검색어 입력 ----------------------------------------------------
 
   const onChangeSearchWord = (e: any) => {
-    setSearchWord(e.target.value);
+    setSearchState({ ...searchState, searchKeyword: e.target.value });
   };
-
-  // console.log(encodeURIComponent(import.meta.env.VITE_KAKAO_CLIENT_ID));
-  // console.log(import.meta.env.VITE_KAKAO_CLIENT_ID);
 
   return (
     <>
@@ -114,14 +152,19 @@ export default function Main() {
         <Splash />
       ) : (
         <>
-          <MainWrap>
+          <MainWrap
+            onClick={() => {
+              setSearchState({ ...searchState, searchFocus: false });
+            }}
+          >
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                if (searchWord === '') {
+                if (searchState.searchKeyword === '') {
                   toast.error('검색어를 입력해주세요.');
                 } else {
-                  navigate(`/search/${searchWord}`);
+                  addRecentSearchKeyword(searchState.searchKeyword);
+                  navigate(`/search/${searchState.searchKeyword}`);
                 }
               }}
             >
@@ -136,15 +179,19 @@ export default function Main() {
                     <SearchInput
                       type='text'
                       placeholder='검색'
-                      value={searchWord}
+                      value={searchState.searchKeyword}
                       onChange={(e) => {
                         onChangeSearchWord(e);
+                      }}
+                      onFocus={() => handleFocusOn()}
+                      onClick={(e) => {
+                        e.stopPropagation();
                       }}
                     ></SearchInput>
                     <button style={{ display: 'none' }} />
                     <XButton
                       onClick={() => {
-                        setSearchWord('');
+                        setSearchState({ ...searchState, searchKeyword: '' });
                       }}
                     >
                       <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
@@ -154,10 +201,11 @@ export default function Main() {
                     <div
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        if (searchWord === '') {
+                        if (searchState.searchKeyword === '') {
                           toast.error('검색어를 입력해주세요.');
                         } else {
-                          navigate(`/search/${searchWord}`);
+                          addRecentSearchKeyword(searchState.searchKeyword);
+                          navigate(`/search/${searchState.searchKeyword}`);
                         }
                       }}
                     >
@@ -171,20 +219,35 @@ export default function Main() {
                     </div>
                   </SearchInputWrap>
 
+                  <SearchHistory onOff={searchState.searchFocus} />
+
                   <Title>
                     <div className='title'>오늘의 특가✔️</div>
                     <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
                   </Title>
                   <Topten />
                 </Wrap>
+
                 <CategoryWrap>
                   <CategoryTitle>
                     <div>Apple 제품</div>
                     <div>가장 저렴할 때 구매하세요. 🔻</div>
                   </CategoryTitle>
-                  <CategoryTabWrap>
-                    {categoryList.map((item, index: number) => {
-                      return (
+
+                  <Swiper
+                    modules={[Scrollbar]}
+                    scrollbar={{ draggable: true, hide: true }}
+                    slidesPerView={'auto'}
+                    spaceBetween={25}
+                    style={{
+                      width: '100%',
+                      height: '3.375rem',
+                      borderBottom: '0.0625rem solid rgba(243, 243, 243, 1)',
+                      paddingTop: '18px',
+                    }}
+                  >
+                    {categoryList.map((item, index: number) => (
+                      <SwiperSlide style={{ width: '96px' }} key={index}>
                         <CategoryTab
                           key={index}
                           children={index}
@@ -193,9 +256,9 @@ export default function Main() {
                           index={index}
                           content={item}
                         />
-                      );
-                    })}
-                  </CategoryTabWrap>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
 
                   <Filterbar>
                     <Options>
@@ -272,6 +335,7 @@ const Wraper = styled.div`
 `;
 
 const Header = styled.div`
+  width: 375px;
   height: 3.875rem; /* 62px / 16 = 3.875rem */
   top: 2.125rem; /* 34px / 16 = 2.125rem */
   border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
@@ -394,33 +458,6 @@ const CategoryTitle = styled.div`
   font-size: 1.25rem; /* 20px / 16 = 1.25rem */
   gap: 1.375rem; /* 22px / 16 = 1.375rem */
   font-weight: 700;
-`;
-
-const CategoryTabWrap = styled.div`
-  width: 100%;
-  display: flex;
-  height: 4.375rem; /* 70px / 16 = 4.375rem */
-  flex-direction: row;
-  white-space: nowrap;
-  /* 넘쳐나는 내용 무조건 숨김 */
-  overflow-x: auto;
-  /* 넘친 텍스트 ... 으로 처리 */
-  align-items: center;
-  gap: 0.625rem; /* 10px / 16 = 0.625rem */
-  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
-  position: absolute;
-  top: 5.875rem;
-  left: -1px;
-  padding-left: 2px;
-  &::-webkit-scrollbar {
-    height: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    width: 10%; /* 스크롤바의 길이 */
-    height: 5px;
-    background: rgba(181, 181, 181, 1);
-    border-radius: 10px;
-  }
 `;
 
 const Filterbar = styled.div`

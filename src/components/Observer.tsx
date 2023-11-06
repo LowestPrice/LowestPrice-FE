@@ -34,6 +34,6 @@ export default function Observer(props: Props) {
 }
 
 const Wrap = styled.div`
-  width: 18.75rem;
+  width: 100%;
   height: 0.625rem;
 `;

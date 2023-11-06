@@ -9,7 +9,7 @@ export interface Image {
 }
 
 export interface Product {
-  ProductCategory: Category[];
+  Category: Category[];
   cardDiscount: number;
   coupangItemId: string;
   coupangVendorId: string;
@@ -22,7 +22,9 @@ export interface Product {
   productId: number;
   productImage: string;
   productName: string;
+  productUrl: string;
   isAlertOn: boolean;
+  realId: string;
 }
 
 export interface Category {
