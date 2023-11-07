@@ -97,21 +97,25 @@ function Topten() {
             <ToptenProduct {...data[morePrevIndex]} index={morePrevIndex} />
           </PrivewProductWrap>
         </Container>
+
         <Container>
           <PrivewProductWrap>
             <ToptenProduct {...data[PrevIndex]} index={PrevIndex} />
           </PrivewProductWrap>
         </Container>
+
         <IndexWrapper>
           <ProductWrap>
             <ToptenProduct {...data[index]} index={index} />
           </ProductWrap>
         </IndexWrapper>
+
         <Container>
           <PrivewProductWrap>
             <ToptenProduct {...data[NextIndex]} index={NextIndex} />
           </PrivewProductWrap>
         </Container>
+        
         <Container>
           <PrivewProductWrap>
             <ToptenProduct {...data[moreNextIndex]} index={moreNextIndex} />

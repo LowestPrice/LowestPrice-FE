@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
 
 import { getUserinfo } from '../../../api/mypage';
-import { DeleteIdWithKakao, postLogout } from '../../../api/login';
+import { postLogout } from '../../../api/login';
 
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
@@ -221,4 +221,3 @@ const Logout = styled.div`
   margin-top: 80px;
   cursor: pointer;
 `;
-
