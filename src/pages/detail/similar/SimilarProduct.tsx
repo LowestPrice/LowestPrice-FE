@@ -67,7 +67,7 @@ const SimilarProductContent = styled.div`
   height: 3.12375rem;
   .Stitle {
     width: 7.734375rem;
-    height: 1.77375rem;
+    height: 1.7rem;
     font-size: 0.694375rem;
     font-weight: 400;
     text-overflow: ellipsis;

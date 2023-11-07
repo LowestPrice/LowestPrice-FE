@@ -6,10 +6,10 @@ import { toast } from 'react-toastify';
 interface Props {
   share: boolean;
   handleShareButton: () => void;
-  title: string;
-  mainImage: string;
-  id: string;
-  realId?: string;
+  title: string | undefined;
+  mainImage: string | undefined;
+  id: number | undefined;
+  realId?: string | undefined;
 }
 
 function ShareFooter(props: Props) {

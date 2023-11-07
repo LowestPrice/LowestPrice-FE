@@ -403,7 +403,7 @@ const StyledBackIcon = styled(BackIcon)`
 const StyledDropDownIcon = styled(DropDownIcon)`
   margin-right: 1.25rem;
   position: absolute;
-  top: 1.1rem;
+  top: 1.22rem;
 `;
 
 const DropDownList = styled.li`

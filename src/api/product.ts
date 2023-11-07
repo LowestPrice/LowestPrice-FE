@@ -97,7 +97,7 @@ export const getOptions = async (realId: string | undefined) => {
 
 // 유사 상품 보기
 
-export const getSimilarProducts = async (productId: string | undefined) => {
+export const getSimilarProducts = async (productId: number | undefined) => {
   const accessToken: string | undefined = Cookies.get('Authorization');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
