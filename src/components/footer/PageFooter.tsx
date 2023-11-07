@@ -90,7 +90,7 @@ export const FlexBox = styled.div`
   position: fixed;
   bottom: 0;
   background-color: white;
-  z-index: 9999;
+  /* z-index: 9999; */
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
   }
