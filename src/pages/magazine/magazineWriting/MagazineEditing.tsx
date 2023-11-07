@@ -77,7 +77,7 @@ const MagazineEditing: React.FC = () => {
       },
       {
         onSuccess: () => {
-          toast.success('수정되었습니다.');
+          toast.success('수정되었습니다✅');
           navigate('/magazine');
         },
         onError: (error) => {

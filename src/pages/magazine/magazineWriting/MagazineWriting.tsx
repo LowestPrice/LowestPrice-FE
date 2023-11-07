@@ -71,7 +71,7 @@ const MagazineWriting: React.FC = () => {
       { title, content, image },
       {
         onSuccess: () => {
-          toast.success('추가되었습니다');
+          toast.success('추가되었습니다✅');
           navigate('/magazine');
         },
         onError: (error) => {

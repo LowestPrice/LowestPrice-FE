@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { MagazineProps } from '../../../type/type';
 import { deleteMagazine, getMagazineDetail, getAnotherMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { BackIcon, DropDownIcon, GreyShareIcon } from '../../../assets/icon/icon';
+import { BackIcon, DropDownIcon, GreyShareIcon, MypageEditIcon, DeleteIcon, ShareIcon } from '../../../assets/icon/icon';
 import { useState, useRef } from 'react';
 import useDropDown from '../../../hooks/useDropDown';
 import { DropDownProps } from '../../../type/type';
@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ShareFooter from '../../../components/footer/ShareFooter';
+import { DropDownListProps } from '../../../type/type';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   const { id } = useParams();
@@ -55,7 +56,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 
   const onDeleteButtonHandler = (id: any) => {
     deletePosts.mutate({ id });
-    toast.success('삭제되었습니다.');
+    toast.success('삭제되었습니다✅');
   };
 
   // 좋아요
@@ -74,10 +75,33 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 
   // 드롭다운 (수정/삭제 이동)
   const DropDown: React.FC<DropDownProps> = ({ onEditClick, onDeleteClick }) => {
+    const confirmDeleteClick = () => {
+      if (onDeleteClick && window.confirm('삭제하시겠습니까?')) {
+        onDeleteClick();
+      } else if (!onDeleteClick) {
+        console.error('onDeleteClick 함수가 정의되지 않았습니다.');
+      }
+    };
+
     return (
       <>
-        <DropDownList onClick={onEditClick}>수정</DropDownList>
-        <DropDownList onClick={onDeleteClick}>삭제</DropDownList>
+        <DropDownList onClick={onEditClick} top='50px' color='black' borderRadius='6px 6px 0px 0px'>
+          <DropDownText>
+            수정하기
+            <MypageEditIcon />
+          </DropDownText>
+        </DropDownList>
+        <DropDownList
+          onClick={() => (onDeleteClick ? confirmDeleteClick() : console.error('onDeleteClick 함수가 정의되지 않았습니다.'))}
+          top='96px'
+          color='red'
+          borderRadius='0px 0px 6px 6px'
+        >
+          <DropDownText>
+            삭제하기
+            <DeleteIcon />
+          </DropDownText>
+        </DropDownList>
       </>
     );
   };
@@ -104,6 +128,19 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             <Title>{magazineData.title}</Title>
             <EditorShareFlex>
               <Editor>작성 날짜: {writtenDate}</Editor>
+              <ShareIcon
+                onClick={() => {
+                  handleShareButton();
+                  console.log('함수 실행');
+                }}
+              />
+              <ShareFooter
+                share={share}
+                handleShareButton={handleShareButton}
+                title={dataDetail?.data.title}
+                mainImage={dataDetail?.data.mainImage}
+                id={dataDetail?.data.magazineId}
+              ></ShareFooter>
             </EditorShareFlex>
           </TitleWrap>
           <Flex>
@@ -171,13 +208,6 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
               </Overlay>
             </AnotherContentButton>
           ))}
-        <ShareFooter
-          share={share}
-          handleShareButton={handleShareButton}
-          title={dataDetail?.data.title}
-          mainImage={dataDetail?.data.mainImage}
-          id={dataDetail?.data.magazineId}
-        ></ShareFooter>
       </Container>
     </Scroll>
   );
@@ -374,11 +404,12 @@ const AnotherText = styled.div`
 `;
 
 const EditorShareFlex = styled.div`
-  width: 23.438rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding-right: 1.25rem;
+  background-color: red;
 `;
 
 const LikeShareIconFlex = styled.div`
@@ -406,15 +437,28 @@ const StyledDropDownIcon = styled(DropDownIcon)`
   top: 1.22rem;
 `;
 
-const DropDownList = styled.li`
-  width: 3.125rem;
-  height: 1.875rem;
+const DropDownList = styled.li<DropDownListProps>`
+  width: 8.375rem;
+  height: 2.875rem;
   list-style-type: none;
   background-color: #fff;
   display: flex;
-  justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: absolute;
+  top: ${({ top }) => top};
+  color: ${({ color }) => color};
+  border-radius: ${({ borderRadius }) => borderRadius};
+  right: 30px;
+  z-index: 999;
+  display: flex;
+`;
+
+const DropDownText = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
 
 const Overlay = styled.div`

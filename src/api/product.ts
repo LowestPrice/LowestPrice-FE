@@ -118,7 +118,7 @@ export const getSearch = async (searchWord: string | undefined, lastId: number |
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/search?search=${searchWord}&lastId=${lastId}&isOutOfStock=${isSoldout}`);
     return response.data.data;
   } catch (err) {
-    toast.error('찾으시는 상품이 존재하지 않습니다.');
+    toast.error('찾으시는 상품이 존재하지 않습니다❗️');
     console.log(err);
   }
 };
