@@ -161,7 +161,7 @@ export default function Main() {
               onSubmit={(e) => {
                 e.preventDefault();
                 if (searchState.searchKeyword === '') {
-                  toast.error('검색어를 입력해주세요.');
+                  toast.error('검색어를 입력해주세요❗️');
                 } else {
                   addRecentSearchKeyword(searchState.searchKeyword);
                   navigate(`/search/${searchState.searchKeyword}`);
@@ -202,7 +202,7 @@ export default function Main() {
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
                         if (searchState.searchKeyword === '') {
-                          toast.error('검색어를 입력해주세요.');
+                          toast.error('검색어를 입력해주세요❗️');
                         } else {
                           addRecentSearchKeyword(searchState.searchKeyword);
                           navigate(`/search/${searchState.searchKeyword}`);

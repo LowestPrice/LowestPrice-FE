@@ -19,7 +19,7 @@ export default function NProductItem(props: Props) {
   const alarmMutation = useMutation(toggleAlarm, {
     onSuccess: () => {
       queryClient.invalidateQueries('alarmProducts');
-      toast.success('알림 상품 제거 완료.');
+      toast.success('알림 상품 제거되었습니다✅');
     },
     onError: () => {
       console.log('alarm 상품 제거 실패');

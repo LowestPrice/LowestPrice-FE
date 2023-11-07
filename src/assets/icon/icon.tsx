@@ -1,4 +1,5 @@
 import { SVGProps } from 'react';
+// import { useState } from 'react';
 
 // 좋아요 하트 아이콘
 export const LineHeartIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -190,6 +191,7 @@ export const DropDownIcon = (props: SVGProps<SVGSVGElement>) => {
 
 // 공유하기 아이콘
 export const ShareIcon = (props: SVGProps<SVGSVGElement>) => {
+  // const [share, setShare] = useState<boolean>(false);
   return (
     <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' {...props}>
       <path d='M12.425 14.5V1M12.425 1L8.675 4.675M12.425 1L16.025 4.675' stroke='white' strokeWidth='1.9125' strokeLinecap='round' strokeLinejoin='round' />
@@ -234,6 +236,21 @@ export const MypageEditIcon = (props: SVGProps<SVGSVGElement>) => {
         />
         <line id='Line 19' x1='10.601' y1='3.39896' x2='14.601' y2='7.39896' stroke='#6F6F6F' strokeWidth='1.7' />
       </g>
+    </svg>
+  );
+};
+
+// 매거진 상세페이지 삭제하기 아이콘
+export const DeleteIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' {...props}>
+      <path
+        d='M4 7H20M9 4H15M10 17V11M14 17V11M15.5 21H8.5C7.39543 21 6.5 20.1046 6.5 19L6.0434 8.04163C6.01973 7.47351 6.47392 7 7.04253 7H16.9575C17.5261 7 17.9803 7.47351 17.9566 8.04163L17.5 19C17.5 20.1046 16.6046 21 15.5 21Z'
+        stroke='#FF4545'
+        stroke-width='1.7'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
     </svg>
   );
 };

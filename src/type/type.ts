@@ -76,3 +76,9 @@ export interface PriceWrapProps {
 export interface FormattedData {
   [key: string]: number;
 }
+
+export interface DropDownListProps {
+  top: string;
+  color: string;
+  borderRadius: string;
+}
