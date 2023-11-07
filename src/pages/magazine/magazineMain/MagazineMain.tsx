@@ -36,7 +36,7 @@ const Magazine: React.FC<MagazineProps> = () => {
 
   return (
     <>
-      <Header>
+      <Header onClick={() => navigate('/magazine')}>
         <BlueLogo />
         <LogoTitle>매거진</LogoTitle>
       </Header>
@@ -115,6 +115,7 @@ const Header = styled.div`
   padding-bottom: 1.12rem;
   padding-left: 1.25rem;
   padding-right: 17.62rem;
+  cursor: pointer;
 
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;

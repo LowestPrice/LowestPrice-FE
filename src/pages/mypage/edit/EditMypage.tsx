@@ -89,7 +89,7 @@ export default function EditMypage() {
               { name, imageFile },
               {
                 onSuccess: () => {
-                  toast.success('수정 완료!');
+                  toast.success('수정되었습니다✅');
                   navigate('/mypage');
                 },
                 onError: (error) => {
