@@ -1,20 +1,25 @@
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 
 import { getUserinfo } from '../../../api/mypage';
-import { postLogout } from '../../../api/login';
+import { DeleteIdWithKakao, postLogout } from '../../../api/login';
 
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 
 import { MypageEditIcon, RightBackIcon } from '../../../assets/icon/icon';
+import RecentProducts from '../../../components/modal/RecentProducts';
+import { useState } from 'react';
 
 function Mypage() {
   // 네비게이트 ----------------------------------------
 
   const navigate = useNavigate();
+
+  // 상태관리 ----------------------------------------
+  const [modal, setModal] = useState(false);
 
   // 서버로 유저정보 가져오기 -----------------------------------
 
@@ -30,18 +35,24 @@ function Mypage() {
     },
   });
 
+  // 로그아웃--------------------------------------------------------
+
+  const handleLogoutButton = () => {
+    logoutMutation.mutate();
+  };
+
+  // 최근 본 상품 모달 --------------------------------------------------------
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
   if (status === 'loading') {
     return <Loading />;
   }
   if (status === 'error') {
     return <Error />;
   }
-
-  // 로그아웃--------------------------------------------------------
-
-  const handleLogoutButton = () => {
-    logoutMutation.mutate();
-  };
 
   return (
     <div style={{ width: '100%' }}>
@@ -62,15 +73,18 @@ function Mypage() {
               </EditIcon>
             </EditProfileImage>
           </Profile>
+          <Article onClick={toggleModal}>
+            <Unit>
+              최근 본 게시물 <RightBackIcon />
+            </Unit>
+          </Article>
+          {modal && <RecentProducts toggleModal={toggleModal} />}
           <Article onClick={() => navigate('/likemagazine')}>
-            <Like>
+            <Unit>
               좋아요한 매거진 보기 <RightBackIcon />
-            </Like>
+            </Unit>
           </Article>
           <Logout onClick={handleLogoutButton}>로그아웃</Logout>
-          {/* <Article>
-            <Unregister onClick={onDeleteButtonHandler}>회원탈퇴</Unregister>
-          </Article> */}
         </Wrap>
       </Scroll>
       <PageFooter />
@@ -99,7 +113,7 @@ const Header = styled.div`
 `;
 
 const Wrap = styled.div`
-  height: 37.5rem;
+  height: 50.5rem;
 `;
 
 const Scroll = styled.div`
@@ -107,7 +121,13 @@ const Scroll = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  max-height: 100vh;
+  max-height: 75vh;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    max-height: 80vh;
+  }
+  @media screen and (min-width: 744px) {
+    max-height: 100vh;
+  }
 `;
 
 const Title = styled.div`
@@ -181,7 +201,7 @@ const Article = styled.div`
   padding-left: 22px;
 `;
 
-const Like = styled.div`
+const Unit = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -202,9 +222,3 @@ const Logout = styled.div`
   cursor: pointer;
 `;
 
-// const Unregister = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   margin-right: 18px;
-// `;
