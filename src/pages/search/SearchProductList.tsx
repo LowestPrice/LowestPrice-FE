@@ -35,13 +35,13 @@ function SearchProductList(props: Props) {
     return <Loading />;
   }
   if (infiniteSearchData.status === 'error') {
-    toast.error('찾으시는 상품이 존재하지 않습니다.');
+    toast.error('찾으시는 상품이 존재하지 않습니다❗️');
   }
   if (infiniteSearchFilterData.status === 'loading') {
     return <Loading />;
   }
   if (infiniteSearchFilterData.status === 'error') {
-    toast.error('찾으시는 상품이 존재하지 않습니다.');
+    toast.error('찾으시는 상품이 존재하지 않습니다❗️');
   }
 
   // 2차원 배열 -> 1차원 배열로 변경 ------------------------------------------
