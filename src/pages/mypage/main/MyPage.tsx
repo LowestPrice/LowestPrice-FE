@@ -9,7 +9,6 @@ import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 
-import Cookies from 'js-cookie';
 import { MypageEditIcon, RightBackIcon } from '../../../assets/icon/icon';
 import RecentProducts from '../../../components/modal/RecentProducts';
 import { useState } from 'react';
@@ -26,9 +25,6 @@ function Mypage() {
 
   const { data, status } = useQuery('userInfo', getUserinfo);
 
-  // 리액트쿼리로 유저정보 가져오기 -----------------------------------
-  const queryClient = useQueryClient();
-
   // 로그아웃하기 -----------------------------------------
   const logoutMutation = useMutation(postLogout, {
     onSuccess: () => {
@@ -44,24 +40,6 @@ function Mypage() {
   const handleLogoutButton = () => {
     logoutMutation.mutate();
   };
-
-  // 회원탈퇴 --------------------------------------------------------
-  const deleteId = useMutation(DeleteIdWithKakao, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('KakaoId');
-    },
-    onError: (error) => {
-      console.log('error 발생', error);
-    },
-  });
-
-  const onDeleteButtonHandler = () => {
-    deleteId.mutate();
-    alert('탈퇴되었습니다.');
-    navigate('/');
-  };
-
-  const accessToken = Cookies.get('Authorization');
 
   // 최근 본 상품 모달 --------------------------------------------------------
 
@@ -106,20 +84,7 @@ function Mypage() {
               좋아요한 매거진 보기 <RightBackIcon />
             </Unit>
           </Article>
-          {accessToken ? (
-            <Article onClick={handleLogoutButton}>
-              <Unit>
-                로그아웃 <RightBackIcon />
-              </Unit>
-            </Article>
-          ) : (
-            <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>
-          )}
-          <Article>
-            <Unit onClick={onDeleteButtonHandler}>
-              회원탈퇴 <RightBackIcon />
-            </Unit>
-          </Article>
+          <Logout onClick={handleLogoutButton}>로그아웃</Logout>
         </Wrap>
       </Scroll>
       <PageFooter />
@@ -242,3 +207,18 @@ const Unit = styled.div`
   justify-content: space-between;
   margin-right: 1.125rem;
 `;
+
+const Logout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray02, #b5b5b5);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration-line: underline;
+  margin-top: 80px;
+  cursor: pointer;
+`;
+
