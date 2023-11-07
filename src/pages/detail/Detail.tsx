@@ -52,6 +52,21 @@ function Detail() {
   const currentPrice = data.currentPrice.toLocaleString();
   const originalPrice = data.originalPrice.toLocaleString();
 
+  // 로컬 스토리지 저장 -------------------------------------------------------------------------
+
+  // * 로컬 스토리지에서 watched 항목 가져오기
+  let watchedItems = localStorage.getItem('watched');
+  // * 가져온 항목이 있을 시 JSON 파싱, 없을 시 빈 배열
+  let watched = watchedItems ? JSON.parse(watchedItems) : [];
+  // * Set으로 중복 값 제거
+  let watchedSet = new Set(watched);
+  // * 상품 id를 Set에 추가
+  watchedSet.add(params.id);
+  // * Set에서 배열로 반환
+  watched = [...watchedSet];
+  // * 배열을 로컬 스토리지에 watched 항목으로 다시 저장
+  localStorage.setItem('watched', JSON.stringify(watched));
+
   // 화면 --------------------------------------------------------------------------------------
 
   return (
