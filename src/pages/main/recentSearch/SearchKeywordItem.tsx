@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
 interface Props {
+  id: string;
   keyword: string;
 }
 
@@ -18,7 +19,7 @@ function SearchKeywordItem(props: Props) {
 
   const handleXButton = () => {
     console.log('지웁니다.');
-    const newRecentList = [...recentList.filter((item) => item.keyword !== props.keyword)];
+    const newRecentList = [...recentList.filter((item) => item.id !== props.id)];
     localStorage.setItem('recentSearchKeywordList', JSON.stringify(newRecentList));
     console.log('지웠습니다.');
   };

@@ -20,7 +20,7 @@ function SearchHistory(props: Props) {
         <Wrap $onOff={props.onOff}>
           <Title>최근 검색어</Title>
           {recentList.map((item, index) => {
-            return <SearchKeywordItem key={index} keyword={item.keyword} />;
+            return <SearchKeywordItem key={index} id={item.id} keyword={item.keyword} />;
           })}
         </Wrap>
       ) : (
@@ -35,10 +35,10 @@ export default SearchHistory;
 const Wrap = styled.div<{ $onOff: boolean }>`
   opacity: ${(props) => (props.$onOff ? '100' : '0')};
   z-index: ${(props) => (props.$onOff ? '1000' : '-10')};
-  transition: all 1s;
+  /* transition: all 1s; */
   width: 350px;
   position: absolute;
-  top: 150px;
+  top: 190px;
   border: 1px solid var(--gray01, #d9d9d9);
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 90%;
