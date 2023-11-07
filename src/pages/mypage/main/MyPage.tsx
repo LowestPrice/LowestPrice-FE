@@ -9,7 +9,6 @@ import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 
-import Cookies from 'js-cookie';
 import { MypageEditIcon, RightBackIcon } from '../../../assets/icon/icon';
 
 function Mypage() {
@@ -20,9 +19,6 @@ function Mypage() {
   // 서버로 유저정보 가져오기 -----------------------------------
 
   const { data, status } = useQuery('userInfo', getUserinfo);
-
-  // 리액트쿼리로 유저정보 가져오기 -----------------------------------
-  // const queryClient = useQueryClient();
 
   // 로그아웃하기 -----------------------------------------
   const logoutMutation = useMutation(postLogout, {
@@ -47,24 +43,6 @@ function Mypage() {
     logoutMutation.mutate();
   };
 
-  // 회원탈퇴 --------------------------------------------------------
-  // const deleteId = useMutation(DeleteIdWithKakao, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries('KakaoId');
-  //   },
-  //   onError: (error) => {
-  //     console.log('error 발생', error);
-  //   },
-  // });
-
-  // const onDeleteButtonHandler = () => {
-  //   deleteId.mutate();
-  //   alert('탈퇴되었습니다.');
-  //   navigate('/');
-  // };
-
-  const accessToken = Cookies.get('Authorization');
-
   return (
     <div style={{ width: '100%' }}>
       <Header>마이페이지</Header>
@@ -84,13 +62,12 @@ function Mypage() {
               </EditIcon>
             </EditProfileImage>
           </Profile>
-
           <Article onClick={() => navigate('/likemagazine')}>
             <Like>
               좋아요한 매거진 보기 <RightBackIcon />
             </Like>
           </Article>
-          {accessToken ? <Article onClick={handleLogoutButton}>로그아웃</Article> : <Article onClick={() => navigate('/login')}>로그인하러 가기</Article>}
+          <Logout onClick={handleLogoutButton}>로그아웃</Logout>
           {/* <Article>
             <Unregister onClick={onDeleteButtonHandler}>회원탈퇴</Unregister>
           </Article> */}
@@ -209,6 +186,20 @@ const Like = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-right: 1.125rem;
+`;
+
+const Logout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray02, #b5b5b5);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration-line: underline;
+  margin-top: 80px;
+  cursor: pointer;
 `;
 
 // const Unregister = styled.div`
