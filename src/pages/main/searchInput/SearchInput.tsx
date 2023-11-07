@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import uuid from 'react-uuid';
-import SearchHistory from '../recentSearch/SearchHistory';
-
+import SearchHistory from './recentSearch/SearchHistory';
 
 interface Props {
   handleFocusOn: () => void;
@@ -17,6 +16,8 @@ function SearchInput(props: Props) {
   // 네비게이트 -------------------
 
   const navigate = useNavigate();
+
+  // 검색어 입력 ---------------------------------------------
 
   const onChangeSearchWord = (e: any) => {
     setSearchState(e.target.value);
@@ -43,7 +44,7 @@ function SearchInput(props: Props) {
   return (
     <>
       <Wrap>
-        <form
+        <Form
           onSubmit={(e) => {
             e.preventDefault();
             if (searchState === '') {
@@ -96,7 +97,7 @@ function SearchInput(props: Props) {
               />
             </svg>
           </div>
-        </form>
+        </Form>
       </Wrap>
       <SearchHistory onOff={props.searchFocus} />
     </>
@@ -134,6 +135,15 @@ const Wrap = styled.div`
     width: 80%;
     height: 3.25rem;
   }
+`;
+
+const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* transform: translate(-50%, 150%); */
 `;
 
 const Input = styled.input`
