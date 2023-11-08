@@ -13,17 +13,6 @@ const pop = keyframes`
   100% { transform: scale(1); }
 `;
 
-// const flyAndFade = keyframes`
-//   0% {
-//     transform: translateY(0);
-//     /* opacity: 1; */
-//   }
-//   50% {
-//     transform: translateY(-10rem);
-//     /* opacity: 0; */
-//   }
-// `;
-
 const Heart: React.FC<HeartProps> = ({ like, onClick }) => {
   return (
     <HeartButton like={like} onClick={onClick}>
@@ -31,22 +20,6 @@ const Heart: React.FC<HeartProps> = ({ like, onClick }) => {
     </HeartButton>
   );
 };
-
-// const Heart: React.FC<HeartProps> = ({ like, onClick }) => {
-//   return (
-//     <button
-//       onClick={onClick}
-//       style={{
-//         marginTop: '-0.25rem',
-//         background: 'none',
-//         border: 'none',
-//         outline: 'none',
-//       }}
-//     >
-//       {like ? <ColorHeartIcon /> : <LineHeartIcon />}
-//     </button>
-//   );
-// };
 
 const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount, handleLikeClick, index }) => {
   return (

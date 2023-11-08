@@ -25,7 +25,7 @@ export const useLike = (initialLike: boolean, initialCount: number) => {
     event.stopPropagation();
     const accessToken = Cookies.get('Authorization');
     if (!accessToken) {
-      toast.error('로그인 후 이용하세요.', {
+      toast.error('로그인 이후 이용이 가능합니다❗️', {
         onClose: () => navigate('/login'),
       });
       return;
