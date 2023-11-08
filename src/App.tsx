@@ -4,6 +4,7 @@ import { Outlet } from 'react-router';
 import './App.css';
 import ReactGA from 'react-ga4';
 import RouteChangeTrackers from './RouteChangeTrackers';
+import GoogleTagManager from './GoogleTagManager';
 
 export default function App() {
   if (import.meta.env.VITE_REACT_APP_GOOGLE_ANALYTICS) {
@@ -15,6 +16,7 @@ export default function App() {
       <Suspense fallback={<Loading />}>
         <Outlet />
       </Suspense>
+      <GoogleTagManager gtmId='GTM-5RJ9KXDN' />
     </div>
   );
 }
