@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { MagazineProps } from '../../../type/type';
 import { deleteMagazine, getMagazineDetail, getAnotherMagazine } from '../../../api/magazine';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { BackIcon, DropDownIcon, GreyShareIcon, MypageEditIcon, DeleteIcon, ShareIcon } from '../../../assets/icon/icon';
+import { BackIcon, DropDownIcon, MypageEditIcon, DeleteIcon, ShareIcon } from '../../../assets/icon/icon';
 import { useState, useRef } from 'react';
 import useDropDown from '../../../hooks/useDropDown';
 import { DropDownProps } from '../../../type/type';
@@ -128,16 +128,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             <Title>{magazineData.title}</Title>
             <EditorShareFlex>
               <Editor>작성 날짜: {writtenDate}</Editor>
-              <div
-                onClick={() => {
-                  handleShareButton();
-                  console.log('함수 실행');
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                <ShareIcon />
-              </div>
-
+              <ShareIcon onClick={handleShareButton} style={{ cursor: 'pointer', marginRight: '1rem', marginBottom: '1.5rem' }} />
               <ShareFooter
                 share={share}
                 handleShareButton={handleShareButton}
@@ -192,9 +183,9 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             index={index}
             handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
           />
-          <StyledGreyShareIcon>
+          {/* <StyledGreyShareIcon>
             <GreyShareIcon onClick={handleShareButton} />
-          </StyledGreyShareIcon>
+          </StyledGreyShareIcon> */}
         </LikeShareIconFlex>
         <AnotherMagazine>
           <AnotherText>다른 매거진 보기</AnotherText>
@@ -238,7 +229,7 @@ const TitleWrap = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 999;
+  z-index: 10;
   padding-bottom: 0.625rem;
   padding-top: 13.75rem;
   background-color: rgba(0, 0, 0, 0.3);
@@ -316,7 +307,7 @@ const AnotherContentEditor = styled.div`
 `;
 
 const MagazineTitle = styled.div`
-  z-index: 999;
+  z-index: 20;
   display: flex;
   align-items: center;
   width: 8.125rem;
@@ -340,7 +331,6 @@ const TitleText = styled.div`
 `;
 
 const TopText = styled.div`
-  z-index: 999;
   color: #fff;
   text-align: center;
   font-size: 0.75rem;
@@ -361,7 +351,6 @@ const Flex = styled.div`
   align-items: flex-start;
   padding: 1.375rem 1.5rem;
   background-color: transparent;
-  z-index: 1;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
   }
@@ -374,7 +363,7 @@ const Button = styled.div`
   width: 1.5rem;
   height: 1.5rem;
   background-color: transparent;
-  z-index: 999;
+  z-index: 500;
   cursor: pointer;
 `;
 
@@ -413,7 +402,6 @@ const EditorShareFlex = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-right: 1.25rem;
-  background-color: red;
 `;
 
 const LikeShareIconFlex = styled.div`
@@ -424,12 +412,12 @@ const LikeShareIconFlex = styled.div`
   margin-left: 0.625rem;
 `;
 
-const StyledGreyShareIcon = styled.button`
-  margin-right: 1.25rem;
-  margin-top: -0.0625rem;
-  background-color: transparent;
-  border: none;
-`;
+// const StyledGreyShareIcon = styled.button`
+//   margin-right: 1.25rem;
+//   margin-top: -0.0625rem;
+//   background-color: transparent;
+//   border: none;
+// `;
 
 const StyledBackIcon = styled(BackIcon)`
   margin-left: 1.25rem;
@@ -454,7 +442,7 @@ const DropDownList = styled.li<DropDownListProps>`
   color: ${({ color }) => color};
   border-radius: ${({ borderRadius }) => borderRadius};
   right: 30px;
-  z-index: 999;
+  z-index: 500;
   display: flex;
 `;
 
