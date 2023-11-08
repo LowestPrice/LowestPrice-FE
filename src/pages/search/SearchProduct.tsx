@@ -31,20 +31,24 @@ function SearchProduct(props: Props) {
       </AlarmWrap>
       <SProductContent>
         <div className='productName'>{props.productName}</div>
-        <div className='originalPrice'>{originalPrice}</div>
+        {props.discountRate !== 0 ? <div className='originalPrice'>{originalPrice}</div> : <div style={{ marginTop: '10px' }}></div>}
         <SProductDiscountWrap>
           <div className='currentPrice'>{currentPrice}원</div>
-          <SProductDisount>
-            <div>
-              <svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'>
-                <path
-                  d='M4.256 6.67159C4.65334 7.11401 5.34666 7.11401 5.744 6.67159L9.56398 2.41818C10.1421 1.77442 9.68526 0.75 8.81998 0.75H1.18001C0.31474 0.75 -0.142143 1.77442 0.436019 2.41818L4.256 6.67159Z'
-                  fill='#137FFF'
-                />
-              </svg>
-            </div>
-            <div>{props.discountRate}%</div>
-          </SProductDisount>
+          {props.discountRate !== 0 ? (
+            <SProductDisount>
+              <div>
+                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'>
+                  <path
+                    d='M4.256 6.67159C4.65334 7.11401 5.34666 7.11401 5.744 6.67159L9.56398 2.41818C10.1421 1.77442 9.68526 0.75 8.81998 0.75H1.18001C0.31474 0.75 -0.142143 1.77442 0.436019 2.41818L4.256 6.67159Z'
+                    fill='#137FFF'
+                  />
+                </svg>
+              </div>
+              <div>{props.discountRate}%</div>
+            </SProductDisount>
+          ) : (
+            <div></div>
+          )}
         </SProductDiscountWrap>
       </SProductContent>
     </Wrap>
@@ -115,6 +119,7 @@ const SProductDisount = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 10px;
   }
 `;
 
