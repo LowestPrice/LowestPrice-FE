@@ -61,7 +61,7 @@ const Wrap = styled.div`
   width: 10.375rem;
   min-height: 14.375rem;
   /* border: 0.0625rem solid gray; */
-  margin-bottom: 0.9375rem;
+  margin-bottom: 30px;
   cursor: pointer;
   position: relative;
 `;

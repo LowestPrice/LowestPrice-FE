@@ -16,7 +16,7 @@ function CategoryProduct(props: Props) {
   const originalPrice = props.originalPrice.toLocaleString();
 
   return (
-    <div>
+    <div style={{ marginBottom: '30px' }}>
       <Wrap
         onClick={() => {
           navigate(`/detail/${props.productId}`);
