@@ -213,6 +213,7 @@ const Options = styled.div`
 `;
 
 const Soldout = styled.div<{ $isSoldout: boolean }>`
+  font-size: 12px;
   margin-left: 9.375rem;
   cursor: pointer;
   color: ${(props) => (!props.$isSoldout ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};

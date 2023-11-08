@@ -119,8 +119,10 @@ const Wrap = styled.div`
   justify-content: space-between;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
+    justify-content: space-around;
   }
   @media screen and (min-width: 744px) {
     width: 744px;
+    justify-content: space-around;
   }
 `;

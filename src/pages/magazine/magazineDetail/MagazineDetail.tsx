@@ -358,7 +358,6 @@ const Flex = styled.div`
   align-items: flex-start;
   padding: 1.375rem 1.5rem;
   background-color: transparent;
-
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
   }

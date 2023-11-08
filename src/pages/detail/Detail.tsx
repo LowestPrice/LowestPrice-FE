@@ -110,7 +110,7 @@ function Detail() {
                         />
                       </svg>
                     </div>
-                    <div>{data?.discountRate}%</div>
+                    <div style={{ fontSize: '14px', fontWeight: '700' }}>{data?.discountRate}%</div>
                   </DiscountWrap>
                 ) : (
                   <div></div>
