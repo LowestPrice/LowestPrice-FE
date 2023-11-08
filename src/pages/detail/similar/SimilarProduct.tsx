@@ -33,7 +33,7 @@ function SimilarProduct(props: Props) {
                     />
                   </svg>
                 </div>
-                <div>{props.discountRate}%</div>
+                <div style={{ fontSize: '10px' }}>{props.discountRate}%</div>
               </DiscountRateWrap>
             ) : (
               <div></div>

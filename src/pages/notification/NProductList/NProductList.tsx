@@ -20,10 +20,20 @@ export default function NProductList() {
     return <Error />;
   }
 
+  const isProduct = data.length === 0 ? false : true;
+
   // 화면 ----------------------------------------------------------------------
 
   return (
     <Wrap>
+      {isProduct ? (
+        <div></div>
+      ) : (
+        <NoProduct $isProduct={isProduct}>
+          <div>알림설정한 상품이 존재하지 않습니다.</div>
+          <div>알림설정은 해당 상품에서 설정하실 수 있습니다.</div>
+        </NoProduct>
+      )}
       {data.map((item: Product, index: number) => {
         return <NProductItem key={index} {...item} />;
       })}
@@ -41,5 +51,19 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+`;
+
+const NoProduct = styled.div<{ $isProduct: boolean }>`
+  width: 76%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  div {
+    font-size: 12px;
+    line-height: 16px;
+  }
 `;
