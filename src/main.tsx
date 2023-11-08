@@ -16,7 +16,7 @@ root.render(
       <ToastContainer
         position='top-center'
         autoClose={2000}
-        hideProgressBar={true}
+        hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
         rtl={false}
@@ -25,6 +25,8 @@ root.render(
         pauseOnHover
         icon={false}
         closeButton={false}
+        style={{ width: '17.3125rem', height: '3.375rem' }}
+        theme='dark'
       />
       <RouterProvider router={router} />
     </QueryClientProvider>
