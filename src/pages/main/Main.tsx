@@ -286,6 +286,7 @@ const Title = styled.div`
 `;
 
 const CategoryWrap = styled.div`
+  width: 375px;
   display: flex;
   flex-direction: column;
   position: relative;
