@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
@@ -104,7 +104,7 @@ function SearchInput(props: Props) {
   );
 }
 
-export default SearchInput;
+export default React.memo(SearchInput);
 
 const Wrap = styled.div`
   width: 20.9375rem;
