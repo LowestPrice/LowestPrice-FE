@@ -67,7 +67,7 @@ export default ShareFooter;
 const Wrap = styled.div<{ $share: boolean }>`
   width: 134px;
   height: 92px;
-  opacity: ${({ $share }) => ($share ? '1' : '0')};
+  opacity: ${({ $share }) => ($share ? '100' : '0')};
   border-top: 0.0625rem solid #d9d9d9;
   display: flex;
   flex-direction: column;

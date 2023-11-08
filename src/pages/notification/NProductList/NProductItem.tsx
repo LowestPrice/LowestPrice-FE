@@ -159,7 +159,10 @@ const DiscountContent = styled.div`
   align-items: center;
   gap: 2px;
   justify-content: center;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 500;
   color: #137fff;
+  .discountRate {
+    font-size: 8px;
+  }
 `;

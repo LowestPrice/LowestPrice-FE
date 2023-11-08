@@ -128,12 +128,16 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             <Title>{magazineData.title}</Title>
             <EditorShareFlex>
               <Editor>작성 날짜: {writtenDate}</Editor>
-              <ShareIcon
+              <div
                 onClick={() => {
                   handleShareButton();
                   console.log('함수 실행');
                 }}
-              />
+                style={{ cursor: 'pointer' }}
+              >
+                <ShareIcon />
+              </div>
+
               <ShareFooter
                 share={share}
                 handleShareButton={handleShareButton}
@@ -357,7 +361,7 @@ const Flex = styled.div`
   align-items: flex-start;
   padding: 1.375rem 1.5rem;
   background-color: transparent;
-  z-index: 999;
+  z-index: 1;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
   }
