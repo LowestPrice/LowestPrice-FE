@@ -23,7 +23,6 @@ root.render(
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='dark'
         icon={false}
         closeButton={false}
       />
