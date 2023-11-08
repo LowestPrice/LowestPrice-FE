@@ -36,8 +36,7 @@ function Alarmbell(props: Props) {
   const handleAlarmButton = () => {
     alarmMutation.mutate(props.productId);
     if (!accessToken) {
-      toast.error(`로그인 이후 
-      알림목록에 추가하실 수 있습니다❗️`);
+      toast.error('로그인 이후 이용이 가능합니다❗️');
       navigate('/login');
       return;
     }
