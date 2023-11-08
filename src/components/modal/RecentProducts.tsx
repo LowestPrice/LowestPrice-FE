@@ -25,10 +25,10 @@ const RecentProducts: React.FC<{ toggleModal: () => void }> = ({ toggleModal }) 
     }))
   );
 
-  console.log(recentProductsQueries, '뭐나와?');
-  recentProductsQueries.forEach((queryResult, index) => {
-    console.log(`쿼리 ${index} 결과:`, queryResult.data.productId);
-  });
+  // console.log(recentProductsQueries, '뭐나와?');
+  // recentProductsQueries.forEach((queryResult, index) => {
+  //   console.log(`쿼리 ${index} 결과:`, queryResult.data.productId);
+  // });
 
   const isLoading = recentProductsQueries.some((query) => query.isLoading);
   const isError = recentProductsQueries.some((query) => query.isError);

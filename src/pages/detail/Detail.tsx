@@ -116,14 +116,6 @@ function Detail() {
                   <div></div>
                 )}
                 <GreyShareIcon onClick={handleShareButton} style={{ position: 'absolute', right: '0rem', cursor: 'pointer' }} />
-                <ShareFooter
-                  share={share}
-                  handleShareButton={handleShareButton}
-                  id={data?.productId}
-                  realId={data?.realId}
-                  title={data?.productName}
-                  mainImage={data?.productImage}
-                />
               </PriceNDiscountWrap>
             </Content>
           </ProductContent>
@@ -142,6 +134,14 @@ function Detail() {
           <AlarmFooter productUrl={data?.productUrl} productId={params.id} isAlertOn={data?.isAlertOn} />
         </Scroll>
       </Wrap>
+      <ShareFooter
+        share={share}
+        handleShareButton={handleShareButton}
+        id={data?.productId}
+        realId={data?.realId}
+        title={data?.productName}
+        mainImage={data?.productImage}
+      />
     </>
   );
 }
