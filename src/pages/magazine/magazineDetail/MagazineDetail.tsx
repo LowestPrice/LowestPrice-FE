@@ -190,9 +190,6 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
             index={index}
             handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
           />
-          {/* <StyledGreyShareIcon>
-            <GreyShareIcon onClick={handleShareButton} />
-          </StyledGreyShareIcon> */}
         </LikeShareIconFlex>
         <AnotherMagazine>
           <AnotherText>다른 매거진 보기</AnotherText>
@@ -419,13 +416,6 @@ const LikeShareIconFlex = styled.div`
   margin-bottom: 0.875rem;
   margin-left: 0.625rem;
 `;
-
-// const StyledGreyShareIcon = styled.button`
-//   margin-right: 1.25rem;
-//   margin-top: -0.0625rem;
-//   background-color: transparent;
-//   border: none;
-// `;
 
 const StyledBackIcon = styled(BackIcon)`
   margin-left: 1.25rem;
