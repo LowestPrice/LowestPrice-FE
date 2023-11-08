@@ -1,6 +1,6 @@
-type Props = {};
+import React from 'react';
 
-function Logo({}: Props) {
+function Logo() {
   return (
     <div>
       <svg style={{ marginTop: '5px' }} width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -81,4 +81,4 @@ function Logo({}: Props) {
   );
 }
 
-export default Logo;
+export default React.memo(Logo);
