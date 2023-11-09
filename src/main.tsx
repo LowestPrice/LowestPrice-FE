@@ -25,6 +25,8 @@ root.render(
         pauseOnHover
         icon={false}
         closeButton={false}
+        style={{ width: '17.3125rem', height: '3.375rem' }}
+        theme='dark'
       />
       <RouterProvider router={router} />
     </QueryClientProvider>

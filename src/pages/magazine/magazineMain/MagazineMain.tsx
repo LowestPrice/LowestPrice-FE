@@ -79,7 +79,6 @@ const Magazine: React.FC<MagazineProps> = () => {
           })}
         </Scroll>
       </Container>
-
       <PageFooter />
     </>
   );

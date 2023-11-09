@@ -73,20 +73,22 @@
 
 .Toastify__toast--error {
   color: white;
-  border-radius: 30px !important;
-  background-color: #000 !important;
   text-align: center;
-  font-family: Pretendard;
+  border-radius: 30px;
   font-size: 14px;
   font-weight: 600;
 }
 
 .Toastify__toast--success {
   color: white;
-  border-radius: 30px !important;
-  background-color: #000 !important;
   text-align: center;
-  font-family: Pretendard;
+  border-radius: 30px;
   font-size: 14px;
   font-weight: 600;
+}
+
+.Toastify__toast-container--top-center {
+  top: 0;
+  left: 50% !important ;
+  transform: translateX(-50%) !important;
 }
