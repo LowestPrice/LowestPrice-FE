@@ -12,7 +12,7 @@ function KakaoLogin() {
 
   useEffect(() => {
     document.cookie = `accessToken=${accessToken}; max-age=17000`;
-    document.cookie = `refreshToken=${refreshToken}; max-age=170000`;
+    document.cookie = `refreshToken=${refreshToken}; max-age= 604800`;
     document.cookie = `isLogin=true; max-age=5`;
     navigate('/');
   }, []);

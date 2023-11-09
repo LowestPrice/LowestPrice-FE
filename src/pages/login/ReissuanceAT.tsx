@@ -17,7 +17,7 @@ function ReissuanceAT({}: Props) {
   document.cookie = `accessToken=${accessToken}; max-age=17000`;
   const acessCookie = Cookies.get('accessToken');
 
-  if (acessCookie) {
+  if (acessCookie !== 'Bearer undefined') {
     navigate('/');
   }
 
