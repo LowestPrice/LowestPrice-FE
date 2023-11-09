@@ -34,12 +34,17 @@ const PageFooter = () => {
     setActiveIcon(path);
   };
 
-  const accessToken = Cookies.get('Authorization');
+  const accessToken = Cookies.get('accessToken');
+  const refreshToken = Cookies.get('refreshToken');
 
   const handleAlarmButton = () => {
     if (!accessToken) {
-      toast.error('로그인 이후 이용이 가능합니다❗️');
-      navigate('/login');
+      toast.success('재로그인을 시도했습니다. 다시 시도해주세요✅');
+      navigate('/reissuanceat');
+      if (!refreshToken) {
+        toast.error('로그인 이후 이용이 가능합니다❗️');
+        navigate('/login');
+      }
       return;
     } else {
       navigate('/notification');
@@ -48,8 +53,16 @@ const PageFooter = () => {
 
   const handleMypageButton = () => {
     if (!accessToken) {
-      toast.error('로그인 이후 이용이 가능합니다❗️');
-      navigate('/login');
+      toast.error('재로그인을 시도했습니다. 다시 시도해주세요✅');
+      navigate('/reissuanceat');
+      if (accessToken === 'Bearer undefined') {
+        toast.error('재로그인을 시도했습니다. 다시 시도해주세요✅');
+        navigate('/reissuanceat');
+      }
+      if (!refreshToken) {
+        toast.error('로그인 이후 이용이 가능합니다❗️');
+        navigate('/login');
+      }
       return;
     } else {
       navigate('/mypage');

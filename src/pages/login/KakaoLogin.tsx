@@ -8,9 +8,11 @@ function KakaoLogin() {
   const url = new URL(currentUrl);
   const queryString = url.searchParams; // URLSearchParams {size: 1}
   const accessToken = 'Bearer ' + queryString.get('Authorization');
+  const refreshToken = 'Bearer ' + queryString.get('refreshToken');
 
   useEffect(() => {
-    document.cookie = `Authorization=${accessToken}; max-age=17000`;
+    document.cookie = `accessToken=${accessToken}; max-age=17000`;
+    document.cookie = `refreshToken=${refreshToken}; max-age=170000`;
     document.cookie = `isLogin=true; max-age=5`;
     navigate('/');
   }, []);

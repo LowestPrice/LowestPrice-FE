@@ -16,6 +16,7 @@ import 'react-quill/dist/quill.snow.css';
 import ShareFooter from '../../../components/footer/ShareFooter';
 import { DropDownListProps } from '../../../type/type';
 import WindowModal from '../../../components/modal/WindowModal';
+import { Helmet } from 'react-helmet-async';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   const { id } = useParams();
@@ -85,6 +86,7 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 
     return (
       <>
+        <Helmet title={`내일은 최저가 | 매거지 상세 | ${id}`} />
         <DropDownList onClick={onEditClick} top='50px' color='black' borderRadius='6px 6px 0px 0px'>
           <DropDownText>
             수정하기

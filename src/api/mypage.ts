@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export const getUserinfo = async () => {
-  const accessToken = Cookies.get('Authorization');
+  const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/mypage`);
@@ -13,7 +13,7 @@ export const getUserinfo = async () => {
 };
 
 export const postUserinfo = async ({ name, imageFile }: { name: any; imageFile: any }) => {
-  const accessToken = Cookies.get('Authorization');
+  const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
   console.log(accessToken);

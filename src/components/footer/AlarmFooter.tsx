@@ -31,7 +31,7 @@ function AlarmFooter(props: Props) {
     },
   });
 
-  const accessToken = Cookies.get('Authorization');
+  const accessToken = Cookies.get('accessToken');
 
   const handleAlarmButton = () => {
     alarmMutation.mutate(Number(props.productId));

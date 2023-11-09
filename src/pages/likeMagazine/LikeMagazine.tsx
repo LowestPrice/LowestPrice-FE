@@ -3,11 +3,13 @@ import MagazineItem from './MagazineItem';
 import PageFooter from '../../components/footer/PageFooter';
 import { GreyBackIcon } from '../../assets/icon/icon';
 import { useNavigate } from 'react-router';
+import { Helmet } from 'react-helmet-async';
 
 const LikeMagazine = () => {
   const navigate = useNavigate();
   return (
     <>
+      <Helmet title='내일은 최저가 | 좋아요 한 매거진' />
       <Container>
         <Header>
           <StyledBackButton onClick={() => navigate('/mypage')}>

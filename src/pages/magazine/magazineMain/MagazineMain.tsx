@@ -8,6 +8,7 @@ import { BlueLogo } from '../../../assets/icon/icon';
 import styled from 'styled-components';
 import { useLike } from '../../../hooks/useLike';
 import Like from '../Like';
+import { Helmet } from 'react-helmet-async';
 
 const Magazine: React.FC<MagazineProps> = () => {
   const [magazines, setMagazines] = useState<any[]>([]);
@@ -36,6 +37,7 @@ const Magazine: React.FC<MagazineProps> = () => {
 
   return (
     <>
+      <Helmet title='내일은 최저가 | 매거진 홈' />
       <Header onClick={() => navigate('/magazine')}>
         <BlueLogo />
         <LogoTitle>매거진</LogoTitle>
