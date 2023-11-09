@@ -50,6 +50,7 @@ export const postLogout = async () => {
     )}&logout_redirect_uri=https://lowest-price.store`;
     window.location.href = kakaoOauthURL;
     Cookies.remove('accessToken');
+    Cookies.remove('refreshToken');
   } catch (error) {
     console.error('로그아웃 에러', error);
   }
@@ -59,12 +60,12 @@ export const postLogout = async () => {
 
 export const getAccessToken = async () => {
   const refreshToken = Cookies.get('refreshToken');
-  console.log(refreshToken);
-  axios.defaults.headers.common['refreshToken'] = refreshToken;
+  console.log('refreshToken', refreshToken);
+  axios.defaults.headers.common['refreshtoken'] = refreshToken;
   try {
     const response = await axios.post(`${import.meta.env.VITE_API_KEY}/refresh`);
     return response.data.accessToken;
   } catch (error) {
-    console.error('회원 탈퇴 에러', error);
+    console.error('getAccessToken 에러', error);
   }
 };

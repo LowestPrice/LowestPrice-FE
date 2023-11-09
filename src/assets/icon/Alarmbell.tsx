@@ -37,7 +37,6 @@ function Alarmbell(props: Props) {
   const handleAlarmButton = () => {
     alarmMutation.mutate(props.productId);
     if (!accessToken) {
-      toast.success('재로그인을 시도했습니다. 다시 시도해주세요✅');
       navigate('/reissuanceat');
       if (!refreshToken) {
         toast.error('로그인 이후 이용이 가능합니다❗️');
