@@ -15,6 +15,7 @@ import SimilarProductList from './similar/SimilarProductList';
 import { GreyShareIcon } from '../../assets/icon/icon';
 import ShareFooter from '../../components/footer/ShareFooter';
 import { Product } from '../../type';
+import { Helmet } from 'react-helmet-async';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
@@ -72,6 +73,7 @@ function Detail() {
 
   return (
     <>
+      <Helmet title={`내일은 최저가 | 상세페이지 | ${params.id}`} />
       <Wrap>
         <Header>
           <BackButton onClick={() => navigate(-1)}>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { loginWithKakao } from '../../api/login';
 import PageFooter from '../../components/footer/PageFooter';
 import { temporaryLogin } from '../../api/login';
+import { Helmet } from 'react-helmet-async';
 
 export default function Login() {
   const handleKakaoLogin = () => {
@@ -13,6 +14,7 @@ export default function Login() {
 
   return (
     <div style={{ width: '100%' }}>
+      <Helmet title='내일은 최저가 | 로그인' />
       <Header>
         <h3>로그인</h3>
       </Header>

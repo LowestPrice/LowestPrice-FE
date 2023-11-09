@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import NProductList from './NProductList/NProductList';
 import NPriceAlarmList from './NPriceAlarmList/NPriceAlarmList';
 import PageFooter from '../../components/footer/PageFooter';
+import { Helmet } from 'react-helmet-async';
 
 type Props = {};
 
@@ -26,6 +27,8 @@ export default function Notification({}: Props) {
 
   return (
     <Wrap>
+      <Helmet title='내일은 최저가 | 알림' />
+
       <Header>
         <MyNotification>내 알림</MyNotification>
       </Header>

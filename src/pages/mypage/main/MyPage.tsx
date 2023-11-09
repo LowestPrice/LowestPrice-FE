@@ -12,6 +12,7 @@ import Error from '../../../components/Error';
 import { MypageEditIcon, RightBackIcon } from '../../../assets/icon/icon';
 import RecentProducts from '../../../components/modal/RecentProducts';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 function Mypage() {
   // 네비게이트 ----------------------------------------
@@ -56,6 +57,8 @@ function Mypage() {
 
   return (
     <div style={{ width: '100%' }}>
+      <Helmet title='내일은 최저가 | 마이페이지' />
+
       <Header>마이페이지</Header>
       <Scroll>
         <Wrap>

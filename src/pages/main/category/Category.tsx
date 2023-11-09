@@ -7,10 +7,10 @@ import 'swiper/css';
 import 'swiper/css/scrollbar';
 import styled from 'styled-components';
 
-import { Filter } from '../../../../type';
-import CategoryTab from '../CategoryTab';
-import FilterOption from '../FilterOption';
-import CategoryList from './CategoryProductList';
+import { Filter } from '../../../type';
+import CategoryTab from './CategoryTab';
+import FilterOption from './FilterOption';
+import CategoryList from './list/CategoryProductList';
 
 function Category() {
   const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([true, false, false, false, false]);
