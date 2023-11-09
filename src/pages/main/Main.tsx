@@ -28,6 +28,7 @@ export default function Main() {
       }, 1500);
       return () => clearTimeout(splashTime);
     }
+    console.log('메인페이지 useEffect');
   });
 
   // 검색창 포커스 onOff -----------------------------------
@@ -36,6 +37,7 @@ export default function Main() {
     setSearchFocus(true);
   };
 
+  console.log('메인페이지 바깥');
   return (
     <>
       {showSplash && isLogin ? (
@@ -65,11 +67,6 @@ export default function Main() {
 
               <Category />
             </Wraper>
-            <div
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-            ></div>
           </MainWrap>
           <PageFooter />
         </>
