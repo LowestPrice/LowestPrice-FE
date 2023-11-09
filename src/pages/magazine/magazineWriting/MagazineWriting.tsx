@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage, styleString, Container, Scroll } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
@@ -23,7 +23,6 @@ const MagazineWriting: React.FC = () => {
   const [content, setContent] = useState<string>('');
   const [image, setImage] = useState<any>(null);
   const [previewImage, setPreviewImage] = useState<string>('');
-  const titleRef = useRef<HTMLTextAreaElement>(null);
 
   const addPosts = useMutation(postMagazine, {
     onSuccess: () => {
@@ -37,18 +36,6 @@ const MagazineWriting: React.FC = () => {
   const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setTitle(e.target.value);
   };
-
-  const adjustTitleHeight = () => {
-    const targetTextarea = titleRef.current;
-    if (targetTextarea) {
-      targetTextarea.style.height = 'auto';
-      targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
-    }
-  };
-
-  useEffect(() => {
-    adjustTitleHeight();
-  }, [title]);
 
   const onContentChangeHandler = (value: string): void => {
     setContent(value);
@@ -120,7 +107,7 @@ const MagazineWriting: React.FC = () => {
               </label>
             </PhotoAdd>
           </PhotoDiv>
-          <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} ref={titleRef} />
+          <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
           {previewImage && <StyledImage src={previewImage} alt='매거진 이미지' />}
           <ReactQuill
             theme='snow'

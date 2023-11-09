@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
@@ -25,23 +25,10 @@ const MagazineEditing: React.FC = () => {
   const [newMainImage, setNewImage] = useState(magazineData.mainImage);
   const [previewImage, setPreviewImage] = useState<string>(magazineData.mainImage);
   const queryClient = useQueryClient();
-  const titleRef = useRef<HTMLTextAreaElement>(null);
 
   const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setNewTitle(e.target.value);
   };
-
-  const adjustTitleHeight = () => {
-    const targetTextarea = titleRef.current;
-    if (targetTextarea) {
-      targetTextarea.style.height = 'auto';
-      targetTextarea.style.height = targetTextarea.scrollHeight + 'px';
-    }
-  };
-
-  useEffect(() => {
-    adjustTitleHeight();
-  }, [newTitle]);
 
   const onContentChangeHandler = (value: string): void => {
     setNewContent(value);

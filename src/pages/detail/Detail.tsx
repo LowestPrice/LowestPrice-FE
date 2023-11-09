@@ -143,6 +143,7 @@ function Detail() {
         realId={data?.realId}
         title={data?.productName}
         mainImage={data?.productImage}
+        price={data?.currentPrice}
       />
     </>
   );
