@@ -5,6 +5,7 @@ interface useShareParams {
   content: {
     title?: string;
     imageUrl?: string;
+    price?: string | number;
   };
   url?: string;
 }

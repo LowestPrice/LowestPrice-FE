@@ -10,6 +10,7 @@ interface Props {
   mainImage: string | undefined;
   id: number | undefined;
   realId?: string | undefined;
+  price?: string | number;
 }
 
 function ShareFooter(props: Props) {
@@ -19,6 +20,7 @@ function ShareFooter(props: Props) {
     content: {
       title: props.title,
       imageUrl: props.mainImage,
+      price: props.price,
     },
 
     url: props.realId ? `https://lowest-price.store/detail/${props.id}` : `https://lowest-price.store/magazine/${props.id}`,
@@ -89,7 +91,7 @@ function ShareFooter(props: Props) {
 export default ShareFooter;
 
 const Wrap = styled.div<{ $share: boolean }>`
-  width: 744px;
+  width: 100%;
   height: ${({ $share }) => ($share ? '8.625rem' : '0rem')};
   opacity: ${({ $share }) => ($share ? '1' : '0')};
   border-top: 0.0625rem solid #d9d9d9;
@@ -102,6 +104,12 @@ const Wrap = styled.div<{ $share: boolean }>`
   background: white;
   transition: 380ms ease-in-out 0s;
   z-index: 1000;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 744px;
+  }
 `;
 
 const LinkContent = styled.div<{ $share: boolean }>`
