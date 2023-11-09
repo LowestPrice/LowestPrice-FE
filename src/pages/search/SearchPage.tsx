@@ -9,6 +9,7 @@ import { Filter } from '../../type';
 import SearchProductList from './SearchProductList';
 import PageFooter from '../../components/footer/PageFooter';
 import FilterOption from './FilterOption';
+import { Helmet } from 'react-helmet-async';
 
 function Search() {
   // params 를 통해 productId 받아오기 -------------------------
@@ -64,6 +65,8 @@ function Search() {
 
   return (
     <Wrap>
+      <Helmet title={`내일은 최저가 | 검색 | ${params.searchWord}`} />
+
       <form
         onSubmit={(e) => {
           navigate(`/search/${searchWord}`);
@@ -213,6 +216,7 @@ const Options = styled.div`
 `;
 
 const Soldout = styled.div<{ $isSoldout: boolean }>`
+  font-size: 12px;
   margin-left: 9.375rem;
   cursor: pointer;
   color: ${(props) => (!props.$isSoldout ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};

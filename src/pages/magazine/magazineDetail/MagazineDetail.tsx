@@ -10,3 +10,4 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 };
 
 export default MagazineDetail;
+

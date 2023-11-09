@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { AddImageIcon } from '../../../assets/icon/icon';
+import { Helmet } from 'react-helmet-async';
 
 // const CustomSize = ReactQuill.Quill.import('attributors/style/size');
 // CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
@@ -94,6 +95,7 @@ const MagazineEditing: React.FC = () => {
 
   return (
     <Container>
+      <Helmet title={`내일은 최저가 | 매거지 수정 | ${id}`} />
       <style dangerouslySetInnerHTML={{ __html: styleString }} />
       <FlexBox>
         <Button onClick={() => navigate('/magazine')}></Button>

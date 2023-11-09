@@ -104,6 +104,7 @@ const Wrap = styled.div`
   max-height: 82vh;
   overflow-x: hidden;
   overflow-y: scroll;
+  /* margin-bottom: 30px; */
   &::-webkit-scrollbar {
     width: 0.3125rem;
   }
@@ -119,8 +120,10 @@ const Wrap = styled.div`
   justify-content: space-between;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
+    justify-content: space-around;
   }
   @media screen and (min-width: 744px) {
     width: 744px;
+    justify-content: space-around;
   }
 `;

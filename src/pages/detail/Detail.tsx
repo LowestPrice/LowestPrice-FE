@@ -15,6 +15,7 @@ import SimilarProductList from './similar/SimilarProductList';
 import { GreyShareIcon } from '../../assets/icon/icon';
 import ShareFooter from '../../components/footer/ShareFooter';
 import { Product } from '../../type';
+import { Helmet } from 'react-helmet-async';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
@@ -33,8 +34,7 @@ function Detail() {
 
   // 해당 상품 데이터 불러오기 ----------------------------------------------
 
-  const { status, data } = useQuery<Product, unknown>(['product', params.id], () => getProduct(params.id), { enabled: !!params.id });
-  console.log(data?.currentPrice, '상세페이지 데이터');
+  const { status, data } = useQuery<Product, unknown>(['product', params.id], () => getProduct(params.id));
 
   if (status === 'loading') {
     return <Loading />;
@@ -73,6 +73,7 @@ function Detail() {
 
   return (
     <>
+      <Helmet title={`내일은 최저가 | 상세페이지 | ${params.id}`} />
       <Wrap>
         <Header>
           <BackButton onClick={() => navigate(-1)}>
@@ -111,7 +112,7 @@ function Detail() {
                         />
                       </svg>
                     </div>
-                    <div>{data?.discountRate}%</div>
+                    <div style={{ fontSize: '14px', fontWeight: '700' }}>{data?.discountRate}%</div>
                   </DiscountWrap>
                 ) : (
                   <div></div>

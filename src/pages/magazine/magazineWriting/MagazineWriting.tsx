@@ -7,6 +7,7 @@ import { BackIcon, AddImageIcon } from '../../../assets/icon/icon';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { Helmet } from 'react-helmet-async';
 
 // React Quill 글자 크기 커스텀
 // const CustomSize = ReactQuill.Quill.import('attributors/style/size');
@@ -88,6 +89,7 @@ const MagazineWriting: React.FC = () => {
 
   return (
     <Scroll>
+      <Helmet title='내일은 최저가 | 매거진 작성' />
       <Container>
         <style dangerouslySetInnerHTML={{ __html: styleString }} />
         <FlexBox>
