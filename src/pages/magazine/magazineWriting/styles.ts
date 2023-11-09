@@ -122,7 +122,7 @@ export const Scroll = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  max-height: 85vh;
+  max-height: 100vh;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
   }

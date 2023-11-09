@@ -15,9 +15,17 @@ const MagazineItem = () => {
     return <h1>에러가 발생했습니다.</h1>;
   }
 
-  return (
+  const isLiked = data?.data.data.length === 0 ? true : false;
+  console.log(isLiked);
+
+  return isLiked ? (
+    <BlankMessage>
+      <div>좋아요 한 매거진이 존재하지 않습니다.</div>
+      <div>매거진 페이지에서 좋아요를 누르실 수 있습니다.</div>
+    </BlankMessage>
+  ) : (
     <List>
-      {data?.data.data.map((item: any, index: any) => (
+      {data?.data.data.map((item: any, index: string) => (
         <Item
           key={index}
           style={{ backgroundImage: `url(${item.mainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
@@ -96,5 +104,19 @@ const Overlay = styled.div`
   }
   @media screen and (min-width: 744px) {
     width: 744px;
+  }
+`;
+
+const BlankMessage = styled.div`
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  div {
+    font-size: 12px;
+    line-height: 16px;
   }
 `;
