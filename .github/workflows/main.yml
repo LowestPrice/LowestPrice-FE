@@ -25,6 +25,7 @@ jobs:
           echo VITE_KAKAO_CLIENT_ID=${{ secrets.VITE_KAKAO_CLIENT_ID }} >> .env 
           echo VITE_JAVASCRIPT_KEY=${{ secrets.VITE_JAVASCRIPT_KEY }} >> .env
           echo VITE_REACT_APP_GOOGLE_ANALYTICS=${{ secrets.VITE_REACT_APP_GOOGLE_ANALYTICS }} >> .env
+          echo VITE_GOOGLE_TAG_MANAGER=${{ secrets.VITE_GOOGLE_TAG_MANAGER }} >> .env
 
       # 또는 npm install, 프로젝트 종속성 설치 명령
       - name: Install dependencies

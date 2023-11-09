@@ -1,11 +1,8 @@
 import styled, { keyframes, css } from 'styled-components';
 import { ColorHeartIcon, LineHeartIcon } from '../../assets/icon/icon';
 import { LikeProps, HeartProps } from '../../type/type';
-import { ButtonHTMLAttributes } from 'react';
-
-interface HeartButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  like: boolean;
-}
+import React from 'react';
+import { HeartButtonProps } from '../../type/type';
 
 const pop = keyframes`
   0% { transform: scale(1); }
@@ -13,19 +10,21 @@ const pop = keyframes`
   100% { transform: scale(1); }
 `;
 
-const Heart: React.FC<HeartProps> = ({ like, onClick }) => {
+// like의 값(boolean)에 따라 다른 아이콘을 보여줌
+const Heart: React.FC<HeartProps> = React.memo(({ like, onClick, isMounted }) => {
   return (
-    <HeartButton like={like} onClick={onClick}>
+    <HeartButton like={like} isMounted={isMounted} onClick={onClick}>
       {like ? <ColorHeartIcon /> : <LineHeartIcon />}
     </HeartButton>
   );
-};
+});
 
-const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount, handleLikeClick, index }) => {
+// 해당하는 매거진의 좋아요 상태와 좋아요 수 업데이트
+const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount, handleLikeClick, index, isMounted }) => {
   return (
     <div>
       <LikeFlex>
-        <Heart like={isLiked} onClick={(event) => handleLikeClick(event, magazineId, index)} />
+        <Heart like={isLiked} onClick={(event) => handleLikeClick(event, magazineId, index)} isMounted={isMounted} />
         <div>{likeCount}</div>
       </LikeFlex>
     </div>
@@ -47,7 +46,7 @@ const HeartButton = styled.button<HeartButtonProps>`
   outline: none;
   cursor: pointer;
   animation: ${(props) =>
-    props.like
+    props.like && props.isMounted
       ? css`
           ${pop} 0.6s ease forwards
         `

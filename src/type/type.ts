@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, ButtonHTMLAttributes } from 'react';
 
 export type MagazineProps = {
   data?: magazine[];
@@ -28,6 +28,12 @@ export interface DropDownProps {
 export interface HeartProps {
   like: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  isMounted?: boolean;
+}
+
+export interface HeartButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  like: boolean;
+  isMounted?: boolean;
 }
 
 export interface LikeProps {
@@ -37,6 +43,7 @@ export interface LikeProps {
   handleLikeClick: (event: React.MouseEvent, magazineId: string, index: number) => void;
   index: number;
   style?: React.CSSProperties;
+  isMounted?: boolean;
 }
 
 export interface PriceData {

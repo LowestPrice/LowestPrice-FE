@@ -34,6 +34,7 @@ function Detail() {
   // 해당 상품 데이터 불러오기 ----------------------------------------------
 
   const { status, data } = useQuery<Product, unknown>(['product', params.id], () => getProduct(params.id), { enabled: !!params.id });
+  console.log(data?.currentPrice, '상세페이지 데이터');
 
   if (status === 'loading') {
     return <Loading />;
@@ -141,6 +142,7 @@ function Detail() {
         realId={data?.realId}
         title={data?.productName}
         mainImage={data?.productImage}
+        price={data?.currentPrice}
       />
     </>
   );
