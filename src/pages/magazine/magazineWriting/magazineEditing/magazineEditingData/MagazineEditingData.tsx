@@ -1,20 +1,16 @@
 import React, { useState, useMemo } from 'react';
-import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from './styles';
+import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from '../../styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
-import { putMagazine } from '../../../api/magazine';
+import { putMagazine } from '../../../../../api/magazine';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { AddImageIcon } from '../../../assets/icon/icon';
+import { AddImageIcon } from '../../../../../assets/icon/icon';
 import { Helmet } from 'react-helmet-async';
 
-// const CustomSize = ReactQuill.Quill.import('attributors/style/size');
-// CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
-// ReactQuill.Quill.register(CustomSize, true);
-
-const MagazineEditing: React.FC = () => {
+const MagazineEditingData = () => {
   const location = useLocation();
   const magazineData = location.state.props;
   const { id } = useParams();
@@ -25,6 +21,10 @@ const MagazineEditing: React.FC = () => {
   const [newMainImage, setNewImage] = useState(magazineData.mainImage);
   const [previewImage, setPreviewImage] = useState<string>(magazineData.mainImage);
   const queryClient = useQueryClient();
+
+  // const CustomSize = ReactQuill.Quill.import('attributors/style/size');
+  // CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+  // ReactQuill.Quill.register(CustomSize, true);
 
   const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setNewTitle(e.target.value);
@@ -94,36 +94,38 @@ const MagazineEditing: React.FC = () => {
   }, []);
 
   return (
-    <Container>
-      <Helmet title={`내일은 최저가 | 매거지 수정 | ${id}`} />
-      <style dangerouslySetInnerHTML={{ __html: styleString }} />
-      <FlexBox>
-        <Button onClick={() => navigate('/magazine')}></Button>
-        <Button onClick={() => onSubmitButtonHandler(id, newTitle, newContent, newMainImage)}>수정</Button>
-      </FlexBox>
-      <Scroll>
-        <DirectionCol>
-          <PhotoDiv>
-            <PhotoAdd>
-              <label>
-                <input style={{ display: 'none' }} onChange={onImageChangeHandler} type='file' accept='image/*' />
-                <AddImageIcon />
-              </label>
-            </PhotoAdd>
-          </PhotoDiv>
-          <Title value={newTitle} onChange={onTitleChangeHandler} rows={1} />
-          <StyledImage src={previewImage} alt='매거진 이미지' />
-          <ReactQuill
-            value={newContent}
-            theme='snow'
-            onChange={onContentChangeHandler}
-            modules={modules}
-            style={{ overflowY: 'hidden', minHeight: '78vh', boxSizing: 'border-box', overflow: 'hidden', border: '1px solid #D9D9D9' }}
-          />
-        </DirectionCol>
-      </Scroll>
-    </Container>
+    <>
+      <Container>
+        <Helmet title={`내일은 최저가 | 매거진 수정 | ${id}`} />
+        <style dangerouslySetInnerHTML={{ __html: styleString }} />
+        <FlexBox>
+          <Button onClick={() => navigate('/magazine')}></Button>
+          <Button onClick={() => onSubmitButtonHandler(id, newTitle, newContent, newMainImage)}>수정</Button>
+        </FlexBox>
+        <Scroll>
+          <DirectionCol>
+            <PhotoDiv>
+              <PhotoAdd>
+                <label>
+                  <input style={{ display: 'none' }} onChange={onImageChangeHandler} type='file' accept='image/*' />
+                  <AddImageIcon />
+                </label>
+              </PhotoAdd>
+            </PhotoDiv>
+            <Title value={newTitle} onChange={onTitleChangeHandler} rows={1} />
+            <StyledImage src={previewImage} alt='매거진 이미지' />
+            <ReactQuill
+              value={newContent}
+              theme='snow'
+              onChange={onContentChangeHandler}
+              modules={modules}
+              style={{ overflowY: 'hidden', minHeight: '78vh', boxSizing: 'border-box', overflow: 'hidden', border: '1px solid #D9D9D9' }}
+            />
+          </DirectionCol>
+        </Scroll>
+      </Container>
+    </>
   );
 };
 
-export default MagazineEditing;
+export default MagazineEditingData;

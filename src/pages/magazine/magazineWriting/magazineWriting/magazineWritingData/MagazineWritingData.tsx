@@ -1,20 +1,20 @@
 import React, { useState, useMemo } from 'react';
-import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage, styleString, Container, Scroll } from './styles';
+import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage, styleString, Container, Scroll } from '../../styles';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
-import { postMagazine } from '../../../api/magazine';
-import { BackIcon, AddImageIcon } from '../../../assets/icon/icon';
+import { postMagazine } from '../../../../../api/magazine';
+import { BackIcon, AddImageIcon } from '../../../../../assets/icon/icon';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Helmet } from 'react-helmet-async';
 
-// React Quill 글자 크기 커스텀
-// const CustomSize = ReactQuill.Quill.import('attributors/style/size');
-// CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
-// ReactQuill.Quill.register(CustomSize, true);
+const MagazineWritingData = () => {
+  // React Quill 글자 크기 커스텀
+  // const CustomSize = ReactQuill.Quill.import('attributors/style/size');
+  // CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+  // ReactQuill.Quill.register(CustomSize, true);
 
-const MagazineWriting: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -88,40 +88,42 @@ const MagazineWriting: React.FC = () => {
   }, []);
 
   return (
-    <Scroll>
+    <>
       <Helmet title='내일은 최저가 | 매거진 작성' />
       <Container>
-        <style dangerouslySetInnerHTML={{ __html: styleString }} />
-        <FlexBox>
-          <Button onClick={() => navigate('/magazine')}>
-            <BackIcon />
-          </Button>
-          <Button onClick={() => onSubmitButtonHandler(title, content, image)}>등록</Button>
-        </FlexBox>
-        <DirectionCol>
-          <PhotoDiv>
-            <PhotoAdd>
-              <label>
-                <input style={{ display: 'none' }} onChange={imageHandler} type='file' accept='image/*' />
-                <AddImageIcon />
-              </label>
-            </PhotoAdd>
-          </PhotoDiv>
-          <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
-          {previewImage && <StyledImage src={previewImage} alt='매거진 이미지' />}
-          <ReactQuill
-            theme='snow'
-            placeholder='내용을 입력하세요'
-            onChange={onContentChangeHandler}
-            value={content}
-            modules={modules}
-            style={{ overflowY: 'auto', minHeight: '78vh', boxSizing: 'border-box', overflow: 'hidden', border: '1px solid #D9D9D9' }}
-            preserveWhitespace
-          />
-        </DirectionCol>
+        <Scroll>
+          <style dangerouslySetInnerHTML={{ __html: styleString }} />
+          <FlexBox>
+            <Button onClick={() => navigate('/magazine')}>
+              <BackIcon />
+            </Button>
+            <Button onClick={() => onSubmitButtonHandler(title, content, image)}>등록</Button>
+          </FlexBox>
+          <DirectionCol>
+            <PhotoDiv>
+              <PhotoAdd>
+                <label>
+                  <input style={{ display: 'none' }} onChange={imageHandler} type='file' accept='image/*' />
+                  <AddImageIcon />
+                </label>
+              </PhotoAdd>
+            </PhotoDiv>
+            <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
+            {previewImage && <StyledImage src={previewImage} alt='매거진 이미지' />}
+            <ReactQuill
+              theme='snow'
+              placeholder='내용을 입력하세요'
+              onChange={onContentChangeHandler}
+              value={content}
+              modules={modules}
+              style={{ overflowY: 'auto', minHeight: '78vh', boxSizing: 'border-box', overflow: 'hidden', border: '1px solid #D9D9D9' }}
+              preserveWhitespace
+            />
+          </DirectionCol>
+        </Scroll>
       </Container>
-    </Scroll>
+    </>
   );
 };
 
-export default MagazineWriting;
+export default MagazineWritingData;

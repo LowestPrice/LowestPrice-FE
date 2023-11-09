@@ -22,8 +22,8 @@ const EditMypage = React.lazy(() => import('./pages/mypage/edit/EditMypage'));
 
 // 매거진
 const MagazineMain = React.lazy(() => import('./pages/magazine/magazineMain/MagazineMain'));
-const MagazineWriting = React.lazy(() => import('./pages/magazine/magazineWriting/MagazineWriting'));
-const MagazineEditing = React.lazy(() => import('./pages/magazine/magazineWriting/MagazineEditing'));
+const MagazineWriting = React.lazy(() => import('./pages/magazine/magazineWriting/magazineWriting/MagazineWriting'));
+const MagazineEditing = React.lazy(() => import('./pages/magazine/magazineWriting/magazineEditing/MagazineEditing'));
 const MagazineDetail = React.lazy(() => import('./pages/magazine/magazineDetail/MagazineDetail'));
 const LikeMagazine = React.lazy(() => import('./pages/likeMagazine/LikeMagazine'));
 
