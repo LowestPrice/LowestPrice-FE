@@ -16,7 +16,7 @@ export default function App() {
       <Suspense fallback={<Loading />}>
         <Outlet />
       </Suspense>
-     <GoogleTagManager gtmId='import.meta.env.VITE_GOOGLE_TAG_MANAGER' />
+      <GoogleTagManager gtmId={import.meta.env.VITE_GOOGLE_TAG_MANAGER} />
     </div>
   );
 }

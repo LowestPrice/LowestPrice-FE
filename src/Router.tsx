@@ -5,6 +5,7 @@ import App from './App';
 import Main from './pages/main/Main';
 import Error from './components/Error';
 import Splash from './pages/main/Splash';
+import ReissuanceAT from './pages/login/ReissuanceAT';
 
 // 로그인
 const Login = React.lazy(() => import('./pages/login/Login'));
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: 'kakaologin',
         element: <KakaoLogin />,
+      },
+      {
+        path: 'reissuanceat',
+        element: <ReissuanceAT />,
       },
       {
         path: 'notification',

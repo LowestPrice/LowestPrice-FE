@@ -11,7 +11,8 @@ import Splash from './Splash';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import SearchInput from './searchInput/SearchInput';
-import Category from './category/list/Category';
+import Category from './category/Category';
+import { Helmet } from 'react-helmet-async';
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
@@ -28,7 +29,7 @@ export default function Main() {
       }, 1500);
       return () => clearTimeout(splashTime);
     }
-    console.log('메인페이지 useEffect');
+    console.log('메인페이지 렌더링');
   });
 
   // 검색창 포커스 onOff -----------------------------------
@@ -37,13 +38,14 @@ export default function Main() {
     setSearchFocus(true);
   };
 
-  console.log('메인페이지 바깥');
   return (
     <>
       {showSplash && isLogin ? (
         <Splash />
       ) : (
         <>
+          <Helmet title='내일은 최저가 | 홈' />
+
           <MainWrap
             onClick={() => {
               setSearchFocus(false);

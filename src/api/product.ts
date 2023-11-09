@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 // 상품 전체 조회
 
 export const getProducts = async (isSoldout: boolean) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product?isOutOfStock=${isSoldout}`);
@@ -18,7 +18,7 @@ export const getProducts = async (isSoldout: boolean) => {
 // 상품 상세 조회
 
 export const getProduct = async (productId: string | undefined) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/${productId}`);
@@ -31,7 +31,7 @@ export const getProduct = async (productId: string | undefined) => {
 // 할인율 상위권 10위
 
 export const getTopten = async () => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/top`);
@@ -44,7 +44,7 @@ export const getTopten = async () => {
 // 랜덤 상품 조회
 
 export const getRandom = async (isSoldout: boolean) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/random?isOutOfStock=${isSoldout}`);
@@ -57,7 +57,7 @@ export const getRandom = async (isSoldout: boolean) => {
 // 카테고리별 상품
 
 export const getCategory = async (categoryName: string | undefined, lastId: number | undefined, isSoldout: boolean) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/category/${categoryName}?lastId=${lastId}&isOutOfStock=${isSoldout}`);
@@ -70,7 +70,7 @@ export const getCategory = async (categoryName: string | undefined, lastId: numb
 // 카테고리 안에 필터
 
 export const getCategoryFilter = async (categoryName: string | undefined, filterName: string | undefined, lastId: number | undefined, isSoldout: boolean) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(
@@ -85,7 +85,7 @@ export const getCategoryFilter = async (categoryName: string | undefined, filter
 // 상품 옵션
 
 export const getOptions = async (realId: string | undefined) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/option/${realId}`);
@@ -98,7 +98,7 @@ export const getOptions = async (realId: string | undefined) => {
 // 유사 상품 보기
 
 export const getSimilarProducts = async (productId: number | undefined) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/product/${productId}/similar`);
@@ -111,7 +111,7 @@ export const getSimilarProducts = async (productId: number | undefined) => {
 // 검색 상품
 
 export const getSearch = async (searchWord: string | undefined, lastId: number | undefined, isSoldout: boolean) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
+  const accessToken: string | undefined = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
     console.log(searchWord);
@@ -126,8 +126,8 @@ export const getSearch = async (searchWord: string | undefined, lastId: number |
 // 검색한 상품 필터 -----------------------------------------------------------------------------
 
 export const getFilteredSearch = async (filterName: string | undefined, searchWord: string | undefined, lastId: number | undefined, isSoldout: boolean) => {
-  const accessToken: string | undefined = Cookies.get('Authorization');
-  axios.defaults.headers.common['Authorization'] = accessToken;
+  const accessToken: string | undefined = Cookies.get('accessToken');
+  axios.defaults.headers.common['accesAuthorizationsToken'] = accessToken;
   try {
     console.log(filterName, searchWord);
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/search/${filterName}?search=${searchWord}&lastId=${lastId}&isOutOfStock=${isSoldout}`);

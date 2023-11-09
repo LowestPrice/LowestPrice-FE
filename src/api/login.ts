@@ -27,9 +27,9 @@ export const temporaryLogin = () => {
 // 카카오 회원 탈퇴
 
 export const DeleteIdWithKakao = async () => {
-  const accessToken = Cookies.get('Authorization');
+  const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
-  Cookies.remove('Authorization');
+  Cookies.remove('accessToken');
   try {
     const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/kakao/deactivate`);
     return response;
@@ -41,7 +41,7 @@ export const DeleteIdWithKakao = async () => {
 // 로그아웃
 
 export const postLogout = async () => {
-  const accessToken = Cookies.get('Authorization');
+  const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
 
   try {
@@ -49,8 +49,22 @@ export const postLogout = async () => {
       `${import.meta.env.VITE_KAKAO_CLIENT_ID}`
     )}&logout_redirect_uri=https://lowest-price.store`;
     window.location.href = kakaoOauthURL;
-    Cookies.remove('Authorization');
+    Cookies.remove('accessToken');
   } catch (error) {
     console.error('로그아웃 에러', error);
+  }
+};
+
+// 토큰 재발급
+
+export const getAccessToken = async () => {
+  const refreshToken = Cookies.get('refreshToken');
+  console.log(refreshToken);
+  axios.defaults.headers.common['refreshToken'] = refreshToken;
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_API_KEY}/refresh`);
+    return response.data.accessToken;
+  } catch (error) {
+    console.error('회원 탈퇴 에러', error);
   }
 };
