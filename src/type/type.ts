@@ -32,7 +32,7 @@ export interface HeartProps {
 }
 
 export interface HeartButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  like: boolean;
+  $like: boolean;
   isMounted?: boolean;
 }
 

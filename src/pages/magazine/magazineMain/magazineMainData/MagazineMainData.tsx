@@ -9,7 +9,6 @@ import { BlueLogo } from '../../../../assets/icon/icon';
 
 const MagazineMainData = () => {
   const [magazines, setMagazines] = useState<any[]>([]);
-  const [isMounted, setIsMounted] = useState(false);
   const navigate = useNavigate();
 
   // 매거진 데이터 불러오기
@@ -20,7 +19,6 @@ const MagazineMainData = () => {
     if (data) {
       const responseData = data.data;
       setMagazines(responseData);
-      setIsMounted(true);
     }
   }, [data]);
 
@@ -36,7 +34,7 @@ const MagazineMainData = () => {
 
   return (
     <>
-      <Header>
+      <Header onClick={() => navigate('/magazine')}>
         <BlueLogo />
         <LogoTitle>매거진</LogoTitle>
       </Header>
@@ -45,6 +43,7 @@ const MagazineMainData = () => {
         <Title>Apple 트렌드</Title>
         <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
         {isAdmin && <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>}
+
         <Scroll>
           {magazines?.map((magazineData, index) => {
             // html 마크업 제거 후 렌더링
@@ -69,7 +68,6 @@ const MagazineMainData = () => {
                         likeCount={magazineData.LikeMagazine}
                         handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
                         index={index}
-                        isMounted={isMounted}
                       />
                     </Flex>
                   </BoxPadding>
