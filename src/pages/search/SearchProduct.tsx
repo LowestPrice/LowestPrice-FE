@@ -27,7 +27,7 @@ function SearchProduct(props: Props) {
           e.stopPropagation();
         }}
       >
-        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
+        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} isOutOfStock={props.isOutOfStock} />
       </AlarmWrap>
       {props.isOutOfStock ? (
         <SoldoutWrap>
