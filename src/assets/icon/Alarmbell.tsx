@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 interface Props {
   productId: number;
   isAlertOn: boolean;
+  isOutOfStock: boolean;
 }
 
 function Alarmbell(props: Props) {
@@ -18,7 +19,6 @@ function Alarmbell(props: Props) {
   // 알람 설정하기 / 취소하기 ------------------------
   const alarmMutation = useMutation(toggleAlarm, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['topProduct']);
       queryClient.invalidateQueries(['product']);
       queryClient.invalidateQueries(['randomProduct']);
       queryClient.invalidateQueries(['infiniteCategoryProduct']);
@@ -35,8 +35,12 @@ function Alarmbell(props: Props) {
   const refreshToken = Cookies.get('refreshToken');
 
   const handleAlarmButton = () => {
-    alarmMutation.mutate(props.productId);
+    if (props.isOutOfStock) {
+      toast.error('해당 상품은 매진되었습니다.');
+      return;
+    }
     if (!accessToken) {
+      console.log('재로그인을 시도했습니다.');
       navigate('/reissuanceat');
       if (!refreshToken) {
         toast.error('로그인 이후 이용이 가능합니다❗️');
@@ -49,6 +53,7 @@ function Alarmbell(props: Props) {
     } else {
       toast.success('알림을 받아보실 수 있습니다✅');
     }
+    alarmMutation.mutate(props.productId);
   };
 
   return (

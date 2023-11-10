@@ -18,7 +18,7 @@ function Category() {
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [filterName, setFilterName] = useState<string>('');
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
-  const [isSoldout, setIsSoldout] = useState<boolean>(false);
+  const [isSoldout, setIsSoldout] = useState<boolean>(true);
 
   // 카테고리 리스트 ------------------------------------------------
 
@@ -191,5 +191,5 @@ const Soldout = styled.div<{ $isSoldout: boolean }>`
   cursor: pointer;
   font-weight: 500;
   font-size: 0.75rem; /* 12px / 16 = 0.75rem */
-  color: ${(props) => (!props.$isSoldout ? 'var(--gray03, #6F6F6F)' : 'var(--maincolor_dark, #00ABF9)')};
+  color: ${(props) => (!props.$isSoldout ? 'var(--maincolor_dark, #00ABF9)' : 'var(--gray03, #6F6F6F)')};
 `;

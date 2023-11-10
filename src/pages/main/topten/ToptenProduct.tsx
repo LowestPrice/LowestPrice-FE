@@ -30,7 +30,7 @@ function ToptenProduct(props: Props) {
           e.stopPropagation();
         }}
       >
-        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
+        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} isOutOfStock={props.isOutOfStock} />
       </BellImage>
       <div className='rank'>{props.index + 1}</div>
       <Content>

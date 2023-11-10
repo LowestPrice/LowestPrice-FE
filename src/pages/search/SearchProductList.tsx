@@ -27,7 +27,7 @@ function SearchProductList(props: Props) {
   useEffect(() => {
     infiniteSearchData.refetch();
     infiniteSearchFilterData.refetch();
-  }, [props.filterButton, props.isFilter]);
+  }, [props.filterButton, props.isFilter, props.isSoldout]);
 
   // 로딩, 에러 관리 ---------------------------------------------------------
 

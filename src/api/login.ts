@@ -60,8 +60,7 @@ export const postLogout = async () => {
 
 export const getAccessToken = async () => {
   const refreshToken = Cookies.get('refreshToken');
-  console.log('refreshToken', refreshToken);
-  axios.defaults.headers.common['refreshtoken'] = refreshToken;
+  axios.defaults.headers.common['refreshToken'] = refreshToken;
   try {
     const response = await axios.post(`${import.meta.env.VITE_API_KEY}/refresh`);
     return response.data.accessToken;

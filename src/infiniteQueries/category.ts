@@ -14,7 +14,7 @@ export const infiniteCategory = (categoryId: string | undefined, isSoldout: bool
 
 export const infiniteCategoryFilter = (categoryId: string | undefined, filterName: string | undefined, isSoldout: boolean) => {
   const result = useInfiniteQuery(
-    ['infiniteCategoryFilter', categoryId, filterName],
+    ['infiniteCategoryFilterProduct', categoryId, filterName],
     ({ pageParam = '' }) => getCategoryFilter(categoryId, filterName, pageParam, isSoldout),
     {
       getNextPageParam: (filterProducts) => (filterProducts ? filterProducts[filterProducts.length - 1].productId : undefined),

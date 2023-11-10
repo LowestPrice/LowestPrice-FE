@@ -27,8 +27,15 @@ function SearchProduct(props: Props) {
           e.stopPropagation();
         }}
       >
-        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
+        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} isOutOfStock={props.isOutOfStock} />
       </AlarmWrap>
+      {props.isOutOfStock ? (
+        <SoldoutWrap>
+          <div>Sold Out</div>
+        </SoldoutWrap>
+      ) : (
+        <div></div>
+      )}
       <SProductContent>
         <div className='productName'>{props.productName}</div>
         {props.discountRate !== 0 ? <div className='originalPrice'>{originalPrice}</div> : <div style={{ marginTop: '10px' }}></div>}
@@ -135,4 +142,29 @@ const AlarmWrap = styled.div`
   position: absolute;
   top: 0;
   right: 0.1875rem;
+`;
+
+const SoldoutWrap = styled.div`
+  position: absolute;
+  top: -2px;
+  left: 5px;
+  opacity: 50%;
+  width: 159px;
+  height: 156.6px;
+  border-radius: 20px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), lightgray 50% / cover no-repeat;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    color: white;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%; /* 22px */
+    opacity: 100;
+  }
 `;

@@ -23,7 +23,7 @@ function Search() {
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [filterName, setFilterName] = useState<string>(``);
   const [filterButton, setFilterButton] = useState<boolean[]>([false, false, false]);
-  const [isSoldout, setIsSoldout] = useState<boolean>(false);
+  const [isSoldout, setIsSoldout] = useState<boolean>(true);
 
   // 필터버튼 클릭할 때마다 리패치 -------------------------------------------------------------------------
 
@@ -219,7 +219,7 @@ const Soldout = styled.div<{ $isSoldout: boolean }>`
   font-size: 12px;
   margin-left: 9.375rem;
   cursor: pointer;
-  color: ${(props) => (!props.$isSoldout ? 'rgba(181, 181, 181, 1)' : 'var(--maincolor_dark, #00ABF9)')};
+  color: ${(props) => (!props.$isSoldout ? 'var(--maincolor_dark, #00ABF9)' : 'rgba(181, 181, 181, 1);')};
   @media screen and (max-width: 743px) and (min-width: 376px) {
     position: absolute;
     right: 10px;
