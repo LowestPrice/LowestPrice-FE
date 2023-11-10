@@ -13,7 +13,13 @@ const RecentProducts: React.FC<{ toggleModal: () => void }> = ({ toggleModal }) 
   useEffect(() => {
     // 로컬 스토리지에서 상품 ID 가져오기
     const watchedItems = localStorage.getItem('watched');
-    const watchedIds = watchedItems ? JSON.parse(watchedItems) : [];
+    let watchedIds = watchedItems ? JSON.parse(watchedItems) : [];
+
+    // 배열 길이가 10개를 초과하는 경우, 가장 오래된 항목을 제거
+    if (watchedIds.length > 10) {
+      watchedIds = watchedIds.slice(-4);
+    }
+
     setRecentProducts(watchedIds);
   }, []);
 
@@ -46,27 +52,35 @@ const RecentProducts: React.FC<{ toggleModal: () => void }> = ({ toggleModal }) 
       <Modal>
         <ModalOverlay onClick={toggleModal} />
         <ModalContent>
-          <p>최근 본 상품</p>
-          <ul>
+          <TitleFlex>
+            <Title>최근 본 상품</Title>
+            <CloseButton>X</CloseButton>
+          </TitleFlex>
+          <div>지우기</div>
+          <div>
             {recentProductsQueries.map((query, index) => {
               const product = query.data;
               return (
                 <div key={product ? product.productId : index}>
                   {product ? (
                     <Container onClick={() => navigate(`/detail/${product.productId}`)}>
-                      <img src={product.productImage} alt={product.productName} />
-                      <div>제품명: {product.productName}</div>
-                      <div>원가: {product.originalPrice}</div>
-                      <div>할인가: {product.currentPrice}</div>
-                      <div>할인율: {product.discountRate}%</div>
+                      <img src={product.productImage} alt={product.productName} style={{ width: '4rem', height: '4rem' }} />
+                      <ContentFlex>
+                        <ProductName>제품명: {product.productName}</ProductName>
+                        {/* <div>원가: {product.originalPrice}</div> */}
+                        <PriceFlex>
+                          <Price>{product.currentPrice}원</Price>
+                          <Percentage>{product.discountRate}%</Percentage>
+                        </PriceFlex>
+                      </ContentFlex>
                     </Container>
                   ) : (
-                    '상품 정보 없음'
+                    <div>최근 보신 상품이 존재하지 않습니다.</div>
                   )}
                 </div>
               );
             })}
-          </ul>
+          </div>
         </ModalContent>
       </Modal>
     </>
@@ -96,17 +110,71 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContent = styled.div`
-  width: 80%;
-  height: 100vh;
+  width: 20.9375rem;
+  height: 33.5rem;
   position: relative;
   top: 0px;
   background-color: white;
   margin: 20%;
-  padding: 50px 100px;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   z-index: 999;
+  padding: 0 1.12rem;
 `;
 
 const Container = styled.div`
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 20.9375rem;
+  height: 5.625rem;
+`;
+
+const Title = styled.div`
+  color: #000;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 110%;
+`;
+
+const CloseButton = styled.button`
+  background-color: transparent;
+  border: none;
+`;
+
+const TitleFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+`;
+
+const ContentFlex = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ProductName = styled.div`
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 111.5%;
+`;
+
+const Price = styled.div`
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+`;
+
+const PriceFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Percentage = styled.div`
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 110%;
 `;
