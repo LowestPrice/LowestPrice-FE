@@ -78,7 +78,7 @@ function Mypage() {
           </Profile>
           <Article onClick={toggleModal}>
             <Unit>
-              최근 본 게시물 <RightBackIcon />
+              최근 본 상품 <RightBackIcon />
             </Unit>
           </Article>
           {modal && <RecentProducts toggleModal={toggleModal} />}
