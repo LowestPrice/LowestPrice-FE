@@ -30,8 +30,15 @@ function CategoryProduct(props: Props) {
               e.stopPropagation();
             }}
           >
-            <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} />
+            <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} isOutOfStock={props.isOutOfStock} />
           </BellImage>
+          {props.isOutOfStock ? (
+            <SoldoutWrap>
+              <div>Sold Out</div>
+            </SoldoutWrap>
+          ) : (
+            <div></div>
+          )}
         </CProductImage>
 
         <CProductContent>
@@ -72,6 +79,7 @@ const Wrap = styled.div`
 `;
 
 const CProductImage = styled.div`
+  position: relative;
   width: 166px;
   height: 152.6px;
   border-radius: 20px;
@@ -89,7 +97,7 @@ const BellImage = styled.div`
   z-index: 10;
   position: absolute;
   right: 10px;
-  bottom: 100px;
+  bottom: 5px;
 `;
 
 const CProductContent = styled.div`
@@ -147,5 +155,30 @@ const DiscountRateWrap = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 10px;
+  }
+`;
+
+const SoldoutWrap = styled.div`
+  position: absolute;
+  top: -2px;
+  left: 5px;
+  opacity: 50%;
+  width: 156px;
+  height: 156.6px;
+  border-radius: 20px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), lightgray 50% / cover no-repeat;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    color: white;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%; /* 22px */
+    opacity: 100;
   }
 `;

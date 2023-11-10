@@ -51,6 +51,7 @@ const router = createBrowserRouter([
       {
         path: 'notification',
         element: <Notification />,
+        errorElement: <Main />,
       },
       {
         path: 'search/:searchWord',

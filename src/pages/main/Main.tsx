@@ -159,3 +159,4 @@ const Title = styled.div`
   align-items: center;
   margin-top: 1.25rem; /* 20px / 16 = 1.25rem */
 `;
+

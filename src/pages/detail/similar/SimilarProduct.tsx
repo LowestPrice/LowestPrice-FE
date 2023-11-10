@@ -17,7 +17,16 @@ function SimilarProduct(props: Props) {
           navigate(`/detail/${props.productId}`);
         }}
       >
-        <SimilarProductImage src={props.productImage} />
+        <div style={{ position: 'relative' }}>
+          <SimilarProductImage src={props.productImage} />
+          {props.isOutOfStock ? (
+            <SoldoutWrap>
+              <div>Sold Out</div>
+            </SoldoutWrap>
+          ) : (
+            <div></div>
+          )}
+        </div>
         <SimilarProductContent>
           <div className='Stitle'>{props.productName}</div>
           {props.discountRate !== 0 ? <div className='SexistingPrice'>{originalPrice}원</div> : <div style={{ height: '0.6875rem' }}></div>}
@@ -129,5 +138,30 @@ const DiscountRateWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+`;
+
+const SoldoutWrap = styled.div`
+  position: absolute;
+  top: -2px;
+  left: 8px;
+  opacity: 50%;
+  width: 90%;
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), lightgray 50% / cover no-repeat;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    color: white;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%; /* 22px */
+    opacity: 100;
   }
 `;
