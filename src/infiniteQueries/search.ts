@@ -13,7 +13,7 @@ export function infiniteSearchFilter(filterName: string | undefined, searchWord:
     ['infiniteSearchFilterProduct', searchWord, filterName],
     ({ pageParam = '' }) => getFilteredSearch(filterName, searchWord, pageParam, isSoldout),
     {
-      enabled: !!filterButton,
+      enabled: !!filterButton && !!isSoldout,
       getNextPageParam: (searchFilterProducts) => (searchFilterProducts ? searchFilterProducts[searchFilterProducts.length - 1].productId : undefined),
     }
   );

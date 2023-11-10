@@ -34,10 +34,9 @@ const PageFooter = () => {
     setActiveIcon(path);
   };
 
-  const accessToken = Cookies.get('accessToken');
-  const refreshToken = Cookies.get('refreshToken');
-
   const handleAlarmButton = () => {
+    const accessToken = Cookies.get('accessToken');
+    const refreshToken = Cookies.get('refreshToken');
     if (!accessToken) {
       navigate('/reissuanceat');
       if (!refreshToken) {
@@ -51,6 +50,8 @@ const PageFooter = () => {
   };
 
   const handleMypageButton = () => {
+    const accessToken = Cookies.get('accessToken');
+    const refreshToken = Cookies.get('refreshToken');
     if (!accessToken) {
       navigate('/reissuanceat');
       if (!refreshToken) {

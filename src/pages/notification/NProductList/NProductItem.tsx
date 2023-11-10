@@ -41,6 +41,13 @@ export default function NProductItem(props: Props) {
         navigate(`/detail/${props.productId}`);
       }}
     >
+      {props.isOutOfStock ? (
+        <SoldoutWrap>
+          <div>Sold Out</div>
+        </SoldoutWrap>
+      ) : (
+        <div></div>
+      )}
       <NProductContent>
         <NProductImage src={props.productImage} />
         <NProductInfo>
@@ -164,5 +171,28 @@ const DiscountContent = styled.div`
   color: #137fff;
   .discountRate {
     font-size: 8px;
+  }
+`;
+
+const SoldoutWrap = styled.div`
+  position: absolute;
+
+  opacity: 50%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), lightgray 50% / cover no-repeat;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    color: white;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%; /* 22px */
+    opacity: 100;
   }
 `;
