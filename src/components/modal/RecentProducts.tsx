@@ -62,77 +62,80 @@ const RecentProducts: React.FC<{ toggleModal: () => void; isOpen: boolean }> = (
   }
 
   return (
-    // isOpen && (
-    <Modal onClick={toggleModal}>
-      {/* <ModalOverlay /> */}
+    <>
       <ModalContent $isOpen={isOpen}>
         <Scroll>
-          <TitleFlex>
-            <Title>최근 본 상품</Title>
-            <CloseButton onClick={toggleModal}>
-              <XIcon />
-            </CloseButton>
-          </TitleFlex>
-          <DeleteFlex>
-            <Delete onClick={onRemoveHandler}>전체 삭제</Delete>
-          </DeleteFlex>
-          {recentProductsQueries.length === 0 ? (
-            <div style={{ width: '20.9375rem' }}>최근 본 상품이 없습니다</div>
-          ) : (
-            recentProductsQueries.map((query) => {
-              const product = query.data;
-              const formattedPrice = product ? product.currentPrice.toLocaleString() : '0';
-              if (product && product.discountRate !== 0) {
-                return (
-                  <div key={product.productId}>
-                    <Container onClick={() => navigate(`/detail/${product.productId}`)}>
-                      <img src={product.productImage} alt={product.productName} style={{ width: '4rem', height: '4rem', marginRight: '0.62rem' }} />
-                      <ContentFlex>
-                        <NameDelete>
-                          <ProductName>{product.productName}</ProductName>
-                          <EachProductDelete
-                            onClick={() => {
-                              removeEachProduct(product.productId);
-                            }}
-                          >
-                            <DeleteIcon />
-                          </EachProductDelete>
-                        </NameDelete>
-                        <PriceFlex>
-                          <Price>{formattedPrice}원</Price>
-                          <PercentageWrap>
-                            <DecreaseIcon style={{ width: '0.875rem' }} />
-                            <Percentage>{product.discountRate}%</Percentage>
-                          </PercentageWrap>
-                        </PriceFlex>
-                      </ContentFlex>
-                    </Container>
-                  </div>
-                );
-              }
-              return null;
-            })
-          )}
+          <Position>
+            <TitleFlex>
+              <Title>최근 본 상품</Title>
+              <CloseButton onClick={toggleModal}>
+                <XIcon />
+              </CloseButton>
+            </TitleFlex>
+            <DeleteFlex>
+              <Delete onClick={onRemoveHandler}>전체 삭제</Delete>
+            </DeleteFlex>
+          </Position>
+          <ContainerWrap>
+            {recentProductsQueries.length === 0 ? (
+              <div style={{ width: '20.9375rem' }}>최근 본 상품이 없습니다</div>
+            ) : (
+              recentProductsQueries.map((query) => {
+                const product = query.data;
+                const formattedPrice = product ? product.currentPrice.toLocaleString() : '0';
+                if (product && product.discountRate !== 0) {
+                  return (
+                    <div key={product.productId}>
+                      <Container onClick={() => navigate(`/detail/${product.productId}`)}>
+                        <img src={product.productImage} alt={product.productName} style={{ width: '4rem', height: '4rem', marginRight: '0.62rem' }} />
+                        <ContentFlex>
+                          <NameDelete>
+                            <ProductName>{product.productName}</ProductName>
+                            <EachProductDelete
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeEachProduct(product.productId);
+                              }}
+                            >
+                              <DeleteIcon />
+                            </EachProductDelete>
+                          </NameDelete>
+                          <PriceFlex>
+                            <Price>{formattedPrice}원</Price>
+                            <PercentageWrap>
+                              <DecreaseIcon style={{ width: '0.875rem' }} />
+                              <Percentage>{product.discountRate}%</Percentage>
+                            </PercentageWrap>
+                          </PriceFlex>
+                        </ContentFlex>
+                      </Container>
+                    </div>
+                  );
+                }
+                return null;
+              })
+            )}
+          </ContainerWrap>
         </Scroll>
       </ModalContent>
-    </Modal>
+    </>
   );
   // );
 };
 
 export default RecentProducts;
 
-const Modal = styled.div`
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  position: fixed;
-`;
+// const Modal = styled.div`
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 1000;
+//   position: fixed;
+// `;
 
 // const ModalOverlay = styled.div`
 //   background-color: rgba(0, 0, 0, 0.6);
@@ -146,7 +149,7 @@ const Modal = styled.div`
 
 const ModalContent = styled.div<{ $isOpen: boolean }>`
   width: calc(20.9375rem - 1.5rem);
-  max-height: ${({ $isOpen }) => ($isOpen ? '70vh' : '0px')};
+  height: ${({ $isOpen }) => ($isOpen ? '70vh' : '0px')};
   opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
   position: fixed;
   bottom: 0;
@@ -156,8 +159,7 @@ const ModalContent = styled.div<{ $isOpen: boolean }>`
   border-radius: 0.5rem;
   z-index: 1000;
   padding: 0 0.75rem;
-  overflow: hidden;
-  transition: max-height 380ms ease-in-out, opacity 380ms ease-in-out;
+  transition: all 380ms ease-in-out;
 
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 80vw;
@@ -174,12 +176,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 5.625rem;
+
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 80vw;
   }
   @media screen and (min-width: 744px) {
     width: 720px;
   }
+`;
+
+const ContainerWrap = styled.div`
+  padding-top: 150px;
 `;
 
 const Title = styled.div`
@@ -306,5 +313,18 @@ const Scroll = styled.div`
   }
   @media screen and (min-width: 744px) {
     max-height: 70vh;
+  }
+`;
+
+const Position = styled.div`
+  width: 311px;
+  position: fixed;
+  background-color: #f5f5f5;
+  z-index: 1200;
+  @media screen and (max-width: 743px) and (min-width: 376px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 744px) {
+    width: 720px;
   }
 `;
