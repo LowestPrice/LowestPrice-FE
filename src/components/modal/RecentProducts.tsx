@@ -1,10 +1,12 @@
-import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { getProduct } from '../../api/product';
-import Loading from '../../components/Loading';
-import Error from '../../components/Error';
 import { useQueries } from 'react-query';
 import { useNavigate } from 'react-router';
+import styled from 'styled-components';
+
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+
+import { getProduct } from '../../api/product';
 import { DecreaseIcon, DeleteIcon, XIcon } from '../../assets/icon/icon';
 
 const RecentProducts: React.FC<{ toggleModal: () => void; isOpen: boolean }> = ({ toggleModal, isOpen }) => {
@@ -120,32 +122,9 @@ const RecentProducts: React.FC<{ toggleModal: () => void; isOpen: boolean }> = (
       </ModalContent>
     </>
   );
-  // );
 };
 
 export default RecentProducts;
-
-// const Modal = styled.div`
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 1000;
-//   position: fixed;
-// `;
-
-// const ModalOverlay = styled.div`
-//   background-color: rgba(0, 0, 0, 0.6);
-//   width: 100%;
-//   height: 100%;
-//   position: absolute;
-//   z-index: 999;
-
-//   transition: opacity 380ms ease-in-out, visibility 380ms ease-in-out;
-// `;
 
 const ModalContent = styled.div<{ $isOpen: boolean }>`
   width: calc(20.9375rem - 1.5rem);
@@ -322,7 +301,7 @@ const Position = styled.div`
   background-color: #f5f5f5;
   z-index: 1200;
   @media screen and (max-width: 743px) and (min-width: 376px) {
-    width: 100%;
+    width: 80vw;
   }
   @media screen and (min-width: 744px) {
     width: 720px;

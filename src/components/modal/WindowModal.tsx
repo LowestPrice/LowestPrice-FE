@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-interface WindowModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onConfirm: () => void;
-}
+import { WindowModalProps } from '../../type';
 
 const WindowModal: React.FC<WindowModalProps> = ({ isOpen, onClose, onConfirm }) => {
   return (

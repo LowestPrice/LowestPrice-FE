@@ -1,4 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import { toast } from 'react-toastify';
+
 import Cookies from 'js-cookie';
 import {
   MyPageIcon,
@@ -10,15 +14,8 @@ import {
   ColorFooterMagazineIcon,
   ColorHomeIcon,
 } from '../../assets/icon/icon';
-import { toast } from 'react-toastify';
-import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 
-import { useState, useEffect, ButtonHTMLAttributes } from 'react';
-
-interface ButtonStyleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  $active?: boolean;
-}
+import { ButtonStyleProps } from '../../type';
 
 const PageFooter = () => {
   const navigate = useNavigate();

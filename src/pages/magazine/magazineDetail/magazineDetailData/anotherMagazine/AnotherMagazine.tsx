@@ -1,7 +1,8 @@
-import styled from 'styled-components';
 import { useQuery } from 'react-query';
-import { getAnotherMagazine } from '../../../../../api/magazine';
 import { useNavigate, useParams } from 'react-router';
+import styled from 'styled-components';
+
+import { getAnotherMagazine } from '../../../../../api/magazine';
 
 const AnotherMagazine = () => {
   const navigate = useNavigate();

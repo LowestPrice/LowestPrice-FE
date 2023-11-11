@@ -1,5 +1,6 @@
-import { MagazineProps } from '../../../type/type';
 import MagazineDetailData from './magazineDetailData/MagazineDetailData';
+
+import { MagazineProps } from '../../../type';
 
 const MagazineDetail: React.FC<MagazineProps> = () => {
   return (
@@ -10,4 +11,3 @@ const MagazineDetail: React.FC<MagazineProps> = () => {
 };
 
 export default MagazineDetail;
-

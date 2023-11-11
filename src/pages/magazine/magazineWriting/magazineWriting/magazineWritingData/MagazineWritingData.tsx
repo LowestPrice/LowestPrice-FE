@@ -1,13 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage, styleString, Container, Scroll } from '../../styles';
-import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
-import { postMagazine } from '../../../../../api/magazine';
-import { BackIcon, AddImageIcon } from '../../../../../assets/icon/icon';
-import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
+
+import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage, styleString, Container, Scroll } from '../../styles';
+import { BackIcon, AddImageIcon } from '../../../../../assets/icon/icon';
+
+import { postMagazine } from '../../../../../api/magazine';
 
 const MagazineWritingData = () => {
   // React Quill 글자 크기 커스텀
