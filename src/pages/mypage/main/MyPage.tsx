@@ -20,7 +20,8 @@ function Mypage() {
   const navigate = useNavigate();
 
   // 상태관리 ----------------------------------------
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   // 서버로 유저정보 가져오기 -----------------------------------
 
@@ -45,7 +46,8 @@ function Mypage() {
   // 최근 본 상품 모달 --------------------------------------------------------
 
   const toggleModal = () => {
-    setModal(!modal);
+    // setModal(!modal);
+    setIsOpen(!isOpen);
   };
 
   if (status === 'loading') {
@@ -81,7 +83,7 @@ function Mypage() {
               최근 본 상품 <RightBackIcon />
             </Unit>
           </Article>
-          {modal && <RecentProducts toggleModal={toggleModal} />}
+          <RecentProducts toggleModal={toggleModal} isOpen={isOpen} />
           <Article onClick={() => navigate('/likemagazine')}>
             <Unit>
               좋아요한 매거진 보기 <RightBackIcon />
