@@ -50,6 +50,10 @@ function Mypage() {
     setIsOpen(!isOpen);
   };
 
+  const offModal = () => {
+    setIsOpen(false);
+  };
+
   if (status === 'loading') {
     return <Loading />;
   }
@@ -58,7 +62,7 @@ function Mypage() {
   }
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%' }} onClick={offModal}>
       <Helmet title='내일은 최저가 | 마이페이지' />
 
       <Header>마이페이지</Header>
@@ -78,7 +82,12 @@ function Mypage() {
               </EditIcon>
             </EditProfileImage>
           </Profile>
-          <Article onClick={toggleModal}>
+          <Article
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleModal();
+            }}
+          >
             <Unit>
               최근 본 상품 <RightBackIcon />
             </Unit>
