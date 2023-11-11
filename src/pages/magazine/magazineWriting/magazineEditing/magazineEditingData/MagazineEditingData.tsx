@@ -1,14 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from '../../styles';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
-import { putMagazine } from '../../../../../api/magazine';
-import { useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { AddImageIcon } from '../../../../../assets/icon/icon';
+import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
+
+import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from '../../styles';
+import { AddImageIcon } from '../../../../../assets/icon/icon';
+
+import { putMagazine } from '../../../../../api/magazine';
 
 const MagazineEditingData = () => {
   const location = useLocation();

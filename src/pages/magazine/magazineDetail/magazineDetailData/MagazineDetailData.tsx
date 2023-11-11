@@ -1,19 +1,20 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { deleteMagazine, getMagazineDetail } from '../../../../api/magazine';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { BackIcon, DropDownIcon, ShareIcon } from '../../../../assets/icon/icon';
 import { useState, useRef } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Like from '../../Like';
-import { useLike } from '../../../../hooks/useLike';
-import { useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { toast } from 'react-toastify';
+
 import ShareFooter from '../../../../components/footer/ShareFooter';
 import useDropDown from '../../../../hooks/useDropDown';
 import DropDown from '../../../../components/modal/DropDown';
 import AnotherMagazine from './anotherMagazine/AnotherMagazine';
-import 'react-quill/dist/quill.snow.css';
+import { useLike } from '../../../../hooks/useLike';
+import Like from '../../Like';
+import { BackIcon, DropDownIcon, ShareIcon } from '../../../../assets/icon/icon';
+
+import { deleteMagazine, getMagazineDetail } from '../../../../api/magazine';
 
 const MagazineDetailData = () => {
   const { id } = useParams();
@@ -138,7 +139,7 @@ const MagazineDetailData = () => {
             magazineId={magazineData.magazineId}
             likeCount={magazineData.LikeMagazine}
             index={index}
-            handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index)}
+            handleLikeClick={(event: any) => handleLikeClick(event, magazineData.magazineId, index)}
           />
         </LikeShareIconFlex>
         <AnotherMagazine />

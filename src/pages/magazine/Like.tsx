@@ -1,8 +1,9 @@
-import styled, { keyframes, css } from 'styled-components';
-import { ColorHeartIcon, LineHeartIcon } from '../../assets/icon/icon';
-import { LikeProps, HeartProps } from '../../type/type';
 import React from 'react';
-import { HeartButtonProps } from '../../type/type';
+import styled, { keyframes, css } from 'styled-components';
+
+import { ColorHeartIcon, LineHeartIcon } from '../../assets/icon/icon';
+
+import { LikeProps, HeartProps, HeartButtonProps } from '../../type';
 
 const pop = keyframes`
   0% { transform: scale(1); }

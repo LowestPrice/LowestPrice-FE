@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { postMagazineLike } from '../api/magazine';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
+import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+
+import { postMagazineLike } from '../api/magazine';
 
 export const useLike = (initialLike: boolean, initialCount: number) => {
   const [like, setLike] = useState(initialLike);

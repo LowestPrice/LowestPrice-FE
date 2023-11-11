@@ -1,14 +1,6 @@
 import { useEffect } from 'react';
 
-interface useShareParams {
-  objectType: string;
-  content: {
-    title?: string;
-    imageUrl?: string;
-    price?: string | number;
-  };
-  url?: string;
-}
+import { useShareParams } from '../type';
 
 declare global {
   interface Window {
@@ -26,7 +18,7 @@ const useShare = ({ objectType, content, url }: useShareParams) => {
 
     // 카카오 SDK 초기화
     if (!kakao.isInitialized()) {
-      kakao.init('f79493b1ae9c5befcbf8812d069bf54b');
+      kakao.init(import.meta.env.VITE_KAKAO_SHARE);
     }
 
     kakao.Link.sendDefault({

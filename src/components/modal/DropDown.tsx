@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { MypageEditIcon, DeleteIcon } from '../../assets/icon/icon';
-import { DropDownProps, DropDownListProps } from '../../type/type';
-import WindowModal from './WindowModal';
 import styled from 'styled-components';
+
+import WindowModal from './WindowModal';
+
+import { MypageEditIcon, DeleteIcon } from '../../assets/icon/icon';
+import { DropDownProps, DropDownListProps } from '../../type';
 
 // 드롭다운 (수정/삭제 이동)
 const DropDown: React.FC<DropDownProps> = ({ onEditClick, onDeleteClick }) => {

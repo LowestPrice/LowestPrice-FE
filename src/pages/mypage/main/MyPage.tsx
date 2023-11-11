@@ -64,7 +64,6 @@ function Mypage() {
   return (
     <div style={{ width: '100%' }} onClick={offModal}>
       <Helmet title='내일은 최저가 | 마이페이지' />
-
       <Header>마이페이지</Header>
       <Scroll>
         <Wrap>
