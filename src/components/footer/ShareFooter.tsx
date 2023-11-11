@@ -1,19 +1,12 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
-import useShare from '../../hooks/useShare';
 import { toast } from 'react-toastify';
 
-interface Props {
-  share: boolean;
-  handleShareButton: () => void;
-  title: string | undefined;
-  mainImage: string | undefined;
-  id: number | undefined;
-  realId?: string | undefined;
-  price?: string | number;
-}
+import useShare from '../../hooks/useShare';
 
-function ShareFooter(props: Props) {
+import { ShareFooterProps } from '../../type';
+
+function ShareFooter(props: ShareFooterProps) {
   const copyUrlRef = useRef<HTMLInputElement>(null);
   const { shareToKakaoTalk } = useShare({
     objectType: 'feed',

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Line } from 'react-chartjs-2';
 import { useQuery } from 'react-query';
-import { getPriceHistory } from '../../api/product';
 import Chart from 'chart.js/auto';
+import { Line } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 Chart.register(CategoryScale);
 import styled from 'styled-components';
-import { PriceData, ChartData, PriceChartProps, PriceWrapProps, FormattedData } from '../../type/type';
+
+import { getPriceHistory } from '../../api/product';
+import { PriceData, ChartData, PriceChartProps, PriceWrapProps, FormattedDataProps } from '../../type';
 
 // 최고가, 최저가
 export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) => {
@@ -35,7 +36,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
     labels: [],
     datasets: [],
   });
-  const [_, setFormattedData] = useState<FormattedData>({});
+  const [_, setFormattedData] = useState<FormattedDataProps>({});
 
   // 날짜 형식 변경 (년월일 -> 월일)
   const DeleteYear = (date: string) => {

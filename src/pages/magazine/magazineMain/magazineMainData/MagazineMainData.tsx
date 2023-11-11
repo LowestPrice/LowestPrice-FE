@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { getMagazine } from '../../../../api/magazine';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useLike } from '../../../../hooks/useLike';
+
 import Like from '../../Like';
+import { useLike } from '../../../../hooks/useLike';
 import { BlueLogo } from '../../../../assets/icon/icon';
+
+import { getMagazine } from '../../../../api/magazine';
 
 const MagazineMainData = () => {
   const [magazines, setMagazines] = useState<any[]>([]);
@@ -66,7 +68,7 @@ const MagazineMainData = () => {
                         isLiked={magazineData.isLiked}
                         magazineId={magazineData.magazineId}
                         likeCount={magazineData.LikeMagazine}
-                        handleLikeClick={(event) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
+                        handleLikeClick={(event: any) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
                         index={index}
                       />
                     </Flex>
