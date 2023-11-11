@@ -254,3 +254,24 @@ export const DeleteIcon = (props: SVGProps<SVGSVGElement>) => {
     </svg>
   );
 };
+
+// 가격 하락 아이콘
+export const DecreaseIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9' fill='none' {...props}>
+      <path
+        d='M5.73421 8.08811C6.13384 8.56399 6.86616 8.56399 7.26579 8.08811L12.0484 2.3931C12.5947 1.74247 12.1322 0.75 11.2826 0.75H1.71742C0.867809 0.75 0.405256 1.74247 0.951638 2.39309L5.73421 8.08811Z'
+        fill='#0C77F7'
+      />
+    </svg>
+  );
+};
+
+// X 아이콘
+export const XIcon = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 22 24' fill='none' {...props}>
+      <path d='M16.5601 6L5.84009 18M16.5601 18L5.84009 6' stroke='#6F6F6F' stroke-width='2' stroke-linecap='round' />
+    </svg>
+  );
+};
