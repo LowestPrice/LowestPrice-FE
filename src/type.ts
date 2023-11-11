@@ -177,3 +177,9 @@ export interface useShareParams {
   };
   url?: string;
 }
+
+declare global {
+  export interface Window {
+    Kakao: any;
+  }
+}

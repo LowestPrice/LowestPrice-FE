@@ -2,12 +2,6 @@ import { useEffect } from 'react';
 
 import { useShareParams } from '../type';
 
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
-
 const useShare = ({ objectType, content, url }: useShareParams) => {
   const shareToKakaoTalk = () => {
     if (window.Kakao === undefined) {
