@@ -1,11 +1,12 @@
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { RouterProvider } from 'react-router';
-import router from './Router.tsx';
 import { HelmetProvider } from 'react-helmet-async';
+import router from './Router.tsx';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './index.css';
 
 const queryClient = new QueryClient();
 

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import Cookies from 'js-cookie';
 
 function ReissuanceAT() {
   const navigate = useNavigate();
@@ -17,12 +16,11 @@ function ReissuanceAT() {
   }
   const accessToken = 'Bearer ' + data;
 
-  document.cookie = `accessToken=${accessToken}; max-age=17000`;
-  const acessCookie = Cookies.get('accessToken');
-
-  if (acessCookie !== 'Bearer undefined') {
+  if (accessToken !== 'Bearer undefined') {
+    document.cookie = `accessToken=${accessToken}; max-age=17000`;
     navigate('/');
-  } else if (acessCookie === 'Bearer undefined') {
+  } else if (accessToken === 'Bearer undefined') {
+    document.cookie = `accessToken=null; max-age=17000`;
     toast.error('재로그인이 필요합니다~!');
     navigate('/login');
   }
