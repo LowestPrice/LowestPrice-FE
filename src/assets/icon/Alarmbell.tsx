@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { useMutation, useQueryClient } from 'react-query';
@@ -36,7 +37,7 @@ function Alarmbell(props: Props) {
 
   const handleAlarmButton = () => {
     if (props.isOutOfStock) {
-      toast.error('해당 상품은 매진되었습니다.');
+      toast.error('해당 상품은 품절되었습니다.');
       return;
     }
     if (!accessToken) {
@@ -97,7 +98,7 @@ function Alarmbell(props: Props) {
   );
 }
 
-export default Alarmbell;
+export default React.memo(Alarmbell);
 
 const Wrap = styled.div`
   display: flex;

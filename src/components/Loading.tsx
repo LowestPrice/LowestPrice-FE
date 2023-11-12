@@ -14,8 +14,8 @@ function Loading() {
 export default Loading;
 
 const Wrap = styled.div`
-  width: 23.4375rem;
-  height: 23.4375rem;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,5 +23,9 @@ const Wrap = styled.div`
   div {
     font-size: 0.9375rem;
     font-weight: bold;
+  }
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;

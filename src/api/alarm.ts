@@ -21,3 +21,14 @@ export const getAlarmProducts = async () => {
     console.log(err);
   }
 };
+
+export const getAlarms = async () => {
+  const accessToken = Cookies.get('accessToken');
+  axios.defaults.headers.common['Authorization'] = accessToken;
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_KEY}/notification/history`);
+    return response.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
