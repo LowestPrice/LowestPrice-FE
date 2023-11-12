@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 import Cookies from 'js-cookie';
-
-import Topten from './topten/Topten';
-import PageFooter from '../../components/footer/PageFooter';
-import Logo from '../../assets/icon/Logo';
-
-import Splash from './Splash';
-
 import 'swiper/css';
 import 'swiper/css/scrollbar';
+
+import Logo from '../../assets/icon/Logo';
+import Splash from './Splash';
+import Topten from './topten/Topten';
 import SearchInput from './searchInput/SearchInput';
 import Category from './category/Category';
-import { Helmet } from 'react-helmet-async';
+import PageFooter from '../../components/footer/PageFooter';
+
+
+
+
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
@@ -29,8 +31,8 @@ export default function Main() {
       }, 1500);
       return () => clearTimeout(splashTime);
     }
-    console.log('메인페이지 렌더링');
   });
+  console.log('메인페이지 렌더링');
 
   // 검색창 포커스 onOff -----------------------------------
 
@@ -159,4 +161,3 @@ const Title = styled.div`
   align-items: center;
   margin-top: 1.25rem; /* 20px / 16 = 1.25rem */
 `;
-

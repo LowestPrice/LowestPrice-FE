@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
@@ -7,21 +8,26 @@ interface Props {
 }
 
 function SearchKeywordItem(props: Props) {
+  const [recentKeywords, setRecentKeywords] = useState<{ id: string; keyword: string }[]>([]);
   const navigate = useNavigate();
 
-  const storedRecentList = localStorage.getItem('recentSearchKeywordList');
+  useEffect(() => {
+    const storedRecentList = localStorage.getItem('recentSearchKeywordList');
+    let recentList: { id: string; keyword: string }[] = [];
 
-  let recentList: { id: string; keyword: string }[] = [];
+    recentList = storedRecentList ? JSON.parse(storedRecentList) : {};
 
-  if (storedRecentList) {
-    recentList = JSON.parse(storedRecentList);
-  }
+    if (recentList?.length > 5) {
+      recentList = recentList?.slice(-5);
+    }
 
-  const handleXButton = () => {
-    console.log('지웁니다.');
-    const newRecentList = [...recentList.filter((item) => item.id !== props.id)];
+    setRecentKeywords(recentList);
+  }, []);
+
+  const handleRemoveButton = () => {
+    const newRecentList = [...recentKeywords.filter((item) => item.id !== props.id)];
     localStorage.setItem('recentSearchKeywordList', JSON.stringify(newRecentList));
-    console.log('지웠습니다.');
+    setRecentKeywords(newRecentList);
   };
 
   return (
@@ -46,7 +52,7 @@ function SearchKeywordItem(props: Props) {
       <XButton
         onClick={(e) => {
           e.stopPropagation();
-          handleXButton();
+          handleRemoveButton();
         }}
       >
         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>

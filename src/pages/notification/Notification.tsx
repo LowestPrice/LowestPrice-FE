@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { toast } from 'react-toastify';
 
 import NProductList from './NProductList/NProductList';
-import NPriceAlarmList from './NPriceAlarmList/NPriceAlarmList';
+import NPriceAlarmList from './NPriceAlarmList/NAlarmList';
 import PageFooter from '../../components/footer/PageFooter';
 import { Helmet } from 'react-helmet-async';
 
@@ -21,8 +20,8 @@ export default function Notification({}: Props) {
   // 알림 글 목록 ------------------------------------
 
   const switchPriceTab = (): void => {
-    toast.error('죄송합니다. 해당 정보는 개발중에 있습니다. 조금만 기다려주시면 감사하겠습니다.😂');
-    // setTab(false);
+    // toast.error('죄송합니다. 해당 정보는 개발중에 있습니다. 조금만 기다려주시면 감사하겠습니다.😂');
+    setTab(false);
   };
 
   return (
