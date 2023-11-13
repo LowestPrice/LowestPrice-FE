@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import spiner from '../assets/image/spiner.gif';
+import spinner from '../assets/image/spiner.gif';
 
 function Loading() {
   return (
     <Wrap>
       <div>데이터를 불러오는 중입니다.</div>
       <div>잠시만 기다려주세요.</div>
-      <img src={spiner} alt='로딩 중' />
+      <img src={spinner} alt='로딩 중' width='50px' height='50px' />
     </Wrap>
   );
 }
