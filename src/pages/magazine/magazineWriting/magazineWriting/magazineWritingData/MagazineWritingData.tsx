@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useQueryClient, useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
@@ -35,13 +35,19 @@ const MagazineWritingData = () => {
     },
   });
 
-  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    setTitle(e.target.value);
-  };
+  const onTitleChangeHandler = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+      setTitle(e.target.value);
+    },
+    [title]
+  );
 
-  const onContentChangeHandler = (value: string): void => {
-    setContent(value);
-  };
+  const onContentChangeHandler = useCallback(
+    (value: string): void => {
+      setContent(value);
+    },
+    [content]
+  );
 
   const imageHandler = async (e: any) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -56,20 +62,23 @@ const MagazineWritingData = () => {
     }
   };
 
-  const onSubmitButtonHandler = (title: any, content: any, image: any) => {
-    addPosts.mutate(
-      { title, content, image },
-      {
-        onSuccess: () => {
-          toast.success('추가되었습니다✅');
-          navigate('/magazine');
-        },
-        onError: (error) => {
-          console.error('매거진 추가 에러', error);
-        },
-      }
-    );
-  };
+  const onSubmitButtonHandler = useCallback(
+    (title: any, content: any, image: any) => {
+      addPosts.mutate(
+        { title, content, image },
+        {
+          onSuccess: () => {
+            toast.success('추가되었습니다✅');
+            navigate('/magazine');
+          },
+          onError: (error) => {
+            console.error('매거진 추가 에러', error);
+          },
+        }
+      );
+    },
+    [title, content, image]
+  );
 
   const modules = useMemo(() => {
     return {
@@ -128,4 +137,4 @@ const MagazineWritingData = () => {
   );
 };
 
-export default MagazineWritingData;
+export default React.memo(MagazineWritingData);

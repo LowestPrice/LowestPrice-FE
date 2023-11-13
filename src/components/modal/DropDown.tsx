@@ -17,7 +17,7 @@ const DropDown: React.FC<DropDownProps> = ({ onEditClick, onDeleteClick }) => {
 
   return (
     <>
-      <DropDownList onClick={onEditClick} top='50px' color='black' borderRadius='6px 6px 0px 0px'>
+      <DropDownList onClick={onEditClick} $top='50px' color='black' $borderradius='6px 6px 0px 0px'>
         <DropDownText>
           수정하기
           <MypageEditIcon />
@@ -25,9 +25,9 @@ const DropDown: React.FC<DropDownProps> = ({ onEditClick, onDeleteClick }) => {
       </DropDownList>
       <DropDownList
         onClick={(event) => (onDeleteClick ? confirmDeleteClick(event) : console.error('onDeleteClick 함수가 정의되지 않았습니다.'))}
-        top='96px'
+        $top='96px'
         color='red'
-        borderRadius='0px 0px 6px 6px'
+        $borderradius='0px 0px 6px 6px'
       >
         <DropDownText>
           삭제하기
@@ -57,9 +57,9 @@ const DropDownList = styled.li<DropDownListProps>`
   align-items: center;
   cursor: pointer;
   position: absolute;
-  top: ${({ top }) => top};
+  top: ${({ $top }) => $top};
   color: ${({ color }) => color};
-  border-radius: ${({ borderRadius }) => borderRadius};
+  border-radius: ${({ $borderradius }) => $borderradius};
   right: 30px;
   z-index: 20;
   display: flex;
