@@ -28,7 +28,7 @@ export default function Observer(props: Props) {
 
   return (
     <Wrap ref={target}>
-      <img src={spinner} alt='로딩 중' width='50px' height='50px'/>
+      <img src={spinner} alt='로딩 중' width='50' height='50' />
     </Wrap>
   );
 }

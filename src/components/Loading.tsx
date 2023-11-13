@@ -6,7 +6,7 @@ function Loading() {
     <Wrap>
       <div>데이터를 불러오는 중입니다.</div>
       <div>잠시만 기다려주세요.</div>
-      <img src={spinner} alt='로딩 중' width='50px' height='50px' />
+      <img src={spinner} alt='로딩 중' width='50' height='50' />
     </Wrap>
   );
 }
