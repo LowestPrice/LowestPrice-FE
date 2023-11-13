@@ -1,11 +1,16 @@
 import { useQuery } from 'react-query';
-import NAralmtItem from './NAlarmItem';
 import { getAlarms } from '../../../api/alarm';
+
+import NAralmtItem from './NAlarmItem';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 
 function NPriceAlarmList() {
+  // 알람 데이터 불러오기 --------------------------------
+
   const { data, status } = useQuery('alarms', getAlarms);
+
+  // 로딩 및 에러 처리 -----------------------------------
 
   if (status === 'loading') {
     return <Loading />;
@@ -14,7 +19,9 @@ function NPriceAlarmList() {
   if (status === 'error') {
     return <Error />;
   }
-  console.log(data);
+
+  // 화면 ===============================================
+
   return (
     <div>
       {data.map((item: AlarmItem, index: number) => {

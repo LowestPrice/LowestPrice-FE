@@ -4,17 +4,18 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { Product } from '../../../type';
-
 import { toggleAlarm } from '../../../api/alarm';
 
 interface Props extends Product {}
 
 export default function NProductItem(props: Props) {
+  // 네비게이트 ------------------------------------------------
+
   const navigate = useNavigate();
 
-  const queryClient = useQueryClient();
-
   // 알림상품 제거하기 ------------------------------------------
+
+  const queryClient = useQueryClient();
 
   const alarmMutation = useMutation(toggleAlarm, {
     onSuccess: () => {
@@ -34,6 +35,8 @@ export default function NProductItem(props: Props) {
 
   const originalPrice = props.originalPrice.toLocaleString();
   const currentPrice = props.currentPrice.toLocaleString();
+
+  // 화면 ====================================================
 
   return (
     <Wrap
