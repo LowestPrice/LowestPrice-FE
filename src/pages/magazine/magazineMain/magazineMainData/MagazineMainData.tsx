@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Like from '../../Like';
-import { useLike } from '../../../../hooks/useLike';
-import { BlueLogo } from '../../../../assets/icon/icon';
 
 import { getMagazine } from '../../../../api/magazine';
 
@@ -24,9 +22,6 @@ const MagazineMainData = () => {
     }
   }, [data]);
 
-  // 좋아요 클릭 시 좋아요 상태와 좋아요 수 업데이트
-  const { handleLikeClick } = useLike(false, 0);
-
   if (isLoading) {
     return <h1>로딩중입니다</h1>;
   }
@@ -36,16 +31,11 @@ const MagazineMainData = () => {
 
   return (
     <>
-      <Header onClick={() => navigate('/magazine')}>
-        <BlueLogo />
-        <LogoTitle>매거진</LogoTitle>
-      </Header>
       <Container>
         <Line></Line>
         <Title>Apple 트렌드</Title>
         <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
         {isAdmin && <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>}
-
         <Scroll>
           {magazines?.map((magazineData, index) => {
             // html 마크업 제거 후 렌더링
@@ -64,13 +54,7 @@ const MagazineMainData = () => {
                     <Content>{displayText}</Content>
                     <Flex>
                       <div>{magazineData.editor}</div>
-                      <Like
-                        isLiked={magazineData.isLiked}
-                        magazineId={magazineData.magazineId}
-                        likeCount={magazineData.LikeMagazine}
-                        handleLikeClick={(event: any) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
-                        index={index}
-                      />
+                      <Like isLiked={magazineData.isLiked} magazineId={magazineData.magazineId} likeCount={magazineData.LikeMagazine} index={index} />
                     </Flex>
                   </BoxPadding>
                 </Box>
@@ -83,34 +67,7 @@ const MagazineMainData = () => {
   );
 };
 
-export default MagazineMainData;
-
-const Header = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 1.62rem;
-  padding-bottom: 1.12rem;
-  padding-left: 1.25rem;
-  padding-right: 17.62rem;
-  cursor: pointer;
-
-  @media screen and (max-width: 743px) and (min-width: 376px) {
-    width: 100%;
-  }
-  @media screen and (min-width: 744px) {
-    width: 744px;
-  }
-`;
-
-const LogoTitle = styled.div`
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 110%;
-  margin-left: 0.25rem;
-  width: 2.9375rem;
-`;
+export default React.memo(MagazineMainData);
 
 const Container = styled.div`
   flex: 1;

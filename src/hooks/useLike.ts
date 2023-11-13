@@ -15,6 +15,7 @@ export const useLike = (initialLike: boolean, initialCount: number) => {
   const magazineLike = useMutation(postMagazineLike, {
     onSuccess: () => {
       queryClient.invalidateQueries('posts');
+      queryClient.invalidateQueries('magazineData');
     },
     onError: (error) => {
       console.error('좋아요 error 발생', error);

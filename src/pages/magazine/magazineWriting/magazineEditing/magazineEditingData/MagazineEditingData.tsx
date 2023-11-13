@@ -13,7 +13,7 @@ import { putMagazine } from '../../../../../api/magazine';
 
 const MagazineEditingData = () => {
   const location = useLocation();
-  const magazineData = location.state.props;
+  const magazineData = location.state?.props || { title: '', content: '', mainImage: '' };
   const { id } = useParams();
   const navigate = useNavigate();
 
