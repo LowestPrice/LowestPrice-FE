@@ -48,7 +48,7 @@ const MagazineMainData = () => {
                   onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}
                   style={index === magazines.length - 1 ? { marginBottom: '7rem' } : undefined}
                 >
-                  <Img src={magazineData.mainImage} />
+                  <Img src={magazineData.mainImage} alt='매거진 메인이미지' />
                   <BoxPadding>
                     <BoxTitle>{magazineData.title}</BoxTitle>
                     <Content>{displayText}</Content>

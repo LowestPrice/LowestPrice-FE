@@ -17,7 +17,7 @@ const pop = keyframes`
 // like의 값(boolean)에 따라 다른 아이콘을 보여줌
 const Heart: React.FC<HeartProps> = React.memo(({ like, onClick }) => {
   return (
-    <HeartButton $like={like} onClick={onClick}>
+    <HeartButton $like={like} onClick={onClick} id='HeartButton' aria-label='Heartbutton'>
       {like ? <ColorHeartIcon /> : <LineHeartIcon />}
     </HeartButton>
   );
