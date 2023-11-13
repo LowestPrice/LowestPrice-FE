@@ -25,7 +25,7 @@ const Wrap = styled.div`
     font-weight: bold;
   }
   img {
-    width: 100%;
-    height: 100%;
+    width: 10%;
+    height: 10%;
   }
 `;

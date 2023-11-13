@@ -31,6 +31,7 @@ export default function Notification({}: Props) {
       <Header>
         <MyNotification>내 알림</MyNotification>
       </Header>
+
       <Navigate>
         <ProductList
           $tab={tab}
@@ -49,6 +50,7 @@ export default function Notification({}: Props) {
           가격변동알림
         </PriceAlarmList>
       </Navigate>
+      
       {tab ? <NProductList /> : <NPriceAlarmList />}
       <PageFooter />
     </Wrap>
