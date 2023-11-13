@@ -10,7 +10,6 @@ import ShareFooter from '../../../../components/footer/ShareFooter';
 import useDropDown from '../../../../hooks/useDropDown';
 import DropDown from '../../../../components/modal/DropDown';
 import AnotherMagazine from './anotherMagazine/AnotherMagazine';
-import { useLike } from '../../../../hooks/useLike';
 import Like from '../../Like';
 import { BackIcon, DropDownIcon, ShareIcon } from '../../../../assets/icon/icon';
 
@@ -57,8 +56,8 @@ const MagazineDetailData = () => {
     toast.success('삭제되었습니다✅');
   };
 
-  // 좋아요
-  const { handleLikeClick } = useLike(false, 0);
+  // // 좋아요
+  // const { handleLikeClick } = useLike(false, 0);
 
   // 공유하기
   const handleShareButton = () => {
@@ -134,13 +133,7 @@ const MagazineDetailData = () => {
           <ReactQuill value={magazineData.content} readOnly={true} theme={'bubble'} style={{ overflow: 'hidden' }} />
         </TextArea>
         <LikeShareIconFlex>
-          <Like
-            isLiked={magazineData.isLiked}
-            magazineId={magazineData.magazineId}
-            likeCount={magazineData.LikeMagazine}
-            index={index}
-            handleLikeClick={(event: any) => handleLikeClick(event, magazineData.magazineId, index)}
-          />
+          <Like isLiked={magazineData.isLiked} magazineId={magazineData.magazineId} likeCount={magazineData.LikeMagazine} index={index} />
         </LikeShareIconFlex>
         <AnotherMagazine />
       </Container>

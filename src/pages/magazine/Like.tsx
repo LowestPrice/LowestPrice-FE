@@ -2,8 +2,11 @@ import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
 import { ColorHeartIcon, LineHeartIcon } from '../../assets/icon/icon';
+import { useLike } from '../../hooks/useLike';
 
 import { LikeProps, HeartProps, HeartButtonProps } from '../../type';
+
+// 좋아요 클릭 시 좋아요 상태와 좋아요 수 업데이트
 
 const pop = keyframes`
   0% { transform: scale(1); }
@@ -21,11 +24,18 @@ const Heart: React.FC<HeartProps> = React.memo(({ like, onClick }) => {
 });
 
 // 해당하는 매거진의 좋아요 상태와 좋아요 수 업데이트
-const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount, handleLikeClick, index }) => {
+const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount, index }) => {
+  const { handleLikeClick } = useLike(false, 0);
   return (
     <div>
       <LikeFlex>
-        <Heart like={isLiked} onClick={(event) => handleLikeClick(event, magazineId, index)} />
+        <Heart
+          like={isLiked}
+          onClick={(event) => {
+            handleLikeClick(event, magazineId, index);
+            console.log('찍힘');
+          }}
+        />
         <div>{likeCount}</div>
       </LikeFlex>
     </div>

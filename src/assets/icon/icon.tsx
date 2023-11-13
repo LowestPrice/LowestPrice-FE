@@ -247,9 +247,9 @@ export const DeleteIcon = (props: SVGProps<SVGSVGElement>) => {
       <path
         d='M4 7H20M9 4H15M10 17V11M14 17V11M15.5 21H8.5C7.39543 21 6.5 20.1046 6.5 19L6.0434 8.04163C6.01973 7.47351 6.47392 7 7.04253 7H16.9575C17.5261 7 17.9803 7.47351 17.9566 8.04163L17.5 19C17.5 20.1046 16.6046 21 15.5 21Z'
         stroke='#FF4545'
-        stroke-width='1.7'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.7'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   );
@@ -271,7 +271,7 @@ export const DecreaseIcon = (props: SVGProps<SVGSVGElement>) => {
 export const XIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 22 24' fill='none' {...props}>
-      <path d='M16.5601 6L5.84009 18M16.5601 18L5.84009 6' stroke='#6F6F6F' stroke-width='2' stroke-linecap='round' />
+      <path d='M16.5601 6L5.84009 18M16.5601 18L5.84009 6' stroke='#6F6F6F' strokeWidth='2' strokeLinecap='round' />
     </svg>
   );
 };
