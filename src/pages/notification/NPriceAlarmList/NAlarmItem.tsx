@@ -17,6 +17,8 @@ function NAralmtItem(props: Props) {
 
   const date = props.createdAt ? `${props.createdAt.substr(5, 2)}월 ${props.createdAt.substr(8, 2)}일` : '';
 
+  // 화면 ===================================================================================================
+
   return (
     <Wrap>
       <NPriceItem>
