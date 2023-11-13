@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 
-import useShare from '../../hooks/useShare';
+import useShare from '../../hooks/useShareLink';
 
 import { ShareFooterProps } from '../../type';
 
