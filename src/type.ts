@@ -136,9 +136,9 @@ export interface HeartButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 
 export interface LikeProps {
   isLiked: boolean;
-  magazineId: string;
+  magazineId: number;
   likeCount: number;
-  index: number;
+  index?: number;
   style?: React.CSSProperties;
   isMounted?: boolean;
 }

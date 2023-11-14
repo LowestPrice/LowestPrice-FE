@@ -1,21 +1,25 @@
 import React, { useState, useMemo } from 'react';
-import { useQueryClient, useMutation } from 'react-query';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useQueryClient, useMutation, useQuery } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 
-import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from '../../styles';
-import { AddImageIcon } from '../../../../../assets/icon/icon';
+import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from '../styles';
+import { AddImageIcon } from '../../../../assets/icon/icon';
+import Loading from '../../../../components/Loading';
+import Error from '../../../../components/Error';
 
-import { putMagazine } from '../../../../../api/magazine';
+import { getMagazineDetail, putMagazine } from '../../../../api/magazine';
 
 const MagazineEditingData = () => {
-  const location = useLocation();
-  const magazineData = location.state?.props || { title: '', content: '', mainImage: '' };
   const { id } = useParams();
   const navigate = useNavigate();
+
+  // 데이터 불러오기
+  const { isLoading, isError, data } = useQuery(['posts', id], () => getMagazineDetail(id));
+  const magazineData = data?.data;
 
   const [newTitle, setNewTitle] = useState(magazineData.title);
   const [newContent, setNewContent] = useState(magazineData.content);
@@ -23,9 +27,9 @@ const MagazineEditingData = () => {
   const [previewImage, setPreviewImage] = useState<string>(magazineData.mainImage);
   const queryClient = useQueryClient();
 
-  // const CustomSize = ReactQuill.Quill.import('attributors/style/size');
-  // CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
-  // ReactQuill.Quill.register(CustomSize, true);
+  const CustomSize = ReactQuill.Quill.import('attributors/style/size');
+  CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+  ReactQuill.Quill.register(CustomSize, true);
 
   const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setNewTitle(e.target.value);
@@ -83,8 +87,8 @@ const MagazineEditingData = () => {
           ['image'],
           [{ header: [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          // [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
-          // [{ font: [] }],
+          [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
+          [{ font: [] }],
           [{ size: ['small', false, 'large', 'huge'] }],
           [{ color: [] }, { background: [] }],
           [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
@@ -93,6 +97,14 @@ const MagazineEditingData = () => {
       },
     };
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
 
   return (
     <>

@@ -40,10 +40,6 @@ export const postMagazine = async ({ title, content, image }: { title: any; cont
     formData.append('content', content);
     formData.append('file', image);
 
-    // for (var pair of formData.entries()) {
-    //   console.log(pair[0] + ', ' + pair[1], '폼데이터 매거진 등록 콘솔');
-    // }
-
     const response = await axios.post(`${import.meta.env.VITE_API_KEY}/magazines`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -70,7 +66,6 @@ export const putMagazine = async (props: any) => {
     const response = await axios.put(`${import.meta.env.VITE_API_KEY}/magazines/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        accessToken: accessToken,
       },
     });
     return response;
@@ -126,5 +121,24 @@ export const getLikedMagazineLists = async () => {
     return response;
   } catch (error) {
     console.error('좋아요 한 매거진 리스트 조회 에러', error);
+  }
+};
+
+// 매거진 에디터 사진 보내기
+export const postQuillEditorPhoto = async (file: any) => {
+  const accessToken = Cookies.get('accessToken');
+  axios.defaults.headers.common['Authorization'] = accessToken;
+  const formData = new FormData();
+  formData.set('file', file);
+
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_API_KEY}/magazines/file`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('매거진 에디터 사진 전송 에러', error);
   }
 };

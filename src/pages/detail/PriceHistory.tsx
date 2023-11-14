@@ -6,6 +6,9 @@ import { CategoryScale } from 'chart.js';
 Chart.register(CategoryScale);
 import styled from 'styled-components';
 
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+
 import { getPriceHistory } from '../../api/product';
 import { PriceData, ChartData, PriceChartProps, PriceWrapProps, FormattedDataProps } from '../../type';
 
@@ -33,8 +36,8 @@ export const PriceDataWrap: React.FC<PriceWrapProps> = ({ minPrice, maxPrice }) 
 export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxPrice }) => {
   const { isLoading, isError, data } = useQuery<PriceData | undefined>('priceHistory', () => getPriceHistory(id));
   const [priceData, setPriceData] = useState<ChartData>({
-    labels: [],
-    datasets: [],
+    labels: [], // x축 초기화(날찌)
+    datasets: [], //y축 초기화(가격)
   });
   const [_, setFormattedData] = useState<FormattedDataProps>({});
 
@@ -47,26 +50,30 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
   useEffect(() => {
     if (data?.priceHistoryForWeek) {
       const newFormattedData: { [key: string]: any } = {};
+      // 객체의 각 항목 DeleteYear 사용해 newKey에 할당(11/10 형식)
       for (const [key, value] of Object.entries(data.priceHistoryForWeek)) {
         const newKey = DeleteYear(key);
+        // newformattedData에 새로운 객체 만들어주고, value(가격)할당
         newFormattedData[newKey] = value;
       }
       setFormattedData(newFormattedData);
 
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d')!;
-      const gradient = ctx.createLinearGradient(0, 0, 0, 180);
+      const gradient = ctx.createLinearGradient(0, 0, 0, 200);
       gradient.addColorStop(0, 'rgba(0, 171, 249, 0.12)');
       gradient.addColorStop(1, 'rgba(0, 171, 249, 0)');
 
-      const labels = Object.keys(newFormattedData);
-      const datasetData = Object.values(newFormattedData) as number[];
+      const labels = Object.keys(newFormattedData); //x축
+
+      const datasetData = Object.values(newFormattedData) as number[]; //y축
 
       setPriceData({
-        labels: labels,
+        labels: labels, //x축
         datasets: [
+          //y축
           {
-            label: '',
+            label: '', //범례 지움
             data: datasetData,
             borderColor: '#00ABF9',
             borderWidth: 2,
@@ -81,6 +88,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
     }
   }, [data, setMinPrice, setMaxPrice]);
 
+  // 범례를 숨김
   const options = {
     plugins: {
       legend: {
@@ -90,11 +98,11 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
   };
 
   if (isLoading) {
-    return <h1>로딩중입니다</h1>;
+    return <Loading />;
   }
 
   if (isError) {
-    return <h1>에러가 발생했습니다.</h1>;
+    return <Error />;
   }
 
   return <Line data={priceData} options={options} />;
