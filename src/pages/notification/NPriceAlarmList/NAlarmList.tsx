@@ -20,6 +20,8 @@ function NPriceAlarmList() {
     return <Error />;
   }
 
+  console.log(data);
+
   // 화면 ===============================================
 
   return (
@@ -41,4 +43,6 @@ export interface AlarmItem {
   currentPrice: number; //상품 현재 가격
   productName: string; //상품 이름
   createdAt: string;
+  productOption: string;
+  productImage: string;
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Product } from '../../../type';
 
-import Alarmbell from '../../../assets/icon/Alarmbell';
+// import Alarmbell from '../../../assets/icon/Alarmbell';
 import getParametersForUnsplash from '../../../optimization/imgcdn';
 
 interface Props extends Product {
@@ -25,13 +25,13 @@ function ToptenProduct(props: Props) {
       }}
     >
       <ProductImageWrap />
-      <BellImage
+      {/* <BellImage
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
         <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} isOutOfStock={props.isOutOfStock} />
-      </BellImage>
+      </BellImage> */}
       <div className='rank'>{props.index + 1}</div>
       <Content>
         <div>
@@ -80,14 +80,14 @@ const ProductImageWrap = styled.div`
   align-items: center;
 `;
 
-const BellImage = styled.div`
-  width: 39.19px;
-  height: 39.19px;
-  z-index: 10;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-`;
+// const BellImage = styled.div`
+//   width: 39.19px;
+//   height: 39.19px;
+//   z-index: 10;
+//   position: absolute;
+//   right: 10px;
+//   top: 10px;
+// `;
 
 const Content = styled.div`
   width: 250.09px;

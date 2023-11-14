@@ -24,15 +24,15 @@ function NAralmtItem(props: Props) {
       <NPriceItem>
         <div className='date'>{date}</div>
         <NPriceContent style={{ display: 'flex', flexDirection: 'row' }}>
-          <NPriceimg />
+          <NPriceimg src={props.productImage} />
           <NPriceInfo>
             <div className='title'>{props.productName}</div>
-            {/* <div className='option'>{ props.}</div> */}
+            <div className='option'>{props.productOption}</div>
             <PriceContent>
-              <span className='originalPrice'>{originalPrice}</span>
+              <span className='originalPrice'>{originalPrice}원</span>
               &gt;
-              <span className='currentPrice'>{currentPrice}</span>
-              <span className='DiscountedAmount'>({DiscountedAmount})</span>
+              <span className='currentPrice'>{currentPrice}원</span>
+              <span className='DiscountedAmount'>(-{DiscountedAmount})</span>
             </PriceContent>
           </NPriceInfo>
         </NPriceContent>
@@ -82,7 +82,6 @@ const NPriceimg = styled.img`
 `;
 
 const NPriceInfo = styled.div`
-  width: 290px;
   height: 63px;
   display: flex;
   flex-direction: column;
@@ -94,6 +93,9 @@ const NPriceInfo = styled.div`
   .option {
     font-size: 12px;
     color: rgba(111, 111, 111, 1);
+  }
+  @media screen and (max-width: 450px) {
+    width: 290px;
   }
 `;
 
