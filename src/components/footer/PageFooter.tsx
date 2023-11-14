@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { toast } from 'react-toastify';
 
 import Cookies from 'js-cookie';
+
 import {
   MyPageIcon,
   BellIcon,

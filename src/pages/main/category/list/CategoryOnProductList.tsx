@@ -117,13 +117,16 @@ const Wrap = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   position: absolute;
-  top: 210px;
+  top: 117px;
+  right: 2px;
   @media screen and (min-width: 744px) {
     width: 744px;
+    right: -6px;
   }
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
     justify-content: space-around;
+    right: -6px;
   }
 `;
 
