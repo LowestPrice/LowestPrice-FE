@@ -78,7 +78,7 @@ function Topten() {
   const NextIndex = index === 9 ? 0 : index + 1;
   const moreNextIndex = index === 9 ? 1 : index === 8 ? 0 : index + 2;
 
-  // 화면 ----------------------------------------------------------------
+  // 화면 ==============================================================
 
   return (
     <Wrapper>

@@ -10,6 +10,7 @@ interface Props {
   productUrl: string | undefined;
   productId: string | undefined;
   isAlertOn: boolean | undefined;
+  isOutOfStock: boolean | undefined;
 }
 
 function AlarmFooter(props: Props) {
@@ -34,6 +35,10 @@ function AlarmFooter(props: Props) {
   const accessToken = Cookies.get('accessToken');
 
   const handleAlarmButton = () => {
+    if (props.isOutOfStock) {
+      toast.error('해당 상품은 품절되었습니다.');
+      return;
+    }
     alarmMutation.mutate(Number(props.productId));
     if (!accessToken) {
       toast.error('로그인 이후 이용이 가능합니다❗️');

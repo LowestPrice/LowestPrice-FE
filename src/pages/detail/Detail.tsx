@@ -49,8 +49,6 @@ function Detail() {
     setShare(!share);
   };
 
-  console.log(data);
-
   // 천 단위 콤마 찍기 -------------------------------------------------------------------------
 
   const currentPrice: string | undefined = data?.currentPrice.toLocaleString();
@@ -142,7 +140,7 @@ function Detail() {
           <SimilarProductList productId={data?.productId} />
 
           <Message>구매하기 버튼을 통해 구매를 할 경우, '내일은 최저가'에 수익이 발생합니다. 발생한 수익은 가격 추적 서비스 운영을 위해 사용됩니다.</Message>
-          <AlarmFooter productUrl={data?.productUrl} productId={params.id} isAlertOn={data?.isAlertOn} />
+          <AlarmFooter productUrl={data?.productUrl} productId={params.id} isAlertOn={data?.isAlertOn} isOutOfStock={data?.isOutOfStock} />
         </Scroll>
       </Wrap>
       <ShareFooter
@@ -327,7 +325,7 @@ const ChartArea = styled.div`
 const SoldoutWrap = styled.div`
   position: absolute;
   top: -2px;
-  left: 5px;
+  left: 0px;
   opacity: 50%;
   width: 100%;
   height: 100%;

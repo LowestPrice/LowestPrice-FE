@@ -38,7 +38,7 @@ const Wrap = styled.div<{ $onOff: boolean }>`
   /* transition: all 1s; */
   width: 350px;
   position: absolute;
-  top: 148px;
+  top: 118px;
   border: 1px solid var(--gray01, #d9d9d9);
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 90%;
