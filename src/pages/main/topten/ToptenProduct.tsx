@@ -25,13 +25,7 @@ function ToptenProduct(props: Props) {
       }}
     >
       <ProductImageWrap />
-      {/* <BellImage
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} isOutOfStock={props.isOutOfStock} />
-      </BellImage> */}
+
       <div className='rank'>{props.index + 1}</div>
       <Content>
         <div>
@@ -42,7 +36,7 @@ function ToptenProduct(props: Props) {
         <div className='title'>{props.productName}</div>
       </Content>
       <ImageWrap>
-        <ProductImage src={props.productImage + getParametersForUnsplash(257.997, 257.997, 80, 'jpg')} />
+        <ProductImage src={props.productImage + getParametersForUnsplash(257.997, 257.997, 80, 'jpg')} alt='toptenImage' />
       </ImageWrap>
     </Wrap>
   );
@@ -79,15 +73,6 @@ const ProductImageWrap = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-// const BellImage = styled.div`
-//   width: 39.19px;
-//   height: 39.19px;
-//   z-index: 10;
-//   position: absolute;
-//   right: 10px;
-//   top: 10px;
-// `;
 
 const Content = styled.div`
   width: 250.09px;
