@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 
 import NProductList from './NProductList/NProductList';
 import NPriceAlarmList from './NPriceAlarmList/NAlarmList';
 import PageFooter from '../../components/footer/PageFooter';
+import HelmetTag from '../../components/HelmetTag';
 
 type Props = {};
 
@@ -29,7 +29,12 @@ export default function Notification({}: Props) {
 
   return (
     <Wrap>
-      <Helmet title='내일은 최저가 | 알림' />
+      <HelmetTag
+        title='내일은 최저가 | 알림'
+        keywords='내일은 최저가 | 알림'
+        description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+        url='https://lowest-price.store/'
+      />
 
       <Header>
         <MyNotification>내 알림</MyNotification>

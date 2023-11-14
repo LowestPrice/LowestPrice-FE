@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { loginWithKakao } from '../../api/login';
 import PageFooter from '../../components/footer/PageFooter';
 import { temporaryLogin } from '../../api/login';
-import { Helmet } from 'react-helmet-async';
+import HelmetTag from '../../components/HelmetTag';
 
 export default function Login() {
   const handleKakaoLogin = () => {
@@ -14,7 +14,12 @@ export default function Login() {
 
   return (
     <div style={{ width: '100%' }}>
-      <Helmet title='내일은 최저가 | 로그인' />
+      <HelmetTag
+        title='내일은 최저가 | 로그인'
+        keywords='내일은 최저가 | 로그인'
+        description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+        url='https://lowest-price.store/'
+      />
       <Header>
         <h3>로그인</h3>
       </Header>
