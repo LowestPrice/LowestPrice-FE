@@ -13,7 +13,7 @@ import FilterOption from './FilterOption';
 import CategoryList from './list/CategoryProductList';
 
 function Category() {
-  const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([true, false, false, false, false]);
+  const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([true, false, false, false, false, false]);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [filterName, setFilterName] = useState<string>('');
