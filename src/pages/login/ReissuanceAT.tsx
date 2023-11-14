@@ -19,7 +19,8 @@ function ReissuanceAT() {
   if (accessToken !== 'Bearer undefined') {
     document.cookie = `accessToken=${accessToken}; max-age=17000`;
     navigate('/');
-  } else if (accessToken === 'Bearer undefined') {
+  }
+  if (accessToken === 'Bearer undefined') {
     document.cookie = `accessToken=null; max-age=17000`;
     toast.error('재로그인이 필요합니다~!');
     navigate('/login');
