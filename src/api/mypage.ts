@@ -12,7 +12,7 @@ export const getUserinfo = async () => {
   }
 };
 
-export const postUserinfo = async ({ name, imageFile }: { name: any; imageFile: any }) => {
+export const postUserinfo = async ({ name, imageFile, phoneNumber }: { name: any; imageFile: any; phoneNumber: any }) => {
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
@@ -21,6 +21,7 @@ export const postUserinfo = async ({ name, imageFile }: { name: any; imageFile: 
   const formData = new FormData();
   formData.set('nickname', name);
   formData.set('file', imageFile);
+  formData.set('phone', phoneNumber);
 
   for (let [key, value] of formData.entries()) {
     console.log(key, value);

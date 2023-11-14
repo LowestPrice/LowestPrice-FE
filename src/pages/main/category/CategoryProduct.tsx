@@ -23,7 +23,7 @@ function CategoryProduct(props: Props) {
         }}
       >
         <CProductImage>
-          <img src={props.productImage} className='productImage'></img>
+          <img src={props.productImage} className='productImage' alt='categoryProduct'></img>
           <BellImage
             style={{ zIndex: '999' }}
             onClick={(e) => {
