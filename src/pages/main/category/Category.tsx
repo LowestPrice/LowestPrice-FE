@@ -80,11 +80,6 @@ function Category() {
 
   return (
     <CategoryWrap>
-      <CategoryTitle>
-        <div>Apple 제품</div>
-        <div>가장 저렴할 때 구매하세요. 🔻</div>
-      </CategoryTitle>
-
       <Swiper
         modules={[Scrollbar]}
         scrollbar={{ draggable: true, hide: true }}
@@ -154,19 +149,6 @@ const CategoryWrap = styled.div`
   }
 `;
 
-const CategoryTitle = styled.div`
-  height: 4.375rem; /* 70px / 16 = 4.375rem */
-  padding: 0.625rem; /* 10px / 16 = 0.625rem */
-  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
-  font-size: 1.25rem; /* 20px / 16 = 1.25rem */
-  gap: 1.375rem; /* 22px / 16 = 1.375rem */
-  font-weight: 700;
-  @media screen and (max-width: 375px) {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-`;
-
 const Filterbar = styled.div`
   width: 100%;
   height: 1.9375rem; /* 31px / 16 = 1.9375rem */
@@ -176,7 +158,7 @@ const Filterbar = styled.div`
   font-size: 0.75rem; /* 12px / 16 = 0.75rem */
   color: var(--gray03, #6f6f6f);
   position: absolute;
-  top: 10.875rem; /* 174px / 16 = 10.875rem */
+  top: 4.875rem; /* 174px / 16 = 10.875rem */
 `;
 
 const Options = styled.div`

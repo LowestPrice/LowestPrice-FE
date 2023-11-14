@@ -68,6 +68,10 @@ export default function Main() {
                   <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
                 </Title>
                 <Topten />
+                <CategoryTitle>
+                  <div>Apple 제품</div>
+                  <div>가장 저렴할 때 구매하세요. 🔻</div>
+                </CategoryTitle>
               </Wrap>
 
               <Category />
@@ -161,4 +165,19 @@ const Title = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 1.25rem; /* 20px / 16 = 1.25rem */
+`;
+
+const CategoryTitle = styled.div`
+  width: 100%;
+  height: 4.375rem; /* 70px / 16 = 4.375rem */
+  padding: 0.625rem; /* 10px / 16 = 0.625rem */
+  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
+  font-size: 1.25rem; /* 20px / 16 = 1.25rem */
+  gap: 1.375rem; /* 22px / 16 = 1.375rem */
+  font-weight: 700;
+  padding-left: 20px;
+  @media screen and (max-width: 375px) {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 `;
