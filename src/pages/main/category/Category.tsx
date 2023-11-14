@@ -161,6 +161,10 @@ const CategoryTitle = styled.div`
   font-size: 1.25rem; /* 20px / 16 = 1.25rem */
   gap: 1.375rem; /* 22px / 16 = 1.375rem */
   font-weight: 700;
+  @media screen and (max-width: 375px) {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 `;
 
 const Filterbar = styled.div`

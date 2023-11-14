@@ -12,7 +12,7 @@ import Error from '../../../components/Error';
 import { MypageEditIcon, RightBackIcon } from '../../../assets/icon/icon';
 import RecentProducts from '../../../components/modal/RecentProducts';
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import HelmetTag from '../../../components/HelmetTag';
 
 function Mypage() {
   // 네비게이트 ----------------------------------------
@@ -63,7 +63,12 @@ function Mypage() {
 
   return (
     <div style={{ width: '100%' }} onClick={offModal}>
-      <Helmet title='내일은 최저가 | 마이페이지' />
+      <HelmetTag
+        title='내일은 최저가 | 마이페이지'
+        keywords='내일은 최저가 | 마이페이지'
+        description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+        url='https://lowest-price.store/'
+      />
       <Header>마이페이지</Header>
       <Scroll>
         <Wrap>

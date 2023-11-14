@@ -8,7 +8,7 @@ import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 import { toast } from 'react-toastify';
-import { Helmet } from 'react-helmet-async';
+import HelmetTag from '../../../components/HelmetTag';
 
 export default function EditMypage() {
   // 리액트 쿼리로 유저정보 가져오기 -----------------------------------------
@@ -86,7 +86,12 @@ export default function EditMypage() {
 
   return (
     <div style={{ width: '100%' }}>
-      <Helmet title='내일은 최저가 | 마이페이지 수정' />
+      <HelmetTag
+        title='내일은 최저가 | 마이페이지 수정'
+        keywords='내일은 최저가 | 마이페이지 수정'
+        description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+        url='https://lowest-price.store/'
+      />
       <Header>
         <h2>프로필 수정</h2>
         <CompleteButton

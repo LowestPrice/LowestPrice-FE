@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 import Cookies from 'js-cookie';
 import 'swiper/css';
@@ -11,10 +10,7 @@ import Topten from './topten/Topten';
 import SearchInput from './searchInput/SearchInput';
 import Category from './category/Category';
 import PageFooter from '../../components/footer/PageFooter';
-
-
-
-
+import HelmetTag from '../../components/HelmetTag';
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
@@ -46,7 +42,12 @@ export default function Main() {
         <Splash />
       ) : (
         <>
-          <Helmet title='내일은 최저가 | 홈' />
+          <HelmetTag
+            title='내일은 최저가 | 홈'
+            keywords='내일은 최저가 | 홈'
+            description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+            url='https://lowest-price.store/'
+          />
 
           <MainWrap
             onClick={() => {

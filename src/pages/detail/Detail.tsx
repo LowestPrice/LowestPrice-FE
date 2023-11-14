@@ -15,7 +15,7 @@ import SimilarProductList from './similar/SimilarProductList';
 import { GreyShareIcon } from '../../assets/icon/icon';
 import ShareFooter from '../../components/footer/ShareFooter';
 import { Product } from '../../type';
-import { Helmet } from 'react-helmet-async';
+import HelmetTag from '../../components/HelmetTag';
 
 function Detail() {
   // 상태 관리 ------------------------------------------------------
@@ -73,7 +73,12 @@ function Detail() {
 
   return (
     <>
-      <Helmet title={`내일은 최저가 | 상세페이지 | ${params.id}`} />
+      <HelmetTag
+        title={`내일은 최저가 | 상세페이지 | ${params.id}`}
+        keywords={`내일은 최저가 | 상세페이지 | ${params.id}`}
+        description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+        url='https://lowest-price.store/'
+      />
       <Wrap>
         <Header>
           <BackButton onClick={() => navigate(-1)}>
