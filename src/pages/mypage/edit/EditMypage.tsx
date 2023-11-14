@@ -19,7 +19,7 @@ export default function EditMypage() {
   // 상태 관리 -------------------------------------------------------------
 
   const [name, setName] = useState<string | undefined>(data.nickname);
-  // const [phoneNumber, setPhoneNumber] = useState<string | undefined>(data.phoneNumber);
+  const [phoneNumber, setPhoneNumber] = useState<number>(data.phone);
   const [imageFile, setImageFile]: any = useState();
   const [imageSrc, setImageSrc]: any = useState(data.image);
 
@@ -56,6 +56,9 @@ export default function EditMypage() {
     setName(e.target.value);
   };
 
+  const onChangePhoneNumber = (e: any) => {
+    setPhoneNumber(e.target.value);
+  };
   const userInfoMutation = useMutation(postUserinfo, {
     onSuccess: () => {
       console.log('mutate 완료');
@@ -89,7 +92,7 @@ export default function EditMypage() {
         <CompleteButton
           onClick={() => {
             userInfoMutation.mutate(
-              { name, imageFile },
+              { name, imageFile, phoneNumber },
               {
                 onSuccess: () => {
                   toast.success('수정되었습니다✅');
@@ -111,7 +114,7 @@ export default function EditMypage() {
           <ImageInput onChange={(e) => onUpload(e)} multiple type='file' accept='image/*' id='profileimage'></ImageInput>
           <EditImageLabel htmlFor='profileimage'>수정</EditImageLabel>
           <EditName onChange={onChangeName} value={name}></EditName>
-          {/* <EditPhoneNumber onChange={onChangeName} value={phoneNumber}></EditPhoneNumber> */}
+          <EditPhoneNumber onChange={onChangePhoneNumber} value={phoneNumber}></EditPhoneNumber>
           <Withdrawal onClick={onDeleteButtonHandler}>회원탈퇴</Withdrawal>
         </Profile>
       </Wrap>
@@ -183,15 +186,15 @@ const EditName = styled.input`
   color: black;
 `;
 
-// const EditPhoneNumber = styled.input`
-//   width: 155px;
-//   height: 40px;
-//   border-radius: 7px;
-//   margin-top: 10px;
-//   background-color: rgba(217, 217, 217, 1);
-//   border: none;
-//   color: black;
-// `;
+const EditPhoneNumber = styled.input`
+  width: 155px;
+  height: 40px;
+  border-radius: 7px;
+  margin-top: 10px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  color: black;
+`;
 
 const Withdrawal = styled.div`
   color: var(--gray02, #b5b5b5);

@@ -17,7 +17,7 @@ export default function Observer(props: Props) {
           props.handleIntersection();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0 }
     );
 
     if (target.current) {
