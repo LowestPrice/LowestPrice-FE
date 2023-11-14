@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
-import { getLikedMagazineLists } from '../../api/magazine';
 import { useNavigate } from 'react-router';
+
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+
+import { getLikedMagazineLists } from '../../api/magazine';
 
 const MagazineItem = () => {
   // 데이터 불러오기
@@ -9,14 +13,13 @@ const MagazineItem = () => {
   const navigate = useNavigate();
 
   if (isLoading) {
-    return <h1>로딩중입니다</h1>;
+    <Loading />;
   }
   if (isError) {
-    return <h1>에러가 발생했습니다.</h1>;
+    <Error />;
   }
 
   const isLiked = data?.data.data.length === 0 ? true : false;
-  console.log(isLiked);
 
   return isLiked ? (
     <BlankMessage>

@@ -24,7 +24,7 @@ const Heart: React.FC<HeartProps> = React.memo(({ like, onClick }) => {
 });
 
 // 해당하는 매거진의 좋아요 상태와 좋아요 수 업데이트
-const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount, index }) => {
+const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount }) => {
   const { handleLikeClick } = useLike(false, 0);
   return (
     <div>
@@ -32,8 +32,7 @@ const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount, index }) =>
         <Heart
           like={isLiked}
           onClick={(event) => {
-            handleLikeClick(event, magazineId, index);
-            console.log('찍힘');
+            handleLikeClick(event, magazineId);
           }}
         />
         <div>{likeCount}</div>

@@ -1,32 +1,26 @@
-import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Like from '../../Like';
+import Like from '../Like';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
 
-import { getMagazine } from '../../../../api/magazine';
+import { getMagazine } from '../../../api/magazine';
 
 const MagazineMainData = () => {
-  const [magazines, setMagazines] = useState<any[]>([]);
   const navigate = useNavigate();
 
   // 매거진 데이터 불러오기
   const { isLoading, isError, data } = useQuery('magazineData', getMagazine);
+  const magazines = data?.data;
   const isAdmin = data?.admin;
 
-  useEffect(() => {
-    if (data) {
-      const responseData = data.data;
-      setMagazines(responseData);
-    }
-  }, [data]);
-
   if (isLoading) {
-    return <h1>로딩중입니다</h1>;
+    <Loading />;
   }
   if (isError) {
-    return <h1>에러가 발생했습니다.</h1>;
+    <Error />;
   }
 
   return (
@@ -37,7 +31,8 @@ const MagazineMainData = () => {
         <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
         {isAdmin && <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>}
         <Scroll>
-          {magazines?.map((magazineData, index) => {
+          {/* return의 item부터 magazineItem 컴포넌트 만들어서 넣기 */}
+          {magazines?.map((magazineData: any, index: number) => {
             // html 마크업 제거 후 렌더링
             const textOnly = magazineData.content.replace(/<\/?[^>]+(>|$)/g, '');
             const displayText = textOnly.length > 53 ? `${textOnly.substring(0, 53)}...` : textOnly;
@@ -45,7 +40,7 @@ const MagazineMainData = () => {
               <Item key={magazineData.magazineId}>
                 <Box
                   key={index}
-                  onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}
+                  onClick={() => navigate(`/magazine/${magazineData.magazineId}`)}
                   style={index === magazines.length - 1 ? { marginBottom: '7rem' } : undefined}
                 >
                   <Img src={magazineData.mainImage} alt='매거진 메인이미지' />
@@ -54,7 +49,7 @@ const MagazineMainData = () => {
                     <Content>{displayText}</Content>
                     <Flex>
                       <div>{magazineData.editor}</div>
-                      <Like isLiked={magazineData.isLiked} magazineId={magazineData.magazineId} likeCount={magazineData.LikeMagazine} index={index} />
+                      <Like isLiked={magazineData.isLiked} magazineId={magazineData.magazineId} likeCount={magazineData.LikeMagazine} />
                     </Flex>
                   </BoxPadding>
                 </Box>
@@ -67,7 +62,7 @@ const MagazineMainData = () => {
   );
 };
 
-export default React.memo(MagazineMainData);
+export default MagazineMainData;
 
 const Container = styled.div`
   flex: 1;

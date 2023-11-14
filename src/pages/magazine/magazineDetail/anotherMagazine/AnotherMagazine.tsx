@@ -2,14 +2,12 @@ import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
 import styled from 'styled-components';
 
-import { getAnotherMagazine } from '../../../../../api/magazine';
+import { getAnotherMagazine } from '../../../../api/magazine';
 
 const AnotherMagazine = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { isLoading, isError, data } = useQuery(['anotherPosts', id], () => getAnotherMagazine(id), {
-    keepPreviousData: true,
-  });
+  const { isLoading, isError, data } = useQuery(['anotherPosts', id], () => getAnotherMagazine(id));
 
   const anotherMagazine = data?.data.data;
 
@@ -27,14 +25,19 @@ const AnotherMagazine = () => {
         <AnotherText>다른 매거진 보기</AnotherText>
       </Another>
       {anotherMagazine &&
-        anotherMagazine.map((magazine: any, index: any) => (
+        anotherMagazine.map((Anotehrmagazine: any, index: number) => (
           <AnotherContentButton
             key={index}
-            style={{ backgroundImage: `url(${magazine.mainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
-            onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
+            style={{
+              backgroundImage: `url(${Anotehrmagazine.mainImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+            onClick={() => navigate(`/magazine/${Anotehrmagazine.magazineId}`)}
           >
             <Overlay>
-              <AnotherContentTitle>{magazine.title}</AnotherContentTitle>
+              <AnotherContentTitle>{Anotehrmagazine.title}</AnotherContentTitle>
               <AnotherContentEditor>by 관리자</AnotherContentEditor>
             </Overlay>
           </AnotherContentButton>
