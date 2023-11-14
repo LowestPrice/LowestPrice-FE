@@ -49,8 +49,6 @@ function Detail() {
     setShare(!share);
   };
 
-  console.log(data);
-
   // 천 단위 콤마 찍기 -------------------------------------------------------------------------
 
   const currentPrice: string | undefined = data?.currentPrice.toLocaleString();

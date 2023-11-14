@@ -45,8 +45,6 @@ const RecentProducts: React.FC<{ toggleModal: () => void; isOpen: boolean }> = (
   // 각 상품 지우기
   const removeEachProduct = (productId: string) => {
     const updatedProducts = recentProducts.filter((id) => id !== String(productId));
-    console.log(productId, '상품id');
-    console.log(updatedProducts, '업데이트');
 
     localStorage.setItem('watched', JSON.stringify(updatedProducts));
     setRecentProducts(updatedProducts);
@@ -139,6 +137,7 @@ const ModalContent = styled.div<{ $isOpen: boolean }>`
   z-index: 1000;
   padding: 0 0.75rem;
   transition: all 380ms ease-in-out;
+  position: fixed;
 
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 80vw;
@@ -155,7 +154,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 5.625rem;
-
+  margin-bottom: 10px;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 80vw;
   }
@@ -255,6 +254,7 @@ const EachProductDelete = styled.button`
   z-index: 10;
   width: 30px;
   height: 30px;
+  margin-right: 8px;
 `;
 
 const DeleteFlex = styled.div`

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import MagazineData from './magazineMainData/MagazineMainData';
+import MagazineData from './MagazineMainData';
 import PageFooter from '../../../components/footer/PageFooter';
 import { BlueLogo } from '../../../assets/icon/icon';
 
