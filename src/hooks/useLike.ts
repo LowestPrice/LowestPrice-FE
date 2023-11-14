@@ -15,6 +15,7 @@ export const useLike = (initialLike: boolean, initialCount: number) => {
   const magazineLike = useMutation(postMagazineLike, {
     onSuccess: () => {
       queryClient.invalidateQueries('posts');
+      queryClient.invalidateQueries('magazineData');
     },
     onError: (error) => {
       console.error('좋아요 error 발생', error);
@@ -22,7 +23,7 @@ export const useLike = (initialLike: boolean, initialCount: number) => {
   });
 
   // 좋아요 버튼 클릭 시 실행, 좋아요 상태와 수를 업데이트
-  const handleLikeClick = (event: any, magazineId: string | number, index: number, setMagazines?: any) => {
+  const handleLikeClick = (event: any, magazineId: any, setMagazines?: any) => {
     event.stopPropagation();
     const accessToken = Cookies.get('accessToken');
     if (!accessToken) {
@@ -34,8 +35,8 @@ export const useLike = (initialLike: boolean, initialCount: number) => {
     if (setMagazines) {
       setMagazines((prevMagazines: any) => {
         const updatedMagazines = [...prevMagazines];
-        updatedMagazines[index].isLiked = !updatedMagazines[index].isLiked;
-        updatedMagazines[index].LikeMagazine += updatedMagazines[index].isLiked ? 1 : -1;
+        updatedMagazines[magazineId].isLiked = !updatedMagazines[magazineId].isLiked;
+        updatedMagazines[magazineId].LikeMagazine += updatedMagazines[magazineId].isLiked ? 1 : -1;
         return updatedMagazines;
       });
     }

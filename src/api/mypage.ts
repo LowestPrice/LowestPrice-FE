@@ -16,7 +16,6 @@ export const postUserinfo = async ({ name, imageFile, phoneNumber }: { name: any
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
-  console.log(accessToken);
 
   const formData = new FormData();
   formData.set('nickname', name);

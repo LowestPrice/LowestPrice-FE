@@ -1,4 +1,4 @@
-import MagazineEditingData from './magazineEditingData/MagazineEditingData';
+import MagazineEditingData from './MagazineEditingData';
 
 const MagazineEditing: React.FC = () => {
   return (

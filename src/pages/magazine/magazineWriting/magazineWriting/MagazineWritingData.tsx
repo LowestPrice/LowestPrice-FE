@@ -1,21 +1,20 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { useQueryClient, useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
-import { Helmet } from 'react-helmet-async';
 
-import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, Title, StyledImage, styleString, Container, Scroll } from '../../styles';
-import { BackIcon, AddImageIcon } from '../../../../../assets/icon/icon';
+import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll, Title } from '../styles';
+import { BackIcon, AddImageIcon } from '../../../../assets/icon/icon';
 
-import { postMagazine } from '../../../../../api/magazine';
+import { postMagazine, postQuillEditorPhoto } from '../../../../api/magazine';
 
 const MagazineWritingData = () => {
   // React Quill 글자 크기 커스텀
-  // const CustomSize = ReactQuill.Quill.import('attributors/style/size');
-  // CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
-  // ReactQuill.Quill.register(CustomSize, true);
+  const CustomSize = ReactQuill.Quill.import('attributors/style/size');
+  CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+  ReactQuill.Quill.register(CustomSize, true);
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -26,6 +25,8 @@ const MagazineWritingData = () => {
   const [image, setImage] = useState<any>(null);
   const [previewImage, setPreviewImage] = useState<string>('');
 
+  const quillRef = useRef<any>(null);
+
   const addPosts = useMutation(postMagazine, {
     onSuccess: () => {
       queryClient.invalidateQueries('posts');
@@ -35,15 +36,15 @@ const MagazineWritingData = () => {
     },
   });
 
-  const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const onTitleChangeHandler = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setTitle(e.target.value);
-  };
+  }, []);
 
-  const onContentChangeHandler = (value: string): void => {
+  const onContentChangeHandler = useCallback((value: string): void => {
     setContent(value);
-  };
+  }, []);
 
-  const imageHandler = async (e: any) => {
+  const onImageChangeHandler = async (e: any) => {
     const file = e.target.files ? e.target.files[0] : null;
     setImage(file);
     if (file) {
@@ -56,7 +57,7 @@ const MagazineWritingData = () => {
     }
   };
 
-  const onSubmitButtonHandler = (title: any, content: any, image: any) => {
+  const onSubmitButtonHandler = useCallback((title: any, content: any, image: any) => {
     addPosts.mutate(
       { title, content, image },
       {
@@ -69,6 +70,39 @@ const MagazineWritingData = () => {
         },
       }
     );
+  }, []);
+
+  // 퀼 에디터 사진 변환
+  const imageHandler = () => {
+    // 1. 이미지를 저장할 input type=file DOM을 만든다.
+    const input = document.createElement('input');
+    // 속성 써주기
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click(); // 에디터 이미지버튼을 클릭하면 이 input이 클릭된다.
+    // input이 클릭되면 파일 선택창이 나타난다.
+
+    // input에 변화가 생긴다면 = 이미지를 선택
+    input.addEventListener('change', async () => {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        // multer에 맞는 형식으로 데이터 만들어준다.
+
+        try {
+          const res = await postQuillEditorPhoto(file);
+          if (res.data) {
+            const imgUrl = res.data;
+            const editor = quillRef.current.getEditor();
+            const range = editor.getSelection();
+            editor.insertEmbed(range.index, 'image', imgUrl);
+          } else {
+            console.log('응답이 없습니다');
+          }
+        } catch (error) {
+          console.log('사진 업로드 실패했어요', error);
+        }
+      }
+    });
   };
 
   const modules = useMemo(() => {
@@ -78,20 +112,22 @@ const MagazineWritingData = () => {
           ['image'],
           [{ header: [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          // [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
-          // [{ font: [] }],
+          [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
+          [{ font: [] }],
           [{ size: ['small', false, 'large', 'huge'] }],
           [{ color: [] }, { background: [] }],
           [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
           [{ align: [] }],
         ],
+        handlers: {
+          image: imageHandler,
+        },
       },
     };
   }, []);
 
   return (
     <>
-      <Helmet title='내일은 최저가 | 매거진 작성' />
       <Container>
         <Scroll>
           <style dangerouslySetInnerHTML={{ __html: styleString }} />
@@ -105,7 +141,7 @@ const MagazineWritingData = () => {
             <PhotoDiv>
               <PhotoAdd>
                 <label>
-                  <input style={{ display: 'none' }} onChange={imageHandler} type='file' accept='image/*' />
+                  <input style={{ display: 'none' }} onChange={onImageChangeHandler} type='file' accept='image/*' />
                   <AddImageIcon />
                 </label>
               </PhotoAdd>
@@ -113,6 +149,7 @@ const MagazineWritingData = () => {
             <Title placeholder='제목' onChange={onTitleChangeHandler} value={title} />
             {previewImage && <StyledImage src={previewImage} alt='매거진 이미지' />}
             <ReactQuill
+              ref={quillRef}
               theme='snow'
               placeholder='내용을 입력하세요'
               onChange={onContentChangeHandler}
@@ -128,4 +165,4 @@ const MagazineWritingData = () => {
   );
 };
 
-export default MagazineWritingData;
+export default React.memo(MagazineWritingData);

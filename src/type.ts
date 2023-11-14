@@ -72,9 +72,9 @@ export interface DropDownProps {
 
 // 드롭다운 수정/삭제 부분 스타일 props로 적용하기 위한 type
 export interface DropDownListProps {
-  top: string;
+  $top: string;
   color: string;
-  borderRadius: string;
+  $borderradius: string;
 }
 
 // 차트 --------------------------------------------------------
@@ -136,10 +136,9 @@ export interface HeartButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 
 export interface LikeProps {
   isLiked: boolean;
-  magazineId: string;
+  magazineId: number;
   likeCount: number;
-  handleLikeClick: (event: React.MouseEvent, magazineId: string, index: number) => void;
-  index: number;
+  index?: number;
   style?: React.CSSProperties;
   isMounted?: boolean;
 }

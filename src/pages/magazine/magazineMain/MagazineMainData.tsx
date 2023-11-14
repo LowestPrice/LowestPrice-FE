@@ -1,53 +1,38 @@
-import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Like from '../../Like';
-import { useLike } from '../../../../hooks/useLike';
-import { BlueLogo } from '../../../../assets/icon/icon';
+import Like from '../Like';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
 
-import { getMagazine } from '../../../../api/magazine';
+import { getMagazine } from '../../../api/magazine';
 
 const MagazineMainData = () => {
-  const [magazines, setMagazines] = useState<any[]>([]);
   const navigate = useNavigate();
 
   // 매거진 데이터 불러오기
   const { isLoading, isError, data } = useQuery('magazineData', getMagazine);
+  const magazines = data?.data;
   const isAdmin = data?.admin;
 
-  useEffect(() => {
-    if (data) {
-      const responseData = data.data;
-      setMagazines(responseData);
-    }
-  }, [data]);
-
-  // 좋아요 클릭 시 좋아요 상태와 좋아요 수 업데이트
-  const { handleLikeClick } = useLike(false, 0);
-
   if (isLoading) {
-    return <h1>로딩중입니다</h1>;
+    <Loading />;
   }
   if (isError) {
-    return <h1>에러가 발생했습니다.</h1>;
+    <Error />;
   }
 
   return (
     <>
-      <Header onClick={() => navigate('/magazine')}>
-        <BlueLogo />
-        <LogoTitle>매거진</LogoTitle>
-      </Header>
       <Container>
         <Line></Line>
         <Title>Apple 트렌드</Title>
         <Subtitle>IT 트렌드, 여기서 볼 수 있어요</Subtitle>
         {isAdmin && <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>}
-
         <Scroll>
-          {magazines?.map((magazineData, index) => {
+          {/* return의 item부터 magazineItem 컴포넌트 만들어서 넣기 */}
+          {magazines?.map((magazineData: any, index: number) => {
             // html 마크업 제거 후 렌더링
             const textOnly = magazineData.content.replace(/<\/?[^>]+(>|$)/g, '');
             const displayText = textOnly.length > 53 ? `${textOnly.substring(0, 53)}...` : textOnly;
@@ -55,22 +40,16 @@ const MagazineMainData = () => {
               <Item key={magazineData.magazineId}>
                 <Box
                   key={index}
-                  onClick={() => navigate(`/magazine/${magazineData.magazineId}`, { state: { index } })}
+                  onClick={() => navigate(`/magazine/${magazineData.magazineId}`)}
                   style={index === magazines.length - 1 ? { marginBottom: '7rem' } : undefined}
                 >
-                  <Img src={magazineData.mainImage} />
+                  <Img src={magazineData.mainImage} alt='매거진 메인이미지' />
                   <BoxPadding>
                     <BoxTitle>{magazineData.title}</BoxTitle>
                     <Content>{displayText}</Content>
                     <Flex>
                       <div>{magazineData.editor}</div>
-                      <Like
-                        isLiked={magazineData.isLiked}
-                        magazineId={magazineData.magazineId}
-                        likeCount={magazineData.LikeMagazine}
-                        handleLikeClick={(event: any) => handleLikeClick(event, magazineData.magazineId, index, setMagazines)}
-                        index={index}
-                      />
+                      <Like isLiked={magazineData.isLiked} magazineId={magazineData.magazineId} likeCount={magazineData.LikeMagazine} />
                     </Flex>
                   </BoxPadding>
                 </Box>
@@ -84,33 +63,6 @@ const MagazineMainData = () => {
 };
 
 export default MagazineMainData;
-
-const Header = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 1.62rem;
-  padding-bottom: 1.12rem;
-  padding-left: 1.25rem;
-  padding-right: 17.62rem;
-  cursor: pointer;
-
-  @media screen and (max-width: 743px) and (min-width: 376px) {
-    width: 100%;
-  }
-  @media screen and (min-width: 744px) {
-    width: 744px;
-  }
-`;
-
-const LogoTitle = styled.div`
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 110%;
-  margin-left: 0.25rem;
-  width: 2.9375rem;
-`;
 
 const Container = styled.div`
   flex: 1;
