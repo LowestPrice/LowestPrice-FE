@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
 
-import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll, Title } from '../styles';
+import { FlexBox, Button, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, Container, Scroll, Title } from '../styles';
 import { BackIcon, AddImageIcon } from '../../../../assets/icon/icon';
 
 import { postMagazine, postQuillEditorPhoto } from '../../../../api/magazine';
@@ -123,7 +123,6 @@ const MagazineWritingData = () => {
     <>
       <Container>
         <Scroll>
-          <style dangerouslySetInnerHTML={{ __html: styleString }} />
           <FlexBox>
             <Button onClick={() => navigate('/magazine')}>
               <BackIcon />

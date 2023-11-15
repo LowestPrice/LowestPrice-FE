@@ -19,8 +19,6 @@ export default function Login() {
   //   temporaryLogin();
   // };
 
-  // 화면 ===============================================================================
-
   return (
     <div style={{ width: '100%' }}>
       <HelmetTag

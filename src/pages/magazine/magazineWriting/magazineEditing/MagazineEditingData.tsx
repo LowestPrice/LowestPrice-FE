@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 
-import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, styleString, Container, Scroll } from '../styles';
+import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, Container, Scroll } from '../styles';
 import { AddImageIcon } from '../../../../assets/icon/icon';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
@@ -141,7 +141,6 @@ const MagazineEditingData = () => {
     <>
       <Container>
         <Helmet title={`내일은 최저가 | 매거진 수정 | ${id}`} />
-        <style dangerouslySetInnerHTML={{ __html: styleString }} />
         <FlexBox>
           <Button onClick={() => navigate('/magazine')}></Button>
           <Button onClick={() => onSubmitButtonHandler(id, newTitle, newContent, newMainImage)}>수정</Button>
