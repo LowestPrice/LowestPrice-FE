@@ -15,13 +15,13 @@ const pop = keyframes`
 `;
 
 // like의 값(boolean)에 따라 다른 아이콘을 보여줌
-const Heart: React.FC<HeartProps> = React.memo(({ like, onClick }) => {
+const Heart: React.FC<HeartProps> = ({ like, onClick }) => {
   return (
     <HeartButton $like={like} onClick={onClick} id='HeartButton' aria-label='Heartbutton'>
       {like ? <ColorHeartIcon /> : <LineHeartIcon />}
     </HeartButton>
   );
-});
+};
 
 // 해당하는 매거진의 좋아요 상태와 좋아요 수 업데이트
 const Like: React.FC<LikeProps> = ({ isLiked, magazineId, likeCount }) => {

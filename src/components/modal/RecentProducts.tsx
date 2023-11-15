@@ -62,7 +62,7 @@ const RecentProducts: React.FC<{ toggleModal: () => void; isOpen: boolean }> = (
   }
 
   return (
-    <>
+    <Modal>
       <ModalContent $isOpen={isOpen}>
         <Scroll>
           <Position>
@@ -118,11 +118,15 @@ const RecentProducts: React.FC<{ toggleModal: () => void; isOpen: boolean }> = (
           </ContainerWrap>
         </Scroll>
       </ModalContent>
-    </>
+    </Modal>
   );
 };
 
 export default RecentProducts;
+
+const Modal = styled.div`
+  position: fixed;
+`;
 
 const ModalContent = styled.div<{ $isOpen: boolean }>`
   width: calc(20.9375rem - 1.5rem);
@@ -136,7 +140,7 @@ const ModalContent = styled.div<{ $isOpen: boolean }>`
   border-radius: 0.5rem;
   z-index: 1000;
   padding: 0 0.75rem;
-  transition: all 380ms ease-in-out;
+  transition: height 380ms ease-in-out;
 
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 80vw;
@@ -153,6 +157,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+  position: relative;
+
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 80vw;
   }
@@ -163,6 +169,7 @@ const Container = styled.div`
 
 const ContainerWrap = styled.div`
   padding-top: 150px;
+  padding-bottom: 100px;
 `;
 
 const Title = styled.div`
@@ -198,7 +205,7 @@ const ProductName = styled.div`
   line-height: 111.5%;
   margin-bottom: 0.875rem;
   @media screen and (max-width: 743px) and (min-width: 376px) {
-    width: 100%;
+    width: 88%;
     font-size: 1rem;
   }
   @media screen and (min-width: 744px) {
@@ -249,10 +256,12 @@ const PercentageWrap = styled.div`
 const EachProductDelete = styled.button`
   background-color: transparent;
   border: none;
-  z-index: 10;
+  /* z-index: 10; */
   width: 30px;
   height: 30px;
   margin-right: 8px;
+  position: absolute;
+  right: 0px;
 `;
 
 const DeleteFlex = styled.div`

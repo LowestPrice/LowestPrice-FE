@@ -157,4 +157,4 @@ const MagazineWritingData = () => {
   );
 };
 
-export default React.memo(MagazineWritingData);
+export default MagazineWritingData;

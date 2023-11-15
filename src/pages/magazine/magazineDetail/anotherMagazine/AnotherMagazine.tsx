@@ -61,6 +61,7 @@ const AnotherContentButton = styled.button`
   background-repeat: no-repeat;
   border: 0.0625rem solid #fff;
   position: relative;
+  width: 100%;
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
   }
