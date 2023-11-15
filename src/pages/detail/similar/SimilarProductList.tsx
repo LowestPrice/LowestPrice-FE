@@ -10,13 +10,19 @@ type Props = {
 };
 
 function SimilarProductList(props: Props) {
+  // 유사상품 데이터 가져오기 ------------------------------------------------------------------------
+
   const { status, data } = useQuery('similarProducts', () => getSimilarProducts(props.productId));
+
   if (status === 'loading') {
     return <Loading />;
   }
   if (status === 'error') {
     return <Error />;
   }
+
+  // 화면 ========================================================
+
   return (
     <Wrapper>
       {data.length !== 0 ? (

@@ -8,8 +8,13 @@ interface Props {
 }
 
 function SearchKeywordItem(props: Props) {
+  // 최근 검색어 리스트 상태 관리 -----------------------------------------------------------
+
   const [recentKeywords, setRecentKeywords] = useState<{ id: string; keyword: string }[]>([]);
+
   const navigate = useNavigate();
+
+  // 최근 검색어 리스트 불러오기 ------------------------------------------------------------
 
   useEffect(() => {
     const storedRecentList = localStorage.getItem('recentSearchKeywordList');
@@ -24,11 +29,15 @@ function SearchKeywordItem(props: Props) {
     setRecentKeywords(recentList);
   }, []);
 
+  // 최근 검색어 삭제하기 -------------------------------------------------------------------
+
   const handleRemoveButton = () => {
     const newRecentList = [...recentKeywords.filter((item) => item.id !== props.id)];
     localStorage.setItem('recentSearchKeywordList', JSON.stringify(newRecentList));
     setRecentKeywords(newRecentList);
   };
+
+  // 화면 ====================================================================================
 
   return (
     <Wrap

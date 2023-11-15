@@ -1,16 +1,25 @@
 import styled from 'styled-components';
-import { loginWithKakao } from '../../api/login';
+
 import PageFooter from '../../components/footer/PageFooter';
-// import { temporaryLogin } from '../../api/login';
 import HelmetTag from '../../components/HelmetTag';
 
+import { loginWithKakao } from '../../api/login';
+// import { temporaryLogin } from '../../api/login';
+
 export default function Login() {
+  // 카카오 로그인하기 ----------------------
+
   const handleKakaoLogin = () => {
     loginWithKakao();
   };
+
+  // 개발환경에서 카카오 로그인하기 ----------
+
   // const handleTempLogin = () => {
   //   temporaryLogin();
   // };
+
+  // 화면 ===============================================================================
 
   return (
     <div style={{ width: '100%' }}>

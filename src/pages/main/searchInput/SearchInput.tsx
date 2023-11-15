@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
 import uuid from 'react-uuid';
+
 import SearchHistory from './recentSearch/RecentSearchList';
 
 interface Props {
