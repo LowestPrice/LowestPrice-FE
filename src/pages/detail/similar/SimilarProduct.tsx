@@ -1,15 +1,19 @@
-import styled from 'styled-components';
-import { Product } from '../../../type';
 import { useNavigate } from 'react-router';
+import styled from 'styled-components';
+
+import { Product } from '../../../type';
 
 interface Props extends Product {}
 
 function SimilarProduct(props: Props) {
-  // 상품 가격 천 단위 콤마 생성하기 -------------------------------
   const navigate = useNavigate();
 
+  // 상품 가격 천 단위 콤마 생성하기 -------------------------------
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
+
+  // 화면 =============================================================
+  
   return (
     <div>
       <Wrap
