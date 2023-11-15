@@ -97,7 +97,7 @@ const RecentProducts: React.FC<{ toggleModal: () => void; isOpen: boolean }> = (
                                 removeEachProduct(product.productId);
                               }}
                             >
-                              <DeleteIcon />
+                              <DeleteIcon style={{ paddingRight: '10px' }} />
                             </EachProductDelete>
                           </NameDelete>
                           <PriceFlex>
