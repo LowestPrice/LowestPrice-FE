@@ -78,11 +78,11 @@ function Topten() {
   const NextIndex = index === 9 ? 0 : index + 1;
   const moreNextIndex = index === 9 ? 1 : index === 8 ? 0 : index + 2;
 
-  // 화면 ----------------------------------------------------------------
+  // 화면 ==============================================================
 
   return (
     <Wrapper>
-      <LeftButton type='button' onClick={decreaseClick}>
+      <LeftButton type='button' onClick={decreaseClick} aria-label='leftButton'>
         <i className='fas fa-chevron-left'></i>
       </LeftButton>
       <Row
@@ -115,7 +115,7 @@ function Topten() {
             <ToptenProduct {...data[NextIndex]} index={NextIndex} />
           </PrivewProductWrap>
         </Container>
-        
+
         <Container>
           <PrivewProductWrap>
             <ToptenProduct {...data[moreNextIndex]} index={moreNextIndex} />
@@ -123,7 +123,7 @@ function Topten() {
         </Container>
       </Row>
 
-      <RightButton type='button' onClick={increaseClick}>
+      <RightButton type='button' onClick={increaseClick} aria-label='rightButton'>
         <i className='fas fa-chevron-right'></i>
       </RightButton>
     </Wrapper>

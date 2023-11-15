@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Product } from '../../../type';
 
-import Alarmbell from '../../../assets/icon/Alarmbell';
+// import Alarmbell from '../../../assets/icon/Alarmbell';
 import getParametersForUnsplash from '../../../optimization/imgcdn';
 
 interface Props extends Product {
@@ -18,6 +18,8 @@ function ToptenProduct(props: Props) {
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
 
+  // 화면 =========================================================
+
   return (
     <Wrap
       onClick={() => {
@@ -25,13 +27,7 @@ function ToptenProduct(props: Props) {
       }}
     >
       <ProductImageWrap />
-      <BellImage
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <Alarmbell productId={props.productId} isAlertOn={props.isAlertOn} isOutOfStock={props.isOutOfStock} />
-      </BellImage>
+
       <div className='rank'>{props.index + 1}</div>
       <Content>
         <div>
@@ -42,7 +38,7 @@ function ToptenProduct(props: Props) {
         <div className='title'>{props.productName}</div>
       </Content>
       <ImageWrap>
-        <ProductImage src={props.productImage + getParametersForUnsplash(257.997, 257.997, 80, 'jpg')} />
+        <ProductImage src={props.productImage + getParametersForUnsplash(257.997, 257.997, 80, 'jpg')} alt='toptenImage' />
       </ImageWrap>
     </Wrap>
   );
@@ -78,15 +74,6 @@ const ProductImageWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const BellImage = styled.div`
-  width: 39.19px;
-  height: 39.19px;
-  z-index: 10;
-  position: absolute;
-  right: 10px;
-  top: 10px;
 `;
 
 const Content = styled.div`

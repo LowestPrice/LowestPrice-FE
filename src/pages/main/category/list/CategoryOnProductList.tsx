@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
 
+import { Product } from '../../../../type';
+import { infiniteCategory, infiniteCategoryFilter } from '../../../../infiniteQueries/category';
+
 import CategoryOnProduct from '../CategoryProduct';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
-import { Product } from '../../../../type';
 import Observer from '../../../../components/Observer';
-import { infiniteCategory, infiniteCategoryFilter } from '../../../../infiniteQueries/category';
 
 interface Props {
   categoryId: number;
@@ -117,13 +118,16 @@ const Wrap = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   position: absolute;
-  top: 210px;
+  top: 117px;
+  right: 2px;
   @media screen and (min-width: 744px) {
     width: 744px;
+    right: -6px;
   }
   @media screen and (max-width: 743px) and (min-width: 376px) {
     width: 100%;
     justify-content: space-around;
+    right: -6px;
   }
 `;
 

@@ -1,11 +1,12 @@
-import SearchProduct from './SearchProduct';
-import styled from 'styled-components';
 import { useEffect } from 'react';
-import { Product } from '../../type';
-import Loading from '../../components/Loading';
 import { infiniteSearch, infiniteSearchFilter } from '../../infiniteQueries/search';
-import Observer from '../../components/Observer';
 import { toast } from 'react-toastify';
+import styled from 'styled-components';
+
+import { Product } from '../../type';
+import SearchProduct from './SearchProduct';
+import Loading from '../../components/Loading';
+import Observer from '../../components/Observer';
 
 interface Props {
   searchWord: string | undefined;

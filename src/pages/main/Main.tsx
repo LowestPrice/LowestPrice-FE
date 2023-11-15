@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Cookies from 'js-cookie';
-
-import Topten from './topten/Topten';
-import PageFooter from '../../components/footer/PageFooter';
-import Logo from '../../assets/icon/Logo';
-
-import Splash from './Splash';
-
 import 'swiper/css';
 import 'swiper/css/scrollbar';
+
+import Logo from '../../assets/icon/Logo';
+import Splash from './Splash';
+import Topten from './topten/Topten';
 import SearchInput from './searchInput/SearchInput';
 import Category from './category/Category';
-import { Helmet } from 'react-helmet-async';
+import PageFooter from '../../components/footer/PageFooter';
+import HelmetTag from '../../components/HelmetTag';
 
 export default function Main() {
   // 상태 관리 ------------------------------------------------------------------------------------------------
@@ -29,8 +27,8 @@ export default function Main() {
       }, 1500);
       return () => clearTimeout(splashTime);
     }
-    console.log('메인페이지 렌더링');
   });
+  console.log('메인페이지 렌더링');
 
   // 검색창 포커스 onOff -----------------------------------
 
@@ -44,7 +42,12 @@ export default function Main() {
         <Splash />
       ) : (
         <>
-          <Helmet title='내일은 최저가 | 홈' />
+          <HelmetTag
+            title='내일은 최저가 | 홈'
+            keywords='내일은 최저가 | 홈'
+            description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+            url='https://lowest-price.store/'
+          />
 
           <MainWrap
             onClick={() => {
@@ -65,6 +68,10 @@ export default function Main() {
                   <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
                 </Title>
                 <Topten />
+                <SubTitle>
+                  <div>Apple 제품</div>
+                  <div>가장 저렴할 때 구매하세요. 🔻</div>
+                </SubTitle>
               </Wrap>
 
               <Category />
@@ -160,3 +167,17 @@ const Title = styled.div`
   margin-top: 1.25rem; /* 20px / 16 = 1.25rem */
 `;
 
+const SubTitle = styled.div`
+  width: 100%;
+  height: 4.375rem; /* 70px / 16 = 4.375rem */
+  padding: 0.625rem; /* 10px / 16 = 0.625rem */
+  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
+  font-size: 1.25rem; /* 20px / 16 = 1.25rem */
+  gap: 1.375rem; /* 22px / 16 = 1.375rem */
+  font-weight: 700;
+  padding-left: 20px;
+  @media screen and (max-width: 375px) {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+`;

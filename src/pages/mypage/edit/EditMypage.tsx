@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import styled from 'styled-components';
-import { getUserinfo, postUserinfo } from '../../../api/mypage';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+
+import { getUserinfo, postUserinfo } from '../../../api/mypage';
 import { DeleteIdWithKakao } from '../../../api/login';
+
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
-import { toast } from 'react-toastify';
-import { Helmet } from 'react-helmet-async';
+import HelmetTag from '../../../components/HelmetTag';
 
 export default function EditMypage() {
-  // 리액트 쿼리로 유저정보 가져오기 -----------------------------------------
+  // 유저정보 가져오기  ------------------------------------------------------
 
   const { data, status } = useQuery('userInfo', getUserinfo);
   const queryClient = useQueryClient();
 
-  // 상태 관리 -------------------------------------------------------------
+  // 이름, 전화번호, 프로필사진 상태 관리 -------------------------------------
 
   const [name, setName] = useState<string | undefined>(data.nickname);
+  const [phoneNumber, setPhoneNumber] = useState<number>(data.phone);
   const [imageFile, setImageFile]: any = useState();
   const [imageSrc, setImageSrc]: any = useState(data.image);
 
@@ -28,7 +31,6 @@ export default function EditMypage() {
   if (status === 'error') {
     return <Error />;
   }
-  console.log(data);
 
   // 네비게이트 ---------------------------------------------------------------
 
@@ -55,6 +57,9 @@ export default function EditMypage() {
     setName(e.target.value);
   };
 
+  const onChangePhoneNumber = (e: any) => {
+    setPhoneNumber(e.target.value);
+  };
   const userInfoMutation = useMutation(postUserinfo, {
     onSuccess: () => {
       console.log('mutate 완료');
@@ -82,13 +87,18 @@ export default function EditMypage() {
 
   return (
     <div style={{ width: '100%' }}>
-      <Helmet title='내일은 최저가 | 마이페이지 수정' />
+      <HelmetTag
+        title='내일은 최저가 | 마이페이지 수정'
+        keywords='내일은 최저가 | 마이페이지 수정'
+        description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+        url='https://lowest-price.store/'
+      />
       <Header>
         <h2>프로필 수정</h2>
         <CompleteButton
           onClick={() => {
             userInfoMutation.mutate(
-              { name, imageFile },
+              { name, imageFile, phoneNumber },
               {
                 onSuccess: () => {
                   toast.success('수정되었습니다✅');
@@ -110,6 +120,7 @@ export default function EditMypage() {
           <ImageInput onChange={(e) => onUpload(e)} multiple type='file' accept='image/*' id='profileimage'></ImageInput>
           <EditImageLabel htmlFor='profileimage'>수정</EditImageLabel>
           <EditName onChange={onChangeName} value={name}></EditName>
+          <EditPhoneNumber onChange={onChangePhoneNumber} value={phoneNumber}></EditPhoneNumber>
           <Withdrawal onClick={onDeleteButtonHandler}>회원탈퇴</Withdrawal>
         </Profile>
       </Wrap>
@@ -176,6 +187,16 @@ const EditName = styled.input`
   height: 40px;
   border-radius: 7px;
   margin-top: 60px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  color: black;
+`;
+
+const EditPhoneNumber = styled.input`
+  width: 155px;
+  height: 40px;
+  border-radius: 7px;
+  margin-top: 10px;
   background-color: rgba(217, 217, 217, 1);
   border: none;
   color: black;

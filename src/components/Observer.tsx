@@ -13,27 +13,29 @@ export default function Observer(props: Props) {
     const observer = new IntersectionObserver(
       ([entry]: IntersectionObserverEntry[]) => {
         if (entry.isIntersecting) {
+          console.log('trigger on');
           props.handleIntersection();
         }
       },
-      { threshold: 1 }
+      { threshold: 0 }
     );
 
     if (target.current) {
+      // console.log('trigger on');
       observer.observe(target.current);
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [props.handleIntersection]);
 
   return (
     <Wrap ref={target}>
-      <img src={spinner} alt='로딩 중' />
+      <img src={spinner} alt='로딩 중' width='50' height='50' />
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
   width: 100%;
-  height: 0.625rem;
+  height: 20px;
 `;

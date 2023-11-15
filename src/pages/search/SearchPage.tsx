@@ -9,7 +9,7 @@ import { Filter } from '../../type';
 import SearchProductList from './SearchProductList';
 import PageFooter from '../../components/footer/PageFooter';
 import FilterOption from './FilterOption';
-import { Helmet } from 'react-helmet-async';
+import HelmetTag from '../../components/HelmetTag';
 
 function Search() {
   // params 를 통해 productId 받아오기 -------------------------
@@ -65,7 +65,12 @@ function Search() {
 
   return (
     <Wrap>
-      <Helmet title={`내일은 최저가 | 검색 | ${params.searchWord}`} />
+      <HelmetTag
+        title='내일은 최저가 | 검색'
+        keywords='내일은 최저가 | 검색'
+        description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+        url='https://lowest-price.store/'
+      />
 
       <form
         onSubmit={(e) => {

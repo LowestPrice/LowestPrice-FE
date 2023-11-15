@@ -1,37 +1,45 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { toast } from 'react-toastify';
 
 import NProductList from './NProductList/NProductList';
-import NPriceAlarmList from './NPriceAlarmList/NPriceAlarmList';
+import NPriceAlarmList from './NPriceAlarmList/NAlarmList';
 import PageFooter from '../../components/footer/PageFooter';
-import { Helmet } from 'react-helmet-async';
+import HelmetTag from '../../components/HelmetTag';
 
 type Props = {};
 
 export default function Notification({}: Props) {
+  // 알림상품 & 알림글 탭 상태관리 --------------------------
+
   const [tab, setTab] = useState<boolean>(true);
 
-  // 알림상품목록 ------------------------------------
+  // 알림상품 전환 -----------------------------------------
 
   const switchProductTab = (): void => {
     setTab(true);
   };
 
-  // 알림 글 목록 ------------------------------------
+  // 알림 글 전환 ------------------------------------------
 
   const switchPriceTab = (): void => {
-    toast.error('죄송합니다. 해당 정보는 개발중에 있습니다. 조금만 기다려주시면 감사하겠습니다.😂');
-    // setTab(false);
+    setTab(false);
   };
+
+  // 화면 ==================================================
 
   return (
     <Wrap>
-      <Helmet title='내일은 최저가 | 알림' />
+      <HelmetTag
+        title='내일은 최저가 | 알림'
+        keywords='내일은 최저가 | 알림'
+        description='쿠팡에서 스크래핑해 온 데이터로 만든 Apple 제품 검색 웹사이트입니다.'
+        url='https://lowest-price.store/'
+      />
 
       <Header>
         <MyNotification>내 알림</MyNotification>
       </Header>
+
       <Navigate>
         <ProductList
           $tab={tab}
@@ -50,6 +58,7 @@ export default function Notification({}: Props) {
           가격변동알림
         </PriceAlarmList>
       </Navigate>
+
       {tab ? <NProductList /> : <NPriceAlarmList />}
       <PageFooter />
     </Wrap>

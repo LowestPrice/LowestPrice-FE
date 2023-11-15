@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
 import { getOptions } from '../../../api/product';
@@ -7,7 +8,6 @@ import { getOptions } from '../../../api/product';
 import OptionModalItem from './OptionModalItem';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
-import { useNavigate } from 'react-router';
 
 interface Props {
   realId: string | undefined;
@@ -15,6 +15,8 @@ interface Props {
 }
 
 function OptionModal(props: Props) {
+  // 옵션(셀렉트) 모달 on/off 상태 관리 -------------------------------------
+
   const [isOpenOption, setIsOpenOption] = useState<boolean>(false);
 
   const navigate = useNavigate();

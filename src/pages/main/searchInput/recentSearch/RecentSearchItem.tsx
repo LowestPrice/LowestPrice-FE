@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
@@ -7,22 +8,36 @@ interface Props {
 }
 
 function SearchKeywordItem(props: Props) {
+  // 최근 검색어 리스트 상태 관리 -----------------------------------------------------------
+
+  const [recentKeywords, setRecentKeywords] = useState<{ id: string; keyword: string }[]>([]);
+
   const navigate = useNavigate();
 
-  const storedRecentList = localStorage.getItem('recentSearchKeywordList');
+  // 최근 검색어 리스트 불러오기 ------------------------------------------------------------
 
-  let recentList: { id: string; keyword: string }[] = [];
+  useEffect(() => {
+    const storedRecentList = localStorage.getItem('recentSearchKeywordList');
+    let recentList: { id: string; keyword: string }[] = [];
 
-  if (storedRecentList) {
-    recentList = JSON.parse(storedRecentList);
-  }
+    recentList = storedRecentList ? JSON.parse(storedRecentList) : {};
 
-  const handleXButton = () => {
-    console.log('지웁니다.');
-    const newRecentList = [...recentList.filter((item) => item.id !== props.id)];
+    if (recentList?.length > 5) {
+      recentList = recentList?.slice(-5);
+    }
+
+    setRecentKeywords(recentList);
+  }, []);
+
+  // 최근 검색어 삭제하기 -------------------------------------------------------------------
+
+  const handleRemoveButton = () => {
+    const newRecentList = [...recentKeywords.filter((item) => item.id !== props.id)];
     localStorage.setItem('recentSearchKeywordList', JSON.stringify(newRecentList));
-    console.log('지웠습니다.');
+    setRecentKeywords(newRecentList);
   };
+
+  // 화면 ====================================================================================
 
   return (
     <Wrap
@@ -46,7 +61,7 @@ function SearchKeywordItem(props: Props) {
       <XButton
         onClick={(e) => {
           e.stopPropagation();
-          handleXButton();
+          handleRemoveButton();
         }}
       >
         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>

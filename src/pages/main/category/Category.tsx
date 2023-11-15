@@ -13,7 +13,9 @@ import FilterOption from './FilterOption';
 import CategoryList from './list/CategoryProductList';
 
 function Category() {
-  const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([true, false, false, false, false]);
+  // (카테고리 이름, 카테고리 버튼 색), (필터 이름, 필터 버튼 클릭 유무, 필터 버튼 색), 품절상품 상태 관리 ---------------
+
+  const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([true, false, false, false, false, false]);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [filterName, setFilterName] = useState<string>('');
@@ -80,11 +82,6 @@ function Category() {
 
   return (
     <CategoryWrap>
-      <CategoryTitle>
-        <div>Apple 제품</div>
-        <div>가장 저렴할 때 구매하세요. 🔻</div>
-      </CategoryTitle>
-
       <Swiper
         modules={[Scrollbar]}
         scrollbar={{ draggable: true, hide: true }}
@@ -154,15 +151,6 @@ const CategoryWrap = styled.div`
   }
 `;
 
-const CategoryTitle = styled.div`
-  height: 4.375rem; /* 70px / 16 = 4.375rem */
-  padding: 0.625rem; /* 10px / 16 = 0.625rem */
-  border-bottom: 0.0625rem solid rgba(243, 243, 243, 1); /* 1px / 16 = 0.0625rem */
-  font-size: 1.25rem; /* 20px / 16 = 1.25rem */
-  gap: 1.375rem; /* 22px / 16 = 1.375rem */
-  font-weight: 700;
-`;
-
 const Filterbar = styled.div`
   width: 100%;
   height: 1.9375rem; /* 31px / 16 = 1.9375rem */
@@ -172,7 +160,7 @@ const Filterbar = styled.div`
   font-size: 0.75rem; /* 12px / 16 = 0.75rem */
   color: var(--gray03, #6f6f6f);
   position: absolute;
-  top: 10.875rem; /* 174px / 16 = 10.875rem */
+  top: 4.875rem; /* 174px / 16 = 10.875rem */
 `;
 
 const Options = styled.div`
