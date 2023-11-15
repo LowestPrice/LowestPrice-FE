@@ -18,6 +18,8 @@ function ToptenProduct(props: Props) {
   const currentPrice = props.currentPrice.toLocaleString();
   const originalPrice = props.originalPrice.toLocaleString();
 
+  // 화면 =========================================================
+
   return (
     <Wrap
       onClick={() => {

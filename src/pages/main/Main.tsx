@@ -68,10 +68,10 @@ export default function Main() {
                   <div className='subTitle'>할인율이 가장 높은 상품이에요</div>
                 </Title>
                 <Topten />
-                <CategoryTitle>
+                <SubTitle>
                   <div>Apple 제품</div>
                   <div>가장 저렴할 때 구매하세요. 🔻</div>
-                </CategoryTitle>
+                </SubTitle>
               </Wrap>
 
               <Category />
@@ -167,7 +167,7 @@ const Title = styled.div`
   margin-top: 1.25rem; /* 20px / 16 = 1.25rem */
 `;
 
-const CategoryTitle = styled.div`
+const SubTitle = styled.div`
   width: 100%;
   height: 4.375rem; /* 70px / 16 = 4.375rem */
   padding: 0.625rem; /* 10px / 16 = 0.625rem */

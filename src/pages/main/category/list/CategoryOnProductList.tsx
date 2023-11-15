@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
 
+import { Product } from '../../../../type';
+import { infiniteCategory, infiniteCategoryFilter } from '../../../../infiniteQueries/category';
+
 import CategoryOnProduct from '../CategoryProduct';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
-import { Product } from '../../../../type';
 import Observer from '../../../../components/Observer';
-import { infiniteCategory, infiniteCategoryFilter } from '../../../../infiniteQueries/category';
 
 interface Props {
   categoryId: number;

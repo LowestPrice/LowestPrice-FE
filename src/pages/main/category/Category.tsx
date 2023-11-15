@@ -13,6 +13,8 @@ import FilterOption from './FilterOption';
 import CategoryList from './list/CategoryProductList';
 
 function Category() {
+  // (카테고리 이름, 카테고리 버튼 색), (필터 이름, 필터 버튼 클릭 유무, 필터 버튼 색), 품절상품 상태 관리 ---------------
+
   const [isCategorySelect, setIsCategorySelect] = useState<boolean[]>([true, false, false, false, false, false]);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [isFilter, setIsFilter] = useState<boolean>(false);

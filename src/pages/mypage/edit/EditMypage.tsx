@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import styled from 'styled-components';
-import { getUserinfo, postUserinfo } from '../../../api/mypage';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+
+import { getUserinfo, postUserinfo } from '../../../api/mypage';
 import { DeleteIdWithKakao } from '../../../api/login';
+
 import PageFooter from '../../../components/footer/PageFooter';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
-import { toast } from 'react-toastify';
 import HelmetTag from '../../../components/HelmetTag';
 
 export default function EditMypage() {
-  // 리액트 쿼리로 유저정보 가져오기 -----------------------------------------
+  // 유저정보 가져오기  ------------------------------------------------------
 
   const { data, status } = useQuery('userInfo', getUserinfo);
   const queryClient = useQueryClient();
 
-  // 상태 관리 -------------------------------------------------------------
+  // 이름, 전화번호, 프로필사진 상태 관리 -------------------------------------
 
   const [name, setName] = useState<string | undefined>(data.nickname);
   const [phoneNumber, setPhoneNumber] = useState<number>(data.phone);
@@ -29,7 +31,6 @@ export default function EditMypage() {
   if (status === 'error') {
     return <Error />;
   }
-  console.log(data);
 
   // 네비게이트 ---------------------------------------------------------------
 
