@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 import useDropDown from '../../../hooks/useDropDown';
@@ -82,8 +83,9 @@ const MagazineDetailItem = (props: Props) => {
           )}
         </Flex>
       </TopBox>
-      <TextArea dangerouslySetInnerHTML={{ __html: props.content }} />
-
+      <TextArea>
+        <ReactQuill value={props.content} readOnly={true} theme={'bubble'} style={{ overflow: 'hidden' }} />
+      </TextArea>
       <LikeShareIconFlex>
         <Like isLiked={props.isLiked} magazineId={props.magazineId} likeCount={props.LikeMagazine} />
       </LikeShareIconFlex>
@@ -150,14 +152,33 @@ const TextArea = styled.div`
     max-width: 100%;
     height: auto;
   }
-  .ql-editor .ql-size-huge {
-    font-size: 30px !important;
+
+  @media screen and (min-width: 747px) {
+    .ql-snow .ql-editor .ql-size-huge {
+      font-size: 24px !important;
+    }
+
+    .ql-snow .ql-editor .ql-size-large {
+      font-size: 20px !important;
+    }
+
+    .ql-snow .ql-editor .ql-size-normal {
+      font-size: 16px !important;
+    }
   }
-  .ql-editor .ql-size-large {
-    font-size: 24px !important;
-  }
-  .ql-editor .ql-size-normal {
-    font-size: 18px !important;
+
+  @media screen and (min-width: 375px) and (max-width: 746px) {
+    .ql-snow .ql-editor .ql-size-huge {
+      font-size: 20px !important;
+    }
+
+    .ql-snow .ql-editor .ql-size-large {
+      font-size: 16px !important;
+    }
+
+    .ql-snow .ql-editor .ql-size-normal {
+      font-size: 14px !important;
+    }
   }
 `;
 

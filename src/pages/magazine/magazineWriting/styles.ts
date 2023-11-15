@@ -93,29 +93,6 @@ export const StyledImage = styled.img`
   }
 `;
 
-export const styleString = `
-  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="0.75rem"]::before,
-  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="0.75rem"]::before {
-    content: '0.75rem'; 
-  }
-  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="0.875rem"]::before,
-  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="0.875rem"]::before {
-    content: '0.875rem'; 
-  }
-  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="1rem"]::before,
-  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="1rem"]::before {
-    content: '1rem'; 
-  }
-  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="1.125rem"]::before,
-  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="1.125rem"]::before {
-    content: '1.125rem'; 
-  }
-  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="1.25rem"]::before,
-  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="1.25rem"]::before {
-    content: '1.25rem';
-  }
-`;
-
 export const Scroll = styled.div`
   width: 23.75rem;
   overflow: scroll;
