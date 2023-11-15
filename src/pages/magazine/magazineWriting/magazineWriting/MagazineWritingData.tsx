@@ -11,11 +11,6 @@ import { BackIcon, AddImageIcon } from '../../../../assets/icon/icon';
 import { postMagazine, postQuillEditorPhoto } from '../../../../api/magazine';
 
 const MagazineWritingData = () => {
-  // React Quill 글자 크기 커스텀
-  const CustomSize = ReactQuill.Quill.import('attributors/style/size');
-  CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
-  ReactQuill.Quill.register(CustomSize, true);
-
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -112,9 +107,7 @@ const MagazineWritingData = () => {
           ['image'],
           [{ header: [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
-          [{ font: [] }],
-          [{ size: ['small', false, 'large', 'huge'] }],
+          [{ size: ['small', false, 'large', 'huge'] }], //normal은 false로
           [{ color: [] }, { background: [] }],
           [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
           [{ align: [] }],
@@ -155,7 +148,7 @@ const MagazineWritingData = () => {
               onChange={onContentChangeHandler}
               value={content}
               modules={modules}
-              style={{ overflowY: 'auto', minHeight: '78vh', boxSizing: 'border-box', overflow: 'hidden', border: '1px solid #D9D9D9' }}
+              style={{ minHeight: '100vh', boxSizing: 'border-box', border: '1px solid #D9D9D9' }}
               preserveWhitespace
             />
           </DirectionCol>

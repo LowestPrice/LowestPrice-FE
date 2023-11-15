@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 import useDropDown from '../../../hooks/useDropDown';
@@ -15,7 +14,7 @@ import { magazine } from '../../../type';
 interface Props extends magazine {
   writtenDate: string;
   handleShareButton: () => void;
-  share: any;
+  share: boolean;
   isAdmin: boolean;
   isOpen: boolean;
   magazineData: any;
@@ -83,9 +82,8 @@ const MagazineDetailItem = (props: Props) => {
           )}
         </Flex>
       </TopBox>
-      <TextArea>
-        <ReactQuill value={props.content} readOnly={true} theme={'bubble'} style={{ overflow: 'hidden' }} />
-      </TextArea>
+      <TextArea dangerouslySetInnerHTML={{ __html: props.content }} />
+
       <LikeShareIconFlex>
         <Like isLiked={props.isLiked} magazineId={props.magazineId} likeCount={props.LikeMagazine} />
       </LikeShareIconFlex>
@@ -110,6 +108,7 @@ const TopBox = styled.div`
 `;
 
 const TitleWrap = styled.div`
+  width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -145,9 +144,21 @@ const Editor = styled.div`
 const TextArea = styled.div`
   overflow-y: auto;
   min-height: 21.5rem;
-  display: flex;
-  justify-content: center;
   margin: 1.25rem;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .ql-editor .ql-size-huge {
+    font-size: 30px !important;
+  }
+  .ql-editor .ql-size-large {
+    font-size: 24px !important;
+  }
+  .ql-editor .ql-size-normal {
+    font-size: 18px !important;
+  }
 `;
 
 const MagazineTitle = styled.div`
@@ -155,17 +166,9 @@ const MagazineTitle = styled.div`
   display: flex;
   align-items: center;
   width: 8.125rem;
-
-  @media screen and (max-width: 743px) and (min-width: 376px) {
-    width: 18.125rem;
-  }
-  @media screen and (min-width: 744px) {
-    width: 18.125rem;
-  }
 `;
 
 const TitleText = styled.div`
-  flex-grow: 1;
   font-size: 0.75rem;
   font-weight: 300;
   color: #fff;

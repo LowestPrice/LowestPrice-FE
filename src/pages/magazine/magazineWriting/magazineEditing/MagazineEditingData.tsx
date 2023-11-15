@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { useQueryClient, useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill';
@@ -10,8 +10,7 @@ import { FlexBox, Button, Title, DirectionCol, PhotoAdd, PhotoDiv, StyledImage, 
 import { AddImageIcon } from '../../../../assets/icon/icon';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
-
-import { getMagazineDetail, putMagazine } from '../../../../api/magazine';
+import { getMagazineDetail, putMagazine, postQuillEditorPhoto } from '../../../../api/magazine';
 
 const MagazineEditingData = () => {
   const { id } = useParams();
@@ -25,11 +24,10 @@ const MagazineEditingData = () => {
   const [newContent, setNewContent] = useState(magazineData.content);
   const [newMainImage, setNewImage] = useState(magazineData.mainImage);
   const [previewImage, setPreviewImage] = useState<string>(magazineData.mainImage);
-  const queryClient = useQueryClient();
 
-  const CustomSize = ReactQuill.Quill.import('attributors/style/size');
-  CustomSize.whitelist = ['12px', '14px', '16px', '18px', '20px'];
-  ReactQuill.Quill.register(CustomSize, true);
+  const quillRef = useRef<any>(null);
+
+  const queryClient = useQueryClient();
 
   const onTitleChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setNewTitle(e.target.value);
@@ -80,6 +78,38 @@ const MagazineEditingData = () => {
     );
   };
 
+  // 퀼 에디터 사진 변환
+  const imageHandler = () => {
+    // 1. 이미지를 저장할 input type=file DOM을 만든다.
+    const input = document.createElement('input');
+    // 속성 써주기
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click(); // 에디터 이미지버튼을 클릭하면 이 input이 클릭된다.
+    // input이 클릭되면 파일 선택창이 나타난다.
+
+    // input에 변화가 생긴다면 = 이미지를 선택
+    input.addEventListener('change', async () => {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        // multer에 맞는 형식으로 데이터 만들어준다.
+        try {
+          const res = await postQuillEditorPhoto(file);
+          if (res.data) {
+            const imgUrl = res.data;
+            const editor = quillRef.current.getEditor();
+            const range = editor.getSelection();
+            editor.insertEmbed(range.index, 'image', imgUrl);
+          } else {
+            console.log('응답이 없습니다');
+          }
+        } catch (error) {
+          console.log('사진 업로드 실패했어요', error);
+        }
+      }
+    });
+  };
+
   const modules = useMemo(() => {
     return {
       toolbar: {
@@ -87,13 +117,14 @@ const MagazineEditingData = () => {
           ['image'],
           [{ header: [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [{ size: ['12px', '14px', '16px', '18px', '20px'] }],
-          [{ font: [] }],
-          [{ size: ['small', false, 'large', 'huge'] }],
+          [{ size: ['small', false, 'large', 'huge'] }], //normal은 false로
           [{ color: [] }, { background: [] }],
           [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
           [{ align: [] }],
         ],
+        handlers: {
+          image: imageHandler,
+        },
       },
     };
   }, []);
@@ -128,11 +159,12 @@ const MagazineEditingData = () => {
             <Title value={newTitle} onChange={onTitleChangeHandler} rows={1} />
             <StyledImage src={previewImage} alt='매거진 이미지' />
             <ReactQuill
+              ref={quillRef}
               value={newContent}
               theme='snow'
               onChange={onContentChangeHandler}
               modules={modules}
-              style={{ overflowY: 'hidden', minHeight: '78vh', boxSizing: 'border-box', overflow: 'hidden', border: '1px solid #D9D9D9' }}
+              style={{ minHeight: '78vh', boxSizing: 'border-box', border: '1px solid #D9D9D9', borderBottom: 'none', marginBottom: '50px' }}
             />
           </DirectionCol>
         </Scroll>
