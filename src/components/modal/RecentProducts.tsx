@@ -148,7 +148,6 @@ const ModalContent = styled.div<{ $isOpen: boolean }>`
   }
   @media screen and (min-width: 744px) {
     width: 720px;
-    padding: 0 1.8rem;
   }
 `;
 
