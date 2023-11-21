@@ -47,38 +47,12 @@
 - 모바일 환경에서의 터치 이벤트(스와이프에)에 잘 반응하는 Slider를 표현하기 위해 선택하였습니다.
 
 ### 4. 유저 피드백 및 개선 상항
-
-### 5. 기능 리스트
-#### 로그인 페이지 
-- 카카오 로그인 
-#### 메인 페이지
-- 검색 기능: 최근 검색어 
-- 카로셀: 자동 및 수동 카로셀
-- 필터 기능: 카테고리, 할인율 순, 높은 가격/낮은 가격, 품절 상품 제외
-- 무한 스크롤
-#### 상품 상세페이지
-- 가격 차트: 최근 가격 동향 파악 
-- 옵션
-- 비슷한 상품
-- 공유 기능: 링크 및 카카오톡을 통한 공유
-- 최저가로 사러가기 url: 쿠팡 사이트로 이동
-- 알림 추가
-#### 매거진 페이지 
-- 매거진 전체 조회: 좋아요 기능
-- 매거진 상세 조회: 좋아요 기능, 공유 기능, 다른 매거진 조회, 매거진 삭제
-- 매거진 작성/수정: Quill 에디터로 작성 및 수정(관리자만 접근 가능)
-#### 알림 페이지 
-- 상품 목록: 알림 설정한 상품 조회 및 알림 취소
-- 가격 변동 알림: 가격 변동 알림 조회 
-#### 마이페이지 
-- 유저 정보 조회
-- 유저 정보 수정(프로필 사진 및 닉네임)
-- 로그아웃 및 회원탈퇴
-- 최근 본 상품
-- 좋아요 한 매거진 보기
+|유저 의견|반영 수정|
+|------|---|
+|모바일을 저격한 디자인으로 보이는데 컴퓨터로 보았을 땐 다소 답답해보입니다!  PC버전과 모바일 버전이 나뉘어져 있었으면 더 좋았을 것 같다 생각했습니다.|기존 모바일 사이즈 (width: 375px)에서 태블릿 및 데스크탑용 사이즈(375px ~ 744px)까지 미디어 쿼리 및 rem을 사용하여  반응형 웹페이지를 제작하였습니다.  |
+|가로스크롤을 할 때, 스크롤이 작아서 불편합니다.|가로스크롤 화면 또한 모바일 환경에선 짧은 화면에도 드래그로 화면을 움지기이기에 문제가 없었지만, 데스크탑 환경에선 가로스크롤을 움직이기 위해선 작은 모양의 스크롤 바를 클릭하는 수밖에 없었습니다. 이를 해결하고자 Swiper 라는 라이브러리를 이용해 웹페이지에서도 드래그가 가능한 가로 스크롤을 만들어주었습니다.|
   
-### 6. 성능 최적화   
-
+### 5. 성능 최적화   
 ### 1) 데이터 부하 문제 
 
 #### 발생한 문제
@@ -98,119 +72,7 @@
 
 #### 개선 방법
 - Code Spliting 을 이용해 번들링 사이즈를 17% 줄여 초기 로딩 속도를 개선했습니다.
-```
-// Router.tsx
-
-import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
-
-import App from './App';
-import Main from './pages/main/Main';
-import Error from './components/Error';
-import Splash from './pages/main/Splash';
-import ReissuanceAT from './pages/login/ReissuanceAT';
-
-// 로그인
-const Login = React.lazy(() => import('./pages/login/Login'));
-const KakaoLogin = React.lazy(() => import('./pages/login/KakaoLogin'));
-
-// 상품 검색, 상세, 알림
-const SearchPage = React.lazy(() => import('./pages/search/SearchPage'));
-const Detail = React.lazy(() => import('./pages/detail/Detail'));
-const Notification = React.lazy(() => import('./pages/notification/Notification'));
-
-// 마이페이지
-const MyPage = React.lazy(() => import('./pages/mypage/main/MyPage'));
-const EditMypage = React.lazy(() => import('./pages/mypage/edit/EditMypage'));
-
-// 매거진
-const MagazineMain = React.lazy(() => import('./pages/magazine/magazineMain/MagazineMainPage'));
-const MagazineWriting = React.lazy(() => import('./pages/magazine/magazineWriting/magazineWriting/MagazineWriting'));
-const MagazineEditing = React.lazy(() => import('./pages/magazine/magazineWriting/magazineEditing/MagazineEditingPage'));
-const MagazineDetail = React.lazy(() => import('./pages/magazine/magazineDetail/MagazineDetailPage'));
-const LikeMagazine = React.lazy(() => import('./pages/likeMagazine/LikeMagazine'));
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        path: '',
-        element: <Main />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'kakaologin',
-        element: <KakaoLogin />,
-      },
-      {
-        path: 'reissuanceat',
-        element: <ReissuanceAT />,
-      },
-      {
-        path: 'notification',
-        element: <Notification />,
-        errorElement: <Main />,
-      },
-      {
-        path: 'search/:searchWord',
-        element: <SearchPage />,
-        errorElement: <Main />,
-      },
-      {
-        path: 'mypage',
-        element: <MyPage />,
-        errorElement: <Main />,
-      },
-      {
-        path: 'editmypage',
-        element: <EditMypage />,
-        errorElement: <Main />,
-      },
-      {
-        path: 'detail/:id',
-        element: <Detail />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'magazine',
-        element: <MagazineMain />,
-      },
-      {
-        path: '/magazine/:id',
-        element: <MagazineDetail />,
-      },
-      {
-        path: 'magazineWriting',
-        element: <MagazineWriting />,
-      },
-      {
-        path: 'magazineEditing/:id',
-        element: <MagazineEditing />,
-      },
-      {
-        path: '/search/:searchWord',
-        element: <SearchPage />,
-      },
-      {
-        path: 'likemagazine',
-        element: <LikeMagazine />,
-      },
-      {
-        path: 'splash',
-        element: <Splash />,
-      },
-    ],
-  },
-]);
-
-export default router;
-```
-
+https://github.com/LowestPrice/LowestPrice-FE/blob/master/src/Router.tsx
 
 ### 3) 불필요한 리렌더링
 
@@ -223,7 +85,7 @@ export default router;
 ![스크린샷 2023-11-17 171820](https://github.com/LowestPrice/LowestPrice-FE/assets/143480840/71efcb20-7ba4-4d96-a37c-7ad282896838)
 
 
-### 7. 커밋 컨벤션 
+### 6. 커밋 컨벤션 
 예시) Feat: 로그인 함수 추가
 
 *이름: 띄어쓰기 설명 순으로 작성 
