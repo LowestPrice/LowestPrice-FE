@@ -1,8 +1,14 @@
 
-![내일은 최저가](https://github.com/LowestPrice/LowestPrice-FE/assets/136035516/785a3ae4-1911-4bb1-b87d-4fdd6bbc1805)
+<p align="center"> <img src="https://github.com/LowestPrice/LowestPrice-FE/assets/136035516/785a3ae4-1911-4bb1-b87d-4fdd6bbc1805"/></p>
 
 ## 기술 스택
-
+![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
+![Ts](https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![RQ](https://img.shields.io/badge/React_Query-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![RL](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![St](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+<img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=Vite&logoColor=ffffff"/>
 ## 기술적 의사결정
 
 ## 유저 피드백 및 개선 상항
