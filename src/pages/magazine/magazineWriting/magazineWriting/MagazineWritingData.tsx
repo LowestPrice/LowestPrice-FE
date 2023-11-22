@@ -17,10 +17,10 @@ const MagazineWritingData = () => {
   // 데이터 추가하기
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
-  const [image, setImage] = useState<string>('');
+  const [image, setImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>('');
 
-  const quillRef = useRef<any>(null);
+  const quillRef = useRef<ReactQuill>(null);
 
   const addPosts = useMutation(postMagazine, {
     onSuccess: () => {
@@ -39,7 +39,7 @@ const MagazineWritingData = () => {
     setContent(value);
   }, []);
 
-  const onImageChangeHandler = async (e: any) => {
+  const onImageChangeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     setImage(file);
     if (file) {
@@ -52,20 +52,22 @@ const MagazineWritingData = () => {
     }
   };
 
-  const onSubmitButtonHandler = useCallback((title: string, content: string, image: string) => {
-    addPosts.mutate(
-      { title, content, image },
-      {
-        onSuccess: () => {
-          toast.success('추가되었습니다✅');
-          navigate('/magazine');
-        },
-        onError: (error) => {
-          console.error('매거진 추가 에러', error);
-        },
-      }
-    );
-  }, []);
+  const onSubmitButtonHandler = useCallback(() => {
+    if (title && content && image) {
+      addPosts.mutate(
+        { title, content, image },
+        {
+          onSuccess: () => {
+            toast.success('추가되었습니다✅');
+            navigate('/magazine');
+          },
+          onError: (error) => {
+            console.error('매거진 추가 에러', error);
+          },
+        }
+      );
+    }
+  }, [title, content, image, addPosts, navigate]);
 
   // 퀼 에디터 사진 변환
   const imageHandler = () => {
@@ -74,7 +76,7 @@ const MagazineWritingData = () => {
     // 속성 써주기
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
-    input.click(); // 에디터 이미지버튼을 클릭하면 이 input이 클릭된다.
+    input.click(); // 에디터 이미지 버튼을 클릭하면 이 input이 클릭된다.
     // input이 클릭되면 파일 선택창이 나타난다.
 
     // input에 변화가 생긴다면 = 이미지를 선택
@@ -82,14 +84,21 @@ const MagazineWritingData = () => {
       if (input.files && input.files[0]) {
         const file = input.files[0];
         // multer에 맞는 형식으로 데이터 만들어준다.
-
         try {
           const res = await postQuillEditorPhoto(file);
           if (res.data) {
             const imgUrl = res.data;
-            const editor = quillRef.current.getEditor();
-            const range = editor.getSelection();
-            editor.insertEmbed(range.index, 'image', imgUrl);
+            if (quillRef.current) {
+              const editor = quillRef.current.getEditor();
+              const range = editor.getSelection();
+              if (range) {
+                editor.insertEmbed(range.index, 'image', imgUrl);
+              } else {
+                console.error('range is null');
+              }
+            } else {
+              console.error('quillRef is null');
+            }
           } else {
             console.log('응답이 없습니다');
           }
@@ -127,7 +136,7 @@ const MagazineWritingData = () => {
             <Button onClick={() => navigate('/magazine')}>
               <BackIcon />
             </Button>
-            <Button onClick={() => onSubmitButtonHandler(title, content, image)}>등록</Button>
+            <Button onClick={onSubmitButtonHandler}>등록</Button>
           </FlexBox>
           <DirectionCol>
             <PhotoDiv>

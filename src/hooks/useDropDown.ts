@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, RefObject, Dispatch, SetStateAction } from 'react';
 
-const useDropDown = (elem: any, initialState: any) => {
-  const [isOpen, setIsOpen] = useState(initialState);
+const useDropDown = (elem: RefObject<HTMLElement>, initialState: boolean): [boolean, Dispatch<SetStateAction<boolean>>] => {
+  const [isOpen, setIsOpen] = useState<boolean>(initialState);
 
   useEffect(() => {
-    const onClick = (e: any) => {
-      if (elem.current !== null && !elem.current.contains(e.target)) {
-        setIsOpen(!isOpen);
+    const onClick = (e: MouseEvent) => {
+      if (elem.current instanceof HTMLElement && !elem.current.contains(e.target as Node)) {
+        setIsOpen((prevIsOpen) => !prevIsOpen);
       }
     };
 
@@ -18,6 +18,7 @@ const useDropDown = (elem: any, initialState: any) => {
       window.removeEventListener('click', onClick);
     };
   }, [isOpen, elem]);
+
   return [isOpen, setIsOpen];
 };
 

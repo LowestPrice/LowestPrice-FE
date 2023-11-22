@@ -7,6 +7,7 @@ import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 
 import { getMagazine } from '../../../api/magazine';
+import { MagazineLiked } from '../../../type';
 
 const MagazineMainData = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const MagazineMainData = () => {
         {isAdmin && <Writing onClick={() => navigate('/magazineWriting')}>글쓰기</Writing>}
         <Scroll>
           {/* return의 item부터 magazineItem 컴포넌트 만들어서 넣기 */}
-          {magazines?.map((magazineData: any, index: number) => {
+          {magazines?.map((magazineData: MagazineLiked, index: number) => {
             // html 마크업 제거 후 렌더링
             const textOnly = magazineData.content.replace(/<\/?[^>]+(>|$)/g, '');
             const displayText = textOnly.length > 53 ? `${textOnly.substring(0, 53)}...` : textOnly;
