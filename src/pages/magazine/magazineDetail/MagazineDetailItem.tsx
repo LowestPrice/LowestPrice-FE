@@ -10,9 +10,9 @@ import Like from '../Like';
 import { BackIcon, DropDownIcon, ShareIcon } from '../../../assets/icon/icon';
 import ShareFooter from '../../../components/footer/ShareFooter';
 
-import { magazine } from '../../../type';
+import { Magazine } from '../../../type';
 
-interface Props extends magazine {
+interface Props extends Magazine {
   writtenDate: string;
   handleShareButton: () => void;
   share: boolean;

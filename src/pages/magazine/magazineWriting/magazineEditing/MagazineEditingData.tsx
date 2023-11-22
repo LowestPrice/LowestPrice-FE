@@ -25,7 +25,7 @@ const MagazineEditingData = () => {
   const [newMainImage, setNewImage] = useState(magazineData.mainImage);
   const [previewImage, setPreviewImage] = useState<string>(magazineData.mainImage);
 
-  const quillRef = useRef<any>(null);
+  const quillRef = useRef<ReactQuill | null>(null);
 
   const queryClient = useQueryClient();
 
@@ -58,7 +58,7 @@ const MagazineEditingData = () => {
     },
   });
 
-  const onSubmitButtonHandler = (id: unknown, newTitle: string, newContent: string, newMainImage: File) => {
+  const onSubmitButtonHandler = (id: string, newTitle: string, newContent: string, newMainImage: string) => {
     changePost.mutate(
       {
         id,
@@ -85,7 +85,7 @@ const MagazineEditingData = () => {
     // 속성 써주기
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
-    input.click(); // 에디터 이미지버튼을 클릭하면 이 input이 클릭된다.
+    input.click(); // 에디터 이미지 버튼을 클릭하면 이 input이 클릭된다.
     // input이 클릭되면 파일 선택창이 나타난다.
 
     // input에 변화가 생긴다면 = 이미지를 선택
@@ -97,9 +97,17 @@ const MagazineEditingData = () => {
           const res = await postQuillEditorPhoto(file);
           if (res.data) {
             const imgUrl = res.data;
-            const editor = quillRef.current.getEditor();
-            const range = editor.getSelection();
-            editor.insertEmbed(range.index, 'image', imgUrl);
+            if (quillRef.current) {
+              const editor = quillRef.current.getEditor();
+              const range = editor.getSelection();
+              if (range) {
+                editor.insertEmbed(range.index, 'image', imgUrl);
+              } else {
+                console.error('range is null');
+              }
+            } else {
+              console.error('quillRef is null');
+            }
           } else {
             console.log('응답이 없습니다');
           }
@@ -143,7 +151,7 @@ const MagazineEditingData = () => {
         <Helmet title={`내일은 최저가 | 매거진 수정 | ${id}`} />
         <FlexBox>
           <Button onClick={() => navigate('/magazine')}></Button>
-          <Button onClick={() => onSubmitButtonHandler(id, newTitle, newContent, newMainImage)}>수정</Button>
+          <Button onClick={() => onSubmitButtonHandler(id!, newTitle, newContent, newMainImage)}>수정</Button>
         </FlexBox>
         <Scroll>
           <DirectionCol>

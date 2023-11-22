@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { LikeProps, MagazineProps, NewMagazineProps } from '../type';
 
 // 매거진 데이터 조회
 export const getMagazine = async () => {
@@ -16,7 +17,7 @@ export const getMagazine = async () => {
 };
 
 // 매거진 상세 조회
-export const getMagazineDetail = async (id: any) => {
+export const getMagazineDetail = async (id: string | undefined) => {
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   try {
@@ -30,7 +31,7 @@ export const getMagazineDetail = async (id: any) => {
 };
 
 // 매거진 등록
-export const postMagazine = async ({ title, content, image }: { title: string; content: string; image: string }) => {
+export const postMagazine = async ({ title, content, image }: { title: string; content: string; image: File }) => {
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
 
@@ -53,7 +54,7 @@ export const postMagazine = async ({ title, content, image }: { title: string; c
 };
 
 // 매거진 수정
-export const putMagazine = async (props: any) => {
+export const putMagazine = async (props: NewMagazineProps) => {
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   const { id, newTitle, newContent, newMainImage } = props;
@@ -76,7 +77,7 @@ export const putMagazine = async (props: any) => {
 };
 
 // 매거진 삭제
-export const deleteMagazine = async (props: any) => {
+export const deleteMagazine = async (props: MagazineProps) => {
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   const id = props.id;
@@ -89,7 +90,7 @@ export const deleteMagazine = async (props: any) => {
 };
 
 // 매거진 좋아요 등록/취소
-export const postMagazineLike = async (props: any) => {
+export const postMagazineLike = async (props: LikeProps) => {
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   const id = props.id;
@@ -103,7 +104,7 @@ export const postMagazineLike = async (props: any) => {
 };
 
 // 다른 매거진 리스트 조회
-export const getAnotherMagazine = async (id: any) => {
+export const getAnotherMagazine = async (id: string | undefined) => {
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/magazines/${id}/list`);
     return response;
@@ -125,7 +126,7 @@ export const getLikedMagazineLists = async () => {
 };
 
 // 매거진 에디터 사진 보내기
-export const postQuillEditorPhoto = async (file: any) => {
+export const postQuillEditorPhoto = async (file: File) => {
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
   const formData = new FormData();

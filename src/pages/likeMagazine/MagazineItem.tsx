@@ -6,6 +6,7 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 
 import { getLikedMagazineLists } from '../../api/magazine';
+import { MagazineProps } from '../../type';
 
 const MagazineItem = () => {
   // 데이터 불러오기
@@ -28,7 +29,7 @@ const MagazineItem = () => {
     </BlankMessage>
   ) : (
     <List>
-      {data?.data.data.map((item: any, index: string) => (
+      {data?.data.data.map((item: MagazineProps, index: string) => (
         <Item
           key={index}
           style={{ backgroundImage: `url(${item.mainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
