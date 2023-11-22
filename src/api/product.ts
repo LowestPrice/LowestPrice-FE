@@ -147,7 +147,7 @@ export type PriceData = {
   };
 };
 
-export const getPriceHistory = async (id: any): Promise<PriceData | undefined> => {
+export const getPriceHistory = async (id: string): Promise<PriceData | undefined> => {
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_KEY}/price-history/${id}`);
     return response.data;

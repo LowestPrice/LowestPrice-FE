@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 
 import { postMagazineLike } from '../api/magazine';
 
+// 확장성 고려, 매거진 다른 곳에서 사용될 수 있도록
+// 매거진 용, post 용 등으로 빼던지?
 export const useLike = (initialLike: boolean, initialCount: number) => {
   const [like, setLike] = useState(initialLike);
   const [likeCount, setLikeCount] = useState(initialCount);

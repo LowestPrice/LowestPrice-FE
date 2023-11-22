@@ -58,7 +58,7 @@ const MagazineEditingData = () => {
     },
   });
 
-  const onSubmitButtonHandler = (id: any, newTitle: string, newContent: string, newMainImage: File) => {
+  const onSubmitButtonHandler = (id: unknown, newTitle: string, newContent: string, newMainImage: File) => {
     changePost.mutate(
       {
         id,

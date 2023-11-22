@@ -42,7 +42,7 @@ const MagazineDetailData = () => {
     },
   });
 
-  const onDeleteButtonHandler = (id: any) => {
+  const onDeleteButtonHandler = (id: string) => {
     deletePosts.mutate({ id });
     toast.success('삭제되었습니다✅');
   };

@@ -4,6 +4,12 @@ import styled from 'styled-components';
 
 import { getAnotherMagazine } from '../../../../api/magazine';
 
+interface MagazineData {
+  magazineId: string;
+  title: string;
+  mainImage: string;
+}
+
 const AnotherMagazine = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -25,19 +31,19 @@ const AnotherMagazine = () => {
         <AnotherText>다른 매거진 보기</AnotherText>
       </Another>
       {anotherMagazine &&
-        anotherMagazine.map((Anotehrmagazine: any, index: number) => (
+        anotherMagazine.map((Anothermagazine: MagazineData, index: number) => (
           <AnotherContentButton
             key={index}
             style={{
-              backgroundImage: `url(${Anotehrmagazine.mainImage})`,
+              backgroundImage: `url(${Anothermagazine.mainImage})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
             }}
-            onClick={() => navigate(`/magazine/${Anotehrmagazine.magazineId}`)}
+            onClick={() => navigate(`/magazine/${Anothermagazine.magazineId}`)}
           >
             <Overlay>
-              <AnotherContentTitle>{Anotehrmagazine.title}</AnotherContentTitle>
+              <AnotherContentTitle>{Anothermagazine.title}</AnotherContentTitle>
               <AnotherContentEditor>by 관리자</AnotherContentEditor>
             </Overlay>
           </AnotherContentButton>
