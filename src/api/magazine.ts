@@ -30,7 +30,7 @@ export const getMagazineDetail = async (id: any) => {
 };
 
 // 매거진 등록
-export const postMagazine = async ({ title, content, image }: { title: any; content: any; image: any }) => {
+export const postMagazine = async ({ title, content, image }: { title: string; content: string; image: string }) => {
   const accessToken = Cookies.get('accessToken');
   axios.defaults.headers.common['Authorization'] = accessToken;
 

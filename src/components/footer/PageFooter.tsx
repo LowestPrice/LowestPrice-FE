@@ -26,7 +26,7 @@ const PageFooter = () => {
     setActiveIcon(location.pathname);
   }, [location.pathname]);
 
-  const handleNavigation = (path: any) => {
+  const handleNavigation = (path: string) => {
     navigate(path);
     setActiveIcon(path);
   };

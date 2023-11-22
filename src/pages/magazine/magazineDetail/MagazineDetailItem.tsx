@@ -18,10 +18,10 @@ interface Props extends magazine {
   share: boolean;
   isAdmin: boolean;
   isOpen: boolean;
-  magazineData: any;
+  magazineData: string;
   onDeleteButtonHandler: (id: string) => void;
   isLiked: boolean;
-  LikeMagazine: any;
+  LikeMagazine: number;
   id: string;
 }
 const MagazineDetailItem = (props: Props) => {

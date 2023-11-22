@@ -81,11 +81,11 @@ export interface DropDownListProps {
 export interface PriceData {
   maxPrice: number;
   minPrice: number;
-  priceHistoryForWeek: any;
+  priceHistoryForWeek: string;
 }
 
 export interface PriceData {
-  priceHistoryForWeek: any;
+  priceHistoryForWeek: string;
   maxPrice: number;
   minPrice: number;
 }
@@ -98,7 +98,7 @@ export interface ChartData {
     borderColor: string;
     borderWidth: number;
     fill: boolean;
-    backgroundColor?: any;
+    backgroundColor?: string;
   }[];
 }
 
@@ -179,6 +179,6 @@ export interface useShareParams {
 
 declare global {
   export interface Window {
-    Kakao: any;
+    Kakao: string;
   }
 }
