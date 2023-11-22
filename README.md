@@ -88,7 +88,6 @@ https://github.com/LowestPrice/LowestPrice-FE/blob/master/src/Router.tsx
 예시) Feat: 로그인 함수 추가
 
 *이름: 띄어쓰기 설명 순으로 작성 
-
 |이름|설명|
 |------|---|
 |Feat|새로운 기능을 추가할 경우|
