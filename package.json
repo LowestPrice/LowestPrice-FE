@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@types/js-cookie": "^3.0.5",
+    "@types/quill": "^2.0.14",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.5.1",
     "chart.js": "^4.4.0",

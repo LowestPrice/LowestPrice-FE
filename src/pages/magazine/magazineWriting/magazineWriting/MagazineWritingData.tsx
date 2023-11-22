@@ -17,7 +17,7 @@ const MagazineWritingData = () => {
   // 데이터 추가하기
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<string>('');
   const [previewImage, setPreviewImage] = useState<string>('');
 
   const quillRef = useRef<any>(null);
@@ -52,7 +52,7 @@ const MagazineWritingData = () => {
     }
   };
 
-  const onSubmitButtonHandler = useCallback((title: any, content: any, image: any) => {
+  const onSubmitButtonHandler = useCallback((title: string, content: string, image: string) => {
     addPosts.mutate(
       { title, content, image },
       {
