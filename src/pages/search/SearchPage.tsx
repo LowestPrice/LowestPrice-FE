@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -40,7 +40,7 @@ function Search() {
 
   // 검색어 입력 --------------------------------------------------
 
-  const onChangeSearchWord = (e: any) => {
+  const onChangeSearchWord = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchWord(e.target.value);
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
@@ -20,7 +20,7 @@ function SearchInput(props: Props) {
 
   // 검색어 입력 ---------------------------------------------
 
-  const onChangeSearchWord = (e: any) => {
+  const onChangeSearchWord = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchState(e.target.value);
   };
 
