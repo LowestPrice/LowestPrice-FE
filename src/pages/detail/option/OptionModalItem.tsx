@@ -5,7 +5,7 @@ interface Props {
   discountRate: number;
   productId: number;
   productName: string;
-  handleOptionButton: any;
+  handleOptionButton: (productId: number) => void;
 }
 function OptionModalItem(props: Props) {
   return (

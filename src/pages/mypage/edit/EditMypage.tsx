@@ -20,10 +20,10 @@ export default function EditMypage() {
 
   // 이름, 전화번호, 프로필사진 상태 관리 -------------------------------------
 
-  const [name, setName] = useState<string | undefined>(data.nickname);
-  const [phoneNumber, setPhoneNumber] = useState<number>(data.phone);
-  const [imageFile, setImageFile]: any = useState();
-  const [imageSrc, setImageSrc]: any = useState(data.image);
+  const [name, setName] = useState<string>(data.nickname);
+  const [phoneNumber, setPhoneNumber] = useState<string>(data.phone);
+  const [imageFile, setImageFile] = useState<File>(data.image);
+  const [imageSrc, setImageSrc] = useState(data.image);
 
   if (status === 'loading') {
     return <Loading />;
@@ -57,7 +57,7 @@ export default function EditMypage() {
     setName(e.target.value);
   };
 
-  const onChangePhoneNumber = (e: any) => {
+  const onChangePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(e.target.value);
   };
   const userInfoMutation = useMutation(postUserinfo, {
@@ -212,6 +212,6 @@ const Withdrawal = styled.div`
   line-height: 110%; /* 17.6px */
   text-decoration-line: underline;
   position: absolute;
-  bottom: 300px;
+  bottom: 210px;
   cursor: pointer;
 `;

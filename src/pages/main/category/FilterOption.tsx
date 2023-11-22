@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface Props {
   children: number;
   filterButton: boolean[];
-  handleFilterButton: any;
+  handleFilterButton: (index: number, value: string) => void;
   index: number;
   content: string;
   value: string;
