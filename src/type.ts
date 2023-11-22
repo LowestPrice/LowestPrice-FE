@@ -50,12 +50,23 @@ export interface AccessToken {
   headers: string;
 }
 
+// 매거진 --------------------------------------------------------
+
 export type MagazineProps = {
-  data?: magazine[];
+  data?: Magazine[];
+  id?: string;
+  mainImage?: string;
+  magazineId?: number;
+  title?: string;
 };
 
-// 매거진 --------------------------------------------------------
-export interface magazine {
+export interface NewMagazineProps extends MagazineProps {
+  newTitle: string;
+  newContent: string;
+  newMainImage: string;
+}
+
+export interface Magazine {
   magazineId: number;
   title: string;
   content: string;
@@ -63,6 +74,11 @@ export interface magazine {
   createAt: undefined;
   editor: string;
   likes: undefined;
+}
+
+export interface MagazineLiked extends Magazine {
+  isLiked: boolean;
+  LikeMagazine: number;
 }
 
 export interface DropDownProps {
@@ -81,29 +97,23 @@ export interface DropDownListProps {
 export interface PriceData {
   maxPrice: number;
   minPrice: number;
-  priceHistoryForWeek: string;
-}
-
-export interface PriceData {
-  priceHistoryForWeek: string;
-  maxPrice: number;
-  minPrice: number;
+  priceHistoryForWeek: { [date: string]: number };
 }
 
 export interface ChartData {
   labels: string[];
   datasets: {
-    label: string;
+    label: string | undefined;
     data: number[];
     borderColor: string;
     borderWidth: number;
     fill: boolean;
-    backgroundColor?: string;
+    backgroundColor?: string | CanvasGradient;
   }[];
 }
 
 export interface ParamsProps {
-  id: string | number;
+  id: string;
   setMinPrice?: Function;
   setMaxPrice?: Function;
 }
@@ -141,6 +151,7 @@ export interface LikeProps {
   index?: number;
   style?: React.CSSProperties;
   isMounted?: boolean;
+  id?: number;
 }
 
 // 푸터 (PageFooter)--------------------------------------------------------
@@ -179,6 +190,6 @@ export interface useShareParams {
 
 declare global {
   export interface Window {
-    Kakao: string;
+    Kakao: any;
   }
 }

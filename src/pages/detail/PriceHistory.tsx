@@ -49,7 +49,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ id, setMinPrice, setMaxP
 
   useEffect(() => {
     if (data?.priceHistoryForWeek) {
-      const newFormattedData: { [key: string]: any } = {};
+      const newFormattedData: { [key: string]: number } = {};
       // 객체의 각 항목 DeleteYear 사용해 newKey에 할당(11/10 형식)
       for (const [key, value] of Object.entries(data.priceHistoryForWeek)) {
         const newKey = DeleteYear(key);

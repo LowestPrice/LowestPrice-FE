@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
 import { postMagazineLike } from '../api/magazine';
+import { MagazineLiked } from '../type';
 
 // 확장성 고려, 매거진 다른 곳에서 사용될 수 있도록
 // 매거진 용, post 용 등으로 빼던지?
@@ -25,7 +26,11 @@ export const useLike = (initialLike: boolean, initialCount: number) => {
   });
 
   // 좋아요 버튼 클릭 시 실행, 좋아요 상태와 수를 업데이트
-  const handleLikeClick = (event: any, magazineId: any, setMagazines?: any) => {
+  const handleLikeClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    magazineId: number,
+    setMagazines?: React.Dispatch<React.SetStateAction<MagazineLiked[]>>
+  ) => {
     event.stopPropagation();
     const accessToken = Cookies.get('accessToken');
     if (!accessToken) {
@@ -35,7 +40,7 @@ export const useLike = (initialLike: boolean, initialCount: number) => {
       return;
     }
     if (setMagazines) {
-      setMagazines((prevMagazines: any) => {
+      setMagazines((prevMagazines: MagazineLiked[]) => {
         const updatedMagazines = [...prevMagazines];
         updatedMagazines[magazineId].isLiked = !updatedMagazines[magazineId].isLiked;
         updatedMagazines[magazineId].LikeMagazine += updatedMagazines[magazineId].isLiked ? 1 : -1;
@@ -44,7 +49,7 @@ export const useLike = (initialLike: boolean, initialCount: number) => {
     }
     setLike(!like);
     setLikeCount(like ? likeCount - 1 : likeCount + 1);
-    magazineLike.mutate({ id: magazineId });
+    magazineLike.mutate({ id: magazineId, isLiked: like, magazineId: magazineId, likeCount: likeCount });
   };
 
   return { like, likeCount, handleLikeClick };
