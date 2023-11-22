@@ -23,7 +23,7 @@ function ShareFooter(props: ShareFooterProps) {
     shareToKakaoTalk();
   };
 
-  const copyUrl = (e: any) => {
+  const copyUrl = () => {
     if (!document.queryCommandSupported('copy')) {
       return alert('복사 기능이 지원되지 않는 브라우저입니다.');
     }
@@ -31,7 +31,6 @@ function ShareFooter(props: ShareFooterProps) {
     if (copyUrlRef.current) {
       copyUrlRef.current.select();
       document.execCommand('copy');
-      e.target.focus();
     }
 
     setTimeout(() => {

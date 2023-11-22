@@ -41,7 +41,7 @@ function Category() {
   // 카테고리 버튼 클릭 ----------------------------------------------
 
   const handleCategoryButton = useCallback(
-    (idx: any) => {
+    (idx: number) => {
       setCategoryId(idx + 1);
       setIsCategorySelect(() => {
         const newArr = Array(6).fill(false);

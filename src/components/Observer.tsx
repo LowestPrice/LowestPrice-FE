@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import spinner from '../assets/image/spiner.gif';
 
 interface Props {
-  handleIntersection: any;
+  handleIntersection: () => void;
 }
 
 export default function Observer(props: Props) {
@@ -13,7 +13,6 @@ export default function Observer(props: Props) {
     const observer = new IntersectionObserver(
       ([entry]: IntersectionObserverEntry[]) => {
         if (entry.isIntersecting) {
-          console.log('trigger on');
           props.handleIntersection();
         }
       },

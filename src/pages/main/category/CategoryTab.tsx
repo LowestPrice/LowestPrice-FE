@@ -3,9 +3,9 @@ import styled from 'styled-components';
 interface Props {
   children: number;
   isCategorySelected: boolean[];
-  handleCategoryButton: any;
+  handleCategoryButton: (index: number) => void;
   index: number;
-  content: any;
+  content: string;
 }
 
 function CategoryTab(props: Props) {
