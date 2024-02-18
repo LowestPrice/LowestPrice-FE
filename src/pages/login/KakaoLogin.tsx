@@ -18,8 +18,8 @@ function KakaoLogin() {
   // accessToken, refreshToken 쿠키에 저장한 뒤, 메인페이지로 이동 -----------------------
 
   useEffect(() => {
-    document.cookie = `accessToken=${accessToken}; max-age=17000`;
-    document.cookie = `refreshToken=${refreshToken}; max-age= 604800`;
+    document.cookie = `accessToken=${accessToken}; max-age=17000; SameSite=strict; Secure=true; HttpOnly=true;`;
+    document.cookie = `refreshToken=${refreshToken}; max-age= 604800; max-age=17000; SameSite=strict; Secure=true; HttpOnly=true;`;
     document.cookie = `isLogin=true; max-age=5`;
     navigate('/');
   }, []);
